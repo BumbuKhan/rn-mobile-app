@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {StackNavigator, SwitchNavigator} from 'react-navigation';
+import {StackNavigator, SwitchNavigator, TabNavigator} from 'react-navigation';
 import {Provider} from 'react-redux';
 
 import store from './store';
 import HomeScreen from './screens/HomeScreen';
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
 import SignInScreen from "./screens/SignInScreen";
+import RestorePasswordScreen from "./screens/RestorePasswordScreen";
 
 // we'll describe all screens that are shown to authenticated user here
 const AppStack = StackNavigator({
@@ -17,7 +18,14 @@ const AppStack = StackNavigator({
 const RootStack = SwitchNavigator({
     AuthLoading: AuthLoadingScreen,
     App: AppStack,
-    SignIn: SignInScreen
+    Auth: TabNavigator({
+        SignIn: SignInScreen,
+        RestorePassword: RestorePasswordScreen
+    }, {
+        navigationOptions: {
+            tabBarVisible: false
+        }
+    })
 }, {
     // this screen runs always the first once the app is launched and decides
     // whether to show the signin screen according to the 'userToken' key in AsyncStorage

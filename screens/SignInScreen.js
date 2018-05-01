@@ -3,7 +3,7 @@ import {View, Button, AsyncStorage} from 'react-native';
 
 export default class SignInScreen extends Component {
     static navigationOptions = {
-        title: 'Please sign in'
+        title: 'Sign in'
     };
 
     _signInAsync = async () => {
@@ -21,6 +21,10 @@ export default class SignInScreen extends Component {
                 <Button
                     title="Sign me in"
                     onPress={this._signInAsync}
+                />
+                <Button
+                    title="Restore password"
+                    onPress={() => this.props.navigation.navigate('RestorePassword')}
                 />
             </View>
         );

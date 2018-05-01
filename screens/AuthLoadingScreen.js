@@ -20,7 +20,7 @@ export default class AuthLoadingScreen extends Component {
 
         // if authenticate, then navigating him to the application's home screen
         // otherwise showing signin screen
-        this.props.navigation.navigate(userToken ? 'App' : 'SignIn');
+        this.props.navigation.navigate(userToken ? 'App' : 'Auth');
     };
 
     render() {
