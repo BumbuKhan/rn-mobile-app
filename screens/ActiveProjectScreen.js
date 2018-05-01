@@ -5,6 +5,10 @@ import {Header} from 'react-native-elements';
 import Menu from '../components/Menu';
 
 export default class ActiveProjectScreen extends Component {
+    static navigationOptions = {
+      title: 'Active Project'
+    };
+
     _signOut = async () => {
         await AsyncStorage.clear();
         this.props.navigation.navigate('SignIn');
