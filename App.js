@@ -3,8 +3,8 @@ import {StackNavigator, SwitchNavigator, TabNavigator} from 'react-navigation';
 import {Provider} from 'react-redux';
 
 import store from './store';
-import HomeScreen from './screens/HomeScreen';
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
+import HomeScreen from './screens/HomeScreen';
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import RestorePasswordScreen from "./screens/RestorePasswordScreen";
@@ -20,13 +20,14 @@ const RootStack = SwitchNavigator({
     AuthLoading: AuthLoadingScreen,
     App: AppStack,
     Auth: TabNavigator({
-        SignIn: SignInScreen,
         SignUp: SignUpScreen,
+        SignIn: SignInScreen,
         RestorePassword: RestorePasswordScreen
     }, {
         navigationOptions: {
             tabBarVisible: false
-        }
+        },
+        animationEnabled: true
     })
 }, {
     // this screen runs always the first once the app is launched and decides
