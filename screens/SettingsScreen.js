@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import {View, Text, AsyncStorage, Button} from 'react-native';
+import {View, Text} from 'react-native';
+import {Header} from 'react-native-elements';
+
+import Menu from '../components/Menu';
 
 export default class SettingsScreen extends Component {
     static navigationOptions = {
@@ -8,12 +11,15 @@ export default class SettingsScreen extends Component {
 
     render() {
         return (
-            <View style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <Text>Settings screen</Text>
+            <View>
+                <Header
+                    leftComponent={<Menu {...this.props} />}
+                    centerComponent={{text: 'Settings', style: {color: '#fff', fontSize: 20}}}
+                />
+
+                <View>
+                    <Text>Settings screen</Text>
+                </View>
             </View>
         );
     };
