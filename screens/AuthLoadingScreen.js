@@ -16,7 +16,7 @@ export default class AuthLoadingScreen extends Component {
 
     _bootstrapAsync = async () => {
         // checking whether the user is authenticated
-        const userToken = await AsyncStorage.getItem('userToken');
+        const userToken = await AsyncStorage.getItem('authToken');
 
         // if authenticate, then navigating him to the application's home screen
         // otherwise showing signin screen

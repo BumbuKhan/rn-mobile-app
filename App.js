@@ -24,6 +24,7 @@ const RootStack = SwitchNavigator({
         SignIn: SignInScreen,
         RestorePassword: RestorePasswordScreen
     }, {
+        initialRouteName: 'SignIn',
         navigationOptions: {
             tabBarVisible: false
         },
