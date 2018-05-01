@@ -1,19 +1,21 @@
 import React, {Component} from 'react';
-import {StackNavigator, SwitchNavigator, TabNavigator} from 'react-navigation';
+import {StackNavigator, SwitchNavigator, TabNavigator, DrawerNavigator} from 'react-navigation';
 import {Provider} from 'react-redux';
 
 import store from './store';
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
-import HomeScreen from './screens/HomeScreen';
+import ActiveProjectScreen from './screens/ActiveProjectScreen';
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import RestorePasswordScreen from "./screens/RestorePasswordScreen";
 
 // we'll describe all screens that are shown to authenticated user here
 const AppStack = StackNavigator({
-    Home: {
-        screen: HomeScreen
-    }
+    Main: DrawerNavigator({
+        ActiveProject: ActiveProjectScreen
+    }, {
+        initialRouteName: 'ActiveProject'
+    })
 });
 
 const RootStack = SwitchNavigator({
