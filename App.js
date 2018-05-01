@@ -5,17 +5,15 @@ import {Provider} from 'react-redux';
 import store from './store';
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
 import ActiveProjectScreen from './screens/ActiveProjectScreen';
+import SettingsScreen from './screens/SettingsScreen';
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import RestorePasswordScreen from "./screens/RestorePasswordScreen";
 
 // we'll describe all screens that are shown to authenticated user here
-const AppStack = StackNavigator({
-    Main: DrawerNavigator({
-        ActiveProject: ActiveProjectScreen
-    }, {
-        initialRouteName: 'ActiveProject'
-    })
+const AppStack = DrawerNavigator({
+    ActiveProject: ActiveProjectScreen,
+    Settings: SettingsScreen
 });
 
 const RootStack = SwitchNavigator({
