@@ -20,7 +20,7 @@ export default class AuthLoadingScreen extends Component {
 
         // if authenticate, then navigating him to the application's home screen
         // otherwise showing signin screen
-        this.props.navigation.navigate(userToken ? 'App': 'SignIn');
+        this.props.navigation.navigate(userToken ? 'App' : 'SignIn');
     };
 
     render() {
@@ -30,8 +30,8 @@ export default class AuthLoadingScreen extends Component {
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
-                <ActivityIndicator />
-                <StatusBar barStyle="default" />
+                <ActivityIndicator/>
+                <StatusBar barStyle="default"/>
             </View>
         );
     }

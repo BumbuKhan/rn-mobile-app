@@ -14,7 +14,7 @@ const AppStack = StackNavigator({
     }
 });
 
-const RootStack =  SwitchNavigator({
+const RootStack = SwitchNavigator({
     AuthLoading: AuthLoadingScreen,
     App: AppStack,
     SignIn: SignInScreen
@@ -29,7 +29,7 @@ export default class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <RootStack />
+                <RootStack/>
             </Provider>
         );
     }

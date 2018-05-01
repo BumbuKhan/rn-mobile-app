@@ -7,7 +7,7 @@ import {AUTH} from '../services/api_endpoints';
 export const login = (login, password) => {
     // since this action will take some none zero amount of time
     // we'll wrap it to the function so redux-thunk middleware will take kare of the rest
-    return async function(dispatch) {
+    return async function (dispatch) {
 
         // let's see if user has already been authenticated
         let authToken = await AsyncStorage.getItem('authToken');
