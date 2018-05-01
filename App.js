@@ -6,6 +6,7 @@ import store from './store';
 import HomeScreen from './screens/HomeScreen';
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
 import SignInScreen from "./screens/SignInScreen";
+import SignUpScreen from "./screens/SignUpScreen";
 import RestorePasswordScreen from "./screens/RestorePasswordScreen";
 
 // we'll describe all screens that are shown to authenticated user here
@@ -20,6 +21,7 @@ const RootStack = SwitchNavigator({
     App: AppStack,
     Auth: TabNavigator({
         SignIn: SignInScreen,
+        SignUp: SignUpScreen,
         RestorePassword: RestorePasswordScreen
     }, {
         navigationOptions: {

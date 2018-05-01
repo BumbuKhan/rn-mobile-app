@@ -1,16 +1,7 @@
 import React, {Component} from 'react';
-import {View, Button, AsyncStorage} from 'react-native';
+import {View, Text, Button} from 'react-native';
 
 export default class SignInScreen extends Component {
-    static navigationOptions = {
-        title: 'Sign in'
-    };
-
-    _signInAsync = async () => {
-        await AsyncStorage.setItem('authToken', 'some secret token');
-        this.props.navigation.navigate('App');
-    };
-
     render() {
         return (
             <View style={{
@@ -18,13 +9,14 @@ export default class SignInScreen extends Component {
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
-                <Button
-                    title="Sign me in"
-                    onPress={this._signInAsync}
-                />
+                <Text>Sign in form goes here...</Text>
                 <Button
                     title="Restore password"
                     onPress={() => this.props.navigation.navigate('RestorePassword')}
+                />
+                <Button
+                    title="Sign up here"
+                    onPress={() => this.props.navigation.navigate('SignUp')}
                 />
             </View>
         );

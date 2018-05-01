@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, Button} from 'react-native';
 
-export default class RestorePasswordScreen extends Component {
+export default class SignUpScreen extends Component {
     render() {
         return (
             <View style={{
@@ -9,7 +9,7 @@ export default class RestorePasswordScreen extends Component {
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
-                <Text>Restore password form goes here...</Text>
+                <Text>Sig up form goes here...</Text>
                 <Button
                     title="Back to login screen"
                     onPress={() => this.props.navigation.navigate('SignIn')}
