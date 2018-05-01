@@ -1,0 +1,9 @@
+FOR INFORMATION ONLY!, THIS FILE ISN'T USED ANYWHERE IN THIS APPLICATION
+THIS FILE DESCRIBES THE STRUCTURE OF REDUX STORE
+-----------------------------------------------------------------------
+
+REDUX_STORE = {
+    auth: {
+        token: <String>
+    }
+}

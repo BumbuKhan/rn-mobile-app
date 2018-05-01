@@ -1,0 +1,7 @@
+FOR INFORMATION ONLY!, THIS FILE ISN'T USED ANYWHERE IN THIS APPLICATION
+THIS FILE DESCRIBES THE STRUCTURE OF ASYNC STORAGE
+------------------------------------------------------------------------
+
+ASYNC_STORAGE = {
+
+}
