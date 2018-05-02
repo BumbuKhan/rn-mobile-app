@@ -19,7 +19,7 @@ const AppStack = DrawerNavigator({
         screen: MyAccountScreen
     }
 }, {
-    initialRouteName: 'Settings'
+    initialRouteName: 'ActiveProject'
 });
 
 const RootStack = SwitchNavigator({
