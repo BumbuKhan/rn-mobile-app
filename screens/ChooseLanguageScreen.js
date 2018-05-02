@@ -8,7 +8,7 @@ export default class ChooseLanguageScreen extends Component {
     };
 
     setupLanguage = (lang) => {
-        alert(`${lang} now is an active language`);
+        alert(`${lang} is now an active language`);
     };
 
     render() {
