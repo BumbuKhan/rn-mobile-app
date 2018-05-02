@@ -16,10 +16,6 @@ export default class SettingsScreen extends Component {
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{text: 'Settings', style: {color: '#fff', fontSize: 20}}}
                 />
-
-                <View>
-                    <Text>Settings screen</Text>
-                </View>
             </View>
         );
     };

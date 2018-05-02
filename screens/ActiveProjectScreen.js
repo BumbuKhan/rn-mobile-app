@@ -9,10 +9,10 @@ export default class ActiveProjectScreen extends Component {
       title: 'Active Project'
     };
 
-    _signOut = async () => {
+    /*_signOut = async () => {
         await AsyncStorage.clear();
         this.props.navigation.navigate('SignIn');
-    };
+    };*/
 
     render() {
         return (
@@ -22,11 +22,16 @@ export default class ActiveProjectScreen extends Component {
                     centerComponent={{text: 'Active Project', style: {color: '#fff', fontSize: 20}}}
                 />
                 <View>
-                    <Text>Home screen</Text>
-                    <Button
-                        title="Sign out"
-                        onPress={this._signOut}
-                    />
+                    <Text style={{
+                        alignSelf: 'center',
+                        marginTop: 20,
+                        color: '#999'
+                    }}>No active project so far</Text>
+
+                    <Text style={{
+                        alignSelf: 'center',
+                        color: '#999'
+                    }}>Press '+' to create one</Text>
                 </View>
             </View>
         );
