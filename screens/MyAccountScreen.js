@@ -4,7 +4,7 @@ import {Header} from 'react-native-elements';
 
 import Menu from '../components/Menu';
 
-export default class SettingsScreen extends Component {
+export default class MyAccountScreen extends Component {
     static navigationOptions = {
         title: 'Settings'
     };

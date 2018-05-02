@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import store from './store';
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
 import ActiveProjectScreen from './screens/ActiveProjectScreen';
-import SettingsScreen from './screens/SettingsScreen';
+import MyAccountScreen from './screens/MyAccountScreen';
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import RestorePasswordScreen from "./screens/RestorePasswordScreen";
@@ -14,9 +14,12 @@ import RestorePasswordScreen from "./screens/RestorePasswordScreen";
 const AppStack = DrawerNavigator({
     ActiveProject: {
         screen: ActiveProjectScreen,
-        name: "Active project"
+        name: 'Active project'
     },
-    Settings: SettingsScreen
+    Settings: {
+        screen: MyAccountScreen,
+        name: 'Settings'
+    }
 });
 
 const RootStack = SwitchNavigator({
