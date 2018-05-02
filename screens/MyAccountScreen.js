@@ -136,6 +136,27 @@ export default class MyAccountScreen extends Component {
                     </View>*/}
 
 
+                    <ListItem
+                        title="John Doe"
+                        subtitle="john.doe@gmail.com"
+                        subtitleStyle={{
+                            fontSize: 16
+                        }}
+                        avatar={<Avatar
+                            rounded
+                            large
+                            source={{uri: "https://randomuser.me/api/portraits/men/67.jpg"}}
+                            containerStyle={{
+                                marginLeft: 5
+                            }}
+                        />}
+                        containerStyle={[styles.listItem, styles.listItemBorder, styles.listItemMT]}
+                        titleStyle={{
+                            fontSize: 22
+                        }}
+                        onPress={() => alert('Navigating to the edit profile screen')}
+                    />
+
                     <ListItemTitle
                         title="LANGUAGE"
                     />
