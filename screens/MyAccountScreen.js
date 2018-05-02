@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
+import {View, ScrollView, StyleSheet, AsyncStorage} from 'react-native';
 import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
 
 import Menu from '../components/Menu';
@@ -14,6 +14,15 @@ export default class MyAccountScreen extends Component {
                 name="person"
                 color={tintColor}
             />
+        }
+    };
+
+    signOut = async () => {
+        try {
+            await AsyncStorage.removeItem('authToken');
+            this.props.navigation.navigate('Auth');
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -66,7 +75,7 @@ export default class MyAccountScreen extends Component {
                         title="Sign Out"
                         hideChevron={true}
                         titleStyle={[styles.listItemTitleStyle, {color: 'red'}]}
-                        onPress={() => alert('Signing Out...')}
+                        onPress={this.signOut}
                     />
                 </ScrollView>
             </View>
