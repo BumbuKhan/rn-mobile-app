@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
-import {Header, Icon, Avatar} from 'react-native-elements';
+import {View, Text, ScrollView, TouchableOpacity, StyleSheet} from 'react-native';
+import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
 
 import Menu from '../components/Menu';
+import ListItemTitle from '../components/ListItemTitle';
+import ListItemDescription from '../components/ListItemDescription';
 
 export default class MyAccountScreen extends Component {
     static navigationOptions = {
@@ -26,7 +28,7 @@ export default class MyAccountScreen extends Component {
                 <ScrollView style={{
                     backgroundColor: '#f7f7f7'
                 }}>
-                    <View style={{
+                    {/*<View style={{
                         marginTop: 30,
                         padding: 15,
                         borderTopWidth: 1,
@@ -76,9 +78,9 @@ export default class MyAccountScreen extends Component {
                                 </View>
                             </View>
                         </TouchableOpacity>
-                    </View>
+                    </View>*/}
 
-                    <View style={{
+                    {/*<View style={{
                         padding: 15,
                         paddingBottom: 10,
                         marginTop: 15
@@ -87,8 +89,8 @@ export default class MyAccountScreen extends Component {
                             color: '#999',
                             fontSize: 18
                         }}>Language</Text>
-                    </View>
-                    <View style={{
+                    </View>*/}
+                    {/*<View style={{
                         borderTopWidth: 1,
                         borderBottomWidth: 1,
                         borderColor: '#e0e0e0',
@@ -112,9 +114,9 @@ export default class MyAccountScreen extends Component {
                                 </View>
                             </View>
                         </TouchableOpacity>
-                    </View>
+                    </View>*/}
 
-                    <View style={{
+                    {/*<View style={{
                         marginTop: 30,
                         borderTopWidth: 1,
                         borderBottomWidth: 1,
@@ -131,9 +133,53 @@ export default class MyAccountScreen extends Component {
                                 }}>Sign Out</Text>
                             </View>
                         </TouchableOpacity>
-                    </View>
+                    </View>*/}
+
+
+                    <ListItemTitle
+                        title="LANGUAGE"
+                    />
+                    <ListItem
+                        containerStyle={[styles.listItem, styles.listItemBorder]}
+                        title="English"
+                        titleStyle={styles.listItemTitleStyle}
+                        onPress={() => alert('Changing Language')}
+                    />
+                    <ListItemDescription
+                        title='Lorem ipsum dolor sitamet even many many times everyone is happy with it'
+                    />
+
+                    <ListItem
+                        containerStyle={[styles.listItem, styles.listItemBorder, styles.listItemMT]}
+                        title="Sign Out"
+                        hideChevron={true}
+                        titleStyle={[styles.listItemTitleStyle, {color: 'red'}]}
+                        onPress={() => alert('Signing Out...')}
+                    />
+
+
                 </ScrollView>
             </View>
         );
     };
 }
+
+const styles = StyleSheet.create({
+    listItem: {
+        backgroundColor: 'white',
+    },
+
+    listItemBorder: {
+        borderTopWidth: 1,
+        borderTopColor: '#eaeaea',
+        borderBottomColor: '#eaeaea',
+    },
+
+    listItemMT: {
+        marginTop: 30
+    },
+
+    listItemTitleStyle: {
+        fontSize: 18
+    }
+});
