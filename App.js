@@ -13,13 +13,13 @@ import RestorePasswordScreen from "./screens/RestorePasswordScreen";
 // we'll describe all screens that are shown to authenticated user here
 const AppStack = DrawerNavigator({
     ActiveProject: {
-        screen: ActiveProjectScreen,
-        name: 'Active project'
+        screen: ActiveProjectScreen
     },
     Settings: {
-        screen: MyAccountScreen,
-        name: 'Settings'
+        screen: MyAccountScreen
     }
+}, {
+    initialRouteName: 'Settings'
 });
 
 const RootStack = SwitchNavigator({

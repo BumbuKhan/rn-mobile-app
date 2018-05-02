@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
 import {View, Text, AsyncStorage, Button} from 'react-native';
-import {Header} from 'react-native-elements';
+import {Header, Icon} from 'react-native-elements';
 
 import Menu from '../components/Menu';
 import Plus from '../components/Pluss';
 
 export default class ActiveProjectScreen extends Component {
     static navigationOptions = {
-        title: 'Active Project'
+        title: 'Active Project',
+        drawerIcon: ({tintColor}) => {
+            return <Icon
+                name="timer"
+                color={tintColor}
+            />
+        }
     };
 
     /*_signOut = async () => {
