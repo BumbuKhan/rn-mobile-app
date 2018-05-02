@@ -79,6 +79,42 @@ export default class MyAccountScreen extends Component {
                     </View>
 
                     <View style={{
+                        padding: 15,
+                        paddingBottom: 10,
+                        marginTop: 15
+                    }}>
+                        <Text style={{
+                            color: '#999',
+                            fontSize: 18
+                        }}>Language</Text>
+                    </View>
+                    <View style={{
+                        borderTopWidth: 1,
+                        borderBottomWidth: 1,
+                        borderColor: '#e0e0e0',
+                        backgroundColor: 'white'
+                    }}>
+                        <TouchableOpacity>
+                            <View style={{
+                                padding: 15,
+                                flexDirection: 'row',
+                                justifyContent: 'space-between'
+                            }}>
+                                <Text style={{
+                                    fontSize: 18
+                                }}>English</Text>
+                                <View style={{
+                                }}>
+                                    <Icon
+                                        name="chevron-right"
+                                        color="grey"
+                                    />
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={{
                         marginTop: 30,
                         borderTopWidth: 1,
                         borderBottomWidth: 1,
@@ -90,7 +126,8 @@ export default class MyAccountScreen extends Component {
                                 padding: 15
                             }}>
                                 <Text style={{
-                                    color: 'red'
+                                    color: 'red',
+                                    fontSize: 18
                                 }}>Sign Out</Text>
                             </View>
                         </TouchableOpacity>
