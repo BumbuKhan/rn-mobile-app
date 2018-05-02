@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, ScrollView, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
 import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
 
 import Menu from '../components/Menu';
@@ -24,7 +24,6 @@ export default class MyAccountScreen extends Component {
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{text: 'My Account', style: {color: '#fff', fontSize: 20}}}
                 />
-
                 <ScrollView style={{
                     backgroundColor: '#f7f7f7'
                 }}>
@@ -59,7 +58,7 @@ export default class MyAccountScreen extends Component {
                         onPress={() => alert('Changing Language')}
                     />
                     <ListItemDescription
-                        title='Lorem ipsum dolor sitamet even many many times everyone is happy with it'
+                        title='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam leo, varius vel mattis ut.'
                     />
 
                     <ListItem
@@ -69,8 +68,6 @@ export default class MyAccountScreen extends Component {
                         titleStyle={[styles.listItemTitleStyle, {color: 'red'}]}
                         onPress={() => alert('Signing Out...')}
                     />
-
-
                 </ScrollView>
             </View>
         );
