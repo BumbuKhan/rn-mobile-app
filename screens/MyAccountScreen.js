@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, ScrollView, StyleSheet, AsyncStorage, Alert} from 'react-native';
+import {View, Text, ScrollView, StyleSheet, AsyncStorage, Alert} from 'react-native';
 import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
 
 import Menu from '../components/Menu';
@@ -14,7 +14,8 @@ export default class MyAccountScreen extends Component {
                 name="person"
                 color={tintColor}
             />
-        }
+        },
+        header: null // hiding the default StackNavigator header since we have our own
     };
 
     signOut = () => {
@@ -74,7 +75,7 @@ export default class MyAccountScreen extends Component {
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title="English"
                         titleStyle={styles.listItemTitleStyle}
-                        onPress={() => alert('Changing Language')}
+                        onPress={() => this.props.navigation.navigate('ChooseLanguage')}
                     />
                     <ListItemDescription
                         title='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam leo, varius vel mattis ut.'

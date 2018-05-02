@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StackNavigator, SwitchNavigator, TabNavigator, DrawerNavigator} from 'react-navigation';
 import {Provider} from 'react-redux';
+import {Text} from 'react-navigation';
 
 import store from './store';
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
@@ -9,15 +10,26 @@ import MyAccountScreen from './screens/MyAccountScreen';
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import RestorePasswordScreen from "./screens/RestorePasswordScreen";
+import ChooseLanguageScreen from "./screens/ChooseLanguageScreen";
 
 // we'll describe all screens that are shown to authenticated user here
 const AppStack = DrawerNavigator({
     ActiveProject: {
         screen: ActiveProjectScreen
     },
-    Settings: {
+    /*Settings: {
         screen: MyAccountScreen
-    }
+    }*/
+    Settings: StackNavigator({
+        SettingsMain: {
+            screen: MyAccountScreen
+        },
+        ChooseLanguage: {
+            screen: ChooseLanguageScreen
+        }
+    }, {
+        initialRouteName: 'SettingsMain'
+    })
 }, {
     initialRouteName: 'Settings'
 });
