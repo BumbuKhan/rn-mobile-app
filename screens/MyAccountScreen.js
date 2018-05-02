@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, ScrollView, StyleSheet, AsyncStorage} from 'react-native';
+import {View, ScrollView, StyleSheet, AsyncStorage, Alert} from 'react-native';
 import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
 
 import Menu from '../components/Menu';
@@ -17,10 +17,20 @@ export default class MyAccountScreen extends Component {
         }
     };
 
-    signOut = async () => {
+    signOut = () => {
         try {
-            await AsyncStorage.removeItem('authToken');
-            this.props.navigation.navigate('Auth');
+            Alert.alert(
+                'Please confirm',
+                'Are you sure you want to sign out?',
+                [
+                    {text: 'Cancel', onPress: () => {}, style: 'cancel'},
+                    {text: 'OK', onPress: async () => {
+                            await AsyncStorage.removeItem('authToken');
+                            this.props.navigation.navigate('Auth');
+                        }},
+                ],
+                { cancelable: false }
+            )
         } catch (error) {
             console.log(error);
         }
