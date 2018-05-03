@@ -42,11 +42,15 @@ export default class MyAccountScreen extends Component {
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{text: 'My Account', style: {color: '#fff', fontSize: 20}}}
                 />
+
                 <ScrollView style={{
                     backgroundColor: '#f7f7f7'
                 }}>
                     <ListItem
                         title="John Doe"
+                        titleStyle={{
+                            fontSize: 22
+                        }}
                         subtitle="john.doe@gmail.com"
                         subtitleStyle={{
                             fontSize: 16
@@ -60,10 +64,7 @@ export default class MyAccountScreen extends Component {
                             }}
                         />}
                         containerStyle={[styles.listItem, styles.listItemBorder, styles.listItemMT]}
-                        titleStyle={{
-                            fontSize: 22
-                        }}
-                        onPress={() => alert('Navigating to the edit profile screen')}
+                        onPress={() => this.props.navigation.navigate('EditProfile')}
                     />
 
                     <ListItemTitle
@@ -82,8 +83,8 @@ export default class MyAccountScreen extends Component {
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder, styles.listItemMT]}
                         title="Sign Out"
-                        hideChevron={true}
                         titleStyle={[styles.listItemTitleStyle, {color: 'red'}]}
+                        hideChevron={true}
                         onPress={this.signOut}
                     />
                 </ScrollView>

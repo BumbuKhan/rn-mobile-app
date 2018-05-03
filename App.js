@@ -11,6 +11,7 @@ import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import RestorePasswordScreen from "./screens/RestorePasswordScreen";
 import ChooseLanguageScreen from "./screens/ChooseLanguageScreen";
+import EditProfileScreen from "./screens/EditProfilescreen";
 
 // we'll describe all screens that are shown to authenticated user here
 const AppStack = DrawerNavigator({
@@ -23,12 +24,15 @@ const AppStack = DrawerNavigator({
         },
         ChooseLanguage: {
             screen: ChooseLanguageScreen
+        },
+        EditProfile: {
+            screen: EditProfileScreen
         }
     }, {
         initialRouteName: 'SettingsMain'
     })
 }, {
-    initialRouteName: 'ActiveProject'
+    initialRouteName: 'Settings'
 });
 
 const RootStack = SwitchNavigator({
