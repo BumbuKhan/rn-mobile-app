@@ -2,17 +2,21 @@ import React, {Component} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-export default class Plus extends Component {
+class Menu extends Component {
     render() {
         return (
             <TouchableOpacity
-                onPress={this.props.onPress}
+                onPress={() => {
+                    this.props.navigation.navigate('DrawerOpen');
+                }}
             >
                 <Icon
-                    name="add"
+                    name="menu"
                     color="white"
                 />
             </TouchableOpacity>
         );
     }
 }
+
+export {Menu};

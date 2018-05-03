@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, AsyncStorage, Button} from 'react-native';
 import {Header, Icon} from 'react-native-elements';
 
-import Menu from '../components/Menu';
-import Plus from '../components/Pluss';
+import {Menu, Plus} from '../components/common';
 
 export default class ActiveProjectScreen extends Component {
     static navigationOptions = {
@@ -16,18 +15,15 @@ export default class ActiveProjectScreen extends Component {
         }
     };
 
-    /*_signOut = async () => {
-        await AsyncStorage.clear();
-        this.props.navigation.navigate('SignIn');
-    };*/
-
     render() {
         return (
             <View>
                 <Header
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{text: 'Active Project', style: {color: '#fff', fontSize: 20}}}
-                    rightComponent={<Plus onPress={() => {alert('Showing add project form')}}/>}
+                    rightComponent={<Plus onPress={() => {
+                        alert('Showing add project form')
+                    }}/>}
                 />
                 <View>
                     <Text style={{

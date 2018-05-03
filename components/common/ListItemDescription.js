@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-export default class ListItemTitle extends Component {
+class ListItemDescription extends Component {
     render() {
         return (
             <View style={styles.container}>
@@ -13,10 +13,13 @@ export default class ListItemTitle extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20,
-        paddingBottom: 5
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 5
     },
     text: {
         color: 'grey'
     }
 });
+
+export {ListItemDescription};

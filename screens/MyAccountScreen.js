@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, ScrollView, StyleSheet, AsyncStorage, Alert} from 'react-native';
 import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
 
-import Menu from '../components/Menu';
-import ListItemTitle from '../components/ListItemTitle';
-import ListItemDescription from '../components/ListItemDescription';
+import {Menu, ListItemTitle, ListItemDescription} from '../components/common';
 
 export default class MyAccountScreen extends Component {
     static navigationOptions = {
