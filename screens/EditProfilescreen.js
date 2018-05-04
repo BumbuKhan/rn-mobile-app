@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, ScrollView, Modal, TouchableOpacity} from 'react-native';
-import {ListItem, Icon, FormInput, Button} from 'react-native-elements';
+import {ListItem, Icon, FormInput, Button, Avatar} from 'react-native-elements';
 
 export default class EditProfileScreen extends Component {
     static navigationOptions = {
@@ -10,6 +10,7 @@ export default class EditProfileScreen extends Component {
     state = {
         modalVisible: false,
         curEditingField: {
+            name: '',
             value: '',
             placeholder: 'Default Placeholder',
             keyboardType: 'default'
@@ -75,6 +76,52 @@ export default class EditProfileScreen extends Component {
                 </Modal>
 
                 <ScrollView>
+                    <View style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        margin: 20,
+                        marginTop: 30
+                    }}>
+                        <View style={{
+                            flex: 1,
+                            justifyContent: 'center',
+                            alignItems: 'flex-end',
+                            paddingRight: 25,
+                        }}>
+                            <TouchableOpacity onPress={() => {}}>
+                                <Icon
+                                    name='delete-forever'
+                                    color='red'
+                                />
+                                <Text style={{
+                                    color: 'red'
+                                }}>Delete</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View>
+                            <Avatar
+                                large
+                                rounded
+                                source={{uri: "https://randomuser.me/api/portraits/men/67.jpg"}}
+                                onPress={() => console.log("Works!")}
+                                activeOpacity={0.7}
+                            />
+                        </View>
+                        <View style={{
+                            flex: 1,
+                            justifyContent: 'center',
+                            alignItems: 'flex-start',
+                            paddingLeft: 25
+                        }}>
+                            <TouchableOpacity onPress={() => {}}>
+                                <Icon
+                                    name='photo-camera'
+                                />
+                                <Text>Edit</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemMT, styles.listItemBorder]}
                         title="First Name"
@@ -204,5 +251,5 @@ const styles = StyleSheet.create({
 
     modalFormInputContainer: {
         marginTop: 40
-    }
+    },
 });
