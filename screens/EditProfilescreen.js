@@ -142,7 +142,7 @@ export default class EditProfileScreen extends Component {
                         titleStyle={styles.listItemTitleStyle}
                         subtitleStyle={styles.listItemSubtitleStyle}
                         subtitle="John"
-                        rightIcon={{name: 'edit'}}
+                        rightIcon={(<Icon name='edit' size={20} color='gray'/>)}
                         onPress={() => {
                             this.setState({
                                 curEditingField: {
@@ -162,7 +162,7 @@ export default class EditProfileScreen extends Component {
                         titleStyle={styles.listItemTitleStyle}
                         subtitle="Doe"
                         subtitleStyle={styles.listItemSubtitleStyle}
-                        rightIcon={{name: 'edit'}}
+                        rightIcon={(<Icon name='edit' size={20} color='gray'/>)}
                         onPress={() => {
                             this.setState({
                                 curEditingField: {
@@ -182,7 +182,7 @@ export default class EditProfileScreen extends Component {
                         titleStyle={styles.listItemTitleStyle}
                         subtitle="john.doe@gmail.com"
                         subtitleStyle={styles.listItemSubtitleStyle}
-                        rightIcon={{name: 'edit'}}
+                        rightIcon={(<Icon name='edit' size={20} color='gray'/>)}
                         onPress={() => {
                             this.setState({
                                 curEditingField: {
@@ -202,7 +202,7 @@ export default class EditProfileScreen extends Component {
                         titleStyle={styles.listItemTitleStyle}
                         subtitle="+123 432 5675 56"
                         subtitleStyle={styles.listItemSubtitleStyle}
-                        rightIcon={{name: 'edit'}}
+                        rightIcon={(<Icon name='edit' size={20} color='gray'/>)}
                         onPress={() => {
                             this.setState({
                                 curEditingField: {
@@ -222,7 +222,7 @@ export default class EditProfileScreen extends Component {
                         titleStyle={styles.listItemTitleStyle}
                         subtitle="********"
                         subtitleStyle={styles.listItemSubtitleStyle}
-                        rightIcon={{name: 'edit'}}
+                        rightIcon={(<Icon name='edit' size={20} color='gray'/>)}
                         onPress={() => {
                         }}
                     />
