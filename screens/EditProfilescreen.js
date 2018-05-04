@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView, Modal, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert, AsyncStorage} from 'react-native';
 import {ListItem, Icon, FormInput, Button, Avatar} from 'react-native-elements';
 
 export default class EditProfileScreen extends Component {
@@ -69,7 +69,8 @@ export default class EditProfileScreen extends Component {
                                 textStyle={{
                                     fontSize: 18
                                 }}
-                                onPress={() => {}}
+                                onPress={() => {
+                                }}
                             />
                         </View>
                     </View>
@@ -88,7 +89,19 @@ export default class EditProfileScreen extends Component {
                             alignItems: 'flex-end',
                             paddingRight: 25,
                         }}>
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity onPress={() => {
+                                Alert.alert(
+                                    'Please confirm',
+                                    'Are you sure you want to delete the avatar?',
+                                    [
+                                        {text: 'Cancel', onPress: () => {}, style: 'cancel'},
+                                        {text: 'OK', onPress: async () => {
+                                                // making an HTTP request...
+                                            }},
+                                    ],
+                                    { cancelable: false }
+                                )
+                            }}>
                                 <Icon
                                     name='delete-forever'
                                     color='red'
@@ -113,7 +126,8 @@ export default class EditProfileScreen extends Component {
                             alignItems: 'flex-start',
                             paddingLeft: 25
                         }}>
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity onPress={() => {
+                            }}>
                                 <Icon
                                     name='photo-camera'
                                 />
