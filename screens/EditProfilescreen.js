@@ -182,18 +182,7 @@ export default class EditProfileScreen extends Component {
                         titleStyle={styles.listItemTitleStyle}
                         subtitle="john.doe@gmail.com"
                         subtitleStyle={styles.listItemSubtitleStyle}
-                        rightIcon={(<Icon name='edit' size={20} color='gray'/>)}
-                        onPress={() => {
-                            this.setState({
-                                curEditingField: {
-                                    value: 'john.doe@gmail.com',
-                                    placeholder: 'Email',
-                                    keyboardType: 'email-address'
-                                }
-                            });
-
-                            this.setModalVisible(true);
-                        }}
+                        hideChevron={true}
                     />
 
                     <ListItem
