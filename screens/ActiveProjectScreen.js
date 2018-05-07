@@ -5,22 +5,26 @@ import {Header, Icon} from 'react-native-elements';
 import {Menu, Plus} from '../components/common';
 
 export default class ActiveProjectScreen extends Component {
-    static navigationOptions = {
-        title: 'Active Project',
-        drawerIcon: ({tintColor}) => {
-            return <Icon
-                name="timer"
-                color={tintColor}
-            />
+    static navigationOptions = ({navigation, screenProps}) => {
+        return {
+            title: screenProps.t('drawer menu:active project'),
+            drawerIcon: ({tintColor}) => {
+                return <Icon
+                    name="timer"
+                    color={tintColor}
+                />
+            }
         }
     };
 
     render() {
+        const {t} = this.props.screenProps;
+
         return (
             <View>
                 <Header
                     leftComponent={<Menu {...this.props} />}
-                    centerComponent={{text: 'Active Project', style: {color: '#fff', fontSize: 20}}}
+                    centerComponent={{text: t('drawer menu:active project'), style: {color: '#fff', fontSize: 20}}}
                     rightComponent={<Plus onPress={() => {
                         alert('Showing add project form')
                     }}/>}
@@ -30,12 +34,12 @@ export default class ActiveProjectScreen extends Component {
                         alignSelf: 'center',
                         marginTop: 20,
                         color: '#999'
-                    }}>No active project so far</Text>
+                    }}>{t('screens:active project:no active project text 1')}</Text>
 
                     <Text style={{
                         alignSelf: 'center',
                         color: '#999'
-                    }}>Press '+' to create one</Text>
+                    }}>{t('screens:active project:no active project text 2')}</Text>
                 </View>
             </View>
         );

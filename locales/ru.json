@@ -1,0 +1,44 @@
+{
+  "common": {
+    "ok": "OK",
+    "cancel": "Отмена",
+    "back": "Назад",
+    "save": "Сохранить"
+  },
+  "languages": {
+    "en": "English",
+    "de": "Deutsch",
+    "ru": "Русский"
+  },
+  "drawer menu": {
+    "active project": "Активный Проект",
+    "my account": "Мой Аккаунт"
+  },
+  "screens": {
+    "active project": {
+      "no active project text 1": "Пока нет активного проекта",
+      "no active project text 2": "Нажмите '+' чтобы создать"
+    },
+    "my account": {
+      "language title": "ЯЗЫК",
+      "sign out": "Выход",
+      "sign out confirm title": "Пожалуйста подтвердите",
+      "sign out confirm description": "Вы уверены, что хотите выйти?",
+
+      "edit profile": {
+        "title": "Редактировать Профиль",
+        "delete avatar": "Удалить",
+        "edit avatar": "Редактировать",
+        "first name": "Имя",
+        "last name": "Фамилия",
+        "email": "Эл. Адрес",
+        "phone number": "Номер Телефона",
+        "password": "Пароль"
+      },
+
+      "choose language": {
+        "title": "Выберите язык"
+      }
+    }
+  }
+}

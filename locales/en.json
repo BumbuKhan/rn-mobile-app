@@ -1,0 +1,44 @@
+{
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "back": "Back",
+    "save": "Save"
+  },
+  "languages": {
+    "en": "English",
+    "de": "Deutsch",
+    "ru": "Русский"
+  },
+  "drawer menu": {
+    "active project": "Active Project",
+    "my account": "My Account"
+  },
+  "screens": {
+    "active project": {
+      "no active project text 1": "No active project so far",
+      "no active project text 2": "Press '+' to crete one"
+    },
+    "my account": {
+      "language title": "LANGUAGE",
+      "sign out": "Sign Out",
+      "sign out confirm title": "Please confirm",
+      "sign out confirm description": "Are you sure you want to sign out?",
+
+      "edit profile": {
+        "title": "Edit Profile",
+        "delete avatar": "Delete",
+        "edit avatar": "Edit",
+        "first name": "First Name",
+        "last name": "Last Name",
+        "email": "Email",
+        "phone number": "Phone Number",
+        "password": "Password"
+      },
+
+      "choose language": {
+        "title": "Choose Language"
+      }
+    }
+  }
+}

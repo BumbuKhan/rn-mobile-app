@@ -3,32 +3,44 @@ import {View, Text, ScrollView, StyleSheet, AsyncStorage, Alert} from 'react-nat
 import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
 
 import {Menu, ListItemTitle, ListItemDescription} from '../components/common';
+import i18n from '../locales/i18n';
 
 export default class MyAccountScreen extends Component {
-    static navigationOptions = {
-        title: 'My Account',
-        drawerIcon: ({tintColor}) => {
-            return <Icon
-                name="person"
-                color={tintColor}
-            />
-        },
-        header: null // hiding the default StackNavigator header since we have our own
+    static navigationOptions = ({navigation, screenProps}) => {
+        return {
+            title: screenProps.t('drawer menu:my account'),
+            drawerIcon: ({tintColor}) => {
+                return <Icon
+                    name="person"
+                    color={tintColor}
+                />
+            },
+            header: null // hiding the default StackNavigator header since we have our own
+        }
     };
 
     signOut = () => {
+        const {t} = this.props.screenProps;
+
         try {
             Alert.alert(
-                'Please confirm',
-                'Are you sure you want to sign out?',
+                t('screens:my account:sign out confirm title'),
+                t('screens:my account:sign out confirm description'),
                 [
-                    {text: 'Cancel', onPress: () => {}, style: 'cancel'},
-                    {text: 'OK', onPress: async () => {
+                    {
+                        text: t('common:cancel'),
+                        onPress: () => {
+                        }, style: 'cancel'
+                    },
+                    {
+                        text: t('common:ok'),
+                        onPress: async () => {
                             await AsyncStorage.removeItem('authToken');
                             this.props.navigation.navigate('Auth');
-                        }},
+                        }
+                    },
                 ],
-                { cancelable: false }
+                {cancelable: false}
             )
         } catch (error) {
             console.log(error);
@@ -36,16 +48,19 @@ export default class MyAccountScreen extends Component {
     };
 
     render() {
+        const {t} = this.props.screenProps;
+
         return (
             <View style={{flex: 1}}>
                 <Header
                     leftComponent={<Menu {...this.props} />}
-                    centerComponent={{text: 'My Account', style: {color: '#fff', fontSize: 20}}}
+                    centerComponent={{text: t('drawer menu:my account'), style: {color: '#fff', fontSize: 20}}}
                 />
 
                 <ScrollView style={{
                     backgroundColor: '#f7f7f7'
                 }}>
+
                     <ListItem
                         title="John Doe"
                         titleStyle={{
@@ -68,21 +83,23 @@ export default class MyAccountScreen extends Component {
                     />
 
                     <ListItemTitle
-                        title="LANGUAGE"
+                        title={t('screens:my account:language title')}
                     />
+
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title="English"
                         titleStyle={styles.listItemTitleStyle}
                         onPress={() => this.props.navigation.navigate('ChooseLanguage')}
                     />
+
                     <ListItemDescription
                         title='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam leo, varius vel mattis ut.'
                     />
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder, styles.listItemMT]}
-                        title="Sign Out"
+                        title={t('screens:my account:sign out')}
                         titleStyle={[styles.listItemTitleStyle, {color: 'red'}]}
                         hideChevron={true}
                         onPress={this.signOut}

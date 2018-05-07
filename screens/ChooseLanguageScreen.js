@@ -1,25 +1,45 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, AsyncStorage} from 'react-native';
 import {ListItem} from 'react-native-elements';
 
+import i18n from '../locales/i18n';
+
 export default class ChooseLanguageScreen extends Component {
-    static navigationOptions = {
-        title: 'Choose Language'
+    static navigationOptions = ({navigation, screenProps}) => {
+        return {
+            title: screenProps.t('screens:my account:choose language:title')
+        }
+    };
+
+    state = {
+        curLang: null
+    };
+
+    componentWillMount = async () => {
+        let curLang = await AsyncStorage.getItem('curLang');
     };
 
     setupLanguage = (lang) => {
-        alert(`${lang} is now an active language`);
+        i18n.changeLanguage(lang, (err, t) => {
+            if (err) {
+                console.log(err);
+            } else {
+                // saving to the AsyncStorage
+                AsyncStorage.setItem('curLang', lang);
+            }
+        });
     };
 
     render() {
+        const {t} = this.props.screenProps;
+
         return (
             <View style={styles.container}>
                 <ScrollView>
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemMT, styles.listItemBorder]}
-                        title="English"
-                        subtitle="English"
+                        title={t('languages:en')}
                         titleStyle={styles.listItemTitleStyle}
                         onPress={() => this.setupLanguage('en')}
                         rightIcon={{name: 'check'}}
@@ -27,8 +47,7 @@ export default class ChooseLanguageScreen extends Component {
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
-                        title="German"
-                        subtitle="Deutsch"
+                        title={t('languages:de')}
                         hideChevron={true}
                         titleStyle={styles.listItemTitleStyle}
                         onPress={() => this.setupLanguage('de')}
@@ -36,8 +55,7 @@ export default class ChooseLanguageScreen extends Component {
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
-                        title="Russian"
-                        subtitle="Русский"
+                        title={t('languages:ru')}
                         hideChevron={true}
                         titleStyle={styles.listItemTitleStyle}
                         onPress={() => this.setupLanguage('ru')}

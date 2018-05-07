@@ -3,8 +3,10 @@ import {View, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert, Asyn
 import {ListItem, Icon, FormInput, Button, Avatar} from 'react-native-elements';
 
 export default class EditProfileScreen extends Component {
-    static navigationOptions = {
-        title: 'Edit Profile'
+    static navigationOptions = ({navigation, screenProps}) => {
+        return {
+            title: screenProps.t('screens:my account:edit profile:title')
+        }
     };
 
     state = {
@@ -12,7 +14,7 @@ export default class EditProfileScreen extends Component {
         curEditingField: {
             name: '',
             value: '',
-            placeholder: 'Default Placeholder',
+            placeholder: '',
             keyboardType: 'default'
         }
     };
@@ -22,6 +24,8 @@ export default class EditProfileScreen extends Component {
     }
 
     render() {
+        const {t} = this.props.screenProps;
+
         return (
             <View style={styles.container}>
                 <Modal
@@ -62,7 +66,7 @@ export default class EditProfileScreen extends Component {
                             marginTop: 20
                         }}>
                             <Button
-                                title='Save'
+                                title={t('common:save')}
                                 buttonStyle={{
                                     backgroundColor: '#496FC2',
                                 }}
@@ -91,15 +95,23 @@ export default class EditProfileScreen extends Component {
                         }}>
                             <TouchableOpacity onPress={() => {
                                 Alert.alert(
-                                    'Please confirm',
-                                    'Are you sure you want to delete the avatar?',
+                                    t('screens:my account:sign out confirm title'),
+                                    t('screens:my account:sign out confirm description'),
                                     [
-                                        {text: 'Cancel', onPress: () => {}, style: 'cancel'},
-                                        {text: 'OK', onPress: async () => {
+                                        {
+                                            text: t('common:cancel'),
+                                            onPress: () => {
+                                            },
+                                            style: 'cancel'
+                                        },
+                                        {
+                                            text: t('common:ok'),
+                                            onPress: async () => {
                                                 // making an HTTP request...
-                                            }},
+                                            }
+                                        },
                                     ],
-                                    { cancelable: false }
+                                    {cancelable: false}
                                 )
                             }}>
                                 <Icon
@@ -138,7 +150,7 @@ export default class EditProfileScreen extends Component {
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemMT, styles.listItemBorder]}
-                        title="First Name"
+                        title={t('screens:my account:edit profile:first name')}
                         titleStyle={styles.listItemTitleStyle}
                         subtitleStyle={styles.listItemSubtitleStyle}
                         subtitle="John"
@@ -147,7 +159,7 @@ export default class EditProfileScreen extends Component {
                             this.setState({
                                 curEditingField: {
                                     value: 'John',
-                                    placeholder: 'First Name',
+                                    placeholder: t('screens:my account:edit profile:first name'),
                                     keyboardType: 'default'
                                 }
                             });
@@ -158,7 +170,7 @@ export default class EditProfileScreen extends Component {
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
-                        title="Last Name"
+                        title={t('screens:my account:edit profile:last name')}
                         titleStyle={styles.listItemTitleStyle}
                         subtitle="Doe"
                         subtitleStyle={styles.listItemSubtitleStyle}
@@ -167,7 +179,7 @@ export default class EditProfileScreen extends Component {
                             this.setState({
                                 curEditingField: {
                                     value: 'Doe',
-                                    placeholder: 'Last Name',
+                                    placeholder: t('screens:my account:edit profile:last name'),
                                     keyboardType: 'default'
                                 }
                             });
@@ -178,7 +190,7 @@ export default class EditProfileScreen extends Component {
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
-                        title="Email"
+                        title={t('screens:my account:edit profile:email')}
                         titleStyle={styles.listItemTitleStyle}
                         subtitle="john.doe@gmail.com"
                         subtitleStyle={styles.listItemSubtitleStyle}
@@ -187,7 +199,7 @@ export default class EditProfileScreen extends Component {
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
-                        title="Phone Number"
+                        title={t('screens:my account:edit profile:phone number')}
                         titleStyle={styles.listItemTitleStyle}
                         subtitle="+123 432 5675 56"
                         subtitleStyle={styles.listItemSubtitleStyle}
@@ -196,7 +208,7 @@ export default class EditProfileScreen extends Component {
                             this.setState({
                                 curEditingField: {
                                     value: '+123 432 5675 56',
-                                    placeholder: 'Phone Number',
+                                    placeholder: t('screens:my account:edit profile:phone number'),
                                     keyboardType: 'phone-pad'
                                 }
                             });
@@ -207,7 +219,7 @@ export default class EditProfileScreen extends Component {
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
-                        title="Password"
+                        title={t('screens:my account:edit profile:password')}
                         titleStyle={styles.listItemTitleStyle}
                         subtitle="********"
                         subtitleStyle={styles.listItemSubtitleStyle}
