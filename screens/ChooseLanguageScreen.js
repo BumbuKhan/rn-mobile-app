@@ -12,10 +12,6 @@ class ChooseLanguageScreen extends Component {
         }
     };
 
-    componentWillMount = async () => {
-        let curLang = await AsyncStorage.getItem('curLang');
-    };
-
     render() {
         const {t} = this.props.screenProps;
 

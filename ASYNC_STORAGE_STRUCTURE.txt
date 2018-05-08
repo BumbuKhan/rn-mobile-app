@@ -1,8 +1,12 @@
 FOR INFORMATION ONLY!, THIS FILE ISN'T USED ANYWHERE IN THIS APPLICATION
 THIS FILE DESCRIBES THE STRUCTURE OF ASYNC STORAGE
+
+NOTE: values of keys are JSON strings! do not forget to parse before use
 ------------------------------------------------------------------------
 
 ASYNC_STORAGE = {
     user: <Object>,
-    settings: <Object>
+    settings: {
+        curLang: <String>
+    }
 }

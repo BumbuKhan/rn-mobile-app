@@ -20,12 +20,15 @@ class AuthLoadingScreen extends Component {
 
     _bootstrapAsync = async () => {
         try {
-            // if this app is running at the very first time the curLang will be equal to NULL
+            // if this app is running at the very first time the settings will be equal to NULL
             // in this case i18next package will setup system lang as default
-            // otherwise app's language will be restore from the storage
-            let curLang = await AsyncStorage.getItem('curLang');
+            // otherwise app's language will be restore from the AsyncStorage
+            let settings = await AsyncStorage.getItem('settings');
 
-            if (curLang) {
+            if (settings) {
+                // 'settings' is a json string
+                const curLang = JSON.parse(settings).curLang;
+
                 i18n.changeLanguage(curLang);
             }
 
