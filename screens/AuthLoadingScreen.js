@@ -32,8 +32,6 @@ class AuthLoadingScreen extends Component {
             // checking whether the user is authenticated
             const user = await AsyncStorage.getItem('user');
 
-            console.log(user);
-
             // if authenticate, then navigating him to the application's home screen
             // otherwise showing signin screen
             this.props.navigation.navigate(user ? 'App' : 'Auth');

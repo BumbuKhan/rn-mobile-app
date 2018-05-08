@@ -36,7 +36,10 @@ class MyAccountScreen extends Component {
                     {
                         text: t('common:ok'),
                         onPress: async () => {
+                            // waiting for actual logout
                             await this.props.logOut();
+
+                            // redirecting user to the Auth screen
                             this.props.navigation.navigate('Auth');
                         }
                     },
