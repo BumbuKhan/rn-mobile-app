@@ -5,7 +5,7 @@ import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
 import {Menu, ListItemTitle, ListItemDescription} from '../components/common';
 import i18n from '../locales/i18n';
 
-export default class MyAccountScreen extends Component {
+class MyAccountScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
         return {
             title: screenProps.t('drawer menu:my account'),
@@ -129,3 +129,5 @@ const styles = StyleSheet.create({
         fontSize: 18
     }
 });
+
+export default MyAccountScreen;

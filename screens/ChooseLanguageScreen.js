@@ -1,33 +1,19 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, ScrollView, AsyncStorage} from 'react-native';
 import {ListItem} from 'react-native-elements';
+import {connect} from 'react-redux';
 
-import i18n from '../locales/i18n';
+import {setCurLang} from '../actions/settings_actions';
 
-export default class ChooseLanguageScreen extends Component {
+class ChooseLanguageScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
         return {
             title: screenProps.t('screens:my account:choose language:title')
         }
     };
 
-    state = {
-        curLang: null
-    };
-
     componentWillMount = async () => {
         let curLang = await AsyncStorage.getItem('curLang');
-    };
-
-    setupLanguage = (lang) => {
-        i18n.changeLanguage(lang, (err, t) => {
-            if (err) {
-                console.log(err);
-            } else {
-                // saving to the AsyncStorage
-                AsyncStorage.setItem('curLang', lang);
-            }
-        });
     };
 
     render() {
@@ -41,7 +27,7 @@ export default class ChooseLanguageScreen extends Component {
                         containerStyle={[styles.listItem, styles.listItemMT, styles.listItemBorder]}
                         title={t('languages:en')}
                         titleStyle={styles.listItemTitleStyle}
-                        onPress={() => this.setupLanguage('en')}
+                        onPress={() => this.props.setCurLang('en')}
                         rightIcon={{name: 'check'}}
                     />
 
@@ -50,7 +36,7 @@ export default class ChooseLanguageScreen extends Component {
                         title={t('languages:de')}
                         hideChevron={true}
                         titleStyle={styles.listItemTitleStyle}
-                        onPress={() => this.setupLanguage('de')}
+                        onPress={() => this.props.setCurLang('de')}
                     />
 
                     <ListItem
@@ -58,7 +44,7 @@ export default class ChooseLanguageScreen extends Component {
                         title={t('languages:ru')}
                         hideChevron={true}
                         titleStyle={styles.listItemTitleStyle}
-                        onPress={() => this.setupLanguage('ru')}
+                        onPress={() => this.props.setCurLang('ru')}
                     />
 
                 </ScrollView>
@@ -88,3 +74,5 @@ const styles = StyleSheet.create({
         fontSize: 18
     }
 });
+
+export default connect(null, {setCurLang})(ChooseLanguageScreen);
