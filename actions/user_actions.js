@@ -1,22 +1,22 @@
 import {AsyncStorage} from 'react-native';
 import axios from 'axios';
 
-import {LOGIN_SUCCESS, LOGIN_FAIL} from './types';
+import {LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT} from './types';
 import {AUTH} from '../services/api_endpoints';
 
-export const login = (login, password) => {
+export const logIn = (login, password) => {
     // since this action will take some none zero amount of time
-    // we'll wrap it to the function so redux-thunk middleware will take kare of the rest
+    // we'll wrap it to the function so redux-thunk middleware will take care of the rest
     return async function (dispatch) {
 
         // let's see if user has already been authenticated
-        let authToken = await AsyncStorage.getItem('authToken');
+        let user = await AsyncStorage.getItem('user');
 
-        if (authToken) {
+        if (user) {
             // yep!, authenticated :-), dispatching a success login action
             dispatch({
                 type: LOGIN_SUCCESS,
-                payload: authToken
+                payload: JSON.parse(user)
             });
         } else {
             // not authenticated yet :-(, trying to log him in
@@ -43,16 +43,37 @@ const doLogin = async (login, password, dispatch) => {
 
     // if we've reached this line of code then everything is ok - user has been successfully signed in
 
-    // NOTE: 'data' & 'token' keys will be agreed with the backend developers who are responsible for API endpoints
-    const authToken = response.data.token;
+    // NOTE: 'data' & 'user' keys will be agreed with the backend developers who are responsible for API endpoints
+    //const user = response.data.user;
+
+    // WARNING! JUST FOR NOW IMITATING HTTP RESPONSE...
+    const user = {
+        name: 'Gurban',
+        lastname: 'Gurbanov',
+        email: 'qurban.qurbanov93@gmail.com',
+        phone: '+123 654 76 7646'
+    };
 
     // saving token to the AsyncStorage so user wont be asked to enter his credentials every time the app is launched
-    await AsyncStorage.setItem('authToken', authToken);
-    // NOTE: we terminate authToken once the user signs out
+    await AsyncStorage.setItem('user', JSON.stringify(user));
+    // NOTE: we terminate 'user' once the user signs out
 
     // and finally dispatching success action
     dispatch({
         type: LOGIN_SUCCESS,
-        payload: authToken
+        payload: user
     });
+};
+
+
+export const logOut = () => {
+    // since this action will take some none zero amount of time
+    // we'll wrap it to the function so redux-thunk middleware will take care of the rest
+    return async function (dispatch) {
+        await AsyncStorage.setItem('user', '');
+
+        dispatch({
+            type: LOG_OUT
+        });
+    }
 };

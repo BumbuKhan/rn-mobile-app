@@ -6,10 +6,12 @@ import {
     StyleSheet,
     View
 } from 'react-native';
+import {connect} from 'react-redux';
 
 import i18n from '../locales/i18n';
+import {setCurLang} from '../actions/settings_actions';
 
-export default class AuthLoadingScreen extends Component {
+class AuthLoadingScreen extends Component {
     constructor(props) {
         super(props);
 
@@ -28,11 +30,13 @@ export default class AuthLoadingScreen extends Component {
             }
 
             // checking whether the user is authenticated
-            const userToken = await AsyncStorage.getItem('authToken');
+            const user = await AsyncStorage.getItem('user');
+
+            console.log(user);
 
             // if authenticate, then navigating him to the application's home screen
             // otherwise showing signin screen
-            this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+            this.props.navigation.navigate(user ? 'App' : 'Auth');
         } catch (error) {
             console.log(error);
         }
@@ -51,3 +55,5 @@ export default class AuthLoadingScreen extends Component {
         );
     }
 }
+
+export default connect(null, {setCurLang})(AuthLoadingScreen);

@@ -3,6 +3,6 @@ THIS FILE DESCRIBES THE STRUCTURE OF ASYNC STORAGE
 ------------------------------------------------------------------------
 
 ASYNC_STORAGE = {
-    authToken: <String>,
-    curLang: <String>
+    user: <Object>,
+    settings: <Object>
 }

@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import auth from './auth_reducer';
-import curLang from './cur_lang_reducer';
+import user from './user_reducer';
+import settings from './settings_reducer';
 
 export default combineReducers({
-    auth,
-    curLang
+    user,
+    settings
 });

@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {View, Text, ScrollView, StyleSheet, AsyncStorage, Alert} from 'react-native';
 import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
+import {connect} from 'react-redux';
 
 import {Menu, ListItemTitle, ListItemDescription} from '../components/common';
-import i18n from '../locales/i18n';
+import {logOut} from '../actions/user_actions';
 
 class MyAccountScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -19,7 +20,7 @@ class MyAccountScreen extends Component {
         }
     };
 
-    signOut = () => {
+    _logOut = () => {
         const {t} = this.props.screenProps;
 
         try {
@@ -35,7 +36,7 @@ class MyAccountScreen extends Component {
                     {
                         text: t('common:ok'),
                         onPress: async () => {
-                            await AsyncStorage.removeItem('authToken');
+                            await this.props.logOut();
                             this.props.navigation.navigate('Auth');
                         }
                     },
@@ -102,7 +103,7 @@ class MyAccountScreen extends Component {
                         title={t('screens:my account:sign out')}
                         titleStyle={[styles.listItemTitleStyle, {color: 'red'}]}
                         hideChevron={true}
-                        onPress={this.signOut}
+                        onPress={this._logOut}
                     />
                 </ScrollView>
             </View>
@@ -130,4 +131,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default MyAccountScreen;
+export default connect(null, {logOut})(MyAccountScreen);

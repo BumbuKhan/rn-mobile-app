@@ -1,8 +1,6 @@
-import {LOGIN_SUCCESS, LOGIN_FAIL} from '../actions/types';
+import {LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT} from '../actions/types';
 
-const INITIAL_STATE = {
-    token: null
-};
+const INITIAL_STATE = null;
 
 export default authReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
@@ -10,6 +8,9 @@ export default authReducer = (state = INITIAL_STATE, action) => {
             return {token: action.payload};
 
         case LOGIN_FAIL:
+            return INITIAL_STATE;
+
+        case LOG_OUT:
             return INITIAL_STATE;
 
         default:
