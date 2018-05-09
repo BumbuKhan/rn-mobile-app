@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert, AsyncStorage} from 'react-native';
 import {ListItem, Icon, FormInput, Button, Avatar} from 'react-native-elements';
+import {connect} from 'react-redux';
 
-export default class EditProfileScreen extends Component {
+class EditProfileScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
         return {
             title: screenProps.t('screens:my account:edit profile:title')
         }
     };
 
-    state = {
+    /*state = {
         modalVisible: false,
         curEditingField: {
             name: '',
@@ -17,7 +18,7 @@ export default class EditProfileScreen extends Component {
             placeholder: '',
             keyboardType: 'default'
         }
-    };
+    };*/
 
     setModalVisible(visible) {
         this.setState({modalVisible: visible});
@@ -28,7 +29,7 @@ export default class EditProfileScreen extends Component {
 
         return (
             <View style={styles.container}>
-                <Modal
+                {/*<Modal
                     animationType="slide"
                     transparent={false}
                     visible={this.state.modalVisible}
@@ -78,7 +79,7 @@ export default class EditProfileScreen extends Component {
                             />
                         </View>
                     </View>
-                </Modal>
+                </Modal>*/}
 
                 <ScrollView>
                     {/*<View style={{
@@ -153,7 +154,7 @@ export default class EditProfileScreen extends Component {
                         title={t('screens:my account:edit profile:first name')}
                         titleStyle={styles.listItemTitleStyle}
                         subtitleStyle={styles.listItemSubtitleStyle}
-                        subtitle="John"
+                        subtitle={this.props.user.name}
                         hideChevron={true}
                         /*rightIcon={(<Icon name='edit' size={20} color='gray'/>)}*/
                         /*onPress={() => {
@@ -193,7 +194,7 @@ export default class EditProfileScreen extends Component {
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title={t('screens:my account:edit profile:email')}
                         titleStyle={styles.listItemTitleStyle}
-                        subtitle="john.doe@gmail.com"
+                        subtitle={this.props.user.email}
                         subtitleStyle={styles.listItemSubtitleStyle}
                         hideChevron={true}
                     />
@@ -269,3 +270,9 @@ const styles = StyleSheet.create({
         marginTop: 40
     },
 });
+
+function mapStateToProps({user}) {
+    return {user};
+}
+
+export default connect(mapStateToProps)(EditProfileScreen);

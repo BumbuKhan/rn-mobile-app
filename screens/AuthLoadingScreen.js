@@ -22,7 +22,7 @@ class AuthLoadingScreen extends Component {
         try {
             // clearing out all AsyncStorage...
             // TODO: remove this line of code on production!
-            //await AsyncStorage.clear();
+            // await AsyncStorage.clear();
 
             // checking whether the user is authenticated
             const user = await AsyncStorage.getItem('user'); // will be a JSON string OR null
