@@ -81,7 +81,7 @@ export default class EditProfileScreen extends Component {
                 </Modal>
 
                 <ScrollView>
-                    <View style={{
+                    {/*<View style={{
                         flexDirection: 'row',
                         justifyContent: 'space-between',
                         margin: 20,
@@ -146,7 +146,7 @@ export default class EditProfileScreen extends Component {
                                 <Text>Edit</Text>
                             </TouchableOpacity>
                         </View>
-                    </View>
+                    </View>*/}
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemMT, styles.listItemBorder]}
@@ -154,8 +154,9 @@ export default class EditProfileScreen extends Component {
                         titleStyle={styles.listItemTitleStyle}
                         subtitleStyle={styles.listItemSubtitleStyle}
                         subtitle="John"
-                        rightIcon={(<Icon name='edit' size={20} color='gray'/>)}
-                        onPress={() => {
+                        hideChevron={true}
+                        /*rightIcon={(<Icon name='edit' size={20} color='gray'/>)}*/
+                        /*onPress={() => {
                             this.setState({
                                 curEditingField: {
                                     value: 'John',
@@ -165,10 +166,10 @@ export default class EditProfileScreen extends Component {
                             });
 
                             this.setModalVisible(true);
-                        }}
+                        }}*/
                     />
 
-                    <ListItem
+                    {/*<ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title={t('screens:my account:edit profile:last name')}
                         titleStyle={styles.listItemTitleStyle}
@@ -186,7 +187,7 @@ export default class EditProfileScreen extends Component {
 
                             this.setModalVisible(true);
                         }}
-                    />
+                    />*/}
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
@@ -197,7 +198,7 @@ export default class EditProfileScreen extends Component {
                         hideChevron={true}
                     />
 
-                    <ListItem
+                    {/*<ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title={t('screens:my account:edit profile:phone number')}
                         titleStyle={styles.listItemTitleStyle}
@@ -215,7 +216,7 @@ export default class EditProfileScreen extends Component {
 
                             this.setModalVisible(true);
                         }}
-                    />
+                    />*/}
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}

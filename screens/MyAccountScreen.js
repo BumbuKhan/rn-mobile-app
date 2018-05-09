@@ -20,8 +20,6 @@ class MyAccountScreen extends Component {
         }
     };
 
-    state = {};
-
     _logOut = () => {
         const {t} = this.props.screenProps;
 
@@ -76,14 +74,14 @@ class MyAccountScreen extends Component {
                         subtitleStyle={{
                             fontSize: 16
                         }}
-                        avatar={<Avatar
+                        /*avatar={<Avatar
                             rounded
                             large
                             source={{uri: "https://randomuser.me/api/portraits/men/67.jpg"}}
                             containerStyle={{
                                 marginLeft: 5
                             }}
-                        />}
+                        />}*/
                         containerStyle={[styles.listItem, styles.listItemBorder, styles.listItemMT]}
                         onPress={() => this.props.navigation.navigate('EditProfile')}
                     />
