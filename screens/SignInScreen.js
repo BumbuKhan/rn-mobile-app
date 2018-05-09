@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, Button, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
 
-import {logIn} from '../actions/user_actions';
+import {logIn, populateData} from '../actions/user_actions';
 
 class SignInScreen extends Component {
     handleSignIn = async () => {
@@ -14,6 +14,9 @@ class SignInScreen extends Component {
 
         // if successfully authenticated then remember it
         await AsyncStorage.setItem('user', JSON.stringify(user));
+
+        // populating user's data from AsyncStorage to Redux store
+        this.props.populateData(user);
 
         // and navigate user to the app's home screen
         this.props.navigation.navigate('App');
@@ -41,4 +44,4 @@ class SignInScreen extends Component {
     }
 }
 
-export default connect(null, {logIn})(SignInScreen);
+export default connect(null, {logIn, populateData})(SignInScreen);

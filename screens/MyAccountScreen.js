@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, ScrollView, StyleSheet, Alert} from 'react-native';
+import {View, Text, ScrollView, StyleSheet, Alert, AsyncStorage} from 'react-native';
 import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 
@@ -20,6 +20,8 @@ class MyAccountScreen extends Component {
         }
     };
 
+    state = {};
+
     _logOut = () => {
         const {t} = this.props.screenProps;
 
@@ -36,11 +38,11 @@ class MyAccountScreen extends Component {
                     {
                         text: t('common:ok'),
                         onPress: async () => {
-                            // waiting for actual logout
-                            await this.props.logOut();
-
                             // redirecting user to the Auth screen
                             this.props.navigation.navigate('Auth');
+
+                            // waiting for actual logout
+                            await this.props.logOut();
                         }
                     },
                 ],
