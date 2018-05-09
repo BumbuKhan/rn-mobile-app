@@ -5,7 +5,10 @@ NOTE: values of keys are JSON strings! do not forget to parse before use
 ------------------------------------------------------------------------
 
 ASYNC_STORAGE = {
-    user: <Object>,
+    user: {
+        name: <String>
+        email: <String>
+    },
     settings: {
         curLang: <String>
     }

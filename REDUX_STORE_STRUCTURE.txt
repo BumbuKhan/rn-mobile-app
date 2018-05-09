@@ -3,7 +3,10 @@ THIS FILE DESCRIBES THE STRUCTURE OF REDUX STORE
 -----------------------------------------------------------------------
 
 REDUX_STORE = {
-    user: <Object>,
+    user: {
+        name: <String>
+        email: <String>
+    },
     settings: {
         curLang: <String>
     }

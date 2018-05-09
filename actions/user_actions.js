@@ -49,9 +49,7 @@ const doLogin = async (login, password, dispatch) => {
     // WARNING! JUST FOR NOW IMITATING HTTP RESPONSE...
     const user = {
         name: 'Gurban',
-        lastname: 'Gurbanov',
         email: 'qurban.qurbanov93@gmail.com',
-        phone: '+123 654 76 7646'
     };
 
     // saving token to the AsyncStorage so user wont be asked to enter his credentials every time the app is launched

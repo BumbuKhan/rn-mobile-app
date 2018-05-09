@@ -66,11 +66,11 @@ class MyAccountScreen extends Component {
                 }}>
 
                     <ListItem
-                        title="John Doe"
+                        title={this.props.user.name}
                         titleStyle={{
                             fontSize: 22
                         }}
-                        subtitle="john.doe@gmail.com"
+                        subtitle={this.props.user.email}
                         subtitleStyle={{
                             fontSize: 16
                         }}

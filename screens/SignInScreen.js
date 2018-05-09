@@ -9,9 +9,7 @@ class SignInScreen extends Component {
         // TODO: do an HTTP request to auth endpoint
         const user = {
             name: 'Gurban',
-            lastname: 'Gurbanov',
             email: 'qurban.qurbanov93@gmail.com',
-            phone: '+123 654 76 7646'
         };
 
         // if successfully authenticated then remember it
