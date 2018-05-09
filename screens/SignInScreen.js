@@ -49,34 +49,17 @@ class SignInScreen extends Component {
                         containerStyle={styles.containerStyle}
                     />
 
-                    <View style={[
-                        styles.mx20,
-                        {
-                            flex: 1,
-                            marginTop: 15,
-                            alignItems: 'flex-end'
-                        }
-                    ]}>
-                        <TouchableOpacity onPress={() => {
-                            alert('aasdasd');
-                        }}>
-                            <Text>Forgot Password?</Text>
-                        </TouchableOpacity>
-                    </View>
-
                     <Button
                         title="Log in"
                         fontWeight="bold"
                         backgroundColor="#4663E5"
                         borderRadius={3}
                         onPress={this.handleSignIn}
-                        style={[styles.signInBtn, styles.my20]}
+                        style={[styles.my20, {marginTop: 30}]}
+                        textStyle={{
+                            fontSize: 20
+                        }}
                     />
-
-                    {/*<Button
-                        title="Restore password"
-                        onPress={() => this.props.navigation.navigate('RestorePassword')}
-                    />*/}
                 </ScrollView>
             </View>
         );
@@ -101,7 +84,7 @@ const styles = StyleSheet.create({
 
     containerStyle: {
         height: 50,
-        borderBottomColor: '#666',
+        borderBottomColor: '#999',
     }
 });
 
