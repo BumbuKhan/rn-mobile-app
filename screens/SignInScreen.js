@@ -35,10 +35,6 @@ export default class SignInScreen extends Component {
                     title="Restore password"
                     onPress={() => this.props.navigation.navigate('RestorePassword')}
                 />
-                <Button
-                    title="Sign up here"
-                    onPress={() => this.props.navigation.navigate('SignUp')}
-                />
             </View>
         );
     }

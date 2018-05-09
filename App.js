@@ -10,7 +10,6 @@ import AuthLoadingScreen from "./screens/AuthLoadingScreen";
 import ActiveProjectScreen from './screens/ActiveProjectScreen';
 import MyAccountScreen from './screens/MyAccountScreen';
 import SignInScreen from "./screens/SignInScreen";
-import SignUpScreen from "./screens/SignUpScreen";
 import RestorePasswordScreen from "./screens/RestorePasswordScreen";
 import ChooseLanguageScreen from "./screens/ChooseLanguageScreen";
 import EditProfileScreen from "./screens/EditProfilescreen";
@@ -41,7 +40,6 @@ const RootStack = SwitchNavigator({
     AuthLoading: AuthLoadingScreen,
     App: AppStack,
     Auth: TabNavigator({
-        SignUp: SignUpScreen,
         SignIn: SignInScreen,
         RestorePassword: RestorePasswordScreen
     }, {
