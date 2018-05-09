@@ -1,10 +1,9 @@
 import {AsyncStorage} from 'react-native';
 import axios from 'axios';
 
-import {LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT, POPULATE_USER_DATA_FROM_ASYNC_STORAGE} from './types';
-import {AUTH} from '../services/api_endpoints';
+import {LOG_OUT, POPULATE_USER_DATA_FROM_ASYNC_STORAGE} from './types';
 
-export const logIn = (login, password) => {
+/*export const logIn = (login, password) => {
     // since this action will take some none zero amount of time
     // we'll wrap it to the function so redux-thunk middleware will take care of the rest
     return async function (dispatch) {
@@ -23,10 +22,10 @@ export const logIn = (login, password) => {
             await doLogin(login, password, dispatch);
         }
     }
-};
+};*/
 
 // helper function to log the user in
-const doLogin = async (login, password, dispatch) => {
+/*const doLogin = async (login, password, dispatch) => {
     // making a post request to auth endpoint...
     let response = await axios.post(AUTH, {
         login,
@@ -61,7 +60,7 @@ const doLogin = async (login, password, dispatch) => {
         type: LOGIN_SUCCESS,
         payload: user
     });
-};
+};*/
 
 export const logOut = () => {
     // since this action will take some none zero amount of time

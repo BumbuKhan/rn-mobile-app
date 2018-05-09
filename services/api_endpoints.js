@@ -1,1 +1,0 @@
-export const AUTH = 'Waiting for the endpoint to be implemented...';

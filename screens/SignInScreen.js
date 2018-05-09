@@ -2,19 +2,45 @@ import React, {Component} from 'react';
 import {View, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import {FormInput, Text, Button} from 'react-native-elements';
+import axios from 'axios';
 
-import {logIn, populateData} from '../actions/user_actions';
+import {populateData} from '../actions/user_actions';
+import {LOGIN} from '../helpers/api_endpoints';
 
 class SignInScreen extends Component {
     state = {
         email: '',
         password: '',
-        disabled: true
+        loading: false
     };
 
     handleSignIn = async () => {
-        alert('submitting...');
-        /*// TODO: do an HTTP request to auth endpoint
+        let _this = this;
+
+        this.setState({
+            loading: true
+        });
+
+        axios
+            .post(LOGIN, {
+                email: this.state.email,
+                password: this.state.password
+            }, {
+                headers: {'Content-Type': 'application/json'},
+            })
+            .then(function (response) {
+                _this.setState({
+                    loading: false
+                });
+
+                alert(JSON.stringify(response));
+            })
+            .catch(function (error) {
+                alert(JSON.stringify(response));
+            });
+
+
+        /*
         const user = {
             name: 'Gurban',
             email: 'qurban.qurbanov93@gmail.com',
@@ -47,9 +73,9 @@ class SignInScreen extends Component {
                         inputStyle={styles.inputStyle}
                         containerStyle={[styles.containerStyle, {marginBottom: 15}]}
                         keyboardType="email-address"
-                        onTextChange={(value) => {
+                        onChangeText={(value) => {
                             this.setState({
-                                email: value.text
+                                email: value
                             });
                         }}
                     />
@@ -60,7 +86,7 @@ class SignInScreen extends Component {
                         secureTextEntry
                         inputStyle={styles.inputStyle}
                         containerStyle={[styles.containerStyle, {marginBottom: 25}]}
-                        onChange={(value) => {
+                        onChangeText={(value) => {
                             this.setState({
                                 password: value
                             });
@@ -68,7 +94,7 @@ class SignInScreen extends Component {
                     />
 
                     <Button
-                        title="Log in"
+                        title={(!this.state.loading) ? "Log in" : ""}
                         fontWeight="bold"
                         backgroundColor="#4663E5"
                         borderRadius={3}
@@ -76,6 +102,8 @@ class SignInScreen extends Component {
                         textStyle={{
                             fontSize: 20
                         }}
+                        loading={this.state.loading}
+                        disabled={this.state.loading}
                     />
                 </ScrollView>
             </View>
@@ -105,4 +133,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(null, {logIn, populateData})(SignInScreen);
+export default connect(null, {populateData})(SignInScreen);
