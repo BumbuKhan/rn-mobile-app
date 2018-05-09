@@ -6,7 +6,14 @@ import {FormInput, Text, Button} from 'react-native-elements';
 import {logIn, populateData} from '../actions/user_actions';
 
 class SignInScreen extends Component {
+    state = {
+        email: '',
+        password: '',
+        disabled: true
+    };
+
     handleSignIn = async () => {
+        alert('submitting...');
         /*// TODO: do an HTTP request to auth endpoint
         const user = {
             name: 'Gurban',
@@ -40,13 +47,24 @@ class SignInScreen extends Component {
                         inputStyle={styles.inputStyle}
                         containerStyle={[styles.containerStyle, {marginBottom: 15}]}
                         keyboardType="email-address"
+                        onTextChange={(value) => {
+                            this.setState({
+                                email: value.text
+                            });
+                        }}
                     />
 
                     <FormInput
+                        input={this.state.password}
                         placeholder="Password"
                         secureTextEntry
                         inputStyle={styles.inputStyle}
-                        containerStyle={styles.containerStyle}
+                        containerStyle={[styles.containerStyle, {marginBottom: 25}]}
+                        onChange={(value) => {
+                            this.setState({
+                                password: value
+                            });
+                        }}
                     />
 
                     <Button
@@ -55,7 +73,6 @@ class SignInScreen extends Component {
                         backgroundColor="#4663E5"
                         borderRadius={3}
                         onPress={this.handleSignIn}
-                        style={[styles.my20, {marginTop: 30}]}
                         textStyle={{
                             fontSize: 20
                         }}
