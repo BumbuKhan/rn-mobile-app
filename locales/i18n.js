@@ -11,6 +11,7 @@ const languageDetector = {
     detect: (cb) => {
         return DangerZone.Localization.getCurrentLocaleAsync()
             .then(async (lang) => {
+                console.log('i18n fired up and set app lang to:', lang);
                 cb(lang);
             })
     },

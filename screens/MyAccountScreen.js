@@ -54,6 +54,8 @@ class MyAccountScreen extends Component {
     render() {
         const {t} = this.props.screenProps;
 
+        console.log(this.props.settings);
+
         return (
             <View style={{flex: 1}}>
                 <Header
