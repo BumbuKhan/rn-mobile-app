@@ -9,6 +9,7 @@ import {
 import {connect} from 'react-redux';
 
 import {populateData} from '../actions/user_actions';
+import {populateSettings} from '../actions/settings_actions';
 
 class AuthLoadingScreen extends Component {
     constructor(props) {
@@ -29,12 +30,22 @@ class AuthLoadingScreen extends Component {
             // if authenticate, then navigating him to the application's home screen
             // otherwise showing signin screen
             if (user) {
+                // user already authenticated...
+
                 // populating user's data from AsyncStorage to Redux store
                 const userData = JSON.parse(user);
                 this.props.populateData(userData);
 
+                // fetching user's settings, curLang in particular
+                const settings = await AsyncStorage.getItem('settings');
+
+                // populating settings data from AsyncStorage to Redux store
+                const settingsData = JSON.parse(settings);
+                this.props.populateSettings(settingsData);
+
                 this.props.navigation.navigate('App');
             } else {
+                // not authenticated... taking him to appropriate screen
                 this.props.navigation.navigate('Auth');
             }
         } catch (error) {
@@ -60,4 +71,4 @@ function mapStateToProps(state) {
     return state;
 }
 
-export default connect(null, {populateData})(AuthLoadingScreen);
+export default connect(null, {populateData, populateSettings})(AuthLoadingScreen);

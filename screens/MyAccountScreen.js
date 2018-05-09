@@ -134,8 +134,9 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps({user}) {
-    return {user};
+function mapStateToProps({user, settings}) {
+    console.log(user);
+    return {user, settings};
 }
 
 export default connect(mapStateToProps, {logOut})(MyAccountScreen);
