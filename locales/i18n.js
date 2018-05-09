@@ -11,13 +11,6 @@ const languageDetector = {
     detect: (cb) => {
         return DangerZone.Localization.getCurrentLocaleAsync()
             .then(async (lang) => {
-                // checking the 'curLang' key in settings, if it's empty - setting lang
-                const settings = await AsyncStorage.getItem('settings');
-
-                if (!settings) {
-                    AsyncStorage.setItem('settings', JSON.stringify({curLang: lang}));
-                }
-
                 cb(lang);
             })
     },

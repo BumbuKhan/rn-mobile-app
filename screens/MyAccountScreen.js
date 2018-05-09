@@ -54,6 +54,11 @@ class MyAccountScreen extends Component {
     render() {
         const {t} = this.props.screenProps;
 
+        AsyncStorage.getItem('settings').then((data) => {
+            console.log(data);
+        });
+
+
         return (
             <View style={{flex: 1}}>
                 <Header

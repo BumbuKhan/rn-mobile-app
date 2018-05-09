@@ -20,20 +20,12 @@ class AuthLoadingScreen extends Component {
 
     _bootstrapAsync = async () => {
         try {
-            // if this app is running at the very first time the settings will be equal to NULL
-            // in this case i18next package will setup system lang as default
-            // otherwise app's language will be restore from the AsyncStorage
-            let settings = await AsyncStorage.getItem('settings');
-
-            if (settings) {
-                // 'settings' is a json string
-                const curLang = JSON.parse(settings).curLang;
-
-                i18n.changeLanguage(curLang);
-            }
+            // clearing out all AsyncStorage...
+            // TODO: remove this line of code on production!
+            await AsyncStorage.clear();
 
             // checking whether the user is authenticated
-            const user = await AsyncStorage.getItem('user');
+            const user = await AsyncStorage.getItem('user'); // will be a JSON string OR null
 
             // if authenticate, then navigating him to the application's home screen
             // otherwise showing signin screen

@@ -65,7 +65,6 @@ const doLogin = async (login, password, dispatch) => {
     });
 };
 
-
 export const logOut = () => {
     // since this action will take some none zero amount of time
     // we'll wrap it to the function so redux-thunk middleware will take care of the rest

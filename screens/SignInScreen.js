@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {View, Text, Button, AsyncStorage} from 'react-native';
+import {connect} from 'react-redux';
 
-export default class SignInScreen extends Component {
+import {logIn} from '../actions/user_actions';
+
+class SignInScreen extends Component {
     handleSignIn = async () => {
         // TODO: do an HTTP request to auth endpoint
         const user = {
@@ -39,3 +42,5 @@ export default class SignInScreen extends Component {
         );
     }
 }
+
+export default connect(null, {logIn})(SignInScreen);
