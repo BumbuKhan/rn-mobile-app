@@ -8,8 +8,7 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 
-import i18n from '../locales/i18n';
-import {setCurLang} from '../actions/settings_actions';
+import {populateData} from '../actions/user_actions';
 
 class AuthLoadingScreen extends Component {
     constructor(props) {
@@ -22,14 +21,24 @@ class AuthLoadingScreen extends Component {
         try {
             // clearing out all AsyncStorage...
             // TODO: remove this line of code on production!
-            await AsyncStorage.clear();
+            //await AsyncStorage.clear();
 
             // checking whether the user is authenticated
             const user = await AsyncStorage.getItem('user'); // will be a JSON string OR null
 
+            console.log(user);
+
             // if authenticate, then navigating him to the application's home screen
             // otherwise showing signin screen
-            this.props.navigation.navigate(user ? 'App' : 'Auth');
+            if (user) {
+                // populating user's data from AsyncStorage to Redux store
+                const userData = JSON.parse(user);
+                this.props.populateData(userData);
+
+                this.props.navigation.navigate('App');
+            } else {
+                this.props.navigation.navigate('Auth');
+            }
         } catch (error) {
             console.log(error);
         }
@@ -49,4 +58,4 @@ class AuthLoadingScreen extends Component {
     }
 }
 
-export default connect(null, {setCurLang})(AuthLoadingScreen);
+export default connect(null, {populateData})(AuthLoadingScreen);

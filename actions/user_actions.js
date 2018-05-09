@@ -1,7 +1,7 @@
 import {AsyncStorage} from 'react-native';
 import axios from 'axios';
 
-import {LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT} from './types';
+import {LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT, POPULATE_USER_DATA_FROM_ASYNC_STORAGE} from './types';
 import {AUTH} from '../services/api_endpoints';
 
 export const logIn = (login, password) => {
@@ -75,4 +75,11 @@ export const logOut = () => {
             type: LOG_OUT
         });
     }
+};
+
+export const populateData = (data) => {
+    return {
+        type: POPULATE_USER_DATA_FROM_ASYNC_STORAGE,
+        payload: data
+    };
 };

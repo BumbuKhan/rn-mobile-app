@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, ScrollView, StyleSheet, AsyncStorage, Alert} from 'react-native';
+import {View, Text, ScrollView, StyleSheet, Alert} from 'react-native';
 import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 
@@ -53,11 +53,6 @@ class MyAccountScreen extends Component {
 
     render() {
         const {t} = this.props.screenProps;
-
-        AsyncStorage.getItem('settings').then((data) => {
-            console.log(data);
-        });
-
 
         return (
             <View style={{flex: 1}}>
@@ -139,4 +134,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(null, {logOut})(MyAccountScreen);
+function mapStateToProps({user}) {
+    return {user};
+}
+
+export default connect(mapStateToProps, {logOut})(MyAccountScreen);
