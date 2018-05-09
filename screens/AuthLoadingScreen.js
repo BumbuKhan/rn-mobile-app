@@ -13,13 +13,15 @@ import {populateData} from '../actions/user_actions';
 class AuthLoadingScreen extends Component {
     constructor(props) {
         super(props);
+
+        this._bootstrapAsync();
     }
 
     _bootstrapAsync = async () => {
         try {
             // clearing out all AsyncStorage...
             // TODO: remove this line of code on production!
-            await AsyncStorage.clear();
+            //await AsyncStorage.clear();
 
             // checking whether the user is authenticated
             const user = await AsyncStorage.getItem('user'); // will be a JSON string OR null
@@ -38,10 +40,6 @@ class AuthLoadingScreen extends Component {
         } catch (error) {
             console.log(error);
         }
-    };
-
-    componentWillMount = () => {
-        this._bootstrapAsync();
     };
 
     render() {
