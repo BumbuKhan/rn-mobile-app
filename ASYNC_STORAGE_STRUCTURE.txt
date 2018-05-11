@@ -1,7 +1,8 @@
 FOR INFORMATION ONLY!, THIS FILE ISN'T USED ANYWHERE IN THIS APPLICATION
 THIS FILE DESCRIBES THE STRUCTURE OF ASYNC STORAGE
 
-NOTE: values of keys are JSON strings! do not forget to parse before use
+NOTE: Values of keys are JSON strings!
+      Do not forget to parse before use and stringify before save
 ------------------------------------------------------------------------
 
 ASYNC_STORAGE = {
