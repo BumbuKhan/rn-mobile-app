@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, ScrollView, StyleSheet, Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {FormInput, Text, Button} from 'react-native-elements';
 
@@ -27,11 +27,30 @@ class SignInScreen extends Component {
             password: this.state.password // 12345678
         })
             .then((response) => {
-                console.log(response.data);
+                /*
+
+                response.data has such structure:
+
+                {
+                  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...HC7DI0TF846rXJkb0i6o",
+                  "expires_in": 3600,
+                  "token_type": "bearer",
+                }
+
+                */
+
             })
             .catch((error) => {
-                alert('Incorrect email or password');
+                Alert.alert(
+                    'Authentication failed',
+                    'Incorrect email or password',
+                    [
+                        {text: 'OK', onPress: () => {}},
+                    ],
+                    { cancelable: false }
+                );
 
+                // clearing out a password field and enabling 'log in' button back
                 _this.setState({
                     password: '',
                     loading: false
