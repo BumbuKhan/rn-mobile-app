@@ -27,37 +27,79 @@ class SignInScreen extends Component {
             email: this.state.email, // qurban.qurbanov93@gmail.com
             password: this.state.password // 12345678
         })
-            .then((response) => {
+            .then(({data}) => {
                 /*
-
-                response.data has such structure:
+                data has such structure:
 
                 {
                   "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...HC7DI0TF846rXJkb0i6o",
                   "expires_in": 3600,
                   "token_type": "bearer",
                 }
-
                 */
 
-                console.log(response.data);
+                // saving data to userData
+                userData.token = data;
 
                 // after getting auth token we should fetch user's data
-                axios.get('/me', {}, {
-                    Authorization: `Bearer ${response.data.access_token}`
-                }).then((user) => {
-                    console.log(user);
-                })
+                const authStr = `Bearer ${data.access_token}`;
 
+                return axios.get('/me', {headers: {Authorization: authStr}});
+            })
+            .then(({data}) => {
+                /*
+                data has such structure:
+
+                {
+                  "id": 2,
+                  "name": "Gurban",
+                  "email": "qurban.qurbanov93@gmail.com",
+                  "created_at": "2018-05-09 13:13:09",
+                  "updated_at": "2018-05-09 13:13:09",
+                }
+                */
+
+                // saving user's data to userData
+                userData = {...userData, ...data};
+
+                /*
+                and now userData looks like:
+
+                {
+                    "token": Object {
+                        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xODUuNjkuMTU0LjIzNVwvYXBpXC9sb2dpbiIsImlhdCI6MTUyNjAxMzE4OSwiZXhwIjoxNTI2MDE2Nzg5LCJuYmYiOjE1MjYwMTMxODksImp0aSI6ImZNYXJ5OGp0ZTZBUzJYMDUiLCJzdWIiOjIsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.ztyftC3QiLCrHUyslHQ0jZCy4YjIFqBog8zJInTXr2c",
+                        "expires_in": 3600,
+                        "token_type": "bearer",
+                    },
+                    "id": 2,
+                    "name": "Gurban",
+                    "email": "qurban.qurbanov93@gmail.com",
+                    "created_at": "2018-05-09 13:13:09",
+                    "updated_at": "2018-05-09 13:13:09",
+                }
+                */
+
+                // saving userData to AsyncStorage...
+                return AsyncStorage.setItem('user', JSON.stringify(userData));
+            })
+            .then((savedToAsyncStorage) => {
+                // populating user's data from AsyncStorage to Redux store
+                _this.props.populateData(userData);
+
+                // taking user to the main screen
+                _this.props.navigation.navigate('App');
             })
             .catch((error) => {
                 Alert.alert(
                     'Authentication failed',
                     'Incorrect email or password',
                     [
-                        {text: 'OK', onPress: () => {}},
+                        {
+                            text: 'OK', onPress: () => {
+                            }
+                        },
                     ],
-                    { cancelable: false }
+                    {cancelable: false}
                 );
 
                 // clearing out a password field and enabling 'log in' button back
@@ -66,21 +108,6 @@ class SignInScreen extends Component {
                     loading: false
                 });
             });
-
-        /*
-        const user = {
-            name: 'Gurban',
-            email: 'qurban.qurbanov93@gmail.com',
-        };
-
-        // if successfully authenticated then remember it
-        await AsyncStorage.setItem('user', JSON.stringify(user));
-
-        // populating user's data from AsyncStorage to Redux store
-        this.props.populateData(user);
-
-        // and navigate user to the app's home screen
-        this.props.navigation.navigate('App');*/
     };
 
     render() {
