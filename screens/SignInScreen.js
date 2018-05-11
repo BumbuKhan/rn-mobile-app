@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {View, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import {FormInput, Text, Button} from 'react-native-elements';
-import axios from 'axios';
 
 import {populateData} from '../actions/user_actions';
-import {LOGIN} from '../helpers/api_endpoints';
+import axios from '../helpers/axios';
+
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 class SignInScreen extends Component {
     state = {
@@ -21,24 +22,21 @@ class SignInScreen extends Component {
             loading: true
         });
 
-        axios
-            .post(LOGIN, {
-                email: this.state.email,
-                password: this.state.password
-            }, {
-                headers: {'Content-Type': 'application/json'},
+        axios.post('/login', {
+            email: this.state.email, // qurban.qurbanov93@gmail.com
+            password: this.state.password // 12345678
+        })
+            .then((response) => {
+                console.log(response.data);
             })
-            .then(function (response) {
+            .catch((error) => {
+                alert('Incorrect email or password');
+
                 _this.setState({
+                    password: '',
                     loading: false
                 });
-
-                alert(JSON.stringify(response));
-            })
-            .catch(function (error) {
-                alert(JSON.stringify(response));
             });
-
 
         /*
         const user = {
@@ -69,6 +67,7 @@ class SignInScreen extends Component {
                     }]}>Log in</Text>
 
                     <FormInput
+                        value={this.state.email}
                         placeholder="Email"
                         inputStyle={styles.inputStyle}
                         containerStyle={[styles.containerStyle, {marginBottom: 15}]}
@@ -81,7 +80,7 @@ class SignInScreen extends Component {
                     />
 
                     <FormInput
-                        input={this.state.password}
+                        value={this.state.password}
                         placeholder="Password"
                         secureTextEntry
                         inputStyle={styles.inputStyle}
