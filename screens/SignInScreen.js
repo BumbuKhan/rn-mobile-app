@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, ScrollView, StyleSheet, Alert} from 'react-native';
+import {View, ScrollView, StyleSheet, Alert, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
 import {FormInput, Text, Button} from 'react-native-elements';
 
@@ -17,6 +17,7 @@ class SignInScreen extends Component {
 
     handleSignIn = async () => {
         let _this = this;
+        let userData = {}; // will be stored to AsyncStorage
 
         this.setState({
             loading: true
@@ -38,6 +39,15 @@ class SignInScreen extends Component {
                 }
 
                 */
+
+                console.log(response.data);
+
+                // after getting auth token we should fetch user's data
+                axios.get('/me', {}, {
+                    Authorization: `Bearer ${response.data.access_token}`
+                }).then((user) => {
+                    console.log(user);
+                })
 
             })
             .catch((error) => {

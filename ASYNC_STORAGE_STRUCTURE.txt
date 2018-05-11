@@ -7,6 +7,11 @@ NOTE: Values of keys are JSON strings!
 
 ASYNC_STORAGE = {
     user: {
+        token: {
+            access_token: <String>
+            expires_in: <Number>
+            token_type: <String>
+        }
         name: <String>
         email: <String>
     },
