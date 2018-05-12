@@ -13,8 +13,8 @@ export const logOut = () => {
         // removing whole user key from the AsyncStorage
         await AsyncStorage.setItem('user', '');
 
-        return {
+        dispatch({
             type: LOG_OUT
-        };
+        });
     }
 };
