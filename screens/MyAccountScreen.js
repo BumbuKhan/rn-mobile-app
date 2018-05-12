@@ -39,9 +39,6 @@ class MyAccountScreen extends Component {
                             // redirecting user to the Auth screen
                             this.props.navigation.navigate('Auth');
 
-                            // removing whole user key from the AsyncStorage
-                            await AsyncStorage.setItem('user', '');
-
                             // updating redux store
                             this.props.logOut();
                         }

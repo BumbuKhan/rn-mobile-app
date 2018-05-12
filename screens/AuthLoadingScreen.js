@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 
-import {populateData} from '../actions/user_actions';
+import {logIn} from '../actions/user_actions';
 import {populateSettings} from '../actions/settings_actions';
 
 class AuthLoadingScreen extends Component {
@@ -35,7 +35,7 @@ class AuthLoadingScreen extends Component {
 
                 // populating user's data from AsyncStorage to Redux store
                 const userData = JSON.parse(user);
-                this.props.populateData(userData);
+                this.props.logIn(userData);
 
                 // fetching user's settings, curLang in particular
                 const settings = await AsyncStorage.getItem('settings');
@@ -73,4 +73,4 @@ function mapStateToProps(state) {
     return state;
 }
 
-export default connect(null, {populateData, populateSettings})(AuthLoadingScreen);
+export default connect(null, {logIn, populateSettings})(AuthLoadingScreen);
