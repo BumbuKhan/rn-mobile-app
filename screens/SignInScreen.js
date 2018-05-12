@@ -23,10 +23,11 @@ class SignInScreen extends Component {
             loading: true
         });
 
-        axios.post('/login', {
-            email: this.state.email, // qurban.qurbanov93@gmail.com
-            password: this.state.password // 12345678
-        })
+        axios
+            .post('/login', {
+                email: this.state.email, // qurban.qurbanov93@gmail.com
+                password: this.state.password // 12345678
+            })
             .then(({data}) => {
                 /*
                 data has such structure:

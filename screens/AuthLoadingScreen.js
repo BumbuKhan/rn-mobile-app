@@ -42,7 +42,7 @@ class AuthLoadingScreen extends Component {
 
                 // populating settings data from AsyncStorage to Redux store
                 const settingsData = JSON.parse(settings);
-                console.log('about to populate user settings', settingsData);
+
                 this.props.populateSettings(settingsData);
 
                 this.props.navigation.navigate('App');

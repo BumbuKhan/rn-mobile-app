@@ -1,8 +1,6 @@
 import {AsyncStorage} from 'react-native';
 
 import {TOGGLE_CUR_LANG,
-    SIGN_OUT,
-    POPULATE_USER_DATA_FROM_ASYNC_STORAGE,
     POPULATE_USER_SETTINGS_FROM_ASYNC_STORAGE
 } from './types';
 import i18n from '../locales/i18n';
@@ -35,6 +33,7 @@ export const setCurLang = (lang) => {
     }
 };
 
+// taking settings from the AsyncStorage and pushing to the redux store
 export const populateSettings = (data) => {
     return {
         type: POPULATE_USER_SETTINGS_FROM_ASYNC_STORAGE,

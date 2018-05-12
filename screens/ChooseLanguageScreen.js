@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView, AsyncStorage} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 
