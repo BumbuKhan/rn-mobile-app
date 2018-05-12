@@ -23,6 +23,7 @@ class ChooseLanguageScreen extends Component {
                         containerStyle={[styles.listItem, styles.listItemMT, styles.listItemBorder]}
                         title={t('languages:en')}
                         titleStyle={styles.listItemTitleStyle}
+                        hideChevron={this.props.settings.curLang !== 'en'}
                         onPress={() => this.props.setCurLang('en')}
                         rightIcon={{name: 'check'}}
                     />
@@ -30,17 +31,19 @@ class ChooseLanguageScreen extends Component {
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title={t('languages:de')}
-                        hideChevron={true}
                         titleStyle={styles.listItemTitleStyle}
+                        hideChevron={this.props.settings.curLang !== 'de'}
                         onPress={() => this.props.setCurLang('de')}
+                        rightIcon={{name: 'check'}}
                     />
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title={t('languages:ru')}
-                        hideChevron={true}
                         titleStyle={styles.listItemTitleStyle}
+                        hideChevron={this.props.settings.curLang !== 'ru'}
                         onPress={() => this.props.setCurLang('ru')}
+                        rightIcon={{name: 'check'}}
                     />
 
                 </ScrollView>
@@ -71,4 +74,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(null, {setCurLang})(ChooseLanguageScreen);
+function mapStateToProps({settings}) {
+    return {settings};
+}
+
+export default connect(mapStateToProps, {setCurLang})(ChooseLanguageScreen);

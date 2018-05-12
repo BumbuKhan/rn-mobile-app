@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import {Menu, ListItemTitle, ListItemDescription} from '../components/common';
 import {logOut} from '../actions/user_actions';
+import languages from '../helpers/languages';
 
 class MyAccountScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -94,7 +95,7 @@ class MyAccountScreen extends Component {
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
-                        title="English"
+                        title={languages[this.props.settings.curLang]}
                         titleStyle={styles.listItemTitleStyle}
                         onPress={() => this.props.navigation.navigate('ChooseLanguage')}
                     />

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 
+import i18n from '../locales/i18n';
 import {logIn} from '../actions/user_actions';
 import {populateSettings} from '../actions/settings_actions';
 
@@ -23,7 +24,7 @@ class AuthLoadingScreen extends Component {
             // clearing out all AsyncStorage...
             // TODO: remove this line of code on production!
             //await AsyncStorage.clear(); // do not use this statement it causes crashes
-            await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
+            //await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
 
             // checking whether the user is authenticated
             const user = await AsyncStorage.getItem('user'); // will be a JSON string OR null
@@ -41,7 +42,15 @@ class AuthLoadingScreen extends Component {
                 const settings = await AsyncStorage.getItem('settings');
 
                 // populating settings data from AsyncStorage to Redux store
-                const settingsData = JSON.parse(settings);
+                let settingsData = JSON.parse(settings);
+
+                if (!settingsData) {
+                    // faking curLang... will be shipped from API very soon
+                    settingsData = {...settingsData, curLang: 'en'};
+                } else {
+                    // settings exist - restoring app language
+                    i18n.changeLanguage(settingsData.curLang);
+                }
 
                 this.props.populateSettings(settingsData);
 
