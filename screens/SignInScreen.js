@@ -3,7 +3,7 @@ import {View, ScrollView, StyleSheet, Alert, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
 import {FormInput, Text, Button} from 'react-native-elements';
 
-import {populateData} from '../actions/user_actions';
+import {logIn} from '../actions/user_actions';
 import axios from '../helpers/axios';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -17,7 +17,7 @@ class SignInScreen extends Component {
 
     handleSignIn = async () => {
         let _this = this;
-        let userData = {}; // will be stored to AsyncStorage
+        let userData = {}; // will be stored to AsyncStorage and redux store
 
         this.setState({
             loading: true
@@ -83,8 +83,8 @@ class SignInScreen extends Component {
                 return AsyncStorage.setItem('user', JSON.stringify(userData));
             })
             .then((savedToAsyncStorage) => {
-                // populating user's data from AsyncStorage to Redux store
-                _this.props.populateData(userData);
+                // pushing all user's data to redux store...
+                _this.props.logIn(userData);
 
                 // taking user to the main screen
                 _this.props.navigation.navigate('App');
@@ -188,4 +188,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(null, {populateData})(SignInScreen);
+export default connect(null, {logIn})(SignInScreen);

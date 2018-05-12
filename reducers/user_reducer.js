@@ -5,7 +5,7 @@ const INITIAL_STATE = null;
 export default authReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case LOGIN_SUCCESS:
-            return {token: action.payload};
+            return action.payload;
 
         case LOGIN_FAIL:
             return INITIAL_STATE;
