@@ -5,7 +5,7 @@ const INITIAL_STATE = null;
 export default curLangReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case TOGGLE_CUR_LANG:
-            return action.payload;
+            return {...state, curLang: action.payload};
 
         case POPULATE_USER_SETTINGS_FROM_ASYNC_STORAGE:
             return action.payload;

@@ -4,6 +4,11 @@ THIS FILE DESCRIBES THE STRUCTURE OF REDUX STORE
 
 REDUX_STORE = {
     user: {
+        token: {
+            access_token: <String>
+            expires_in: <Number>
+            token_type: <String>
+        }
         name: <String>
         email: <String>
     },
