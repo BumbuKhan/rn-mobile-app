@@ -3,7 +3,8 @@
     "ok": "OK",
     "cancel": "Отмена",
     "back": "Назад",
-    "save": "Сохранить"
+    "save": "Сохранить",
+    "continue": "Продолжить"
   },
   "languages": {
     "en": "English",
@@ -33,7 +34,8 @@
         "last name": "Фамилия",
         "email": "Эл. Адрес",
         "phone number": "Номер Телефона",
-        "password": "Пароль"
+        "password": "Пароль",
+        "current password": "текущий пароль"
       },
 
       "choose language": {

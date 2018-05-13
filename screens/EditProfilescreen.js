@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert, AsyncStorage} from 'react-native';
-import {ListItem, Icon, FormInput, Button, Avatar} from 'react-native-elements';
+import {Text, View, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert} from 'react-native';
+import {ListItem, Icon, FormInput, Button} from 'react-native-elements';
 import {connect} from 'react-redux';
+
+import axios from '../helpers/axios';
 
 class EditProfileScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -10,39 +12,96 @@ class EditProfileScreen extends Component {
         }
     };
 
-    /*state = {
-        modalVisible: false,
+    state = {
+        curPasswordModalVisible: false,
         curEditingField: {
             name: '',
             value: '',
             placeholder: '',
-            keyboardType: 'default'
-        }
-    };*/
+            keyboardType: 'default',
+            secureTextEntry: false, // is needed only for password field in order to hide entering symbols
+            buttonText: '',
+            loading: false,
+            error: ''
 
-    setModalVisible(visible) {
-        this.setState({modalVisible: visible});
+        }
+    };
+
+    setCurPasswordModalVisible(visible) {
+        this.setState({
+            curPasswordModalVisible: visible
+        });
     }
+
+    _checkPassword = () => {
+        this.setState({
+            curEditingField: {
+                ...this.state.curEditingField,
+                loading: true
+            }
+        });
+
+        // making an HTTP request to /validate
+        const authStr = `Bearer ${this.props.user.token.access_token}`;
+
+        // console.log(authStr);
+        // console.log(`/validate?password=${this.state.curEditingField.value}`);
+
+        axios
+            .get(`/validate?password=${this.state.curEditingField.value}`, {headers: {Authorization: authStr}})
+            .then((response) => {
+                this.setState({
+                    curEditingField: {
+                        ...this.state.curEditingField,
+                        loading: false
+                    }
+                });
+
+                const data = response.data;
+
+                console.log(data.message);
+
+                if (data.message == 'Invalid') {
+                    this.setState({
+                        curEditingField: {
+                            ...this.state.curEditingField,
+                            error: 'Incorrect password'
+                        }
+                    });
+                } else {
+                    // clearing out error, closing this modal and receiving a brand new password from user
+                    this.setState({
+                        curEditingField: {
+                            ...this.state.curEditingField,
+                            error: ''
+                        }
+                    });
+
+                    this.setCurPasswordModalVisible(false);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    };
 
     render() {
         const {t} = this.props.screenProps;
 
         return (
             <View style={styles.container}>
-                {/*<Modal
+                {<Modal
                     animationType="slide"
                     transparent={false}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => {
-                        alert('Modal has been closed.');
-                    }}>
+                    visible={this.state.curPasswordModalVisible}>
+
                     <View style={styles.modalContainer}>
                         <View style={{
                             alignSelf: 'flex-start',
                             paddingLeft: 15
                         }}>
                             <TouchableOpacity onPress={() => {
-                                this.setModalVisible(false)
+                                this.setCurPasswordModalVisible(false)
                             }}>
                                 <Icon
                                     name='close'
@@ -58,28 +117,44 @@ class EditProfileScreen extends Component {
                                 errorStyle={{color: 'red'}}
                                 errorMessage='ENTER A VALID ERROR HERE'
                                 inputStyle={{fontSize: 22, color: 'black'}}
-                                keyboardType={this.state.curEditingField.keyboardType}
                                 autoFocus={true}
+                                secureTextEntry
+                                onChangeText={(value) => {
+                                    this.setState({
+                                        curEditingField: {
+                                            ...this.state.curEditingField,
+                                            value
+                                        }
+                                    });
+                                }}
                             />
+
+                            {this.state.curEditingField.error.length && (<View style={styles.modalFieldContainer}>
+                                <Text style={styles.modalFieldError}>Incorrect password</Text>
+                            </View>)}
                         </View>
 
                         <View style={{
                             marginTop: 20
                         }}>
                             <Button
-                                title={t('common:save')}
+                                title={this.state.curEditingField.buttonText}
                                 buttonStyle={{
                                     backgroundColor: '#496FC2',
                                 }}
+                                borderRadius={3}
                                 textStyle={{
                                     fontSize: 18
                                 }}
                                 onPress={() => {
+                                    this._checkPassword()
                                 }}
+                                loading={this.state.curEditingField.loading}
+                                disabled={this.state.curEditingField.loading || this.state.curEditingField.value.length < 6}
                             />
                         </View>
                     </View>
-                </Modal>*/}
+                </Modal>}
 
                 <ScrollView>
                     {/*<View style={{
@@ -156,39 +231,7 @@ class EditProfileScreen extends Component {
                         subtitleStyle={styles.listItemSubtitleStyle}
                         subtitle={this.props.user.name}
                         hideChevron={true}
-                        /*rightIcon={(<Icon name='edit' size={20} color='gray'/>)}*/
-                        /*onPress={() => {
-                            this.setState({
-                                curEditingField: {
-                                    value: 'John',
-                                    placeholder: t('screens:my account:edit profile:first name'),
-                                    keyboardType: 'default'
-                                }
-                            });
-
-                            this.setModalVisible(true);
-                        }}*/
                     />
-
-                    {/*<ListItem
-                        containerStyle={[styles.listItem, styles.listItemBorder]}
-                        title={t('screens:my account:edit profile:last name')}
-                        titleStyle={styles.listItemTitleStyle}
-                        subtitle="Doe"
-                        subtitleStyle={styles.listItemSubtitleStyle}
-                        rightIcon={(<Icon name='edit' size={20} color='gray'/>)}
-                        onPress={() => {
-                            this.setState({
-                                curEditingField: {
-                                    value: 'Doe',
-                                    placeholder: t('screens:my account:edit profile:last name'),
-                                    keyboardType: 'default'
-                                }
-                            });
-
-                            this.setModalVisible(true);
-                        }}
-                    />*/}
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
@@ -199,26 +242,6 @@ class EditProfileScreen extends Component {
                         hideChevron={true}
                     />
 
-                    {/*<ListItem
-                        containerStyle={[styles.listItem, styles.listItemBorder]}
-                        title={t('screens:my account:edit profile:phone number')}
-                        titleStyle={styles.listItemTitleStyle}
-                        subtitle="+123 432 5675 56"
-                        subtitleStyle={styles.listItemSubtitleStyle}
-                        rightIcon={(<Icon name='edit' size={20} color='gray'/>)}
-                        onPress={() => {
-                            this.setState({
-                                curEditingField: {
-                                    value: '+123 432 5675 56',
-                                    placeholder: t('screens:my account:edit profile:phone number'),
-                                    keyboardType: 'phone-pad'
-                                }
-                            });
-
-                            this.setModalVisible(true);
-                        }}
-                    />*/}
-
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title={t('screens:my account:edit profile:password')}
@@ -227,6 +250,17 @@ class EditProfileScreen extends Component {
                         subtitleStyle={styles.listItemSubtitleStyle}
                         rightIcon={(<Icon name='edit' size={20} color='gray'/>)}
                         onPress={() => {
+                            this.setState({
+                                curEditingField: {
+                                    ...this.state.curEditingField,
+                                    value: '',
+                                    placeholder: t('screens:my account:edit profile:current password'),
+                                    secureTextEntry: true,
+                                    buttonText: t("common:continue")
+                                }
+                            });
+
+                            this.setCurPasswordModalVisible(true);
                         }}
                     />
                 </ScrollView>
@@ -269,6 +303,15 @@ const styles = StyleSheet.create({
     modalFormInputContainer: {
         marginTop: 40
     },
+
+    modalFieldContainer: {
+        marginLeft: 20,
+        marginTop: 5
+    },
+
+    modalFieldError: {
+        color: 'red'
+    }
 });
 
 function mapStateToProps({user}) {

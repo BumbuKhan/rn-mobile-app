@@ -3,7 +3,8 @@
     "ok": "OK",
     "cancel": "Stornieren",
     "back": "Zurück",
-    "save": "Sparen"
+    "save": "Sparen",
+    "continue": "Fortsetzen"
   },
   "languages": {
     "en": "English",
@@ -33,7 +34,8 @@
         "last name": "Familienname",
         "email": "Email",
         "phone number": "Telefonnummer",
-        "password": "Passwort"
+        "password": "Passwort",
+        "current password": "Aktuelles Passwort"
       },
 
       "choose language": {
