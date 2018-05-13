@@ -34,6 +34,8 @@ class EditProfileScreen extends Component {
     }
 
     _checkPassword = () => {
+        const {t} = this.props.screenProps;
+
         this.setState({
             curEditingField: {
                 ...this.state.curEditingField,
@@ -44,12 +46,11 @@ class EditProfileScreen extends Component {
         // making an HTTP request to /validate
         const authStr = `Bearer ${this.props.user.token.access_token}`;
 
-        // console.log(authStr);
-        // console.log(`/validate?password=${this.state.curEditingField.value}`);
-
+        // TODO: GET method most likely will be replaced with POST
         axios
             .get(`/validate?password=${this.state.curEditingField.value}`, {headers: {Authorization: authStr}})
             .then((response) => {
+                // turning off loading spinner
                 this.setState({
                     curEditingField: {
                         ...this.state.curEditingField,
@@ -59,17 +60,15 @@ class EditProfileScreen extends Component {
 
                 const data = response.data;
 
-                console.log(data.message);
-
-                if (data.message == 'Invalid') {
+                if (data.message === 'Invalid') {
                     this.setState({
                         curEditingField: {
                             ...this.state.curEditingField,
-                            error: 'Incorrect password'
+                            error: t("common:incorrect password")
                         }
                     });
                 } else {
-                    // clearing out error, closing this modal and receiving a brand new password from user
+                    // clearing out error
                     this.setState({
                         curEditingField: {
                             ...this.state.curEditingField,
@@ -77,7 +76,10 @@ class EditProfileScreen extends Component {
                         }
                     });
 
+                    // closing this modal
                     this.setCurPasswordModalVisible(false);
+
+                    // and opening another modal window in order to receive a brand new password from user
                 }
             })
             .catch((error) => {
@@ -114,8 +116,6 @@ class EditProfileScreen extends Component {
                             <FormInput
                                 value={this.state.curEditingField.value}
                                 placeholder={this.state.curEditingField.placeholder}
-                                errorStyle={{color: 'red'}}
-                                errorMessage='ENTER A VALID ERROR HERE'
                                 inputStyle={{fontSize: 22, color: 'black'}}
                                 autoFocus={true}
                                 secureTextEntry
@@ -130,7 +130,7 @@ class EditProfileScreen extends Component {
                             />
 
                             {this.state.curEditingField.error.length && (<View style={styles.modalFieldContainer}>
-                                <Text style={styles.modalFieldError}>Incorrect password</Text>
+                                <Text style={styles.modalFieldError}>{this.state.curEditingField.error}</Text>
                             </View>)}
                         </View>
 
@@ -157,72 +157,6 @@ class EditProfileScreen extends Component {
                 </Modal>}
 
                 <ScrollView>
-                    {/*<View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        margin: 20,
-                        marginTop: 30
-                    }}>
-                        <View style={{
-                            flex: 1,
-                            justifyContent: 'center',
-                            alignItems: 'flex-end',
-                            paddingRight: 25,
-                        }}>
-                            <TouchableOpacity onPress={() => {
-                                Alert.alert(
-                                    t('screens:my account:sign out confirm title'),
-                                    t('screens:my account:sign out confirm description'),
-                                    [
-                                        {
-                                            text: t('common:cancel'),
-                                            onPress: () => {
-                                            },
-                                            style: 'cancel'
-                                        },
-                                        {
-                                            text: t('common:ok'),
-                                            onPress: async () => {
-                                                // making an HTTP request...
-                                            }
-                                        },
-                                    ],
-                                    {cancelable: false}
-                                )
-                            }}>
-                                <Icon
-                                    name='delete-forever'
-                                    color='red'
-                                />
-                                <Text style={{
-                                    color: 'red'
-                                }}>Delete</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View>
-                            <Avatar
-                                large
-                                rounded
-                                source={{uri: "https://randomuser.me/api/portraits/men/67.jpg"}}
-                                onPress={() => console.log("Works!")}
-                                activeOpacity={0.7}
-                            />
-                        </View>
-                        <View style={{
-                            flex: 1,
-                            justifyContent: 'center',
-                            alignItems: 'flex-start',
-                            paddingLeft: 25
-                        }}>
-                            <TouchableOpacity onPress={() => {
-                            }}>
-                                <Icon
-                                    name='photo-camera'
-                                />
-                                <Text>Edit</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>*/}
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemMT, styles.listItemBorder]}

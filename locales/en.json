@@ -4,7 +4,8 @@
     "cancel": "Cancel",
     "back": "Back",
     "save": "Save",
-    "continue": "Continue"
+    "continue": "Continue",
+    "incorrect password": "Incorrect password"
   },
   "languages": {
     "en": "English",

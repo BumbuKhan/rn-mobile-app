@@ -4,7 +4,8 @@
     "cancel": "Отмена",
     "back": "Назад",
     "save": "Сохранить",
-    "continue": "Продолжить"
+    "continue": "Продолжить",
+    "incorrect password": "Неверный пароль"
   },
   "languages": {
     "en": "English",
@@ -35,7 +36,7 @@
         "email": "Эл. Адрес",
         "phone number": "Номер Телефона",
         "password": "Пароль",
-        "current password": "текущий пароль"
+        "current password": "Текущий пароль"
       },
 
       "choose language": {
