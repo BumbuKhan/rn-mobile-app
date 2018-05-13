@@ -24,7 +24,10 @@ class EditProfileScreen extends Component {
             loading: false,
             error: ''
 
-        }
+        },
+
+        newPasswordModalVisible: false,
+        showNewPassword: false
     };
 
     setCurPasswordModalVisible(visible) {
@@ -33,7 +36,14 @@ class EditProfileScreen extends Component {
         });
     }
 
+    setNewPasswordModalVisible(visible) {
+        this.setState({
+            newPasswordModalVisible: visible
+        });
+    }
+
     _checkPassword = () => {
+        console.log('checking password...');
         const {t} = this.props.screenProps;
 
         this.setState({
@@ -54,7 +64,8 @@ class EditProfileScreen extends Component {
                 this.setState({
                     curEditingField: {
                         ...this.state.curEditingField,
-                        loading: false
+                        loading: false,
+                        value: ''
                     }
                 });
 
@@ -80,7 +91,39 @@ class EditProfileScreen extends Component {
                     this.setCurPasswordModalVisible(false);
 
                     // and opening another modal window in order to receive a brand new password from user
+                    this.setState({
+                        curEditingField: {
+                            ...this.state.curEditingField,
+                            placeholder: t("common:new password"),
+                            value: '',
+                            buttonText: t("common:save")
+                        }
+                    });
+
+                    this.setNewPasswordModalVisible(true);
                 }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    };
+
+    _updatePassword = () => {
+        this.setState({
+            curEditingField: {
+                ...this.state.curEditingField,
+                loading: true
+            }
+        });
+
+        const {t} = this.props.screenProps;
+        const authStr = `Bearer ${this.props.user.token.access_token}`;
+        const newPassword = this.state.curEditingField.value;
+
+        axios
+            .post('/change/password', {password: newPassword}, {headers: {Authorization: authStr}})
+            .then((response) => {
+                console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -148,6 +191,89 @@ class EditProfileScreen extends Component {
                                 }}
                                 onPress={() => {
                                     this._checkPassword()
+                                }}
+                                loading={this.state.curEditingField.loading}
+                                disabled={this.state.curEditingField.loading || this.state.curEditingField.value.length < 6}
+                            />
+                        </View>
+                    </View>
+                </Modal>}
+
+                {<Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={this.state.newPasswordModalVisible}>
+
+                    <View style={styles.modalContainer}>
+                        <View style={{
+                            alignSelf: 'flex-start',
+                            paddingLeft: 15
+                        }}>
+                            <TouchableOpacity onPress={() => {
+                                this.setNewPasswordModalVisible(false)
+                            }}>
+                                <Icon
+                                    name='close'
+                                    color='black'
+                                />
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={styles.modalFormInputContainer}>
+                            <FormInput
+                                value={this.state.curEditingField.value}
+                                placeholder={this.state.curEditingField.placeholder}
+                                inputStyle={{fontSize: 22, color: 'black'}}
+                                autoFocus={true}
+                                secureTextEntry={this.state.curEditingField.secureTextEntry}
+                                onChangeText={(value) => {
+                                    this.setState({
+                                        curEditingField: {
+                                            ...this.state.curEditingField,
+                                            value
+                                        }
+                                    });
+                                }}
+                            />
+
+                            <View style={[styles.modalFieldContainer, {
+                                flexDirection: 'row',
+                                justifyContent: 'space-between'
+                            }]}>
+                                <View>
+                                    <Text>{t("common:password min requirement")}</Text>
+                                </View>
+                                <View>
+                                    <TouchableOpacity onPress={() => {
+                                        this.setState({
+                                            curEditingField: {
+                                                ...this.state.curEditingField,
+                                                secureTextEntry: !this.state.curEditingField.secureTextEntry
+                                            }
+                                        });
+                                    }}>
+                                        <Text>{
+                                            (this.state.curEditingField.secureTextEntry) ? t("common:show password") : t("common:hide password")
+                                        }</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+
+                        <View style={{
+                            marginTop: 20
+                        }}>
+                            <Button
+                                title={this.state.curEditingField.buttonText}
+                                buttonStyle={{
+                                    backgroundColor: '#496FC2',
+                                }}
+                                borderRadius={3}
+                                textStyle={{
+                                    fontSize: 18
+                                }}
+                                onPress={() => {
+                                    this._updatePassword()
                                 }}
                                 loading={this.state.curEditingField.loading}
                                 disabled={this.state.curEditingField.loading || this.state.curEditingField.value.length < 6}
@@ -240,6 +366,7 @@ const styles = StyleSheet.create({
 
     modalFieldContainer: {
         marginLeft: 20,
+        marginRight: 20,
         marginTop: 5
     },
 

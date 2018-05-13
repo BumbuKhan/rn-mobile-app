@@ -5,7 +5,11 @@
     "back": "Zurück",
     "save": "Sparen",
     "continue": "Fortsetzen",
-    "incorrect password": "Falsches Passwort"
+    "incorrect password": "Falsches Passwort",
+    "new password": "Neues Kennwort",
+    "password min requirement": "Minimum 6 chars",
+    "show password": "Show Password",
+    "hide password": "Hide Password"
   },
   "languages": {
     "en": "English",

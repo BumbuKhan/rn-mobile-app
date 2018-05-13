@@ -5,7 +5,11 @@
     "back": "Назад",
     "save": "Сохранить",
     "continue": "Продолжить",
-    "incorrect password": "Неверный пароль"
+    "incorrect password": "Неверный пароль",
+    "new password": "Новый Пароль",
+    "password min requirement": "Minimum 6 chars",
+    "show password": "Show Password",
+    "hide password": "Hide Password"
   },
   "languages": {
     "en": "English",
