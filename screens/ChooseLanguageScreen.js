@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
-import {ListItem} from 'react-native-elements';
+import {ListItem, Icon} from 'react-native-elements';
 import {connect} from 'react-redux';
 
 import {setCurLang} from '../actions/settings_actions';
@@ -25,7 +25,7 @@ class ChooseLanguageScreen extends Component {
                         titleStyle={styles.listItemTitleStyle}
                         hideChevron={this.props.settings.curLang !== 'en'}
                         onPress={() => this.props.setCurLang('en')}
-                        rightIcon={{name: 'check'}}
+                        rightIcon={<Icon name='check' />}
                     />
 
                     <ListItem
@@ -34,7 +34,7 @@ class ChooseLanguageScreen extends Component {
                         titleStyle={styles.listItemTitleStyle}
                         hideChevron={this.props.settings.curLang !== 'de'}
                         onPress={() => this.props.setCurLang('de')}
-                        rightIcon={{name: 'check'}}
+                        rightIcon={<Icon name='check' />}
                     />
 
                     <ListItem
@@ -43,7 +43,7 @@ class ChooseLanguageScreen extends Component {
                         titleStyle={styles.listItemTitleStyle}
                         hideChevron={this.props.settings.curLang !== 'ru'}
                         onPress={() => this.props.setCurLang('ru')}
-                        rightIcon={{name: 'check'}}
+                        rightIcon={<Icon name='check' />}
                     />
 
                 </ScrollView>
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     },
 
     listItem: {
-        backgroundColor: 'white',
+        backgroundColor: 'white'
     },
 
     listItemBorder: {
@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     },
 
     listItemTitleStyle: {
-        fontSize: 18
+        fontSize: 18,
+        lineHeight: 30
     }
 });
 
