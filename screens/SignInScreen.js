@@ -4,14 +4,15 @@ import {connect} from 'react-redux';
 import {FormInput, Text, Button} from 'react-native-elements';
 
 import {logIn} from '../actions/user_actions';
+import {populateSettings} from '../actions/settings_actions';
 import axios from '../helpers/axios';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 class SignInScreen extends Component {
     state = {
-        email: '',
-        password: '',
+        email: 'qurban.qurbanov93@gmail.com',
+        password: '12345678',
         loading: false
     };
 
@@ -86,6 +87,14 @@ class SignInScreen extends Component {
             .then((savedToAsyncStorage) => {
                 // pushing all user's data to redux store...
                 _this.props.logIn(userData);
+
+                // we should also populate user's settings...
+                // TODO: curLang will be shipped over API!
+                const settingsData = {
+                    curLang: 'en'
+                };
+
+                this.props.populateSettings(settingsData);
 
                 // taking user to the main screen
                 _this.props.navigation.navigate('App');
@@ -189,4 +198,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(null, {logIn})(SignInScreen);
+export default connect(null, {logIn, populateSettings})(SignInScreen);

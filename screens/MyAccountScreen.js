@@ -55,7 +55,7 @@ class MyAccountScreen extends Component {
     render() {
         const {t} = this.props.screenProps;
 
-        console.log(this.props.settings);
+        console.log(this.props);
 
         return (
             <View style={{flex: 1}}>
@@ -98,10 +98,6 @@ class MyAccountScreen extends Component {
                         title={languages[this.props.settings.curLang]}
                         titleStyle={styles.listItemTitleStyle}
                         onPress={() => this.props.navigation.navigate('ChooseLanguage')}
-                    />
-
-                    <ListItemDescription
-                        title='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam leo, varius vel mattis ut.'
                     />
 
                     <ListItem
