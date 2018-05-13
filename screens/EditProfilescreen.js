@@ -26,8 +26,7 @@ class EditProfileScreen extends Component {
 
         },
 
-        newPasswordModalVisible: false,
-        showNewPassword: false
+        newPasswordModalVisible: false
     };
 
     setCurPasswordModalVisible(visible) {
