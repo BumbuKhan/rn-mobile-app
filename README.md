@@ -20,4 +20,6 @@ us to easily run, test and share the application.
 
 # RESTful API #
 
-You can find [here](https://docs.google.com/spreadsheets/d/1tGuas2DbGQTIQNMXk2KD9IA72SqxT4XIxGgTy35WaFY/edit#gid=0)
+Currently lives on [http://185.69.154.235/api](http://185.69.154.235/api)
+
+Documentation you can find [here](https://docs.google.com/spreadsheets/d/1tGuas2DbGQTIQNMXk2KD9IA72SqxT4XIxGgTy35WaFY/edit#gid=0)
