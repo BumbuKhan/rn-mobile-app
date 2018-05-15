@@ -29,16 +29,28 @@ class SignInScreen extends Component {
                 email: this.state.email, // qurban.qurbanov93@gmail.com
                 password: this.state.password // 12345678
             })
-            .then(({data}) => {
+            .then((_response) => {
+                const response = _response.data;
+
                 /*
-                data has such structure:
+                response has such structure:
 
                 {
-                  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...HC7DI0TF846rXJkb0i6o",
-                  "expires_in": 3600,
-                  "token_type": "bearer",
+                  "success": true,
+                  "data": {
+                    "access_token": "eyJ0eXAiT...MDQ3NTQ2YWEifQ.wIHVkrPGdnRGJokocP_EGh_4auUGsZmGg",
+                    "expires_in": 3600,
+                    "token_type": "bearer",
+                  }
                 }
                 */
+
+                if (!response.success) {
+                    throw new Error('Incorrect email or password');
+                }
+
+                // pulling out data key from response
+                const {data} = response;
 
                 // saving data to userData
                 userData.token = data;
@@ -48,18 +60,29 @@ class SignInScreen extends Component {
 
                 return axios.get('/me', {headers: {Authorization: authStr}});
             })
-            .then(({data}) => {
+            .then((_response) => {
+                const response = _response.data;
                 /*
-                data has such structure:
+                response has such structure:
 
                 {
-                  "id": 2,
-                  "name": "Gurban",
-                  "email": "qurban.qurbanov93@gmail.com",
-                  "created_at": "2018-05-09 13:13:09",
-                  "updated_at": "2018-05-09 13:13:09",
+                    "success": true,
+                    "data": {
+                        "id": 2,
+                        "name": "Gurban",
+                        "language": "de",
+                        "email": "qurban.qurbanov93@gmail.com",
+                        "created_at": "2018-05-14 10:23:33",
+                        "updated_at": "2018-05-15 18:02:03"
+                    }
                 }
                 */
+
+                if(!response.success) {
+                    throw new Error('Could not fetch user data');
+                }
+
+                const {data} = response;
 
                 // saving user's data to userData
                 userData = {...userData, ...data};
@@ -117,6 +140,8 @@ class SignInScreen extends Component {
                     password: '',
                     loading: false
                 });
+
+                console.log(error);
             });
     };
 
