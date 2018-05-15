@@ -8,8 +8,8 @@
     "incorrect password": "Falsches Passwort",
     "new password": "Neues Kennwort",
     "password min requirement": "Minimum 6 chars",
-    "show password": "Show Password",
-    "hide password": "Hide Password"
+    "show password": "Passwort Anzeigen",
+    "hide password": "Passwort Verbergen"
   },
   "languages": {
     "en": "English",
