@@ -6,6 +6,7 @@ import {FormInput, Text, Button} from 'react-native-elements';
 import {logIn} from '../actions/user_actions';
 import {populateSettings} from '../actions/settings_actions';
 import axios from '../helpers/axios';
+import {setCurLang} from '../actions/settings_actions';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -91,16 +92,18 @@ class SignInScreen extends Component {
                 and now userData looks like:
 
                 {
-                    "token": Object {
-                        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xODUuNjkuMTU0LjIzNVwvYXBpXC9sb2dpbiIsImlhdCI6MTUyNjAxMzE4OSwiZXhwIjoxNTI2MDE2Nzg5LCJuYmYiOjE1MjYwMTMxODksImp0aSI6ImZNYXJ5OGp0ZTZBUzJYMDUiLCJzdWIiOjIsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.ztyftC3QiLCrHUyslHQ0jZCy4YjIFqBog8zJInTXr2c",
-                        "expires_in": 3600,
-                        "token_type": "bearer",
-                    },
                     "id": 2,
                     "name": "Gurban",
                     "email": "qurban.qurbanov93@gmail.com",
-                    "created_at": "2018-05-09 13:13:09",
-                    "updated_at": "2018-05-09 13:13:09",
+                    "language": "de",
+                    "created_at": "2018-05-14 10:23:33",
+                    "updated_at": "2018-05-15 18:02:03",
+
+                    "token": Object {
+                        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xODUuNjkuMTU0LjIzNVwvYXBpXC9sb2dpbiIsImlhdCI6MTUyNjQxMjA0NywiZXhwIjoxNTI2NDE1NjQ3LCJuYmYiOjE1MjY0MTIwNDcsImp0aSI6InVIUWdVVmlKV05wTFU1SFkiLCJzdWIiOjIsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.xEA5-zhfndryXmkGXpGVA0EoH2AUA8fJiaYscBtectU",
+                        "expires_in": 3600,
+                        "token_type": "bearer",
+                    }
                 }
                 */
 
@@ -112,12 +115,14 @@ class SignInScreen extends Component {
                 _this.props.logIn(userData);
 
                 // we should also populate user's settings...
-                // TODO: curLang will be shipped over API!
                 const settingsData = {
-                    curLang: 'en'
+                    curLang: userData.language
                 };
 
                 this.props.populateSettings(settingsData);
+
+                // setting up app language...
+                this.props.setCurLang(userData.language);
 
                 // taking user to the main screen
                 _this.props.navigation.navigate('App');
@@ -223,4 +228,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(null, {logIn, populateSettings})(SignInScreen);
+export default connect(null, {logIn, populateSettings, setCurLang})(SignInScreen);
