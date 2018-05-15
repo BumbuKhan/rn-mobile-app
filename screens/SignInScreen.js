@@ -126,25 +126,53 @@ class SignInScreen extends Component {
                 _this.props.navigation.navigate('App');
             })
             .catch((error) => {
-                Alert.alert(
-                    'Authentication failed',
-                    'Incorrect email or password',
-                    [
-                        {
-                            text: 'OK', onPress: () => {
-                            }
-                        },
-                    ],
-                    {cancelable: false}
-                );
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    /*console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);*/
+                    // console.log('error.response');
+                    Alert.alert(
+                        'Authentication failed',
+                        'Incorrect email or password',
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                }
+                            },
+                        ],
+                        {cancelable: false}
+                    );
 
-                // clearing out a password field and enabling 'log in' button back
+                    // clearing out a password field
+                    _this.setState({
+                        password: ''
+                    });
+
+                } else if (error.request) {
+                    // No internet connection...
+                    Alert.alert(
+                        'No Internet Connection',
+                        'Please male sure that you have got an Internet connection',
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                }
+                            },
+                        ],
+                        {cancelable: false}
+                    );
+
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+
+                // enabling 'log in' button back
                 _this.setState({
-                    password: '',
                     loading: false
                 });
-
-                console.log(error);
             });
     };
 
