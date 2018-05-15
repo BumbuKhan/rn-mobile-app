@@ -8,8 +8,6 @@ import {populateSettings} from '../actions/settings_actions';
 import axios from '../helpers/axios';
 import {setCurLang} from '../actions/settings_actions';
 
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-
 class SignInScreen extends Component {
     state = {
         email: 'qurban.qurbanov93@gmail.com',

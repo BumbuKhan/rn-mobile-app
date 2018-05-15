@@ -24,7 +24,7 @@ class AuthLoadingScreen extends Component {
             // clearing out all AsyncStorage...
             // TODO: remove this line of code on production!
             //await AsyncStorage.clear(); // do not use this statement it causes crashes
-            await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
+            //await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
 
             // checking whether the user is authenticated
             const user = await AsyncStorage.getItem('user'); // will be a JSON string OR null

@@ -4,12 +4,31 @@ import {ListItem, Icon} from 'react-native-elements';
 import {connect} from 'react-redux';
 
 import {setCurLang} from '../actions/settings_actions';
+import axios from '../helpers/axios';
 
 class ChooseLanguageScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
         return {
             title: screenProps.t('screens:my account:choose language:title')
         }
+    };
+
+    _setCurLang = (lang) => {
+        this.props.setCurLang(lang);
+
+        // trying to call API...
+        // after getting auth token we should fetch user's data
+        const authStr = `Bearer ${this.props.user.token.access_token}`;
+
+        axios
+            .put('/me/language_change', {
+                language: lang
+            }, {headers: {Authorization: authStr}})
+            .then((_response) => {
+                const response = _response.data;
+
+                console.log(response);
+            });
     };
 
     render() {
@@ -24,8 +43,8 @@ class ChooseLanguageScreen extends Component {
                         title={t('languages:en')}
                         titleStyle={styles.listItemTitleStyle}
                         hideChevron={this.props.settings.curLang !== 'en'}
-                        onPress={() => this.props.setCurLang('en')}
-                        rightIcon={<Icon name='check' />}
+                        onPress={() => this._setCurLang('en')}
+                        rightIcon={<Icon name='check'/>}
                     />
 
                     <ListItem
@@ -33,8 +52,8 @@ class ChooseLanguageScreen extends Component {
                         title={t('languages:de')}
                         titleStyle={styles.listItemTitleStyle}
                         hideChevron={this.props.settings.curLang !== 'de'}
-                        onPress={() => this.props.setCurLang('de')}
-                        rightIcon={<Icon name='check' />}
+                        onPress={() => this._setCurLang('de')}
+                        rightIcon={<Icon name='check'/>}
                     />
 
                     <ListItem
@@ -42,8 +61,8 @@ class ChooseLanguageScreen extends Component {
                         title={t('languages:ru')}
                         titleStyle={styles.listItemTitleStyle}
                         hideChevron={this.props.settings.curLang !== 'ru'}
-                        onPress={() => this.props.setCurLang('ru')}
-                        rightIcon={<Icon name='check' />}
+                        onPress={() => this._setCurLang('ru')}
+                        rightIcon={<Icon name='check'/>}
                     />
 
                 </ScrollView>
@@ -75,8 +94,8 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps({settings}) {
-    return {settings};
+function mapStateToProps({settings, user}) {
+    return {settings, user};
 }
 
 export default connect(mapStateToProps, {setCurLang})(ChooseLanguageScreen);
