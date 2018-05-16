@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert} from 'react-native';
+import {Text, View, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert, AsyncStorage} from 'react-native';
 import {ListItem, Icon, FormInput, Button} from 'react-native-elements';
 import {connect} from 'react-redux';
 
 import axios from '../helpers/axios';
+import {logIn} from '../actions/user_actions';
 
 class EditProfileScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -42,7 +43,6 @@ class EditProfileScreen extends Component {
     }
 
     _checkPassword = () => {
-        console.log('checking password...');
         const {t} = this.props.screenProps;
 
         this.setState({
@@ -147,16 +147,95 @@ class EditProfileScreen extends Component {
         });
 
         const {t} = this.props.screenProps;
-        const authStr = `Bearer ${this.props.user.token.access_token}`;
         const newPassword = this.state.curEditingField.value;
 
+        const authStr = `Bearer ${this.props.user.token.access_token}`;
+
         axios
-            .post('/change/password', {password: newPassword}, {headers: {Authorization: authStr}})
-            .then((response) => {
-                console.log(response.data);
+            .put('/me/password_change',
+                {password: newPassword},
+                {headers: {Authorization: authStr}})
+            .then((_response) => {
+                const response = _response.data;
+                const {data} = response;
+
+                if (!response.success) {
+                    throw new Error('Something went wrong, please try later');
+                }
+
+                // data has new auth data that need to be injected into Redux store & Asyncstorage
+                /*
+                {
+                  "access_token": "eyJ0eXAiOiJ...9IirT6aF3FtfVEl-GOg",
+                  "expires_in": 3600,
+                  "token_type": "bearer",
+                }
+                */
+
+                const newUserData = {
+                    ...this.props.user,
+                    token: data
+                };
+
+                this.props.logIn(newUserData);
+
+                // saving userData to AsyncStorage...
+                return AsyncStorage.setItem('user', JSON.stringify(newUserData));
+            })
+            .then((passwordChanged) => {
+                // turning off loading spinner
+                this.setState({
+                    curEditingField: {
+                        ...this.state.curEditingField,
+                        loading: false
+                    }
+                });
+
+                this.setNewPasswordModalVisible(false);
+
+                setTimeout(() => {
+                    Alert.alert(
+                        'Success!',
+                        'Your password has been successfully changed',
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                }
+                            },
+                        ],
+                        {cancelable: false}
+                    );
+                }, 1000);
             })
             .catch((error) => {
-                console.log(error);
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                } else if (error.request) {
+                    // No internet connection...
+                    Alert.alert(
+                        'No Internet Connection',
+                        'Please male sure that you have got an Internet connection',
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                }
+                            },
+                        ],
+                        {cancelable: false}
+                    );
+
+                    // turning off loading spinner
+                    this.setState({
+                        curEditingField: {
+                            ...this.state.curEditingField,
+                            loading: false,
+                        }
+                    });
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error);
+                }
             })
     };
 
@@ -413,4 +492,4 @@ function mapStateToProps({user}) {
     return {user};
 }
 
-export default connect(mapStateToProps)(EditProfileScreen);
+export default connect(mapStateToProps, {logIn})(EditProfileScreen);
