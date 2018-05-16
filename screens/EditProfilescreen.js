@@ -113,8 +113,8 @@ class EditProfileScreen extends Component {
                 } else if (error.request) {
                     // No internet connection...
                     Alert.alert(
-                        'No Internet Connection',
-                        'Please male sure that you have got an Internet connection',
+                        t("common:no internet connection"),
+                        t("common:please make sure that you have got an internet connection"),
                         [
                             {
                                 text: 'OK', onPress: () => {
@@ -193,10 +193,12 @@ class EditProfileScreen extends Component {
 
                 this.setNewPasswordModalVisible(false);
 
+                // on IOS we should wait for modal window to close (approx. 1 sec) before rising alert
+                // otherwise you might encounter strange behaviour
                 setTimeout(() => {
                     Alert.alert(
-                        'Success!',
-                        'Your password has been successfully changed',
+                        t("common:success"),
+                        t("screens:my account:edit profile:your password has been successfully changed"),
                         [
                             {
                                 text: 'OK', onPress: () => {
@@ -214,8 +216,8 @@ class EditProfileScreen extends Component {
                 } else if (error.request) {
                     // No internet connection...
                     Alert.alert(
-                        'No Internet Connection',
-                        'Please male sure that you have got an Internet connection',
+                        t("common:no internet connection"),
+                        t("common:please make sure that you have got an internet connection"),
                         [
                             {
                                 text: 'OK', onPress: () => {

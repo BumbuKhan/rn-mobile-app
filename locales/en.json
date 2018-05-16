@@ -1,6 +1,7 @@
 {
   "common": {
     "ok": "OK",
+    "success": "Success!",
     "cancel": "Cancel",
     "back": "Back",
     "save": "Save",
@@ -9,7 +10,9 @@
     "new password": "New password",
     "password min requirement": "Minimum 6 chars",
     "show password": "Show Password",
-    "hide password": "Hide Password"
+    "hide password": "Hide Password",
+    "no internet connection": "No Internet Connection",
+    "please make sure that you have got an internet connection": "Please male sure that you have got an Internet connection"
   },
   "languages": {
     "en": "English",
@@ -40,7 +43,8 @@
         "email": "Email",
         "phone number": "Phone Number",
         "password": "Password",
-        "current password": "Current Password"
+        "current password": "Current Password",
+        "your password has been successfully changed": "Your password has been successfully changed"
       },
 
       "choose language": {

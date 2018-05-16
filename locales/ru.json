@@ -1,15 +1,18 @@
 {
   "common": {
     "ok": "OK",
+    "success": "Success!",
     "cancel": "Отмена",
     "back": "Назад",
     "save": "Сохранить",
     "continue": "Продолжить",
     "incorrect password": "Неверный пароль",
     "new password": "Новый Пароль",
-    "password min requirement": "Minimum 6 chars",
+    "password min requirement": "Минимум 6 символов",
     "show password": "Показать Пароль",
-    "hide password": "Скрыть Пароль"
+    "hide password": "Скрыть Пароль",
+    "no internet connection": "Нет соединения с интернетом",
+    "please make sure that you have got an internet connection": "Убедитесь, что у вас есть подключение к Интернету"
   },
   "languages": {
     "en": "English",
@@ -40,7 +43,8 @@
         "email": "Эл. Адрес",
         "phone number": "Номер Телефона",
         "password": "Пароль",
-        "current password": "Текущий пароль"
+        "current password": "Текущий пароль",
+        "your password has been successfully changed": "Ваш пароль был успешно изменен"
       },
 
       "choose language": {

@@ -1,15 +1,18 @@
 {
   "common": {
     "ok": "OK",
+    "success": "Erfolg!",
     "cancel": "Stornieren",
     "back": "Zurück",
     "save": "Sparen",
     "continue": "Fortsetzen",
     "incorrect password": "Falsches Passwort",
     "new password": "Neues Kennwort",
-    "password min requirement": "Minimum 6 chars",
+    "password min requirement": "Mindestens 6 Zeichen",
     "show password": "Passwort Anzeigen",
-    "hide password": "Passwort Verbergen"
+    "hide password": "Passwort Verbergen",
+    "no internet connection": "Keine Internetverbindung",
+    "please make sure that you have got an internet connection": "Bitte stellen Sie sicher, dass Sie eine Internetverbindung haben"
   },
   "languages": {
     "en": "English",
@@ -40,7 +43,8 @@
         "email": "Email",
         "phone number": "Telefonnummer",
         "password": "Passwort",
-        "current password": "Aktuelles Passwort"
+        "current password": "Aktuelles Passwort",
+        "your password has been successfully changed": "Ihr Passwort wurde erfolgreich geändert"
       },
 
       "choose language": {
