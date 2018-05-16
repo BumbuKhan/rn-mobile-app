@@ -375,6 +375,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps({user}) {
+    console.log(user);
     return {user};
 }
 
