@@ -57,8 +57,13 @@ class EditProfileScreen extends Component {
 
         // TODO: GET method most likely will be replaced with POST
         axios
-            .get(`/validate?password=${this.state.curEditingField.value}`, {headers: {Authorization: authStr}})
-            .then((response) => {
+        //.get(`/validate?password=${this.state.curEditingField.value}`, {headers: {Authorization: authStr}})
+            .post(`/me/password_validate`,
+                {password: this.state.curEditingField.value},
+                {headers: {Authorization: authStr}})
+            .then((_response) => {
+                const response = _response.data;
+
                 // turning off loading spinner
                 this.setState({
                     curEditingField: {
@@ -70,7 +75,7 @@ class EditProfileScreen extends Component {
 
                 const data = response.data;
 
-                if (data.message === 'Invalid') {
+                if (!response.success) {
                     this.setState({
                         curEditingField: {
                             ...this.state.curEditingField,
@@ -134,6 +139,7 @@ class EditProfileScreen extends Component {
 
         return (
             <View style={styles.container}>
+                /* Current password modal start */
                 {<Modal
                     animationType="slide"
                     transparent={false}
@@ -197,7 +203,9 @@ class EditProfileScreen extends Component {
                         </View>
                     </View>
                 </Modal>}
+                /* Current password modal   end */
 
+                /* New password modal start */
                 {<Modal
                     animationType="slide"
                     transparent={false}
@@ -280,6 +288,7 @@ class EditProfileScreen extends Component {
                         </View>
                     </View>
                 </Modal>}
+                /* New password modal   end */
 
                 <ScrollView>
 
