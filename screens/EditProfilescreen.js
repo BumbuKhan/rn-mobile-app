@@ -55,9 +55,7 @@ class EditProfileScreen extends Component {
         // making an HTTP request to /validate
         const authStr = `Bearer ${this.props.user.token.access_token}`;
 
-        // TODO: GET method most likely will be replaced with POST
         axios
-        //.get(`/validate?password=${this.state.curEditingField.value}`, {headers: {Authorization: authStr}})
             .post(`/me/password_validate`,
                 {password: this.state.curEditingField.value},
                 {headers: {Authorization: authStr}})
@@ -104,11 +102,39 @@ class EditProfileScreen extends Component {
                         }
                     });
 
+                    // displaying 'new password' modal
                     this.setNewPasswordModalVisible(true);
                 }
             })
             .catch((error) => {
-                console.log(error);
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                } else if (error.request) {
+                    // No internet connection...
+                    Alert.alert(
+                        'No Internet Connection',
+                        'Please male sure that you have got an Internet connection',
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                }
+                            },
+                        ],
+                        {cancelable: false}
+                    );
+
+                    // turning off loading spinner
+                    this.setState({
+                        curEditingField: {
+                            ...this.state.curEditingField,
+                            loading: false,
+                        }
+                    });
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
             })
     };
 
@@ -384,7 +410,6 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps({user}) {
-    console.log(user);
     return {user};
 }
 
