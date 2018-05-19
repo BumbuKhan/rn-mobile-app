@@ -3,10 +3,10 @@ import {View, ScrollView, StyleSheet, Alert, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
 import {FormInput, Text, Button} from 'react-native-elements';
 
-import {logIn} from '../actions/user_actions';
-import {populateSettings} from '../actions/settings_actions';
-import axios from '../helpers/axios';
-import {setCurLang} from '../actions/settings_actions';
+import {logIn} from '../../actions/user_actions';
+import {populateSettings} from '../../actions/settings_actions';
+import axios from '../../helpers/axios';
+import {setCurLang} from '../../actions/settings_actions';
 
 class SignInScreen extends Component {
     state = {

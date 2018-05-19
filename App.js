@@ -6,12 +6,12 @@ import {I18nextProvider, translate} from 'react-i18next';
 
 import i18n from './locales/i18n';
 import store from './store';
-import AuthLoadingScreen from "./screens/AuthLoadingScreen";
+import AuthLoadingScreen from "./screens/auth/AuthLoadingScreen";
 import ActiveProjectScreen from './screens/ActiveProjectScreen';
-import MyAccountScreen from './screens/MyAccountScreen';
-import SignInScreen from "./screens/SignInScreen";
-import ChooseLanguageScreen from "./screens/ChooseLanguageScreen";
-import EditProfileScreen from "./screens/EditProfilescreen";
+import MyAccountScreen from './screens/user/MyAccountScreen';
+import SignInScreen from "./screens/auth/SignInScreen";
+import ChooseLanguageScreen from "./screens/user/ChooseLanguageScreen";
+import EditProfileScreen from "./screens/user/EditProfilescreen";
 
 // we'll describe all screens that are shown to authenticated user here
 const AppStack = DrawerNavigator({

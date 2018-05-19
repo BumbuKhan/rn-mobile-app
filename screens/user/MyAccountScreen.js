@@ -3,10 +3,10 @@ import {View, Text, ScrollView, StyleSheet, Alert, AsyncStorage} from 'react-nat
 import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 
-import {Menu, ListItemTitle, ListItemDescription} from '../components/common';
-import {logOut} from '../actions/user_actions';
-import languages from '../helpers/languages';
-import axios from '../helpers/axios';
+import {Menu, ListItemTitle, ListItemDescription} from '../../components/common/index';
+import {logOut} from '../../actions/user_actions';
+import languages from '../../helpers/languages';
+import axios from '../../helpers/axios';
 
 class MyAccountScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {

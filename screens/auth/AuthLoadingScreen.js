@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 
-import i18n from '../locales/i18n';
-import {logIn} from '../actions/user_actions';
-import {populateSettings} from '../actions/settings_actions';
+import i18n from '../../locales/i18n';
+import {logIn} from '../../actions/user_actions';
+import {populateSettings} from '../../actions/settings_actions';
 
 class AuthLoadingScreen extends Component {
     constructor(props) {

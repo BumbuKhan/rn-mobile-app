@@ -3,8 +3,8 @@ import {Text, View, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert, Asyn
 import {ListItem, Icon, FormInput, Button} from 'react-native-elements';
 import {connect} from 'react-redux';
 
-import axios from '../helpers/axios';
-import {logIn} from '../actions/user_actions';
+import axios from '../../helpers/axios';
+import {logIn} from '../../actions/user_actions';
 
 class EditProfileScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
