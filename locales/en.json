@@ -22,7 +22,9 @@
   "drawer menu": {
     "active project": "Active Project",
     "my account": "My Account",
-    "clients": "Clients"
+    "clients": "Clients",
+    "my hours": "My Hours",
+    "vacation": "Vacation"
   },
   "screens": {
     "active project": {
@@ -31,6 +33,9 @@
     },
     "clients": {
       "no clients": "No clients"
+    },
+    "my hours": {
+      "no content": "No content"
     },
     "my account": {
       "language title": "LANGUAGE",
