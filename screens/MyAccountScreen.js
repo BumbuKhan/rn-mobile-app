@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {Menu, ListItemTitle, ListItemDescription} from '../components/common';
 import {logOut} from '../actions/user_actions';
 import languages from '../helpers/languages';
+import axios from '../helpers/axios';
 
 class MyAccountScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -42,6 +43,14 @@ class MyAccountScreen extends Component {
 
                             // updating redux store
                             this.props.logOut();
+
+                            // and finally calling appropriate API endpoint
+                            const authStr = `Bearer ${this.props.user.token.access_token}`;
+
+                            axios.post('/logout', {}, {headers: {Authorization: authStr}})
+                                .then((response) => {
+                                    console.log(response);
+                                })
                         }
                     },
                 ],

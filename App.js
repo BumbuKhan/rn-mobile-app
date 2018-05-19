@@ -32,7 +32,7 @@ const AppStack = DrawerNavigator({
         initialRouteName: 'SettingsMain'
     })
 }, {
-    initialRouteName: 'ActiveProject'
+    initialRouteName: 'Settings'
 });
 
 const RootStack = SwitchNavigator({
