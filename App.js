@@ -7,7 +7,7 @@ import {I18nextProvider, translate} from 'react-i18next';
 import i18n from './locales/i18n';
 import store from './store';
 import AuthLoadingScreen from "./screens/auth/AuthLoadingScreen";
-import ActiveProjectScreen from './screens/ActiveProjectScreen';
+import ActiveProjectScreen from './screens/active_project/ActiveProjectScreen';
 import MyAccountScreen from './screens/user/MyAccountScreen';
 import SignInScreen from "./screens/auth/SignInScreen";
 import ChooseLanguageScreen from "./screens/user/ChooseLanguageScreen";

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, AsyncStorage, Button} from 'react-native';
 import {Header, Icon} from 'react-native-elements';
 
-import {Menu, Plus} from '../components/common';
+import {Menu, Plus} from '../../components/common/index';
 
 export default class ActiveProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
