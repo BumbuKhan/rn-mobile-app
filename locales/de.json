@@ -21,12 +21,16 @@
   },
   "drawer menu": {
     "active project": "Aktives Projekt",
-    "my account": "Mein Konto"
+    "my account": "Mein Konto",
+    "clients": "Kunden"
   },
   "screens": {
     "active project": {
       "no active project text 1": "Bisher kein aktives projekt",
       "no active project text 2": "Drücken Sie '+' um einen zu erstellen"
+    },
+    "clients": {
+      "no clients": "Keine kunden"
     },
     "my account": {
       "language title": "SPRACHE",

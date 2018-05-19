@@ -21,12 +21,16 @@
   },
   "drawer menu": {
     "active project": "Active Project",
-    "my account": "My Account"
+    "my account": "My Account",
+    "clients": "Clients"
   },
   "screens": {
     "active project": {
       "no active project text 1": "No active project so far",
       "no active project text 2": "Press '+' to crete one"
+    },
+    "clients": {
+      "no clients": "No clients"
     },
     "my account": {
       "language title": "LANGUAGE",

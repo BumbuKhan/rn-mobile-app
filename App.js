@@ -12,11 +12,15 @@ import MyAccountScreen from './screens/user/MyAccountScreen';
 import SignInScreen from "./screens/auth/SignInScreen";
 import ChooseLanguageScreen from "./screens/user/ChooseLanguageScreen";
 import EditProfileScreen from "./screens/user/EditProfilescreen";
+import ClientsListScreen from "./screens/clients/ClientsListScreen";
 
 // we'll describe all screens that are shown to authenticated user here
 const AppStack = DrawerNavigator({
     ActiveProject: {
         screen: ActiveProjectScreen
+    },
+    ClientsListScreen: {
+        screen: ClientsListScreen
     },
     Settings: StackNavigator({
         SettingsMain: {
