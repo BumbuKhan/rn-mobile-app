@@ -24,7 +24,8 @@
     "my account": "Mein Konto",
     "clients": "Kunden",
     "my hours": "Meine Stunden",
-    "vacation": "Ferien"
+    "vacation": "Ferien",
+    "history": "Geschichte"
   },
   "screens": {
     "active project": {
@@ -35,6 +36,9 @@
       "no clients": "Keine kunden"
     },
     "my hours": {
+      "no content": "Kein Inhalt"
+    },
+    "history": {
       "no content": "Kein Inhalt"
     },
     "my account": {

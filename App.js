@@ -15,6 +15,7 @@ import EditProfileScreen from "./screens/user/EditProfilescreen";
 import ClientsListScreen from "./screens/clients/ClientsListScreen";
 import MyHoursScreen from "./screens/my_hours/MyHoursScreen";
 import VacationScreen from "./screens/vacation/VacationScreen";
+import HistoryScreen from "./screens/history/HistoryScreen";
 
 // we'll describe all screens that are shown to authenticated user here
 const AppStack = DrawerNavigator({
@@ -29,6 +30,9 @@ const AppStack = DrawerNavigator({
     },
     Vacation: {
       screen: VacationScreen
+    },
+    History: {
+      screen: HistoryScreen
     },
     Settings: StackNavigator({
         SettingsMain: {

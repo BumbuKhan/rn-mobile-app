@@ -24,7 +24,8 @@
     "my account": "My Account",
     "clients": "Clients",
     "my hours": "My Hours",
-    "vacation": "Vacation"
+    "vacation": "Vacation",
+    "history": "History"
   },
   "screens": {
     "active project": {
@@ -35,6 +36,9 @@
       "no clients": "No clients"
     },
     "my hours": {
+      "no content": "No content"
+    },
+    "history": {
       "no content": "No content"
     },
     "my account": {

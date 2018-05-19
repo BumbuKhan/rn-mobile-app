@@ -24,7 +24,8 @@
     "my account": "Мой Аккаунт",
     "clients": "Клиенты",
     "my hours": "Мои Часы",
-    "vacation": "Отпуск"
+    "vacation": "Отпуск",
+    "history": "История"
   },
   "screens": {
     "active project": {
@@ -35,6 +36,9 @@
       "no clients": "Нет клиентов"
     },
     "my hours": {
+      "no content": "Нет данных"
+    },
+    "history": {
       "no content": "Нет данных"
     },
     "my account": {
