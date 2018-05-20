@@ -44,6 +44,9 @@ export default class ProjectsListScreen extends Component {
                             title={l.name}
                             titleStyle={styles.listItemTitleStyle}
                             containerStyle={containerStyle}
+                            onPress={() => this.props.navigation.navigate('ProjectDetails', {
+                                headerTitle: l.name
+                            })}
                         />)
                     })
                 }

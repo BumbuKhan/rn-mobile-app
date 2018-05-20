@@ -6,6 +6,7 @@ import {I18nextProvider, translate} from 'react-i18next';
 
 import i18n from './locales/i18n';
 import store from './store';
+
 import AuthLoadingScreen from "./screens/auth/AuthLoadingScreen";
 import ActiveProjectScreen from './screens/active_project/ActiveProjectScreen';
 import MyAccountScreen from './screens/user/MyAccountScreen';
@@ -17,6 +18,7 @@ import MyHoursScreen from "./screens/my_hours/MyHoursScreen";
 import VacationScreen from "./screens/vacation/VacationScreen";
 import HistoryScreen from "./screens/history/HistoryScreen";
 import ProjectsListScreen from "./screens/clients/ProjectsListScreen";
+import ProjectDetailsScreen from "./screens/clients/ProjectDetailsScreen";
 
 // we'll describe all screens that are shown to authenticated user here
 const AppStack = DrawerNavigator({
@@ -29,6 +31,9 @@ const AppStack = DrawerNavigator({
         },
         ProjectsList: {
             screen: ProjectsListScreen
+        },
+        ProjectDetails: {
+            screen: ProjectDetailsScreen
         }
     }, {
         initialRouteName: 'ClientsList'
