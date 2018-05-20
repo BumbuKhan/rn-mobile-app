@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert, AsyncStorage} from 'react-native';
+import {Text, View, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert} from 'react-native';
 import {ListItem, Icon, FormInput, Button} from 'react-native-elements';
 import {connect} from 'react-redux';
 
@@ -163,7 +163,7 @@ class EditProfileScreen extends Component {
                     throw new Error('Something went wrong, please try later');
                 }
 
-                // data has new auth data that need to be injected into Redux store & Asyncstorage
+                // data has new auth data that need to be injected into Redux store
                 /*
                 {
                   "access_token": "eyJ0eXAiOiJ...9IirT6aF3FtfVEl-GOg",
@@ -178,9 +178,6 @@ class EditProfileScreen extends Component {
                 };
 
                 this.props.logIn(newUserData);
-
-                // saving userData to AsyncStorage...
-                return AsyncStorage.setItem('user', JSON.stringify(newUserData));
             })
             .then((passwordChanged) => {
                 // turning off loading spinner

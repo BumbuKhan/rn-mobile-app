@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {StyleSheet, ScrollView} from 'react-native';
 import {ListItem} from 'react-native-elements';
 
 export default class ProjectsListScreen extends Component {

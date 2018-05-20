@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, AsyncStorage, Button} from 'react-native';
+import {View, Text} from 'react-native';
 import {Header, Icon} from 'react-native-elements';
 
 import {Menu, Plus} from '../../components/common/index';
