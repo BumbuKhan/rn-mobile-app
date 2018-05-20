@@ -10,10 +10,10 @@ import {store, persistor} from './store';
 
 import AuthLoadingScreen from "./screens/auth/AuthLoadingScreen";
 import ActiveProjectScreen from './screens/active_project/ActiveProjectScreen';
-import MyAccountScreen from './screens/user/MyAccountScreen';
+import MyAccountScreen from './screens/my_account/MyAccountScreen';
 import SignInScreen from "./screens/auth/SignInScreen";
-import ChooseLanguageScreen from "./screens/user/ChooseLanguageScreen";
-import EditProfileScreen from "./screens/user/EditProfilescreen";
+import ChooseLanguageScreen from "./screens/my_account/ChooseLanguageScreen";
+import EditProfileScreen from "./screens/my_account/EditProfilescreen";
 import ClientsListScreen from "./screens/clients/ClientsListScreen";
 import MyHoursScreen from "./screens/my_hours/MyHoursScreen";
 import VacationScreen from "./screens/vacation/VacationScreen";
