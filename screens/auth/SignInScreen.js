@@ -4,9 +4,8 @@ import {connect} from 'react-redux';
 import {FormInput, Text, Button} from 'react-native-elements';
 
 import {logIn} from '../../actions/user_actions';
-import {populateSettings} from '../../actions/settings_actions';
 import axios from '../../helpers/axios';
-import {setCurLang} from '../../actions/settings_actions';
+import {setCurLang} from '../../actions/user_actions';
 
 class SignInScreen extends Component {
     state = {
@@ -105,19 +104,8 @@ class SignInScreen extends Component {
                 }
                 */
 
-                // saving userData to AsyncStorage...
-                return AsyncStorage.setItem('user', JSON.stringify(userData));
-            })
-            .then((savedToAsyncStorage) => {
                 // pushing all user's data to redux store...
                 _this.props.logIn(userData);
-
-                // we should also populate user's settings...
-                const settingsData = {
-                    curLang: userData.language
-                };
-
-                this.props.populateSettings(settingsData);
 
                 // setting up app language...
                 this.props.setCurLang(userData.language);
@@ -250,4 +238,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(null, {logIn, populateSettings, setCurLang})(SignInScreen);
+export default connect(null, {logIn, setCurLang})(SignInScreen);

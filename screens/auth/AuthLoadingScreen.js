@@ -10,7 +10,6 @@ import {connect} from 'react-redux';
 
 import i18n from '../../locales/i18n';
 import {logIn} from '../../actions/user_actions';
-import {populateSettings} from '../../actions/settings_actions';
 
 class AuthLoadingScreen extends Component {
     constructor(props) {
@@ -38,18 +37,7 @@ class AuthLoadingScreen extends Component {
                 // fetching user's settings, curLang in particular
                 const settings = await AsyncStorage.getItem('settings');
 
-                // populating settings data from AsyncStorage to Redux store
-                let settingsData = JSON.parse(settings);
-
-                if (!settingsData) {
-                    // faking curLang... will be shipped from API very soon
-                    settingsData = {...settingsData, curLang: 'en'};
-                } else {
-                    // settings exist - restoring app language
-                    i18n.changeLanguage(settingsData.curLang);
-                }
-
-                this.props.populateSettings(settingsData);
+                i18n.changeLanguage(user.language);
 
                 this.props.navigation.navigate('App');
             } else {
@@ -79,4 +67,4 @@ function mapStateToProps({user}) {
     return {user};
 }
 
-export default connect(mapStateToProps, {logIn, populateSettings})(AuthLoadingScreen);
+export default connect(mapStateToProps, {logIn})(AuthLoadingScreen);

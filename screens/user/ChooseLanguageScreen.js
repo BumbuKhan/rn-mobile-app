@@ -3,7 +3,7 @@ import {View, StyleSheet, ScrollView} from 'react-native';
 import {ListItem, Icon} from 'react-native-elements';
 import {connect} from 'react-redux';
 
-import {setCurLang} from '../../actions/settings_actions';
+import {setCurLang} from '../../actions/user_actions';
 import axios from '../../helpers/axios';
 
 class ChooseLanguageScreen extends Component {
@@ -56,7 +56,7 @@ class ChooseLanguageScreen extends Component {
                         containerStyle={[styles.listItem, styles.listItemMT, styles.listItemBorder]}
                         title={t('languages:en')}
                         titleStyle={styles.listItemTitleStyle}
-                        hideChevron={this.props.settings.curLang !== 'en'}
+                        hideChevron={this.props.user.language !== 'en'}
                         onPress={() => this._setCurLang('en')}
                         rightIcon={<Icon name='check'/>}
                     />
@@ -65,7 +65,7 @@ class ChooseLanguageScreen extends Component {
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title={t('languages:de')}
                         titleStyle={styles.listItemTitleStyle}
-                        hideChevron={this.props.settings.curLang !== 'de'}
+                        hideChevron={this.props.user.language !== 'de'}
                         onPress={() => this._setCurLang('de')}
                         rightIcon={<Icon name='check'/>}
                     />
@@ -74,7 +74,7 @@ class ChooseLanguageScreen extends Component {
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title={t('languages:ru')}
                         titleStyle={styles.listItemTitleStyle}
-                        hideChevron={this.props.settings.curLang !== 'ru'}
+                        hideChevron={this.props.user.language !== 'ru'}
                         onPress={() => this._setCurLang('ru')}
                         rightIcon={<Icon name='check'/>}
                     />
@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps({settings, user}) {
-    return {settings, user};
+function mapStateToProps({user}) {
+    return {user};
 }
 
 export default connect(mapStateToProps, {setCurLang})(ChooseLanguageScreen);

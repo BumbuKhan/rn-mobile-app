@@ -102,7 +102,7 @@ class MyAccountScreen extends Component {
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
-                        title={languages[this.props.settings.curLang]}
+                        title={languages[this.props.user.language]}
                         titleStyle={styles.listItemTitleStyle}
                         onPress={() => this.props.navigation.navigate('ChooseLanguage')}
                     />
