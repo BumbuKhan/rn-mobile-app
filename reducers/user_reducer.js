@@ -1,4 +1,4 @@
-import {LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT, POPULATE_USER_DATA_FROM_ASYNC_STORAGE, TOGGLE_CUR_LANG} from '../actions/types';
+import {LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT, TOGGLE_CUR_LANG} from '../actions/types';
 
 const INITIAL_STATE = null;
 
@@ -15,9 +15,6 @@ export default authReducer = (state = INITIAL_STATE, action) => {
 
         case TOGGLE_CUR_LANG:
             return {...state, language: action.payload};
-
-        case POPULATE_USER_DATA_FROM_ASYNC_STORAGE:
-            return action.payload;
 
         default:
             return state;

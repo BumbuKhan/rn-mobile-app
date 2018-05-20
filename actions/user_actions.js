@@ -10,14 +10,9 @@ export const logIn = (user) => {
 };
 
 export const logOut = () => {
-    return async function(dispatch) {
-        // removing whole user key from the AsyncStorage
-        await AsyncStorage.setItem('user', '');
-
-        dispatch({
-            type: LOG_OUT
-        });
-    }
+    return {
+        type: LOG_OUT
+    };
 };
 
 export const setCurLang = (lang) => {
