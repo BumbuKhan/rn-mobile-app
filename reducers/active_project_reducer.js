@@ -1,4 +1,4 @@
-import {TOGGLE_ACTIVE_PROJECT_TYPE, CREATE_ACTIVE_PROJECT} from '../actions/types';
+import {TOGGLE_ACTIVE_PROJECT_TYPE, CREATE_ACTIVE_PROJECT, REMOVE_ACTIVE_PROJECT} from '../actions/types';
 
 const INITIAL_STATE = {
     type: 'STN',
@@ -12,6 +12,9 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
 
         case CREATE_ACTIVE_PROJECT:
             return {...state, isCreated: true};
+
+        case REMOVE_ACTIVE_PROJECT:
+            return INITIAL_STATE;
 
         default:
             return state;

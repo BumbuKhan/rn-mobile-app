@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {View, Modal, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Modal, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import {Header, Icon, Button, CheckBox, Text} from 'react-native-elements';
 import {connect} from 'react-redux';
 
 import {Menu, Plus} from '../../components/common';
-import {toggleType, createProject} from '../../actions';
+import {toggleType, createProject, removeProject} from '../../actions';
 
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -21,9 +21,7 @@ class ActiveProjectScreen extends Component {
 
     state = {
         projectTypeModalVisible: false,
-        activeProject: {
-
-        }
+        activeProject: {}
     };
 
     setProjectTypeModalVisible(visible) {
@@ -31,6 +29,47 @@ class ActiveProjectScreen extends Component {
             projectTypeModalVisible: visible
         });
     }
+
+    renderRemoveProjectBtn = () => {
+        if (!this.props.activeProject.isCreated) {
+            return;
+        }
+
+        return (<Button
+            title="Remove This Project"
+            buttonStyle={{
+                backgroundColor: '#F04747',
+            }}
+            borderRadius={3}
+            textStyle={{
+                fontSize: 18
+            }}
+            onPress={this.props.removeProject}
+        />)
+    };
+
+    renderNoActiveProjectText = () => {
+        if (this.props.activeProject.isCreated) {
+            return;
+        }
+
+        const {t} = this.props.screenProps;
+
+        return (
+            <View>
+                <Text style={{
+                    alignSelf: 'center',
+                    marginTop: 20,
+                    color: '#999'
+                }}>{t('screens:active project:no active project text 1')}</Text>
+
+                <Text style={{
+                    alignSelf: 'center',
+                    color: '#999'
+                }}>{t('screens:active project:no active project text 2')}</Text>
+            </View>
+        );
+    };
 
     render() {
         const {t} = this.props.screenProps;
@@ -147,22 +186,15 @@ class ActiveProjectScreen extends Component {
                 <Header
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{text: t('drawer menu:active project'), style: {color: '#fff', fontSize: 20}}}
-                    rightComponent={(!this.props.activeProject.isCreated)? <Plus onPress={() => {
+                    rightComponent={(!this.props.activeProject.isCreated) ? <Plus onPress={() => {
                         this.setProjectTypeModalVisible(true);
                     }}/> : null}
                 />
-                <View>
-                    <Text style={{
-                        alignSelf: 'center',
-                        marginTop: 20,
-                        color: '#999'
-                    }}>{t('screens:active project:no active project text 1')}</Text>
+                <ScrollView>
+                    {this.renderNoActiveProjectText()}
 
-                    <Text style={{
-                        alignSelf: 'center',
-                        color: '#999'
-                    }}>{t('screens:active project:no active project text 2')}</Text>
-                </View>
+                    {this.renderRemoveProjectBtn()}
+                </ScrollView>
             </View>
         );
     };
@@ -201,4 +233,4 @@ function mapStateToProps({activeProject}) {
     return {activeProject}
 }
 
-export default connect(mapStateToProps, {toggleType, createProject})(ActiveProjectScreen);
+export default connect(mapStateToProps, {toggleType, createProject, removeProject})(ActiveProjectScreen);

@@ -1,4 +1,4 @@
-import {TOGGLE_ACTIVE_PROJECT_TYPE, CREATE_ACTIVE_PROJECT} from './types';
+import {TOGGLE_ACTIVE_PROJECT_TYPE, CREATE_ACTIVE_PROJECT, REMOVE_ACTIVE_PROJECT} from './types';
 
 export const toggleType = (type) => {
     return {
@@ -10,5 +10,11 @@ export const toggleType = (type) => {
 export const createProject = () => {
     return {
         type: CREATE_ACTIVE_PROJECT
+    }
+};
+
+export const removeProject = () => {
+    return {
+        type: REMOVE_ACTIVE_PROJECT
     }
 };
