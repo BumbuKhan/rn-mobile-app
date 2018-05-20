@@ -2,7 +2,7 @@ import {LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT, TOGGLE_CUR_LANG} from '../actions/ty
 
 const INITIAL_STATE = null;
 
-export default authReducer = (state = INITIAL_STATE, action) => {
+export default userReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case LOGIN_SUCCESS:
             return action.payload;

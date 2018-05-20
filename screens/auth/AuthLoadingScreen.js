@@ -7,7 +7,7 @@ import {
 import {connect} from 'react-redux';
 
 import i18n from '../../locales/i18n';
-import {logIn} from '../../actions/user_actions';
+import {logIn} from '../../actions';
 
 class AuthLoadingScreen extends Component {
     constructor(props) {

@@ -3,7 +3,7 @@ import {View, StyleSheet, ScrollView} from 'react-native';
 import {ListItem, Icon} from 'react-native-elements';
 import {connect} from 'react-redux';
 
-import {setCurLang} from '../../actions/user_actions';
+import {setCurLang} from '../../actions';
 import axios from '../../helpers/axios';
 
 class ChooseLanguageScreen extends Component {

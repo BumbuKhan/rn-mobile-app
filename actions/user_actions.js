@@ -1,5 +1,4 @@
 import {LOG_OUT, LOGIN_SUCCESS, TOGGLE_CUR_LANG} from './types';
-import {AsyncStorage} from "react-native";
 import i18n from "../locales/i18n";
 
 export const logIn = (user) => {

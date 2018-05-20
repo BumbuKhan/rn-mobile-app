@@ -4,7 +4,7 @@ import {ListItem, Icon, FormInput, Button} from 'react-native-elements';
 import {connect} from 'react-redux';
 
 import axios from '../../helpers/axios';
-import {logIn} from '../../actions/user_actions';
+import {logIn} from '../../actions';
 
 class EditProfileScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {

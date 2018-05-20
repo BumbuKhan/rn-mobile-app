@@ -3,9 +3,9 @@ import {View, ScrollView, StyleSheet, Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {FormInput, Text, Button} from 'react-native-elements';
 
-import {logIn} from '../../actions/user_actions';
+import {logIn} from '../../actions';
 import axios from '../../helpers/axios';
-import {setCurLang} from '../../actions/user_actions';
+import {setCurLang} from '../../actions';
 
 class SignInScreen extends Component {
     state = {
