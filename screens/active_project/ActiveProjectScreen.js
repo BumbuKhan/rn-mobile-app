@@ -4,7 +4,7 @@ import {Header, Icon, Button, CheckBox, Text} from 'react-native-elements';
 import {connect} from 'react-redux';
 
 import {Menu, Plus} from '../../components/common';
-import {toggleType} from '../../actions';
+import {toggleType, createProject} from '../../actions';
 
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -126,7 +126,7 @@ class ActiveProjectScreen extends Component {
                             marginRight: 10
                         }}>
                             <Button
-                                title="Add project"
+                                title="Create project"
                                 buttonStyle={{
                                     backgroundColor: '#496FC2',
                                 }}
@@ -135,6 +135,8 @@ class ActiveProjectScreen extends Component {
                                     fontSize: 18
                                 }}
                                 onPress={() => {
+                                    this.props.createProject();
+                                    this.setProjectTypeModalVisible(false);
                                 }}
                             />
                         </View>
@@ -199,4 +201,4 @@ function mapStateToProps({activeProject}) {
     return {activeProject}
 }
 
-export default connect(mapStateToProps, {toggleType})(ActiveProjectScreen);
+export default connect(mapStateToProps, {toggleType, createProject})(ActiveProjectScreen);

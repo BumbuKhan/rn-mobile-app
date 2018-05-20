@@ -18,6 +18,7 @@ REDUX_STORE = {
         }
     },
     activeProject: {
-        type: <String ['STN', 'ATN', 'BTN']>
+        type: <String ['STN', 'ATN', 'BTN']>,
+        isCreated: <Boolean>
     }
 }
