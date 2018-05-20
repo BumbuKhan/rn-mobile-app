@@ -3,9 +3,10 @@ import {StackNavigator, SwitchNavigator, TabNavigator, DrawerNavigator} from 're
 import {Provider} from 'react-redux';
 import {Text} from 'react-navigation';
 import {I18nextProvider, translate} from 'react-i18next';
+import {PersistGate} from 'redux-persist/integration/react';
 
 import i18n from './locales/i18n';
-import store from './store';
+import {store, persistor} from './store';
 
 import AuthLoadingScreen from "./screens/auth/AuthLoadingScreen";
 import ActiveProjectScreen from './screens/active_project/ActiveProjectScreen';
@@ -42,10 +43,10 @@ const AppStack = DrawerNavigator({
         screen: MyHoursScreen
     },
     Vacation: {
-      screen: VacationScreen
+        screen: VacationScreen
     },
     History: {
-      screen: HistoryScreen
+        screen: HistoryScreen
     },
     Settings: StackNavigator({
         SettingsMain: {
@@ -99,9 +100,11 @@ export default class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <I18nextProvider i18n={i18n}>
-                    <ReloadAppOnLanguageChange/>
-                </I18nextProvider>
+                <PersistGate loading={null} persistor={persistor}>
+                    <I18nextProvider i18n={i18n}>
+                        <ReloadAppOnLanguageChange/>
+                    </I18nextProvider>
+                </PersistGate>
             </Provider>
         );
     }

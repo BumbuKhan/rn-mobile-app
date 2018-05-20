@@ -49,7 +49,7 @@ class MyAccountScreen extends Component {
 
                             axios.post('/logout', {}, {headers: {Authorization: authStr}})
                                 .then((response) => {
-                                    console.log(response);
+                                    //console.log(response);
                                 })
                         }
                     },

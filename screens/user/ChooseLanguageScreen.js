@@ -26,7 +26,7 @@ class ChooseLanguageScreen extends Component {
             .then((_response) => {
                 const response = _response.data;
 
-                console.log(response);
+                //console.log(response);
             })
             .catch((error) => {
                 // we don't do anything if something goes wrong...
