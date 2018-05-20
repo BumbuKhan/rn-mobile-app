@@ -13,7 +13,8 @@ export default class ClientsListScreen extends Component {
                     name="group"
                     color={tintColor}
                 />
-            }
+            },
+            header: null // hiding the default StackNavigator header since we have our own
         }
     };
 
@@ -64,7 +65,13 @@ export default class ClientsListScreen extends Component {
                                 title={l.name}
                                 titleStyle={styles.listItemTitleStyle}
                                 subtitle={l.subtitle}
+                                subtitleStyle={{
+                                    fontSize: 16
+                                }}
                                 containerStyle={containerStyle}
+                                onPress={() => this.props.navigation.navigate('ProjectsList', {
+                                    headerTitle: l.name
+                                })}
                             />)
                         })
                     }
