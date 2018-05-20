@@ -25,18 +25,16 @@ class AuthLoadingScreen extends Component {
             //await AsyncStorage.clear(); // do not use this statement it causes crashes
             //await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
 
-            // trying to get user data from redux state...
-            // redux state will be rehydrated due to redux-persist middleware
+            // trying to get user data from redux store...
+            // redux store will be rehydrated due to redux-persist middleware
             const {user} = this.props;
 
             // if authenticate, then navigating him to the application's home screen
             // otherwise showing signin screen
             if (user) {
-                // user already authenticated...
+                // authenticated...
 
-                // fetching user's settings, curLang in particular
-                const settings = await AsyncStorage.getItem('settings');
-
+                // setting up app language
                 i18n.changeLanguage(user.language);
 
                 this.props.navigation.navigate('App');
