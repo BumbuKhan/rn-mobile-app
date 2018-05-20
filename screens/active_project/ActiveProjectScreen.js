@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {View, Modal, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert} from 'react-native';
 import {Header, Icon, Button, CheckBox, Text} from 'react-native-elements';
 import {connect} from 'react-redux';
 
 import {Menu, Plus} from '../../components/common';
 import {toggleType, createProject, removeProject} from '../../actions';
+import axios from "../../helpers/axios";
 
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -35,8 +36,10 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
+        const {t} = this.props.screenProps;
+
         return (<Button
-            title="Remove This Project"
+            title={t('screens:active project:remove project button text')}
             buttonStyle={{
                 backgroundColor: '#F04747',
             }}
@@ -44,7 +47,26 @@ class ActiveProjectScreen extends Component {
             textStyle={{
                 fontSize: 18
             }}
-            onPress={this.props.removeProject}
+            onPress={() => {
+                Alert.alert(
+                    t('screens:active project:remove project confirm title'),
+                    t('screens:active project:remove project confirm description'),
+                    [
+                        {
+                            text: t('common:cancel'),
+                            onPress: () => {
+                            }, style: 'cancel'
+                        },
+                        {
+                            text: t('common:ok'),
+                            onPress: () => {
+                                this.props.removeProject()
+                            }
+                        },
+                    ],
+                    {cancelable: false}
+                )
+            }}
         />)
     };
 
@@ -100,7 +122,7 @@ class ActiveProjectScreen extends Component {
 
                         <View>
                             <View style={styles.modalHeader}>
-                                <Text h3>Choose the type of the project you want to work on</Text>
+                                <Text h3>{t("screens:active project:project type modal title")}</Text>
                             </View>
 
                             <View style={[styles.modalCheckboxWrapper, {borderTopWidth: 1, borderTopColor: '#e0e0e0'}]}>
@@ -117,7 +139,7 @@ class ActiveProjectScreen extends Component {
                                     }}
                                 />
                                 <View style={styles.modalCheckboxSubtitleContainer}>
-                                    <Text style={styles.modalCheckboxSubtitle}>Dealing with steel</Text>
+                                    <Text style={styles.modalCheckboxSubtitle}>{t("common:stn job type description")}</Text>
                                 </View>
                             </View>
 
@@ -135,7 +157,7 @@ class ActiveProjectScreen extends Component {
                                     }}
                                 />
                                 <View style={styles.modalCheckboxSubtitleContainer}>
-                                    <Text style={styles.modalCheckboxSubtitle}>Construction related job</Text>
+                                    <Text style={styles.modalCheckboxSubtitle}>{t("common:btn job type description")}</Text>
                                 </View>
                             </View>
 
@@ -153,7 +175,7 @@ class ActiveProjectScreen extends Component {
                                     }}
                                 />
                                 <View style={styles.modalCheckboxSubtitleContainer}>
-                                    <Text style={styles.modalCheckboxSubtitle}>Repair of working machines</Text>
+                                    <Text style={styles.modalCheckboxSubtitle}>{t("common:atn job type description")}</Text>
                                 </View>
                             </View>
 
@@ -165,7 +187,7 @@ class ActiveProjectScreen extends Component {
                             marginRight: 10
                         }}>
                             <Button
-                                title="Create project"
+                                title={t("screens:active project:create project")}
                                 buttonStyle={{
                                     backgroundColor: '#496FC2',
                                 }}

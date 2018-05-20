@@ -12,7 +12,10 @@
     "show password": "Passwort Anzeigen",
     "hide password": "Passwort Verbergen",
     "no internet connection": "Keine Internetverbindung",
-    "please make sure that you have got an internet connection": "Bitte stellen Sie sicher, dass Sie eine Internetverbindung haben"
+    "please make sure that you have got an internet connection": "Bitte stellen Sie sicher, dass Sie eine Internetverbindung haben",
+    "stn job type description": "Umgang mit Stahl",
+    "btn job type description": "Baubezogene Arbeit",
+    "atn job type description": "Reparatur von Arbeitsmaschinen"
   },
   "languages": {
     "en": "English",
@@ -30,7 +33,12 @@
   "screens": {
     "active project": {
       "no active project text 1": "Bisher kein aktives projekt",
-      "no active project text 2": "Drücken Sie '+' um einen zu erstellen"
+      "no active project text 2": "Drücken Sie '+' um einen zu erstellen",
+      "remove project confirm title": "Bitte bestätigen",
+      "remove project confirm description": "Alle mit diesem Projekt verbundenen Daten werden entfernt",
+      "remove project button text": "Entfernen Sie dieses Projekt",
+      "project type modal title": "Wählen Sie den Typ des Projekts, an dem Sie arbeiten möchten",
+      "create project": "Projekt erstellen"
     },
     "clients": {
       "no content": "Keine Inhalt"
@@ -46,7 +54,6 @@
       "sign out": "Ausloggen",
       "sign out confirm title": "Bitte bestätigen",
       "sign out confirm description": "Sind Sie sicher, dass Sie sich abmelden möchten?",
-
       "edit profile": {
         "title": "Profil bearbeiten",
         "delete avatar": "Löschen",

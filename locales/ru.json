@@ -12,7 +12,10 @@
     "show password": "Показать Пароль",
     "hide password": "Скрыть Пароль",
     "no internet connection": "Нет соединения с интернетом",
-    "please make sure that you have got an internet connection": "Убедитесь, что у вас есть подключение к Интернету"
+    "please make sure that you have got an internet connection": "Убедитесь, что у вас есть подключение к Интернету",
+    "stn job type description": "Работа с металлом",
+    "btn job type description": "Стройка",
+    "atn job type description": "Ремонт рабочих машин"
   },
   "languages": {
     "en": "English",
@@ -30,7 +33,12 @@
   "screens": {
     "active project": {
       "no active project text 1": "Пока нет активного проекта",
-      "no active project text 2": "Нажмите '+' чтобы создать"
+      "no active project text 2": "Нажмите '+' чтобы создать",
+      "remove project confirm title": "Пожалуйста подтвердите",
+      "remove project confirm description": "Все данные, связанные с этим проектом, будут удалены.",
+      "remove project button text": "Удалить этот проект",
+      "project type modal title": "Выберите тип проекта, над которым хотите работать",
+      "create project": "Создать проект"
     },
     "clients": {
       "no content": "Нет данных"
