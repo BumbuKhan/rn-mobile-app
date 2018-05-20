@@ -11,14 +11,6 @@ const persistConfig = {
     whitelist: ['user']
 };
 
-/*const store = createStore(
-    reducers,
-    {},
-    compose(
-        applyMiddleware(thunk)
-    )
-);*/
-
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 let store = createStore(persistedReducer, {},
@@ -29,5 +21,3 @@ let store = createStore(persistedReducer, {},
 let persistor = persistStore(store);
 
 export {store, persistor};
-
-//export default store;

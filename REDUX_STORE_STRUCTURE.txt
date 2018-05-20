@@ -16,8 +16,5 @@ REDUX_STORE = {
             expires_in: <Number>
             token_type: <String>
         }
-    },
-    settings: {
-        curLang: <String>
     }
 }

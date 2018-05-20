@@ -3,7 +3,11 @@ THIS FILE DESCRIBES THE STRUCTURE OF ASYNC STORAGE
 
 NOTE: Values of keys are JSON strings!
       Do not forget to parse before use and stringify before save
-------------------------------------------------------------------------
+
+      'user' key is managing by redux-persist middlevare
+      so do not touch it explicitly!
+      Like AsyncStorage.setItem('user', ...)
+-------------------------------------------------------------------------
 
 ASYNC_STORAGE = {
     user: {
@@ -19,8 +23,5 @@ ASYNC_STORAGE = {
             expires_in: <Number>
             token_type: <String>
         }
-    },
-    settings: {
-        curLang: <String>
     }
 }
