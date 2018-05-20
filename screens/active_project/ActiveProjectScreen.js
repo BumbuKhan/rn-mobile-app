@@ -147,9 +147,9 @@ class ActiveProjectScreen extends Component {
                 <Header
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{text: t('drawer menu:active project'), style: {color: '#fff', fontSize: 20}}}
-                    rightComponent={<Plus onPress={() => {
+                    rightComponent={(!this.props.activeProject.isCreated)? <Plus onPress={() => {
                         this.setProjectTypeModalVisible(true);
-                    }}/>}
+                    }}/> : null}
                 />
                 <View>
                     <Text style={{
