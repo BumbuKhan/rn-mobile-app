@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {Menu, Plus} from '../../components/common';
 import {toggleType, createProject, removeProject} from '../../actions';
 import axios from "../../helpers/axios";
+import languages from "../../helpers/languages";
 
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -31,6 +32,23 @@ class ActiveProjectScreen extends Component {
         });
     }
 
+    renderProjectType = () => {
+        if (!this.props.activeProject.isCreated) {
+            return;
+        }
+
+        return (
+            <View style={[styles.mt30]}>
+                <ListItem
+                    hideChevron={true}
+                    rightTitle={this.props.activeProject.type}
+                    title="Project's type"
+                    containerStyle={[styles.listItem, styles.listItemBorder]}
+                />
+            </View>
+        );
+    };
+
     renderRemoveProjectBtn = () => {
         if (!this.props.activeProject.isCreated) {
             return;
@@ -38,36 +56,39 @@ class ActiveProjectScreen extends Component {
 
         const {t} = this.props.screenProps;
 
-        return (<Button
-            title={t('screens:active project:remove project button text')}
-            buttonStyle={{
-                backgroundColor: '#F04747',
-            }}
-            borderRadius={3}
-            textStyle={{
-                fontSize: 18
-            }}
-            onPress={() => {
-                Alert.alert(
-                    t('screens:active project:remove project confirm title'),
-                    t('screens:active project:remove project confirm description'),
-                    [
-                        {
-                            text: t('common:cancel'),
-                            onPress: () => {
-                            }, style: 'cancel'
-                        },
-                        {
-                            text: t('common:ok'),
-                            onPress: () => {
-                                this.props.removeProject()
-                            }
-                        },
-                    ],
-                    {cancelable: false}
-                )
-            }}
-        />)
+        return (
+            <View style={[styles.mt30]}>
+                <Button
+                    title={t('screens:active project:remove project button text')}
+                    buttonStyle={{
+                        backgroundColor: '#F04747',
+                    }}
+                    borderRadius={3}
+                    textStyle={{
+                        fontSize: 18
+                    }}
+                    onPress={() => {
+                        Alert.alert(
+                            t('screens:active project:remove project confirm title'),
+                            t('screens:active project:remove project confirm description'),
+                            [
+                                {
+                                    text: t('common:cancel'),
+                                    onPress: () => {
+                                    }, style: 'cancel'
+                                },
+                                {
+                                    text: t('common:ok'),
+                                    onPress: () => {
+                                        this.props.removeProject()
+                                    }
+                                },
+                            ],
+                            {cancelable: false}
+                        )
+                    }}
+                />
+            </View>)
     };
 
     renderNoActiveProjectText = () => {
@@ -139,7 +160,8 @@ class ActiveProjectScreen extends Component {
                                     }}
                                 />
                                 <View style={styles.modalCheckboxSubtitleContainer}>
-                                    <Text style={styles.modalCheckboxSubtitle}>{t("common:stn job type description")}</Text>
+                                    <Text
+                                        style={styles.modalCheckboxSubtitle}>{t("common:stn job type description")}</Text>
                                 </View>
                             </View>
 
@@ -157,7 +179,8 @@ class ActiveProjectScreen extends Component {
                                     }}
                                 />
                                 <View style={styles.modalCheckboxSubtitleContainer}>
-                                    <Text style={styles.modalCheckboxSubtitle}>{t("common:btn job type description")}</Text>
+                                    <Text
+                                        style={styles.modalCheckboxSubtitle}>{t("common:btn job type description")}</Text>
                                 </View>
                             </View>
 
@@ -175,7 +198,8 @@ class ActiveProjectScreen extends Component {
                                     }}
                                 />
                                 <View style={styles.modalCheckboxSubtitleContainer}>
-                                    <Text style={styles.modalCheckboxSubtitle}>{t("common:atn job type description")}</Text>
+                                    <Text
+                                        style={styles.modalCheckboxSubtitle}>{t("common:atn job type description")}</Text>
                                 </View>
                             </View>
 
@@ -212,7 +236,10 @@ class ActiveProjectScreen extends Component {
                         this.setProjectTypeModalVisible(true);
                     }}/> : null}
                 />
-                <ScrollView>
+                <ScrollView style={{
+                    backgroundColor: '#f7f7f7'
+                }}>
+                    {this.renderProjectType()}
                     {this.renderNoActiveProjectText()}
 
                     {this.renderRemoveProjectBtn()}
@@ -248,6 +275,17 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#e0e0e0',
         paddingBottom: 10
+    },
+    listItem: {
+        backgroundColor: 'white',
+    },
+    listItemBorder: {
+        borderTopWidth: 1,
+        borderTopColor: '#eaeaea',
+        borderBottomColor: '#eaeaea',
+    },
+    mt30: {
+        marginTop: 30
     }
 });
 
