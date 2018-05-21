@@ -99,7 +99,7 @@ class ActiveProjectScreen extends Component {
         return (
             <View style={{flex: 1}}>
 
-                /* Current password modal start */
+                /* Project type modal start */
                 {<Modal
                     animationType="slide"
                     transparent={false}
@@ -203,7 +203,7 @@ class ActiveProjectScreen extends Component {
                         </View>
                     </View>
                 </Modal>}
-                /* Current password modal   end */
+                /* Project type modal   end */
 
                 <Header
                     leftComponent={<Menu {...this.props} />}

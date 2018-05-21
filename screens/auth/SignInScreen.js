@@ -14,7 +14,7 @@ class SignInScreen extends Component {
         loading: false
     };
 
-    handleSignIn = async () => {
+    handleSignIn = () => {
         let _this = this;
         let userData = {}; // will be stored to AsyncStorage and redux store
 
