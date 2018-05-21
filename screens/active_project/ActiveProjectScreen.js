@@ -37,6 +37,12 @@ class ActiveProjectScreen extends Component {
         this.setState({fontLoaded: true});
     }
 
+    componentWillMount = () => {
+        if (this.props.activeProject.isTimerActive) {
+            this._initBlinkTimer();
+        }
+    };
+
     componentWillReceiveProps = (props) => {
         if (props.activeProject.isTimerActive) {
             this._initBlinkTimer();
