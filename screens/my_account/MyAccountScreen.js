@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {View, Text, ScrollView, StyleSheet, Alert, AsyncStorage} from 'react-native';
-import {Header, Icon, Avatar, ListItem} from 'react-native-elements';
+import {View, ScrollView, StyleSheet, Alert, AsyncStorage} from 'react-native';
+import {Header, Icon, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 
-import {Menu, ListItemTitle, ListItemDescription} from '../../components/common/index';
+import {Menu, ListItemTitle} from '../../components/common/index';
 import {logOut} from '../../actions';
 import languages from '../../helpers/languages';
 import axios from '../../helpers/axios';

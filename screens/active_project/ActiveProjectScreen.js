@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert} from 'react-native';
-import {Header, Icon, Button, CheckBox, Text} from 'react-native-elements';
+import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 
 import {Menu, Plus} from '../../components/common';
