@@ -4,7 +4,7 @@ import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert} from 'reac
 import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 
-import {Menu, Plus} from '../../components/common';
+import {Menu, Plus, ListItemDescription} from '../../components/common';
 import * as actions from '../../actions';
 
 class ActiveProjectScreen extends Component {
@@ -63,6 +63,9 @@ class ActiveProjectScreen extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
+                <ListItemDescription
+                    title="You can close the app with running timer. I'll remember, promise!"
+                />
             </View>
         );
     };
