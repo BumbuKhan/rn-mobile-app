@@ -5,7 +5,7 @@ import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-eleme
 import {connect} from 'react-redux';
 
 import {Menu, Plus} from '../../components/common';
-import {toggleType, createProject, removeProject} from '../../actions';
+import * as actions from '../../actions';
 
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -23,7 +23,6 @@ class ActiveProjectScreen extends Component {
     state = {
         fontLoaded: false,
         projectTypeModalVisible: false,
-        activeProject: {}
     };
 
     async componentDidMount() {
@@ -56,7 +55,12 @@ class ActiveProjectScreen extends Component {
                         }
                     </View>
                     <View style={[styles.timerButtonWrapper]}>
-                        <Text>Start/Stop</Text>
+                        <TouchableOpacity onPress={() => this.props.toggleTimer(!this.props.activeProject.isTimerActive)}>
+                            <Icon
+                                name={(this.props.activeProject.isTimerActive) ? "pause-circle-outline" : "play-circle-outline"}
+                                size={65}
+                            />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -74,6 +78,7 @@ class ActiveProjectScreen extends Component {
                     hideChevron={true}
                     rightTitle={this.props.activeProject.type}
                     title="Project's type"
+                    titleStyle={[styles.listItemTitleStyle]}
                     containerStyle={[styles.listItem, styles.listItemBorder]}
                 />
             </View>
@@ -316,6 +321,9 @@ const styles = StyleSheet.create({
         borderTopColor: '#eaeaea',
         borderBottomColor: '#eaeaea',
     },
+    listItemTitleStyle: {
+        fontSize: 18
+    },
     mt30: {
         marginTop: 30
     },
@@ -333,7 +341,7 @@ const styles = StyleSheet.create({
     },
     timerText: {
         fontFamily: 'digital-7-italic',
-        fontSize: 60,
+        fontSize: 50,
         fontWeight: 'bold'
     }
 });
@@ -342,4 +350,4 @@ function mapStateToProps({activeProject}) {
     return {activeProject}
 }
 
-export default connect(mapStateToProps, {toggleType, createProject, removeProject})(ActiveProjectScreen);
+export default connect(mapStateToProps, actions)(ActiveProjectScreen);

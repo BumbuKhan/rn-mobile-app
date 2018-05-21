@@ -1,8 +1,14 @@
-import {TOGGLE_ACTIVE_PROJECT_TYPE, CREATE_ACTIVE_PROJECT, REMOVE_ACTIVE_PROJECT} from '../actions/types';
+import {
+    TOGGLE_ACTIVE_PROJECT_TYPE,
+    CREATE_ACTIVE_PROJECT,
+    REMOVE_ACTIVE_PROJECT,
+    ACTIVE_PROJECT_TOGGLE_TIMER
+} from '../actions/types';
 
 const INITIAL_STATE = {
     type: 'STN',
-    isCreated: false
+    isCreated: false,
+    isTimerActive: true
 };
 
 export default activeProjectReducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +21,9 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
 
         case REMOVE_ACTIVE_PROJECT:
             return INITIAL_STATE;
+
+        case ACTIVE_PROJECT_TOGGLE_TIMER:
+            return {...state, isTimerActive: action.payload};
 
         default:
             return state;

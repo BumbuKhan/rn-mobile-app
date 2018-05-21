@@ -1,4 +1,9 @@
-import {TOGGLE_ACTIVE_PROJECT_TYPE, CREATE_ACTIVE_PROJECT, REMOVE_ACTIVE_PROJECT} from './types';
+import {
+    TOGGLE_ACTIVE_PROJECT_TYPE,
+    CREATE_ACTIVE_PROJECT,
+    REMOVE_ACTIVE_PROJECT,
+    ACTIVE_PROJECT_TOGGLE_TIMER
+} from './types';
 
 export const toggleType = (type) => {
     return {
@@ -16,5 +21,12 @@ export const createProject = () => {
 export const removeProject = () => {
     return {
         type: REMOVE_ACTIVE_PROJECT
+    }
+};
+
+export const toggleTimer = (state) => {
+    return {
+        type: ACTIVE_PROJECT_TOGGLE_TIMER,
+        payload: state
     }
 };
