@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import {
     TOGGLE_ACTIVE_PROJECT_TYPE,
     CREATE_ACTIVE_PROJECT,
@@ -8,7 +10,9 @@ import {
 const INITIAL_STATE = {
     type: 'STN',
     isCreated: false,
-    isTimerActive: true
+    isTimerActive: false,
+    startedAt: null, // UNIX timestamp (in seconds), when start button was pressed
+    vastedTime: 0, // in seconds, counter for time
 };
 
 export default activeProjectReducer = (state = INITIAL_STATE, action) => {
@@ -23,7 +27,27 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
             return INITIAL_STATE;
 
         case ACTIVE_PROJECT_TOGGLE_TIMER:
-            return {...state, isTimerActive: action.payload};
+            const newState = {
+                isTimerActive: action.payload
+            };
+
+            if (action.payload === true) {
+                // user starts time tracking...
+                // setting 'startedAt' to current timestamp
+                newState.startedAt = moment().unix();
+            } else {
+                // user stops timer
+                // calculating the amount of seconds from last start...
+                const deltaSeconds = moment().unix() - state.startedAt;
+
+                // and adding it to 'vastedTime'
+                newState.vastedTime = state.vastedTime + deltaSeconds;
+
+                // setting 'startedAt' to null
+                newState.startedAt = null;
+            }
+
+            return {...state, ...newState};
 
         default:
             return state;

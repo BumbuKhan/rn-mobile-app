@@ -3,9 +3,12 @@ import React, {Component} from 'react';
 import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert} from 'react-native';
 import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
+import moment from 'moment';
 
 import {Menu, Plus, ListItemDescription} from '../../components/common';
 import * as actions from '../../actions';
+
+let timer;
 
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -23,6 +26,7 @@ class ActiveProjectScreen extends Component {
     state = {
         fontLoaded: false,
         projectTypeModalVisible: false,
+        isTimerSemicolonVisible: true
     };
 
     async componentDidMount() {
@@ -32,6 +36,27 @@ class ActiveProjectScreen extends Component {
 
         this.setState({fontLoaded: true});
     }
+
+    componentWillReceiveProps = (props) => {
+        if (props.activeProject.isTimerActive) {
+            // user has started time tracking
+            // we should init setInterval in order to add blink effect to timer's semicolon (00:01)
+            timer = setInterval(() => {
+                this.setState({
+                    isTimerSemicolonVisible: !this.state.isTimerSemicolonVisible
+                });
+            }, 1000);
+        } else {
+            if (timer) {
+                clearInterval(timer);
+            }
+
+            // user has stopped time tracking, so making semicolon visible
+            this.setState({
+                isTimerSemicolonVisible: true
+            });
+        }
+    };
 
     setProjectTypeModalVisible(visible) {
         this.setState({
@@ -47,10 +72,14 @@ class ActiveProjectScreen extends Component {
         return (
             <View style={[styles.mt30]}>
                 <View style={[styles.timerWrapper]}>
-                    <View styles={[styles.timerTextWrapper]}>
+                    <View>
                         {
                             this.state.fontLoaded ? (
-                                <Text style={styles.timerText}>00:00</Text>
+                                <Text style={styles.timerText}>
+                                    00
+                                    <Text style={((this.state.isTimerSemicolonVisible)? styles.colorBlack: styles.colorWhite)}>:</Text>
+                                    00
+                                </Text>
                             ) : null
                         }
                     </View>
@@ -64,8 +93,10 @@ class ActiveProjectScreen extends Component {
                     </View>
                 </View>
                 <ListItemDescription
-                    title="You can close the app with running timer. I'll remember, promise!"
+                    title="You can close the app while timer is running. I'll persist everything, promise!"
                 />
+                <Text>startedAt: {this.props.activeProject.startedAt}</Text>
+                <Text>vastedTime: {this.props.activeProject.vastedTime}</Text>
             </View>
         );
     };
@@ -346,6 +377,12 @@ const styles = StyleSheet.create({
         fontFamily: 'digital-7-italic',
         fontSize: 50,
         fontWeight: 'bold'
+    },
+    colorWhite: {
+        color: 'white'
+    },
+    colorBlack: {
+        color: 'black'
     }
 });
 
