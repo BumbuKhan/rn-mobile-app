@@ -45,6 +45,11 @@ class ActiveProjectScreen extends Component {
         }
     };
 
+    componentWillUnmount = () => {
+        // removing all timers...
+        this._removeBlinkTimer();
+    };
+
     _initBlinkTimer = () => {
         // user has started time tracking
         // we should init setInterval in order to add blink effect to timer's semicolon (00:01)
