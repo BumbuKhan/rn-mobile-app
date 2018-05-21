@@ -8,7 +8,7 @@ import moment from 'moment';
 import {Menu, Plus, ListItemDescription} from '../../components/common';
 import * as actions from '../../actions';
 
-let timer;
+let blinkTimer;
 
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -39,23 +39,31 @@ class ActiveProjectScreen extends Component {
 
     componentWillReceiveProps = (props) => {
         if (props.activeProject.isTimerActive) {
-            // user has started time tracking
-            // we should init setInterval in order to add blink effect to timer's semicolon (00:01)
-            timer = setInterval(() => {
-                this.setState({
-                    isTimerSemicolonVisible: !this.state.isTimerSemicolonVisible
-                });
-            }, 1000);
+            this._initBlinkTimer();
         } else {
-            if (timer) {
-                clearInterval(timer);
-            }
-
-            // user has stopped time tracking, so making semicolon visible
-            this.setState({
-                isTimerSemicolonVisible: true
-            });
+            this._removeBlinkTimer();
         }
+    };
+
+    _initBlinkTimer = () => {
+        // user has started time tracking
+        // we should init setInterval in order to add blink effect to timer's semicolon (00:01)
+        blinkTimer = setInterval(() => {
+            this.setState({
+                isTimerSemicolonVisible: !this.state.isTimerSemicolonVisible
+            });
+        }, 1000);
+    };
+
+    _removeBlinkTimer = () => {
+        if (blinkTimer) {
+            clearInterval(blinkTimer);
+        }
+
+        // user has stopped time tracking, so making semicolon visible
+        this.setState({
+            isTimerSemicolonVisible: true
+        });
     };
 
     setProjectTypeModalVisible(visible) {
