@@ -1,3 +1,4 @@
+import {Font} from 'expo';
 import React, {Component} from 'react';
 import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert} from 'react-native';
 import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-elements';
@@ -20,15 +21,47 @@ class ActiveProjectScreen extends Component {
     };
 
     state = {
+        fontLoaded: false,
         projectTypeModalVisible: false,
         activeProject: {}
     };
+
+    async componentDidMount() {
+        await Font.loadAsync({
+            'digital-7-italic': require('../../assets/fonts/digital-7-italic.ttf')
+        });
+
+        this.setState({fontLoaded: true});
+    }
 
     setProjectTypeModalVisible(visible) {
         this.setState({
             projectTypeModalVisible: visible
         });
     }
+
+    renderTimer = () => {
+        if (!this.props.activeProject.isCreated) {
+            return;
+        }
+
+        return (
+            <View style={[styles.mt30]}>
+                <View style={[styles.timerWrapper]}>
+                    <View styles={[styles.timerTextWrapper]}>
+                        {
+                            this.state.fontLoaded ? (
+                                <Text style={styles.timerText}>00:00</Text>
+                            ) : null
+                        }
+                    </View>
+                    <View style={[styles.timerButtonWrapper]}>
+                        <Text>Start/Stop</Text>
+                    </View>
+                </View>
+            </View>
+        );
+    };
 
     renderProjectType = () => {
         if (!this.props.activeProject.isCreated) {
@@ -237,6 +270,7 @@ class ActiveProjectScreen extends Component {
                 <ScrollView style={{
                     backgroundColor: '#f7f7f7'
                 }}>
+                    {this.renderTimer()}
                     {this.renderProjectType()}
                     {this.renderNoActiveProjectText()}
 
@@ -284,6 +318,23 @@ const styles = StyleSheet.create({
     },
     mt30: {
         marginTop: 30
+    },
+
+    timerWrapper: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        paddingTop: 20,
+        paddingBottom: 20,
+        paddingLeft: 15,
+        paddingRight: 15,
+    },
+    timerText: {
+        fontFamily: 'digital-7-italic',
+        fontSize: 60,
+        fontWeight: 'bold'
     }
 });
 
