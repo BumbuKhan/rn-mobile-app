@@ -5,8 +5,6 @@ import {connect} from 'react-redux';
 
 import {Menu, Plus} from '../../components/common';
 import {toggleType, createProject, removeProject} from '../../actions';
-import axios from "../../helpers/axios";
-import languages from "../../helpers/languages";
 
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
