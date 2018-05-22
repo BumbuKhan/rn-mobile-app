@@ -37,39 +37,48 @@ class ActiveProjectScreen extends Component {
     }
 
     componentWillMount = () => {
-        if (this.props.activeProject.isTimerActive && !_.isNull(this.blinkTimer)) {
+        if (this.props.activeProject.isTimerActive) {
             this._initBlinkTimer();
+        }
+
+        if (this.props.activeProject.isTimerActive) {
+            this._initUpdateTimer();
         }
     };
 
     componentWillReceiveProps = (props) => {
-        console.log('new pros received...');
-
-        if (props.activeProject.isTimerActive && !_.isNull(this.blinkTimer)) {
+        if (props.activeProject.isTimerActive) {
             this._initBlinkTimer();
+            this._initUpdateTimer();
         } else {
             this._removeBlinkTimer();
+            this._removeUpdateTimer();
         }
     };
 
     componentWillUnmount = () => {
         // removing all timers...
         this._removeBlinkTimer();
+        this._removeUpdateTimer();
     };
 
     _initBlinkTimer = () => {
         // user has started time tracking
         // we should init setInterval in order to add blink effect to timer's semicolon (00:01)
-        this.blinkTimer = setInterval(() => {
-            this.setState({
-                isTimerSemicolonVisible: !this.state.isTimerSemicolonVisible
-            });
-        }, 1000);
+
+        if (!this.blinkTimer) {
+            this.blinkTimer = setInterval(() => {
+                this.setState({
+                    isTimerSemicolonVisible: !this.state.isTimerSemicolonVisible
+                });
+            }, 1000);
+        }
     };
 
     _removeBlinkTimer = () => {
         if (this.blinkTimer) {
             clearInterval(this.blinkTimer);
+            this.blinkTimer = null;
         }
 
         // user has stopped time tracking, so making semicolon visible
@@ -78,23 +87,48 @@ class ActiveProjectScreen extends Component {
         });
     };
 
-    /*_initUpdateTimer = () => {
-        updateTimer = setInterval(() => {
-            this.props.updateTimer();
-        }, 3000);
+    _initUpdateTimer = () => {
+        if (!this.updateTimer) {
+            this.updateTimer = setInterval(() => {
+                this.props.updateTimer();
+            }, 3000);
+        }
     };
 
     _removeUpdateTimer = () => {
-        if (updateTimer) {
-            clearInterval(updateTimer);
+        if (this.updateTimer) {
+            clearInterval(this.updateTimer);
+            this.updateTimer = null;
         }
-    };*/
+    };
 
     _setProjectTypeModalVisible(visible) {
         this.setState({
             projectTypeModalVisible: visible
         });
     }
+
+    _getHours = () => {
+        let hours = Math.floor(this.props.activeProject.vastedTime / (3600)).toString();
+
+        // adding leading zero if needed
+        if (hours.length === 1) {
+            return `0${hours}`;
+        }
+
+        return hours;
+    };
+
+    _getMinutes = () => {
+        let minutes = Math.floor((this.props.activeProject.vastedTime % (3600)) / 60).toString();
+
+        // adding leading zero if needed
+        if (minutes.length === 1) {
+            return `0${minutes}`;
+        }
+
+        return minutes;
+    };
 
     _renderTimer = () => {
         if (!this.props.activeProject.isCreated) {
@@ -108,9 +142,10 @@ class ActiveProjectScreen extends Component {
                         {
                             this.state.fontLoaded ? (
                                 <Text style={styles.timerText}>
-                                    00
-                                    <Text style={((this.state.isTimerSemicolonVisible)? styles.colorBlack: styles.colorWhite)}>:</Text>
-                                    00
+                                    {this._getHours()}
+                                    <Text
+                                        style={((this.state.isTimerSemicolonVisible) ? styles.colorBlack : styles.colorWhite)}>:</Text>
+                                    {this._getMinutes()}
                                 </Text>
                             ) : null
                         }
@@ -126,9 +161,8 @@ class ActiveProjectScreen extends Component {
                     </View>
                 </View>
                 <ListItemDescription
-                    title="You can close the app while timer is running. I'll persist everything, promise!"
+                    title="You can close the app while timer is running"
                 />
-                <Text>{JSON.stringify(this.props.activeProject.timers)}</Text>
             </View>
         );
     };

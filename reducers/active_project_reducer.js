@@ -66,7 +66,18 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
             return {...state, ...newState};
 
         case ACTIVE_PROJECT_UPDATE_TIMER:
-            return state;
+            let _vastedTime = 0;
+
+            // looping through all state.timers and calculating deltas between stoppedAt - startedAt
+            state.timers.map((timer) => {
+                let stoppedAt = (timer.stoppedAt)? timer.stoppedAt: moment().unix();
+
+                let deltaSeconds = stoppedAt - timer.startedAt;
+                _vastedTime += deltaSeconds;
+                console.log('deltaSeconds', deltaSeconds);
+            });
+
+            return {...state, vastedTime: _vastedTime};
 
         default:
             return state;
