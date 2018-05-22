@@ -14,7 +14,7 @@ class SignInScreen extends Component {
         loading: false
     };
 
-    handleSignIn = () => {
+    _handleSignIn = () => {
         let _this = this;
         let userData = {}; // will be stored to AsyncStorage and redux store
 
@@ -203,7 +203,7 @@ class SignInScreen extends Component {
                         fontWeight="bold"
                         backgroundColor="#4663E5"
                         borderRadius={3}
-                        onPress={this.handleSignIn}
+                        onPress={this._handleSignIn}
                         textStyle={{
                             fontSize: 20
                         }}

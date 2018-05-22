@@ -30,13 +30,13 @@ class EditProfileScreen extends Component {
         newPasswordModalVisible: false
     };
 
-    setCurPasswordModalVisible(visible) {
+    _setCurPasswordModalVisible(visible) {
         this.setState({
             curPasswordModalVisible: visible
         });
     }
 
-    setNewPasswordModalVisible(visible) {
+    _setNewPasswordModalVisible(visible) {
         this.setState({
             newPasswordModalVisible: visible
         });
@@ -90,7 +90,7 @@ class EditProfileScreen extends Component {
                     });
 
                     // closing this modal
-                    this.setCurPasswordModalVisible(false);
+                    this._setCurPasswordModalVisible(false);
 
                     // and opening another modal window in order to receive a brand new password from user
                     this.setState({
@@ -103,7 +103,7 @@ class EditProfileScreen extends Component {
                     });
 
                     // displaying 'new password' modal
-                    this.setNewPasswordModalVisible(true);
+                    this._setNewPasswordModalVisible(true);
                 }
             })
             .catch((error) => {
@@ -188,7 +188,7 @@ class EditProfileScreen extends Component {
                     }
                 });
 
-                this.setNewPasswordModalVisible(false);
+                this._setNewPasswordModalVisible(false);
 
                 // on IOS we should wait for modal window to close (approx. 1 sec) before rising alert
                 // otherwise you might encounter strange behaviour
@@ -255,7 +255,7 @@ class EditProfileScreen extends Component {
                             paddingLeft: 15
                         }}>
                             <TouchableOpacity onPress={() => {
-                                this.setCurPasswordModalVisible(false)
+                                this._setCurPasswordModalVisible(false)
                             }}>
                                 <Icon
                                     name='close'
@@ -321,7 +321,7 @@ class EditProfileScreen extends Component {
                             paddingLeft: 15
                         }}>
                             <TouchableOpacity onPress={() => {
-                                this.setNewPasswordModalVisible(false)
+                                this._setNewPasswordModalVisible(false)
                             }}>
                                 <Icon
                                     name='close'
@@ -432,7 +432,7 @@ class EditProfileScreen extends Component {
                                 }
                             });
 
-                            this.setCurPasswordModalVisible(true);
+                            this._setCurPasswordModalVisible(true);
                         }}
                     />
                 </ScrollView>
