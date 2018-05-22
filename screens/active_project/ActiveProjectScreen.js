@@ -77,13 +77,13 @@ class ActiveProjectScreen extends Component {
         });
     };
 
-    setProjectTypeModalVisible(visible) {
+    _setProjectTypeModalVisible(visible) {
         this.setState({
             projectTypeModalVisible: visible
         });
     }
 
-    renderTimer = () => {
+    _renderTimer = () => {
         if (!this.props.activeProject.isCreated) {
             return;
         }
@@ -114,13 +114,13 @@ class ActiveProjectScreen extends Component {
                 <ListItemDescription
                     title="You can close the app while timer is running. I'll persist everything, promise!"
                 />
-                <Text>startedAt: {this.props.activeProject.startedAt}</Text>
-                <Text>vastedTime: {this.props.activeProject.vastedTime}</Text>
+                {/*<Text>startedAt: {this.props.activeProject.startedAt}</Text>
+                <Text>vastedTime: {this.props.activeProject.vastedTime}</Text>*/}
             </View>
         );
     };
 
-    renderProjectType = () => {
+    _renderProjectType = () => {
         if (!this.props.activeProject.isCreated) {
             return;
         }
@@ -138,7 +138,7 @@ class ActiveProjectScreen extends Component {
         );
     };
 
-    renderRemoveProjectBtn = () => {
+    _renderRemoveProjectBtn = () => {
         if (!this.props.activeProject.isCreated) {
             return;
         }
@@ -180,7 +180,7 @@ class ActiveProjectScreen extends Component {
             </View>)
     };
 
-    renderNoActiveProjectText = () => {
+    _renderNoActiveProjectText = () => {
         if (this.props.activeProject.isCreated) {
             return;
         }
@@ -221,7 +221,7 @@ class ActiveProjectScreen extends Component {
                             paddingLeft: 15
                         }}>
                             <TouchableOpacity onPress={() => {
-                                this.setProjectTypeModalVisible(false)
+                                this._setProjectTypeModalVisible(false)
                             }}>
                                 <Icon
                                     name='close'
@@ -310,7 +310,7 @@ class ActiveProjectScreen extends Component {
                                 }}
                                 onPress={() => {
                                     this.props.createProject();
-                                    this.setProjectTypeModalVisible(false);
+                                    this._setProjectTypeModalVisible(false);
                                 }}
                             />
                         </View>
@@ -322,17 +322,17 @@ class ActiveProjectScreen extends Component {
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{text: t('drawer menu:active project'), style: {color: '#fff', fontSize: 20}}}
                     rightComponent={(!this.props.activeProject.isCreated) ? <Plus onPress={() => {
-                        this.setProjectTypeModalVisible(true);
+                        this._setProjectTypeModalVisible(true);
                     }}/> : null}
                 />
                 <ScrollView style={{
                     backgroundColor: '#f7f7f7'
                 }}>
-                    {this.renderTimer()}
-                    {this.renderProjectType()}
-                    {this.renderNoActiveProjectText()}
+                    {this._renderTimer()}
+                    {this._renderProjectType()}
+                    {this._renderNoActiveProjectText()}
 
-                    {this.renderRemoveProjectBtn()}
+                    {this._renderRemoveProjectBtn()}
                 </ScrollView>
             </View>
         );

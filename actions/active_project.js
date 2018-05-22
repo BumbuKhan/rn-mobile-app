@@ -2,7 +2,7 @@ import {
     TOGGLE_ACTIVE_PROJECT_TYPE,
     CREATE_ACTIVE_PROJECT,
     REMOVE_ACTIVE_PROJECT,
-    ACTIVE_PROJECT_TOGGLE_TIMER
+    ACTIVE_PROJECT_TOGGLE_TIMER,
 } from './types';
 
 export const toggleType = (type) => {
