@@ -5,13 +5,24 @@ import {
     CREATE_ACTIVE_PROJECT,
     REMOVE_ACTIVE_PROJECT,
     ACTIVE_PROJECT_TOGGLE_TIMER,
+    ACTIVE_PROJECT_UPDATE_TIMER
 } from '../actions/types';
 
 const INITIAL_STATE = {
     type: 'STN',
     isCreated: false,
     isTimerActive: false,
-    startedAt: null, // UNIX timestamp (in seconds), when start button was pressed
+    // 'timers' key will have such structure:
+    /*
+        timers: [
+            {
+                startedAt: <UNIX timestamp>,
+                stoppedAt: <UNIX timestamp>
+            },
+            ...
+        ]
+    */
+    timers: [],
     vastedTime: 0, // in seconds, counter for time
 };
 
@@ -32,22 +43,30 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
             };
 
             if (action.payload === true) {
-                // user starts time tracking...
-                // setting 'startedAt' to current timestamp
-                newState.startedAt = moment().unix();
+                // user starts time tracking - adding new object to state.timers
+                let curTimers = [...state.timers];
+
+                const newTimer = {
+                    startedAt: moment().unix(),
+                    stoppedAt: null // hasn't been stopped yet
+                };
+
+                curTimers.push(newTimer);
+                newState.timers = curTimers;
             } else {
-                // user stops timer
-                // calculating the amount of seconds from last start...
-                const deltaSeconds = moment().unix() - state.startedAt;
+                // user stops timer - getting the last timer and updating it's 'stoppedAt' key
+                let curTimers = [...state.timers];
 
-                // and adding it to 'vastedTime'
-                newState.vastedTime = state.vastedTime + deltaSeconds;
+                const lastTimer = curTimers[curTimers.length - 1];
+                lastTimer.stoppedAt = moment().unix();
 
-                // setting 'startedAt' to null
-                newState.startedAt = null;
+                newState.timers = curTimers;
             }
 
             return {...state, ...newState};
+
+        case ACTIVE_PROJECT_UPDATE_TIMER:
+            return state;
 
         default:
             return state;

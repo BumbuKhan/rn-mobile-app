@@ -7,3 +7,4 @@ export const TOGGLE_ACTIVE_PROJECT_TYPE = 'toggle_active_project_type';
 export const CREATE_ACTIVE_PROJECT = 'create_active_project';
 export const REMOVE_ACTIVE_PROJECT = 'remove_active_project';
 export const ACTIVE_PROJECT_TOGGLE_TIMER = 'active_project_toggle_timer';
+export const ACTIVE_PROJECT_UPDATE_TIMER = 'active_project_UPDATE_timer';

@@ -1,14 +1,13 @@
+import _ from 'lodash';
 import {Font} from 'expo';
 import React, {Component} from 'react';
-import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert} from 'react-native';
+import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert, AsyncStorage} from 'react-native';
 import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 import moment from 'moment';
 
 import {Menu, Plus, ListItemDescription} from '../../components/common';
 import * as actions from '../../actions';
-
-let blinkTimer;
 
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -38,13 +37,15 @@ class ActiveProjectScreen extends Component {
     }
 
     componentWillMount = () => {
-        if (this.props.activeProject.isTimerActive) {
+        if (this.props.activeProject.isTimerActive && !_.isNull(this.blinkTimer)) {
             this._initBlinkTimer();
         }
     };
 
     componentWillReceiveProps = (props) => {
-        if (props.activeProject.isTimerActive) {
+        console.log('new pros received...');
+
+        if (props.activeProject.isTimerActive && !_.isNull(this.blinkTimer)) {
             this._initBlinkTimer();
         } else {
             this._removeBlinkTimer();
@@ -59,7 +60,7 @@ class ActiveProjectScreen extends Component {
     _initBlinkTimer = () => {
         // user has started time tracking
         // we should init setInterval in order to add blink effect to timer's semicolon (00:01)
-        blinkTimer = setInterval(() => {
+        this.blinkTimer = setInterval(() => {
             this.setState({
                 isTimerSemicolonVisible: !this.state.isTimerSemicolonVisible
             });
@@ -67,8 +68,8 @@ class ActiveProjectScreen extends Component {
     };
 
     _removeBlinkTimer = () => {
-        if (blinkTimer) {
-            clearInterval(blinkTimer);
+        if (this.blinkTimer) {
+            clearInterval(this.blinkTimer);
         }
 
         // user has stopped time tracking, so making semicolon visible
@@ -76,6 +77,18 @@ class ActiveProjectScreen extends Component {
             isTimerSemicolonVisible: true
         });
     };
+
+    /*_initUpdateTimer = () => {
+        updateTimer = setInterval(() => {
+            this.props.updateTimer();
+        }, 3000);
+    };
+
+    _removeUpdateTimer = () => {
+        if (updateTimer) {
+            clearInterval(updateTimer);
+        }
+    };*/
 
     _setProjectTypeModalVisible(visible) {
         this.setState({
@@ -103,7 +116,8 @@ class ActiveProjectScreen extends Component {
                         }
                     </View>
                     <View style={[styles.timerButtonWrapper]}>
-                        <TouchableOpacity onPress={() => this.props.toggleTimer(!this.props.activeProject.isTimerActive)}>
+                        <TouchableOpacity
+                            onPress={() => this.props.toggleTimer(!this.props.activeProject.isTimerActive)}>
                             <Icon
                                 name={(this.props.activeProject.isTimerActive) ? "pause-circle-outline" : "play-circle-outline"}
                                 size={65}
@@ -114,8 +128,7 @@ class ActiveProjectScreen extends Component {
                 <ListItemDescription
                     title="You can close the app while timer is running. I'll persist everything, promise!"
                 />
-                {/*<Text>startedAt: {this.props.activeProject.startedAt}</Text>
-                <Text>vastedTime: {this.props.activeProject.vastedTime}</Text>*/}
+                <Text>{JSON.stringify(this.props.activeProject.timers)}</Text>
             </View>
         );
     };

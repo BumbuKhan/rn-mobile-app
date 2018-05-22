@@ -3,6 +3,7 @@ import {
     CREATE_ACTIVE_PROJECT,
     REMOVE_ACTIVE_PROJECT,
     ACTIVE_PROJECT_TOGGLE_TIMER,
+    ACTIVE_PROJECT_UPDATE_TIMER
 } from './types';
 
 export const toggleType = (type) => {
@@ -24,9 +25,17 @@ export const removeProject = () => {
     }
 };
 
+// is called (manually) when user starts/stops timer
 export const toggleTimer = (state) => {
     return {
         type: ACTIVE_PROJECT_TOGGLE_TIMER,
         payload: state
+    }
+};
+
+// is called (automatically) by setInterval()
+export const updateTimer = (state) => {
+    return {
+        type: ACTIVE_PROJECT_UPDATE_TIMER
     }
 };
