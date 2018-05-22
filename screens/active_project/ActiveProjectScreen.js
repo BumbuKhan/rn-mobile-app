@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {Font} from 'expo';
 import React, {Component} from 'react';
 import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert, AsyncStorage} from 'react-native';
