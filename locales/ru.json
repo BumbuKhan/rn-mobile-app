@@ -37,8 +37,14 @@
       "remove project confirm title": "Пожалуйста подтвердите",
       "remove project confirm description": "Все данные, связанные с этим проектом, будут удалены.",
       "remove project button text": "Удалить этот проект",
+
+      "stop project confirm title": "Do you want to stop?",
+      "stop project confirm description": "This project will be stopped and saved, you'll able to find this project in 'History' section",
+      "stop project button text": "Stop Project",
       "project type modal title": "Выберите тип проекта, над которым хотите работать",
-      "create project": "Создать проект"
+      "create project": "Создать проект",
+
+      "main fields": "MAIN FIELDS"
     },
     "clients": {
       "no content": "Нет данных"

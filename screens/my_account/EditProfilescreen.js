@@ -243,7 +243,6 @@ class EditProfileScreen extends Component {
 
         return (
             <View style={styles.container}>
-                /* Current password modal start */
                 {<Modal
                     animationType="slide"
                     transparent={false}
@@ -281,9 +280,13 @@ class EditProfileScreen extends Component {
                                 }}
                             />
 
-                            {this.state.curEditingField.error.length && (<View style={styles.modalFieldContainer}>
-                                <Text style={styles.modalFieldError}>{this.state.curEditingField.error}</Text>
-                            </View>)}
+                            {(this.state.curEditingField.error.length)?
+                                <View style={styles.modalFieldContainer}>
+                                    <Text style={styles.modalFieldError}>{this.state.curEditingField.error || ''}</Text>
+                                </View>
+                                :
+                                <View></View>
+                            }
                         </View>
 
                         <View style={{
@@ -307,9 +310,7 @@ class EditProfileScreen extends Component {
                         </View>
                     </View>
                 </Modal>}
-                /* Current password modal   end */
 
-                /* New password modal start */
                 {<Modal
                     animationType="slide"
                     transparent={false}
@@ -392,7 +393,6 @@ class EditProfileScreen extends Component {
                         </View>
                     </View>
                 </Modal>}
-                /* New password modal   end */
 
                 <ScrollView>
 

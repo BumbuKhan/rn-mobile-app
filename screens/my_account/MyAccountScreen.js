@@ -3,7 +3,7 @@ import {View, ScrollView, StyleSheet, Alert} from 'react-native';
 import {Header, Icon, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 
-import {Menu, ListItemTitle} from '../../components/common/index';
+import {Menu, ListItemTitle} from '../../components/common';
 import {logOut} from '../../actions';
 import languages from '../../helpers/languages';
 import axios from '../../helpers/axios';
@@ -84,14 +84,6 @@ class MyAccountScreen extends Component {
                         subtitleStyle={{
                             fontSize: 16
                         }}
-                        /*avatar={<Avatar
-                            rounded
-                            large
-                            source={{uri: "https://randomuser.me/api/portraits/men/67.jpg"}}
-                            containerStyle={{
-                                marginLeft: 5
-                            }}
-                        />}*/
                         containerStyle={[styles.listItem, styles.listItemBorder, styles.listItemMT]}
                         onPress={() => this.props.navigation.navigate('EditProfile')}
                     />

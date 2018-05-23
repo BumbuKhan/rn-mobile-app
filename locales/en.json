@@ -42,7 +42,9 @@
       "stop project confirm description": "This project will be stopped and saved, you'll able to find this project in 'History' section",
       "stop project button text": "Stop Project",
       "project type modal title": "Choose the type of the project you want to work on",
-      "create project": "Create Project"
+      "create project": "Create Project",
+
+      "main fields": "MAIN FIELDS"
     },
     "clients": {
       "no content": "No content"

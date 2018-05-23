@@ -37,8 +37,14 @@
       "remove project confirm title": "Bitte bestätigen",
       "remove project confirm description": "Alle mit diesem Projekt verbundenen Daten werden entfernt",
       "remove project button text": "Entfernen Sie dieses Projekt",
+
+      "stop project confirm title": "Do you want to stop?",
+      "stop project confirm description": "This project will be stopped and saved, you'll able to find this project in 'History' section",
+      "stop project button text": "Stop Project",
       "project type modal title": "Wählen Sie den Typ des Projekts, an dem Sie arbeiten möchten",
-      "create project": "Projekt erstellen"
+      "create project": "Projekt erstellen",
+
+      "main fields": "MAIN FIELDS"
     },
     "clients": {
       "no content": "Keine Inhalt"

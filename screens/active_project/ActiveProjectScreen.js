@@ -5,8 +5,9 @@ import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-eleme
 import {connect} from 'react-redux';
 import moment from 'moment';
 
-import {Menu, Plus, ListItemDescription} from '../../components/common';
+import {Menu, Plus, ListItemDescription, ListItemTitle} from '../../components/common';
 import * as actions from '../../actions';
+import languages from "../../helpers/languages";
 
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -402,14 +403,60 @@ class ActiveProjectScreen extends Component {
         </Modal>);
     };
 
+    _renderProjectCategory = () => {
+        if (!this.props.activeProject.isCreated) {
+            return;
+        }
+
+        const {t} = this.props.screenProps;
+
+        return (
+            <View>
+                <ListItemTitle
+                    title={t('screens:active project:main fields')}
+                />
+
+                <ListItem
+                    containerStyle={[styles.listItem, styles.listItemBorder]}
+                    title="Client"
+                    titleStyle={styles.listItemTitleStyle}
+                    onPress={() => {
+                    }}
+                />
+
+                <ListItem
+                    containerStyle={[styles.listItem]}
+                    title="Project"
+                    titleStyle={styles.listItemTitleStyle}
+                    onPress={() => {
+                    }}
+                />
+
+                <ListItem
+                    containerStyle={[styles.listItem]}
+                    title="Task"
+                    titleStyle={styles.listItemTitleStyle}
+                    onPress={() => {
+                    }}
+                />
+
+                <ListItem
+                    containerStyle={[styles.listItem]}
+                    title="Activity"
+                    titleStyle={styles.listItemTitleStyle}
+                    onPress={() => {
+                    }}
+                />
+            </View>
+        );
+    };
+
     render() {
         const {t} = this.props.screenProps;
 
         return (
             <View style={{flex: 1}}>
-                /* Project type modal start */
                 {this._renderProjectTypeModal()}
-                /* Project type modal   end */
 
                 <Header
                     leftComponent={<Menu {...this.props} />}
@@ -421,9 +468,12 @@ class ActiveProjectScreen extends Component {
                 <ScrollView style={{
                     backgroundColor: '#f7f7f7'
                 }}>
+                    {this._renderNoActiveProjectText()}
+
                     {this._renderTimer()}
                     {this._renderProjectType()}
-                    {this._renderNoActiveProjectText()}
+
+                    {this._renderProjectCategory()}
 
                     {this._renderStopProjectBtn()}
                     {this._renderRemoveProjectBtn()}
@@ -462,11 +512,11 @@ const styles = StyleSheet.create({
     },
     listItem: {
         backgroundColor: 'white',
-    },
-    listItemBorder: {
-        borderTopWidth: 1,
         borderTopColor: '#eaeaea',
         borderBottomColor: '#eaeaea',
+    },
+    listItemBorder: {
+        borderTopWidth: 1
     },
     listItemTitleStyle: {
         fontSize: 18
