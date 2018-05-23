@@ -193,7 +193,7 @@ class ActiveProjectScreen extends Component {
         const {t} = this.props.screenProps;
 
         return (
-            <View style={[styles.mt30, {marginBottom: 30}]}>
+            <View style={{marginBottom: 30, marginTop: 20}}>
                 <Button
                     title={t('screens:active project:remove project button text')}
                     buttonStyle={{
@@ -237,7 +237,7 @@ class ActiveProjectScreen extends Component {
         return (
             <View style={[styles.mt30]}>
                 <Button
-                    disabled={true}
+                    disabled={false}
                     title={t('screens:active project:stop project button text')}
                     buttonStyle={{
                         backgroundColor: '#0ec86c',
@@ -485,7 +485,7 @@ class ActiveProjectScreen extends Component {
 
                 <ListItem
                     containerStyle={[styles.listItem]}
-                    title="Choose from here"
+                    title="Screws, Hammer, Chisel, Epoxy resin, Paint"
                     titleStyle={styles.listItemTitleStyle}
                     onPress={() => {
                     }}
@@ -564,6 +564,37 @@ class ActiveProjectScreen extends Component {
         );
     };
 
+    _renderProjectStatus = () => {
+        if (!this.props.activeProject.isCreated) {
+            return;
+        }
+
+        const {t} = this.props.screenProps;
+
+        return (
+            <View>
+                <View style={[styles.mt30]}>
+                    <ListItem
+                        containerStyle={[styles.listItem]}
+                        title="Project is completed"
+                        titleStyle={styles.listItemTitleStyle}
+                        hideChevron
+                        switchButton
+                        onSwitch={() => {
+                        }}
+                        switched={false}
+                        onPress={() => {
+                        }}
+                    />
+                </View>
+
+                <ListItemDescription
+                    title="Turn it on only if you've completely done with the project"
+                />
+            </View>
+        );
+    };
+
     render() {
         const {t} = this.props.screenProps;
 
@@ -591,6 +622,8 @@ class ActiveProjectScreen extends Component {
 
                     {this._renderTime()}
                     {this._renderAdditionalInfo()}
+
+                    {this._renderProjectStatus()}
 
                     {this._renderStopProjectBtn()}
                     {this._renderRemoveProjectBtn()}
