@@ -193,16 +193,21 @@ class ActiveProjectScreen extends Component {
         const {t} = this.props.screenProps;
 
         return (
-            <View style={{marginBottom: 30, marginTop: 20}}>
+            <View style={{marginBottom: 20, marginTop: 20}}>
                 <Button
                     title={t('screens:active project:remove project button text')}
                     buttonStyle={{
-                        backgroundColor: '#F04747',
+                        backgroundColor: 'transparent'
+                    }}
+                    textStyle={{
+                        fontSize: 18,
+                        color: 'red'
+                    }}
+                    icon={{
+                        name: 'delete-forever',
+                        color: 'red'
                     }}
                     borderRadius={3}
-                    textStyle={{
-                        fontSize: 18
-                    }}
                     onPress={() => {
                         Alert.alert(
                             t('screens:active project:remove project confirm title'),
@@ -238,7 +243,7 @@ class ActiveProjectScreen extends Component {
             <View style={[styles.mt30]}>
                 <Button
                     disabled={false}
-                    title={t('screens:active project:stop project button text')}
+                    title={t('screens:active project:stop project for today button text')}
                     buttonStyle={{
                         backgroundColor: '#0ec86c',
                     }}
@@ -589,7 +594,7 @@ class ActiveProjectScreen extends Component {
                 </View>
 
                 <ListItemDescription
-                    title="Turn it on only if you've completely done with the project"
+                    title="Turn it on only if you're completely done with the project"
                 />
             </View>
         );

@@ -40,6 +40,7 @@
 
       "stop project confirm title": "Do you want to stop?",
       "stop project confirm description": "This project will be stopped and saved, you'll able to find this project in 'History' section",
+      "stop project for today button text": "Stop Project For Today",
       "stop project button text": "Stop Project",
       "project type modal title": "Wählen Sie den Typ des Projekts, an dem Sie arbeiten möchten",
       "create project": "Projekt erstellen",
