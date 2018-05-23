@@ -1,6 +1,6 @@
 import {Font} from 'expo';
 import React, {Component} from 'react';
-import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert, AsyncStorage} from 'react-native';
+import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert, Image} from 'react-native';
 import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 import moment from 'moment';
@@ -241,11 +241,11 @@ class ActiveProjectScreen extends Component {
 
         const {t} = this.props.screenProps;
 
-        let title = (!this.state.isProjectCompleted)?
-            t('screens:active project:stop project for today button text'):
+        let title = (!this.state.isProjectCompleted) ?
+            t('screens:active project:stop project for today button text') :
             t('screens:active project:stop project button text');
 
-        let backgroundColor = (!this.state.isProjectCompleted)? '#0ec86c': 'red';
+        let backgroundColor = (!this.state.isProjectCompleted) ? '#0ec86c' : 'red';
 
         return (
             <View style={[styles.mt30]}>
@@ -577,6 +577,80 @@ class ActiveProjectScreen extends Component {
         );
     };
 
+    _renderPhotos = () => {
+        if (!this.props.activeProject.isCreated) {
+            return;
+        }
+
+        const {t} = this.props.screenProps;
+
+        return (
+            <View>
+                <ListItemTitle
+                    title="PHOTOS"
+                />
+
+                <View style={[styles.photoScrollView]}>
+                    <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                    >
+                        <Image
+                            style={{width: 100, height: 80, marginRight: 5}}
+                            source={{uri: 'http://jandjcleaningservices.com.au/wp-content/uploads/2015/03/Factory-Cleaning-Services-Melbourne.jpg'}}
+                        />
+
+                        <Image
+                            style={{width: 100, height: 80, marginRight: 5}}
+                            source={{uri: 'http://mckinseychina.com/wp-content/uploads/2014/04/robots669x400.jpg'}}
+                        />
+
+                        <Image
+                            style={{width: 100, height: 80, marginRight: 5}}
+                            source={{uri: 'https://si.wsj.net/public/resources/images/BN-UX263_3bywu_OR_20170831081022.jpg?width=1260&height=840'}}
+                        />
+
+                        <Image
+                            style={{width: 100, height: 80, marginRight: 5}}
+                            source={{uri: 'https://cdn.static-economist.com/sites/default/files/images/print-edition/20150314_BBP001_0.jpg'}}
+                        />
+
+                        <Image
+                            style={{width: 100, height: 80, marginRight: 5}}
+                            source={{uri: 'https://ediewater.s3.amazonaws.com/features/images/r_890-factory-thinking-is-it-time-for-offsite-build-in-the-water-industry-.jpg'}}
+                        />
+                    </ScrollView>
+                </View>
+
+                <View style={[styles.photoChooseBtnWrapper]}>
+                    <View style={{
+                        borderTopColor: '#e0e0e0',
+                        borderTopWidth: 1,
+                        flex: 1
+                    }}>
+                        <Button
+                            title="Add Photo"
+                            buttonStyle={{
+                                backgroundColor: 'transparent'
+                            }}
+                            textStyle={{
+                                fontSize: 18,
+                                color: '#496FC2'
+                            }}
+                            icon={{
+                                name: 'camera-alt',
+                                color: '#496FC2',
+                                size: 24
+                            }}
+                            onPress={() => {
+                            }}
+                        />
+                    </View>
+                </View>
+            </View>
+        );
+    };
+
     _renderProjectStatus = () => {
         if (!this.props.activeProject.isCreated) {
             return;
@@ -636,6 +710,8 @@ class ActiveProjectScreen extends Component {
 
                     {this._renderTime()}
                     {this._renderAdditionalInfo()}
+
+                    {this._renderPhotos()}
 
                     {this._renderProjectStatus()}
 
@@ -710,6 +786,19 @@ const styles = StyleSheet.create({
     },
     colorBlack: {
         color: 'black'
+    },
+
+    photoScrollView: {
+        backgroundColor: 'white',
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 15,
+        paddingBottom: 15,
+    },
+    photoChooseBtnWrapper: {
+        backgroundColor: 'white',
+        paddingLeft: 20,
+        paddingRight: 20
     }
 });
 
