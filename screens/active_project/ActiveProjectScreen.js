@@ -226,6 +226,48 @@ class ActiveProjectScreen extends Component {
             </View>)
     };
 
+    _renderStopProjectBtn = () => {
+        if (!this.props.activeProject.isCreated) {
+            return;
+        }
+
+        const {t} = this.props.screenProps;
+
+        return (
+            <View style={[styles.mt30]}>
+                <Button
+                    title={t('screens:active project:stop project button text')}
+                    buttonStyle={{
+                        backgroundColor: '#0ec86c',
+                    }}
+                    borderRadius={3}
+                    textStyle={{
+                        fontSize: 18
+                    }}
+                    onPress={() => {
+                        Alert.alert(
+                            t('screens:active project:stop project confirm title'),
+                            t('screens:active project:stop project confirm description'),
+                            [
+                                {
+                                    text: t('common:cancel'),
+                                    onPress: () => {
+                                    }, style: 'cancel'
+                                },
+                                {
+                                    text: t('common:ok'),
+                                    onPress: () => {
+                                        this.props.removeProject()
+                                    }
+                                },
+                            ],
+                            {cancelable: false}
+                        )
+                    }}
+                />
+            </View>)
+    };
+
     _renderNoActiveProjectText = () => {
         if (this.props.activeProject.isCreated) {
             return;
@@ -383,6 +425,7 @@ class ActiveProjectScreen extends Component {
                     {this._renderProjectType()}
                     {this._renderNoActiveProjectText()}
 
+                    {this._renderStopProjectBtn()}
                     {this._renderRemoveProjectBtn()}
                 </ScrollView>
             </View>
