@@ -139,7 +139,7 @@ class ActiveProjectScreen extends Component {
 
         return (
             <View style={[styles.mt30]}>
-                <View style={[styles.timerWrapper]}>
+                <View style={[styles.timerWrapper, {borderColor: '#e0e0e0', borderTopWidth: 1, borderBottomWidth: 1}]}>
                     <View>
                         {
                             this.state.fontLoaded ? (
@@ -709,9 +709,9 @@ class ActiveProjectScreen extends Component {
                     {this._renderExpenses()}
 
                     {this._renderTime()}
-                    {this._renderAdditionalInfo()}
 
                     {this._renderPhotos()}
+                    {this._renderAdditionalInfo()}
 
                     {this._renderProjectStatus()}
 
@@ -774,7 +774,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingBottom: 20,
         paddingLeft: 15,
-        paddingRight: 15,
+        paddingRight: 15
     },
     timerText: {
         fontFamily: 'digital-7-italic',
