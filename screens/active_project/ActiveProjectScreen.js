@@ -25,7 +25,9 @@ class ActiveProjectScreen extends Component {
     state = {
         fontLoaded: false,
         projectTypeModalVisible: false,
-        isTimerSemicolonVisible: true
+        isTimerSemicolonVisible: true,
+
+        isProjectCompleted: false, // will be replaced to the props from redux
     };
 
     async componentDidMount() {
@@ -239,13 +241,19 @@ class ActiveProjectScreen extends Component {
 
         const {t} = this.props.screenProps;
 
+        let title = (!this.state.isProjectCompleted)?
+            t('screens:active project:stop project for today button text'):
+            t('screens:active project:stop project button text');
+
+        let backgroundColor = (!this.state.isProjectCompleted)? '#0ec86c': 'red';
+
         return (
             <View style={[styles.mt30]}>
                 <Button
                     disabled={false}
-                    title={t('screens:active project:stop project for today button text')}
+                    title={title}
                     buttonStyle={{
-                        backgroundColor: '#0ec86c',
+                        backgroundColor,
                     }}
                     borderRadius={3}
                     textStyle={{
@@ -585,11 +593,12 @@ class ActiveProjectScreen extends Component {
                         titleStyle={styles.listItemTitleStyle}
                         hideChevron
                         switchButton
-                        onSwitch={() => {
+                        onSwitch={(isProjectCompleted) => {
+                            this.setState({
+                                isProjectCompleted
+                            });
                         }}
-                        switched={false}
-                        onPress={() => {
-                        }}
+                        switched={this.state.isProjectCompleted}
                     />
                 </View>
 
