@@ -493,6 +493,46 @@ class ActiveProjectScreen extends Component {
         );
     };
 
+    _renderTime = () => {
+        if (!this.props.activeProject.isCreated) {
+            return;
+        }
+
+        const {t} = this.props.screenProps;
+
+        return (
+            <View>
+                <ListItemTitle
+                    title={t('screens:active project:time')}
+                />
+
+                <ListItem
+                    containerStyle={[styles.listItem]}
+                    title="Time for the project"
+                    titleStyle={styles.listItemTitleStyle}
+                    hideChevron
+                    rightTitle="40 hour(s)"
+                />
+
+                <ListItem
+                    containerStyle={[styles.listItem]}
+                    title="Spent hours"
+                    titleStyle={styles.listItemTitleStyle}
+                    hideChevron
+                    rightTitle="13 hour(s)"
+                />
+
+                <ListItem
+                    containerStyle={[styles.listItem]}
+                    title="Deadline date"
+                    titleStyle={styles.listItemTitleStyle}
+                    hideChevron
+                    rightTitle="20 July 2018"
+                />
+            </View>
+        );
+    };
+
     render() {
         const {t} = this.props.screenProps;
 
@@ -517,6 +557,8 @@ class ActiveProjectScreen extends Component {
 
                     {this._renderProjectMainFields()}
                     {this._renderExpenses()}
+
+                    {this._renderTime()}
 
                     {this._renderStopProjectBtn()}
                     {this._renderRemoveProjectBtn()}
