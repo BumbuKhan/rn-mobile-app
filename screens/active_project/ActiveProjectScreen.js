@@ -476,7 +476,8 @@ class ActiveProjectScreen extends Component {
                     titleStyle={styles.listItemTitleStyle}
                     hideChevron
                     switchButton
-                    onSwitch={() => {}}
+                    onSwitch={() => {
+                    }}
                     switched={true}
                     onPress={() => {
                     }}
@@ -533,6 +534,36 @@ class ActiveProjectScreen extends Component {
         );
     };
 
+    _renderAdditionalInfo = () => {
+        if (!this.props.activeProject.isCreated) {
+            return;
+        }
+
+        const {t} = this.props.screenProps;
+
+        return (
+            <View style={[styles.mt30, {
+                paddingLeft: 20,
+                paddingRight: 20
+            }]}>
+                <View>
+                    <Text style={{
+                        fontWeight: 'bold',
+                        marginBottom: 5,
+                        fontSize: 17
+                    }}>
+                        This is the additional info from admin
+                    </Text>
+                </View>
+                <Text style={{
+                    fontSize: 15
+                }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
+                    molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                    vitae quam eget, placerat posuere dolor.</Text>
+            </View>
+        );
+    };
+
     render() {
         const {t} = this.props.screenProps;
 
@@ -559,6 +590,7 @@ class ActiveProjectScreen extends Component {
                     {this._renderExpenses()}
 
                     {this._renderTime()}
+                    {this._renderAdditionalInfo()}
 
                     {this._renderStopProjectBtn()}
                     {this._renderRemoveProjectBtn()}
