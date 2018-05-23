@@ -44,7 +44,8 @@
       "project type modal title": "Choose the type of the project you want to work on",
       "create project": "Create Project",
 
-      "main fields": "MAIN FIELDS"
+      "main fields": "MAIN FIELDS",
+      "expenses": "EXPENSES"
     },
     "clients": {
       "no content": "No content"

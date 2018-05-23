@@ -457,6 +457,42 @@ class ActiveProjectScreen extends Component {
         );
     };
 
+    _renderExpenses = () => {
+        if (!this.props.activeProject.isCreated) {
+            return;
+        }
+
+        const {t} = this.props.screenProps;
+
+        return (
+            <View>
+                <ListItemTitle
+                    title={t('screens:active project:expenses')}
+                />
+
+                <ListItem
+                    containerStyle={[styles.listItem]}
+                    title="Expenses from the stock"
+                    titleStyle={styles.listItemTitleStyle}
+                    hideChevron
+                    switchButton
+                    onSwitch={() => {}}
+                    switched={true}
+                    onPress={() => {
+                    }}
+                />
+
+                <ListItem
+                    containerStyle={[styles.listItem]}
+                    title="Choose from here"
+                    titleStyle={styles.listItemTitleStyle}
+                    onPress={() => {
+                    }}
+                />
+            </View>
+        );
+    };
+
     render() {
         const {t} = this.props.screenProps;
 
@@ -480,6 +516,7 @@ class ActiveProjectScreen extends Component {
                     {this._renderProjectType()}
 
                     {this._renderProjectMainFields()}
+                    {this._renderExpenses()}
 
                     {this._renderStopProjectBtn()}
                     {this._renderRemoveProjectBtn()}
