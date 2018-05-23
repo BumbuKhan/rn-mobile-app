@@ -90,7 +90,7 @@ class ActiveProjectScreen extends Component {
         if (!this.updateTimer) {
             this.updateTimer = setInterval(() => {
                 this.props.updateTimer();
-            }, 3000);
+            }, 5000);
         }
     };
 
@@ -249,119 +249,124 @@ class ActiveProjectScreen extends Component {
         );
     };
 
+    _renderProjectTypeModal = () => {
+        const {t} = this.props.screenProps;
+
+        return (<Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.projectTypeModalVisible}>
+
+            <View style={styles.modalContainer}>
+                <View style={{
+                    alignSelf: 'flex-start',
+                    paddingLeft: 15
+                }}>
+                    <TouchableOpacity onPress={() => {
+                        this._setProjectTypeModalVisible(false)
+                    }}>
+                        <Icon
+                            name='close'
+                            color='black'
+                        />
+                    </TouchableOpacity>
+                </View>
+
+                <View>
+                    <View style={styles.modalHeader}>
+                        <Text h3>{t("screens:active project:project type modal title")}</Text>
+                    </View>
+
+                    <View style={[styles.modalCheckboxWrapper, {borderTopWidth: 1, borderTopColor: '#e0e0e0'}]}>
+                        <CheckBox
+                            title='STN'
+                            checked={this.props.activeProject.type === 'STN'}
+                            iconType='material'
+                            checkedIcon="radio-button-checked"
+                            uncheckedIcon="radio-button-unchecked"
+                            checkedColor="#496FC2"
+                            containerStyle={styles.modalCheckboxContainer}
+                            onPress={() => {
+                                this.props.toggleType('STN');
+                            }}
+                        />
+                        <View style={styles.modalCheckboxSubtitleContainer}>
+                            <Text
+                                style={styles.modalCheckboxSubtitle}>{t("common:stn job type description")}</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.modalCheckboxWrapper}>
+                        <CheckBox
+                            title='BTN'
+                            checked={this.props.activeProject.type === 'BTN'}
+                            iconType='material'
+                            checkedIcon="radio-button-checked"
+                            uncheckedIcon="radio-button-unchecked"
+                            checkedColor="#496FC2"
+                            containerStyle={styles.modalCheckboxContainer}
+                            onPress={() => {
+                                this.props.toggleType('BTN');
+                            }}
+                        />
+                        <View style={styles.modalCheckboxSubtitleContainer}>
+                            <Text
+                                style={styles.modalCheckboxSubtitle}>{t("common:btn job type description")}</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.modalCheckboxWrapper}>
+                        <CheckBox
+                            title='ATN'
+                            checked={this.props.activeProject.type === 'ATN'}
+                            iconType='material'
+                            checkedIcon="radio-button-checked"
+                            uncheckedIcon="radio-button-unchecked"
+                            checkedColor="#496FC2"
+                            containerStyle={styles.modalCheckboxContainer}
+                            onPress={() => {
+                                this.props.toggleType('ATN');
+                            }}
+                        />
+                        <View style={styles.modalCheckboxSubtitleContainer}>
+                            <Text
+                                style={styles.modalCheckboxSubtitle}>{t("common:atn job type description")}</Text>
+                        </View>
+                    </View>
+
+                </View>
+
+                <View style={{
+                    marginTop: 35,
+                    marginLeft: 10,
+                    marginRight: 10
+                }}>
+                    <Button
+                        title={t("screens:active project:create project")}
+                        buttonStyle={{
+                            backgroundColor: '#496FC2',
+                        }}
+                        borderRadius={3}
+                        textStyle={{
+                            fontSize: 18
+                        }}
+                        onPress={() => {
+                            this.props.createProject();
+                            this._setProjectTypeModalVisible(false);
+                        }}
+                    />
+                </View>
+            </View>
+        </Modal>);
+    };
+
     render() {
         const {t} = this.props.screenProps;
 
         return (
             <View style={{flex: 1}}>
-
                 /* Project type modal start */
-                {<Modal
-                    animationType="slide"
-                    transparent={false}
-                    visible={this.state.projectTypeModalVisible}>
-
-                    <View style={styles.modalContainer}>
-                        <View style={{
-                            alignSelf: 'flex-start',
-                            paddingLeft: 15
-                        }}>
-                            <TouchableOpacity onPress={() => {
-                                this._setProjectTypeModalVisible(false)
-                            }}>
-                                <Icon
-                                    name='close'
-                                    color='black'
-                                />
-                            </TouchableOpacity>
-                        </View>
-
-                        <View>
-                            <View style={styles.modalHeader}>
-                                <Text h3>{t("screens:active project:project type modal title")}</Text>
-                            </View>
-
-                            <View style={[styles.modalCheckboxWrapper, {borderTopWidth: 1, borderTopColor: '#e0e0e0'}]}>
-                                <CheckBox
-                                    title='STN'
-                                    checked={this.props.activeProject.type === 'STN'}
-                                    iconType='material'
-                                    checkedIcon="radio-button-checked"
-                                    uncheckedIcon="radio-button-unchecked"
-                                    checkedColor="#496FC2"
-                                    containerStyle={styles.modalCheckboxContainer}
-                                    onPress={() => {
-                                        this.props.toggleType('STN');
-                                    }}
-                                />
-                                <View style={styles.modalCheckboxSubtitleContainer}>
-                                    <Text
-                                        style={styles.modalCheckboxSubtitle}>{t("common:stn job type description")}</Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.modalCheckboxWrapper}>
-                                <CheckBox
-                                    title='BTN'
-                                    checked={this.props.activeProject.type === 'BTN'}
-                                    iconType='material'
-                                    checkedIcon="radio-button-checked"
-                                    uncheckedIcon="radio-button-unchecked"
-                                    checkedColor="#496FC2"
-                                    containerStyle={styles.modalCheckboxContainer}
-                                    onPress={() => {
-                                        this.props.toggleType('BTN');
-                                    }}
-                                />
-                                <View style={styles.modalCheckboxSubtitleContainer}>
-                                    <Text
-                                        style={styles.modalCheckboxSubtitle}>{t("common:btn job type description")}</Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.modalCheckboxWrapper}>
-                                <CheckBox
-                                    title='ATN'
-                                    checked={this.props.activeProject.type === 'ATN'}
-                                    iconType='material'
-                                    checkedIcon="radio-button-checked"
-                                    uncheckedIcon="radio-button-unchecked"
-                                    checkedColor="#496FC2"
-                                    containerStyle={styles.modalCheckboxContainer}
-                                    onPress={() => {
-                                        this.props.toggleType('ATN');
-                                    }}
-                                />
-                                <View style={styles.modalCheckboxSubtitleContainer}>
-                                    <Text
-                                        style={styles.modalCheckboxSubtitle}>{t("common:atn job type description")}</Text>
-                                </View>
-                            </View>
-
-                        </View>
-
-                        <View style={{
-                            marginTop: 35,
-                            marginLeft: 10,
-                            marginRight: 10
-                        }}>
-                            <Button
-                                title={t("screens:active project:create project")}
-                                buttonStyle={{
-                                    backgroundColor: '#496FC2',
-                                }}
-                                borderRadius={3}
-                                textStyle={{
-                                    fontSize: 18
-                                }}
-                                onPress={() => {
-                                    this.props.createProject();
-                                    this._setProjectTypeModalVisible(false);
-                                }}
-                            />
-                        </View>
-                    </View>
-                </Modal>}
+                {this._renderProjectTypeModal()}
                 /* Project type modal   end */
 
                 <Header
@@ -440,7 +445,7 @@ const styles = StyleSheet.create({
     },
     timerText: {
         fontFamily: 'digital-7-italic',
-        fontSize: 50,
+        fontSize: 60,
         fontWeight: 'bold'
     },
     colorWhite: {
