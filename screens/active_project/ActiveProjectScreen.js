@@ -193,7 +193,7 @@ class ActiveProjectScreen extends Component {
         const {t} = this.props.screenProps;
 
         return (
-            <View style={[styles.mt30]}>
+            <View style={[styles.mt30, {marginBottom: 30}]}>
                 <Button
                     title={t('screens:active project:remove project button text')}
                     buttonStyle={{
@@ -237,6 +237,7 @@ class ActiveProjectScreen extends Component {
         return (
             <View style={[styles.mt30]}>
                 <Button
+                    disabled={true}
                     title={t('screens:active project:stop project button text')}
                     buttonStyle={{
                         backgroundColor: '#0ec86c',
@@ -403,7 +404,8 @@ class ActiveProjectScreen extends Component {
         </Modal>);
     };
 
-    _renderProjectCategory = () => {
+    // main (the required fields)
+    _renderProjectMainFields = () => {
         if (!this.props.activeProject.isCreated) {
             return;
         }
@@ -420,6 +422,7 @@ class ActiveProjectScreen extends Component {
                     containerStyle={[styles.listItem, styles.listItemBorder]}
                     title="Client"
                     titleStyle={styles.listItemTitleStyle}
+                    rightTitle="Factory masters"
                     onPress={() => {
                     }}
                 />
@@ -428,6 +431,7 @@ class ActiveProjectScreen extends Component {
                     containerStyle={[styles.listItem]}
                     title="Project"
                     titleStyle={styles.listItemTitleStyle}
+                    rightTitle="Tools fixes"
                     onPress={() => {
                     }}
                 />
@@ -436,6 +440,7 @@ class ActiveProjectScreen extends Component {
                     containerStyle={[styles.listItem]}
                     title="Task"
                     titleStyle={styles.listItemTitleStyle}
+                    rightTitle="Fix all screwdrivers"
                     onPress={() => {
                     }}
                 />
@@ -444,6 +449,7 @@ class ActiveProjectScreen extends Component {
                     containerStyle={[styles.listItem]}
                     title="Activity"
                     titleStyle={styles.listItemTitleStyle}
+                    rightTitle="Assist lead master"
                     onPress={() => {
                     }}
                 />
@@ -473,7 +479,7 @@ class ActiveProjectScreen extends Component {
                     {this._renderTimer()}
                     {this._renderProjectType()}
 
-                    {this._renderProjectCategory()}
+                    {this._renderProjectMainFields()}
 
                     {this._renderStopProjectBtn()}
                     {this._renderRemoveProjectBtn()}
