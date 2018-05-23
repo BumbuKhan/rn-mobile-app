@@ -36,7 +36,11 @@
       "no active project text 2": "Press '+' to crete one",
       "remove project confirm title": "Please confirm",
       "remove project confirm description": "All data related to this project will be removed",
-      "remove project button text": "Remove this project",
+      "remove project button text": "Remove Project",
+
+      "stop project confirm title": "Do you want to stop?",
+      "stop project confirm description": "This project will be stopped and saved, you'll able to find this project in 'History' section",
+      "stop project button text": "Stop Project",
       "project type modal title": "Choose the type of the project you want to work on",
       "create project": "Create Project"
     },

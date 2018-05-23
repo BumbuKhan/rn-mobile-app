@@ -257,7 +257,7 @@ class ActiveProjectScreen extends Component {
                                 {
                                     text: t('common:ok'),
                                     onPress: () => {
-                                        this.props.removeProject()
+                                        //this.props.saveProject()
                                     }
                                 },
                             ],
