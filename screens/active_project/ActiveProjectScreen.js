@@ -730,7 +730,6 @@ class ActiveProjectScreen extends Component {
                                         text: `${this.state.imageViewerCurIndex + 1}/${images.length}`,
                                         style: {color: '#fff'}
                                     }}
-                                    rightComponent={{icon: 'more-horiz', color: '#fff'}}
                                 />
                             )
                         }}
