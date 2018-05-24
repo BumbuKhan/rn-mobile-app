@@ -3,11 +3,28 @@ import React, {Component} from 'react';
 import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert, Image, StatusBar} from 'react-native';
 import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
-import moment from 'moment';
+import ImageViewer from 'react-native-image-zoom-viewer';
 
 import {Menu, Plus, ListItemDescription, ListItemTitle} from '../../components/common';
 import * as actions from '../../actions';
-import languages from "../../helpers/languages";
+
+const images = [
+    {
+        url: 'http://jandjcleaningservices.com.au/wp-content/uploads/2015/03/Factory-Cleaning-Services-Melbourne.jpg'
+    },
+    {
+        url: 'http://mckinseychina.com/wp-content/uploads/2014/04/robots669x400.jpg'
+    },
+    {
+        url: 'https://si.wsj.net/public/resources/images/BN-UX263_3bywu_OR_20170831081022.jpg?width=1260&height=840'
+    },
+    {
+        url: 'https://cdn.static-economist.com/sites/default/files/images/print-edition/20150314_BBP001_0.jpg'
+    },
+    {
+        url: 'https://ediewater.s3.amazonaws.com/features/images/r_890-factory-thinking-is-it-time-for-offsite-build-in-the-water-industry-.jpg'
+    }
+];
 
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -27,6 +44,8 @@ class ActiveProjectScreen extends Component {
         fontLoaded: false,
         projectTypeModalVisible: false,
         isTimerSemicolonVisible: true,
+        isImageViewerVisible: false,
+        imageViewerCurIndex: 0,
 
         isProjectCompleted: false, // will be replaced to the props from redux
         expensesNeeded: false
@@ -606,30 +625,25 @@ class ActiveProjectScreen extends Component {
                         horizontal
                         showsHorizontalScrollIndicator={false}
                     >
-                        <Image
-                            style={{width: 100, height: 80, marginRight: 5}}
-                            source={{uri: 'http://jandjcleaningservices.com.au/wp-content/uploads/2015/03/Factory-Cleaning-Services-Melbourne.jpg'}}
-                        />
 
-                        <Image
-                            style={{width: 100, height: 80, marginRight: 5}}
-                            source={{uri: 'http://mckinseychina.com/wp-content/uploads/2014/04/robots669x400.jpg'}}
-                        />
+                        {images.map((image, i) => {
+                            return (
+                                <TouchableOpacity
+                                    key={i}
+                                    onPress={() => {
+                                        this.setState({
+                                            isImageViewerVisible: true,
+                                            imageViewerCurIndex: i
+                                        });
+                                    }}>
+                                    <Image
+                                        style={{width: 100, height: 80, marginRight: 5}}
+                                        source={{uri: image.url}}
+                                    />
+                                </TouchableOpacity>
+                            )
+                        })}
 
-                        <Image
-                            style={{width: 100, height: 80, marginRight: 5}}
-                            source={{uri: 'https://si.wsj.net/public/resources/images/BN-UX263_3bywu_OR_20170831081022.jpg?width=1260&height=840'}}
-                        />
-
-                        <Image
-                            style={{width: 100, height: 80, marginRight: 5}}
-                            source={{uri: 'https://cdn.static-economist.com/sites/default/files/images/print-edition/20150314_BBP001_0.jpg'}}
-                        />
-
-                        <Image
-                            style={{width: 100, height: 80, marginRight: 5}}
-                            source={{uri: 'https://ediewater.s3.amazonaws.com/features/images/r_890-factory-thinking-is-it-time-for-offsite-build-in-the-water-industry-.jpg'}}
-                        />
                     </ScrollView>
                 </View>
 
@@ -658,6 +672,18 @@ class ActiveProjectScreen extends Component {
                         />
                     </View>
                 </View>
+
+                <Modal visible={this.state.isImageViewerVisible} transparent={true}>
+                    <ImageViewer
+                        imageUrls={images}
+                        index={this.state.imageViewerCurIndex}
+                        onSwipeDown={() => {
+                            this.setState({
+                                isImageViewerVisible: false
+                            });
+                        }}
+                    />
+                </Modal>
             </View>
         );
     };
