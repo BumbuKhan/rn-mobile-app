@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Alert, Text, StatusBar, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Alert, Text, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 
 import SearchList, {HighlightableText} from '@unpourtous/react-native-search-list/library';
@@ -40,7 +40,7 @@ export default class ChooseClientListScreen extends Component {
                         textColor={'#000'}
                         hightlightTextColor={'#0069c0'}
                     />
-                    <Text style={{color: 'gray', fontSize: 11}}>{item.address}</Text>
+                    <Text style={{color: 'gray'}}>{item.address}</Text>
                 </View>
             </Touchable>
         )
@@ -91,27 +91,22 @@ export default class ChooseClientListScreen extends Component {
                     renderBackButton={this._renderBackButton}
                     renderEmpty={this._renderEmpty}
                     rowHeight={rowHeight}
-                    toolbarBackgroundColor={'#2196f3'}
+                    toolbarBackgroundColor={'#496FC2'}
                     title='Pick a client     '
                     cancelTitle='Cancel'
                     onClickBack={() => {
                     }}
-                    searchListBackgroundColor={'#2196f3'}
+                    searchListBackgroundColor={'#496FC2'}
                     searchBarToggleDuration={300}
-                    searchInputBackgroundColor={'#0069c0'}
-                    searchInputBackgroundColorActive={'#6ec6ff'}
-                    searchInputPlaceholderColor={'#FFF'}
-                    searchInputTextColor={'#FFF'}
+                    searchInputBackgroundColor={'#fff'}
+                    searchInputBackgroundColorActive={'#fff'}
+                    searchInputPlaceholderColor={'#30497f'}
+                    searchInputTextColor={'#000'}
                     searchInputTextColorActive={'#000'}
                     searchInputPlaceholder='Search'
-                    sectionIndexTextColor={'#6ec6ff'}
-                    searchBarBackgroundColor={'#2196f3'}
+                    sectionIndexTextColor={'#496FC2'}
+                    searchBarBackgroundColor={'#496FC2'}
                 />
-                <StatusBar
-                    backgroundColor='#F00'
-                    barStyle='light-content'
-                />
-
             </View>
         )
     }

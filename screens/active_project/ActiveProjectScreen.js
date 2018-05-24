@@ -1,6 +1,6 @@
 import {Font} from 'expo';
 import React, {Component} from 'react';
-import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert, Image} from 'react-native';
+import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert, Image, StatusBar} from 'react-native';
 import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 import moment from 'moment';
