@@ -20,12 +20,20 @@ import VacationScreen from "./screens/vacation/VacationScreen";
 import HistoryScreen from "./screens/history/HistoryScreen";
 import ProjectsListScreen from "./screens/clients/ProjectsListScreen";
 import ProjectDetailsScreen from "./screens/clients/ProjectDetailsScreen";
+import ChooseClientsListScreen from "./screens/active_project/ChooseClientsListScreen";
 
 // we'll describe all screens that are shown to authenticated user here
 const AppStack = DrawerNavigator({
-    ActiveProject: {
-        screen: ActiveProjectScreen
-    },
+    ActiveProject: StackNavigator({
+        ActiveProjectScreen: {
+            screen: ActiveProjectScreen
+        },
+        ChooseClient: {
+            screen: ChooseClientsListScreen
+        }
+    }, {
+        initialRouteName: 'ActiveProjectScreen'
+    }),
     Clients: StackNavigator({
         ClientsList: {
             screen: ClientsListScreen

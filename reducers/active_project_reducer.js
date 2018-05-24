@@ -74,7 +74,6 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
 
                 let deltaSeconds = stoppedAt - timer.startedAt;
                 _vastedTime += deltaSeconds;
-                console.log('deltaSeconds', deltaSeconds);
             });
 
             return {...state, vastedTime: _vastedTime};

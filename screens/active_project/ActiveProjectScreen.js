@@ -18,7 +18,8 @@ class ActiveProjectScreen extends Component {
                     name="timer"
                     color={tintColor}
                 />
-            }
+            },
+            header: false
         }
     };
 
@@ -438,6 +439,7 @@ class ActiveProjectScreen extends Component {
                     titleStyle={styles.listItemTitleStyle}
                     rightTitle="Factory masters"
                     onPress={() => {
+                        this.props.navigation.navigate('ChooseClient');
                     }}
                 />
 
