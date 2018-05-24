@@ -469,6 +469,7 @@ class ActiveProjectScreen extends Component {
                     titleStyle={styles.listItemTitleStyle}
                     rightTitle="Assist lead master"
                     onPress={() => {
+                        this.props.navigation.navigate('ChooseActivity');
                     }}
                 />
             </View>
