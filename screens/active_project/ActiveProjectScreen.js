@@ -484,7 +484,7 @@ class ActiveProjectScreen extends Component {
                 />
 
                 <ListItem
-                    containerStyle={[styles.listItem]}
+                    containerStyle={[styles.listItem, styles.listItemBorder]}
                     title="Expenses from the stock"
                     titleStyle={styles.listItemTitleStyle}
                     hideChevron
@@ -507,7 +507,7 @@ class ActiveProjectScreen extends Component {
         );
     };
 
-    _renderTime = () => {
+    _renderTimeManagement = () => {
         if (!this.props.activeProject.isCreated) {
             return;
         }
@@ -521,7 +521,7 @@ class ActiveProjectScreen extends Component {
                 />
 
                 <ListItem
-                    containerStyle={[styles.listItem]}
+                    containerStyle={[styles.listItem, styles.listItemBorder]}
                     title="Time for the project"
                     titleStyle={styles.listItemTitleStyle}
                     hideChevron
@@ -590,7 +590,7 @@ class ActiveProjectScreen extends Component {
                     title="PHOTOS"
                 />
 
-                <View style={[styles.photoScrollView]}>
+                <View style={[styles.photoScrollView, {borderColor: '#e0e0e0', borderTopWidth: 1,}]}>
                     <ScrollView
                         horizontal
                         showsHorizontalScrollIndicator={false}
@@ -622,7 +622,7 @@ class ActiveProjectScreen extends Component {
                     </ScrollView>
                 </View>
 
-                <View style={[styles.photoChooseBtnWrapper]}>
+                <View style={[styles.photoChooseBtnWrapper, {borderColor: '#e0e0e0', borderBottomWidth: 1}]}>
                     <View style={{
                         borderTopColor: '#e0e0e0',
                         borderTopWidth: 1,
@@ -662,7 +662,7 @@ class ActiveProjectScreen extends Component {
             <View>
                 <View style={[styles.mt30]}>
                     <ListItem
-                        containerStyle={[styles.listItem]}
+                        containerStyle={[styles.listItem, styles.listItemBorder]}
                         title="Project is completed"
                         titleStyle={styles.listItemTitleStyle}
                         hideChevron
@@ -708,7 +708,7 @@ class ActiveProjectScreen extends Component {
                     {this._renderProjectMainFields()}
                     {this._renderExpenses()}
 
-                    {this._renderTime()}
+                    {this._renderTimeManagement()}
 
                     {this._renderPhotos()}
                     {this._renderAdditionalInfo()}
