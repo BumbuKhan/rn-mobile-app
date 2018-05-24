@@ -19,6 +19,15 @@ REDUX_STORE = {
     },
     activeProject: {
         type: <String ['STN', 'ATN', 'BTN']>,
-        isCreated: <Boolean>
+        isCreated: <Boolean>,
+        isTimerActive: <Boolean>,
+        timers: [
+            {
+                startedAt: <UNIX timestamp>,
+                stoppedAt: <UNIX timestamp>
+            },
+            ...
+        ],
+        vastedTime: <Number [in seconds]>
     }
 }
