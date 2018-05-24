@@ -28,6 +28,7 @@ class ActiveProjectScreen extends Component {
         isTimerSemicolonVisible: true,
 
         isProjectCompleted: false, // will be replaced to the props from redux
+        expensesNeeded: false
     };
 
     async componentDidMount() {
@@ -489,20 +490,25 @@ class ActiveProjectScreen extends Component {
                     titleStyle={styles.listItemTitleStyle}
                     hideChevron
                     switchButton
-                    onSwitch={() => {
+                    onSwitch={(state) => {
+                        this.setState({
+                            expensesNeeded: state
+                        });
                     }}
-                    switched={true}
+                    switched={this.state.expensesNeeded}
                     onPress={() => {
                     }}
                 />
 
-                <ListItem
-                    containerStyle={[styles.listItem]}
-                    title="Screws, Hammer, Chisel, Epoxy resin, Paint"
-                    titleStyle={styles.listItemTitleStyle}
-                    onPress={() => {
-                    }}
-                />
+                {this.state.expensesNeeded && (
+                    <ListItem
+                        containerStyle={[styles.listItem]}
+                        title="Screws, Hammer, Chisel, Epoxy resin, Paint"
+                        titleStyle={styles.listItemTitleStyle}
+                        onPress={() => {
+                        }}
+                    />
+                )}
             </View>
         );
     };
