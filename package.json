@@ -2,6 +2,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "dependencies": {
+    "@unpourtous/react-native-search-list": "^2.0.10",
     "axios": "^0.18.0",
     "expo": "^27.0.1",
     "i18next": "^11.2.3",
