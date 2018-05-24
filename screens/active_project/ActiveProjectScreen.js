@@ -449,6 +449,7 @@ class ActiveProjectScreen extends Component {
                     titleStyle={styles.listItemTitleStyle}
                     rightTitle="Tools fixes"
                     onPress={() => {
+                        this.props.navigation.navigate('ChooseProject');
                     }}
                 />
 

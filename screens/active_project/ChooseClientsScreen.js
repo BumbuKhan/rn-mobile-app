@@ -13,7 +13,7 @@ export default class ChooseClientListScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
         return {
             //title: screenProps.t('screens:active project:choose client:title')
-            title: 'Choose client',
+            title: 'Choose Client',
             header: false
         }
     };
