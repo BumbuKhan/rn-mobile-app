@@ -5,7 +5,7 @@ import {Icon} from 'react-native-elements';
 import SearchList, {HighlightableText} from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
 
-import demoList from './data';
+import demoList from './data_clients';
 
 const rowHeight = 50;
 

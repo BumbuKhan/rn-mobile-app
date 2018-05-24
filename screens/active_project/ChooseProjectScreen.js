@@ -5,7 +5,7 @@ import {Icon} from 'react-native-elements';
 import SearchList, {HighlightableText} from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
 
-import demoList from './data';
+import demoList from './data_projects';
 
 const rowHeight = 50;
 
@@ -40,7 +40,7 @@ export default class ChooseProjectScreen extends Component {
                         textColor={'#000'}
                         hightlightTextColor={'#0069c0'}
                     />
-                    <Text style={{color: 'gray'}}>{item.address}</Text>
+                    <Text style={{color: 'gray'}}>{item.details}</Text>
                 </View>
             </Touchable>
         )
