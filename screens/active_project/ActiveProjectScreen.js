@@ -707,6 +707,40 @@ class ActiveProjectScreen extends Component {
                                 </View>
                             );
                         }}
+                        renderHeader={() => {
+                            return (
+                                <Header
+                                    backgroundColor="black"
+                                    leftComponent={(
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                this.setState({
+                                                    isImageViewerVisible: false
+                                                })
+                                            }}
+                                        >
+                                            <Icon
+                                                name="close"
+                                                color="white"
+                                            />
+                                        </TouchableOpacity>
+                                    )
+                                    }
+                                    centerComponent={{
+                                        text: `${this.state.imageViewerCurIndex + 1}/${images.length}`,
+                                        style: {color: '#fff'}
+                                    }}
+                                    rightComponent={{icon: 'more-horiz', color: '#fff'}}
+                                />
+                            )
+                        }}
+                        renderIndicator={() => {
+                        }}
+                        onChange={(e) => {
+                            this.setState({
+                                imageViewerCurIndex: e
+                            })
+                        }}
                     />
                 </Modal>
             </View>
@@ -753,6 +787,9 @@ class ActiveProjectScreen extends Component {
                 {this._renderProjectTypeModal()}
 
                 <Header
+                    statusBarProps={{
+                        barStyle: 'light-content'
+                    }}
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{text: t('drawer menu:active project'), style: {color: '#fff', fontSize: 20}}}
                     rightComponent={(!this.props.activeProject.isCreated) ? <Plus onPress={() => {
