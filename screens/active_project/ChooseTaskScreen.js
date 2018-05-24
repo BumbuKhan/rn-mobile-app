@@ -5,15 +5,15 @@ import {Icon} from 'react-native-elements';
 import SearchList, {HighlightableText} from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
 
-import demoList from './data_projects';
+import demoList from './data_tasks';
 
 const rowHeight = 50;
 
-export default class ChooseProjectScreen extends Component {
+export default class ChooseTaskScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
         return {
             //title: screenProps.t('screens:active project:choose client:title')
-            title: 'Choose Project',
+            title: 'Choose Task',
             header: false
         }
     };
@@ -92,7 +92,7 @@ export default class ChooseProjectScreen extends Component {
                     renderEmpty={this._renderEmpty}
                     rowHeight={rowHeight}
                     toolbarBackgroundColor={'#496FC2'}
-                    title='Pick a Project     '
+                    title='Pick a Task     '
                     cancelTitle='Cancel'
                     onClickBack={() => {
                     }}

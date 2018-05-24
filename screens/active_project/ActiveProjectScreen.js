@@ -459,6 +459,7 @@ class ActiveProjectScreen extends Component {
                     titleStyle={styles.listItemTitleStyle}
                     rightTitle="Fix all screwdrivers"
                     onPress={() => {
+                        this.props.navigation.navigate('ChooseTask');
                     }}
                 />
 
