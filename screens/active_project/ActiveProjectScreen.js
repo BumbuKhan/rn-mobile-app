@@ -1,6 +1,16 @@
 import {Font} from 'expo';
 import React, {Component} from 'react';
-import {View, Modal, StyleSheet, TouchableOpacity, ScrollView, Alert, Image, StatusBar} from 'react-native';
+import {
+    View,
+    Modal,
+    StyleSheet,
+    TouchableOpacity,
+    ScrollView,
+    Alert,
+    Image,
+    ActivityIndicator,
+    Dimensions
+} from 'react-native';
 import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -675,12 +685,27 @@ class ActiveProjectScreen extends Component {
 
                 <Modal visible={this.state.isImageViewerVisible} transparent={true}>
                     <ImageViewer
+                        style={{flex: 1}}
                         imageUrls={images}
                         index={this.state.imageViewerCurIndex}
                         onSwipeDown={() => {
                             this.setState({
                                 isImageViewerVisible: false
                             });
+                        }}
+                        loadingRender={() => {
+                            const {height} = Dimensions.get('window');
+
+                            return (
+                                <View style={{
+                                    flex: 1,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    paddingTop: height / 2
+                                }}>
+                                    <ActivityIndicator/>
+                                </View>
+                            );
                         }}
                     />
                 </Modal>
