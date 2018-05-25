@@ -60,7 +60,9 @@ class ActiveProjectScreen extends Component {
         imageViewerCurIndex: 0,
 
         isProjectCompleted: false, // will be replaced to the props from redux
-        expensesNeeded: false
+        expensesNeeded: false,
+        noticesNeeded: false,
+        moreStuffNeeded: false
     };
 
     async componentDidMount() {
@@ -554,6 +556,100 @@ class ActiveProjectScreen extends Component {
         );
     };
 
+    _renderNotices = () => {
+        if (!this.props.activeProject.isCreated) {
+            return;
+        }
+
+        const {t} = this.props.screenProps;
+
+        return (
+            <View style={styles.mt30}>
+                <ListItem
+                    containerStyle={[styles.listItem, styles.listItemBorder]}
+                    title={t('screens:active project:notices')}
+                    titleStyle={styles.listItemTitleStyle}
+                    hideChevron
+                    switchButton
+                    onSwitch={(state) => {
+                        this.setState({
+                            noticesNeeded: state
+                        });
+                    }}
+                    switched={this.state.noticesNeeded}
+                    onPress={() => {
+                    }}
+                />
+
+                {this.state.noticesNeeded && (
+                    <View style={styles.textInputWrapper}>
+                        <TextInput
+                            multiline={true}
+                            editable={true}
+                            numberOfLines={10}
+                            placeholder="Type your notices here..."
+                            style={{
+                                fontSize: 16,
+                                color: 'gray'
+                            }}
+                        />
+                    </View>
+                )}
+
+                <ListItemDescription
+                    title="You can leave some reminders here"
+                />
+            </View>
+        );
+    };
+
+    _renderMoreStuff = () => {
+        if (!this.props.activeProject.isCreated) {
+            return;
+        }
+
+        const {t} = this.props.screenProps;
+
+        return (
+            <View style={styles.mt30}>
+                <ListItem
+                    containerStyle={[styles.listItem, styles.listItemBorder]}
+                    title={t('screens:active project:more stuff')}
+                    titleStyle={styles.listItemTitleStyle}
+                    hideChevron
+                    switchButton
+                    onSwitch={(state) => {
+                        this.setState({
+                            moreStuffNeeded: state
+                        });
+                    }}
+                    switched={this.state.moreStuffNeeded}
+                    onPress={() => {
+                    }}
+                />
+
+                {this.state.moreStuffNeeded && (
+                    <View style={styles.textInputWrapper}>
+                        <TextInput
+                            multiline={true}
+                            editable={true}
+                            numberOfLines={10}
+                            placeholder="Type needed stuff here..."
+                            style={{
+                                fontSize: 16,
+                                color: 'gray'
+                            }}
+                        />
+                    </View>
+                )}
+
+                <ListItemDescription
+                    title="If you couldn't find needed stuff in the stock - feel free to add it here"
+                />
+            </View>
+        );
+    };
+
     _renderTimeManagement = () => {
         if (!this.props.activeProject.isCreated) {
             return;
@@ -839,6 +935,10 @@ class ActiveProjectScreen extends Component {
                     {this._renderTimeManagement()}
 
                     {this._renderPhotos()}
+
+                    {this._renderNotices()}
+                    {this._renderMoreStuff()}
+
                     {this._renderAdditionalInfo()}
 
                     {this._renderProjectStatus()}

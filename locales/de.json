@@ -47,7 +47,10 @@
 
       "main fields": "MAIN FIELDS",
       "expenses": "EXPENSES",
-      "time": "TIME MANAGEMENT"
+      "time": "TIME MANAGEMENT",
+
+      "notices": "Notices",
+      "more stuff": "More stuff needed"
     },
     "clients": {
       "no content": "Keine Inhalt"
