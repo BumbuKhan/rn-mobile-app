@@ -9,7 +9,8 @@ import {
     Alert,
     Image,
     ActivityIndicator,
-    Dimensions
+    Dimensions,
+    TextInput
 } from 'react-native';
 import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
@@ -536,13 +537,18 @@ class ActiveProjectScreen extends Component {
                 />
 
                 {this.state.expensesNeeded && (
-                    <ListItem
-                        containerStyle={[styles.listItem]}
-                        title="Screws, Hammer, Chisel, Epoxy resin, Paint"
-                        titleStyle={styles.listItemTitleStyle}
-                        onPress={() => {
-                        }}
-                    />
+                    <View style={styles.textInputWrapper}>
+                        <TextInput
+                            multiline={true}
+                            editable={true}
+                            numberOfLines={10}
+                            placeholder="Type your expences here..."
+                            style={{
+                                fontSize: 16,
+                                color: 'gray'
+                            }}
+                        />
+                    </View>
                 )}
             </View>
         );
@@ -872,6 +878,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#e0e0e0',
         paddingBottom: 10
     },
+
     listItem: {
         backgroundColor: 'white',
         borderTopColor: '#eaeaea',
@@ -921,6 +928,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingLeft: 20,
         paddingRight: 20
+    },
+
+    textInputWrapper: {
+        backgroundColor: 'white',
+        paddingTop: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingBottom: 15
     }
 });
 
