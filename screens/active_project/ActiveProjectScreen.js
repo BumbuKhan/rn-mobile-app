@@ -738,25 +738,26 @@ class ActiveProjectScreen extends Component {
                         horizontal
                         showsHorizontalScrollIndicator={false}
                     >
+                        <View style={{flexDirection: 'row', paddingLeft: 20, paddingRight: 20}}>
 
-                        {images.map((image, i) => {
-                            return (
-                                <TouchableOpacity
-                                    key={i}
-                                    onPress={() => {
-                                        this.setState({
-                                            isImageViewerVisible: true,
-                                            imageViewerCurIndex: i
-                                        });
-                                    }}>
-                                    <Image
-                                        style={{width: 100, height: 80, marginRight: 5}}
-                                        source={{uri: image.url}}
-                                    />
-                                </TouchableOpacity>
-                            )
-                        })}
-
+                            {images.map((image, i) => {
+                                return (
+                                    <TouchableOpacity
+                                        key={i}
+                                        onPress={() => {
+                                            this.setState({
+                                                isImageViewerVisible: true,
+                                                imageViewerCurIndex: i
+                                            });
+                                        }}>
+                                        <Image
+                                            style={{width: 100, height: 80, marginRight: 5}}
+                                            source={{uri: image.url}}
+                                        />
+                                    </TouchableOpacity>
+                                )
+                            })}
+                        </View>
                     </ScrollView>
                 </View>
 
@@ -1019,8 +1020,6 @@ const styles = StyleSheet.create({
 
     photoScrollView: {
         backgroundColor: 'white',
-        paddingLeft: 20,
-        paddingRight: 20,
         paddingTop: 15,
         paddingBottom: 15,
     },
