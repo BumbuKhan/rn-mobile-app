@@ -14,6 +14,7 @@ import {
 import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 import ImageViewer from 'react-native-image-zoom-viewer';
+import ActionSheet from 'react-native-actionsheet';
 
 import {Menu, Plus, ListItemDescription, ListItemTitle} from '../../components/common';
 import * as actions from '../../actions';
@@ -724,8 +725,17 @@ class ActiveProjectScreen extends Component {
                                                 color="white"
                                             />
                                         </TouchableOpacity>
-                                    )
-                                    }
+                                    )}
+                                    rightComponent={(
+                                        <TouchableOpacity
+                                            onPress={this.showActionSheet}
+                                        >
+                                            <Icon
+                                                name="more-horiz"
+                                                color="white"
+                                            />
+                                        </TouchableOpacity>
+                                    )}
                                     centerComponent={{
                                         text: `${this.state.imageViewerCurIndex + 1}/${images.length}`,
                                         style: {color: '#fff'}
@@ -742,8 +752,22 @@ class ActiveProjectScreen extends Component {
                         }}
                     />
                 </Modal>
+
+                <ActionSheet
+                    ref={o => this.ActionSheet = o}
+                    options={['Delete', 'Cancel']}
+                    cancelButtonIndex={1}
+                    destructiveButtonIndex={0}
+                    onPress={(index) => {
+                        console.log('index', index);
+                    }}
+                />
             </View>
         );
+    };
+
+    showActionSheet = () => {
+        this.ActionSheet.show()
     };
 
     _renderProjectStatus = () => {
