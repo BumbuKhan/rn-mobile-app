@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, Alert, Text, TouchableOpacity} from 'react-native';
-import {Icon} from 'react-native-elements';
+import {Icon, Divider} from 'react-native-elements';
 
 import SearchList, {HighlightableText} from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
@@ -61,8 +61,29 @@ export default class ChooseTaskScreen extends Component {
             <View style={styles.emptySearchResult}>
                 <Text style={{color: '#979797', fontSize: 18, paddingTop: 20}}> No Result For <Text
                     style={{color: '#171a23', fontSize: 18}}>{searchStr}</Text></Text>
-                <Text style={{color: '#979797', fontSize: 18, alignItems: 'center', paddingTop: 10}}>Please search
-                    again</Text>
+
+                <Divider style={{
+                    marginTop: 10
+                }}/>
+
+                <View style={{
+                    alignSelf: 'center',
+                    marginTop: 10
+                }}>
+                    <TouchableOpacity>
+
+                        <Text style={{
+                            color: '#0069c0',
+                            fontSize: 18
+                        }}><Icon
+                            name="add"
+                            color="#0069c0"
+                            size={16}
+                        /> Add it as a new activity</Text>
+                    </TouchableOpacity>
+                </View>
+                {/*<Text style={{color: '#979797', fontSize: 18, alignItems: 'center', paddingTop: 10}}>Please search
+                    again</Text>*/}
             </View>
         )
     };
