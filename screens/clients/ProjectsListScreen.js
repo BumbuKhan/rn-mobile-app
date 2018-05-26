@@ -40,6 +40,9 @@ export default class ProjectsListScreen extends Component {
                     }}
                     containerStyle={containerStyle}
                     onPress={() => {
+                        this.props.navigation.navigate('ProjectDetails', {
+                            headerTitle: item.searchStr
+                        });
                     }}
                 />
             </Touchable>
