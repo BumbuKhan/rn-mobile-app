@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
-import {Header, Icon, ListItem} from 'react-native-elements';
+import {View, StyleSheet, Alert, Text, StatusBar} from 'react-native';
+import {Icon, ListItem} from 'react-native-elements';
+
+import SearchList from '@unpourtous/react-native-search-list/library';
+import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
 
 import {Menu} from '../../components/common';
+import demoList from '../active_project/data_clients';
 
-export default class ClientsListScreen extends Component {
+const rowHeight = 50;
+
+export default class ChooseClientListScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
         return {
             title: screenProps.t('drawer menu:clients'),
@@ -19,81 +25,117 @@ export default class ClientsListScreen extends Component {
     };
 
     state = {
-        list: [
-            {
-                name: 'Client 1',
-                subtitle: 'Address 1'
-            },
-            {
-                name: 'Client 2',
-                subtitle: 'Address 2'
-            },
-            {
-                name: 'Client 3',
-                subtitle: 'Address 3'
-            },
-            {
-                name: 'Client 4',
-                subtitle: 'Address 4'
-            }
-        ]
+        dataSource: demoList
+    };
+
+    // custom render row
+    _renderRow = (item, sectionID, rowID, highlightRowFunc, isSearching) => {
+        let containerStyle = [styles.listItem, styles.listItemBorder];
+
+        if (item !== this.state.dataSource.length - 1) {
+            containerStyle.push(styles.listItemNoBorderBottom);
+        }
+
+        return (
+            <Touchable onPress={() => {
+                Alert.alert('Clicked!', `sectionID: ${sectionID}; item: ${item.searchStr}`,
+                    [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    {cancelable: true})
+            }}>
+                <ListItem
+                    key={rowID}
+                    title={item.searchStr}
+                    titleStyle={styles.listItemTitleStyle}
+                    subtitle={item.address}
+                    subtitleStyle={{
+                        fontSize: 16
+                    }}
+                    containerStyle={containerStyle}
+                    onPress={() => {
+                    }}
+                />
+            </Touchable>
+        )
+    };
+
+    // render empty view when datasource is empty
+    _renderEmpty = () => {
+        return (
+            <View style={styles.emptyDataSource}>
+                <Text style={{color: '#979797', fontSize: 18, paddingTop: 20}}> No Content </Text>
+            </View>
+        )
+    };
+
+    // render empty result view when search result is empty
+    _renderEmptyResult = (searchStr) => {
+        return (
+            <View style={styles.emptySearchResult}>
+                <Text style={{color: '#979797', fontSize: 18, paddingTop: 20}}> No Result For <Text
+                    style={{color: '#171a23', fontSize: 18}}>{searchStr}</Text></Text>
+            </View>
+        )
+    };
+
+    _renderBackButton = () => {
+        return (
+            <View style={{
+                paddingLeft: 15
+            }}>
+                <Menu {...this.props} />
+            </View>
+        )
     };
 
     render() {
-        const {t} = this.props.screenProps;
-
         return (
             <View style={{flex: 1}}>
-                <Header
-                    leftComponent={<Menu {...this.props} />}
-                    centerComponent={{text: t('drawer menu:clients'), style: {color: '#fff', fontSize: 20}}}
+                <StatusBar
+                    barStyle='light-content'
                 />
-                <ScrollView style={{
-                    backgroundColor: '#f7f7f7',
-                    paddingTop: 30
-                }}>
-                    {
-                        this.state.list.map((l, i) => {
-                            let containerStyle = [styles.listItem, styles.listItemBorder];
-
-                            if (i !== this.state.list.length - 1) {
-                                containerStyle.push(styles.listItemNoBorderBottom);
-                            }
-
-                            return (<ListItem
-                                key={i}
-                                title={l.name}
-                                titleStyle={styles.listItemTitleStyle}
-                                subtitle={l.subtitle}
-                                subtitleStyle={{
-                                    fontSize: 16
-                                }}
-                                containerStyle={containerStyle}
-                                onPress={() => this.props.navigation.navigate('ProjectsList', {
-                                    headerTitle: l.name
-                                })}
-                            />)
-                        })
-                    }
-                </ScrollView>
+                <SearchList
+                    data={this.state.dataSource}
+                    renderRow={this._renderRow}
+                    renderEmptyResult={this._renderEmptyResult}
+                    renderBackButton={this._renderBackButton}
+                    renderEmpty={this._renderEmpty}
+                    rowHeight={rowHeight}
+                    toolbarBackgroundColor={'#496FC2'}
+                    title='Clients      '
+                    cancelTitle='Cancel'
+                    onClickBack={() => {
+                    }}
+                    searchListBackgroundColor={'#496FC2'}
+                    searchBarToggleDuration={300}
+                    searchInputBackgroundColor={'#fff'}
+                    searchInputBackgroundColorActive={'#fff'}
+                    searchInputPlaceholderColor={'#30497f'}
+                    searchInputTextColor={'#000'}
+                    searchInputTextColorActive={'#000'}
+                    searchInputPlaceholder='Search'
+                    sectionIndexTextColor={'#496FC2'}
+                    searchBarBackgroundColor={'#496FC2'}
+                />
             </View>
-        );
-    };
+        )
+    }
 }
 
 const styles = StyleSheet.create({
     listItem: {
         backgroundColor: 'white',
-    },
-    listItemBorder: {
-        borderTopWidth: 1,
         borderTopColor: '#eaeaea',
         borderBottomColor: '#eaeaea',
     },
-    listItemNoBorderBottom: {
-        borderBottomWidth: 0
+    listItemBorder: {
+        borderBottomWidth: 1
     },
     listItemTitleStyle: {
         fontSize: 18
+    },
+    mt30: {
+        marginTop: 30
     }
 });
