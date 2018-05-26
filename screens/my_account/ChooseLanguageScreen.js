@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import {ListItem, Icon} from 'react-native-elements';
 import {connect} from 'react-redux';
 
@@ -9,7 +9,26 @@ import axios from '../../helpers/axios';
 class ChooseLanguageScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
         return {
-            title: screenProps.t('screens:my account:choose language:title')
+            title: screenProps.t('screens:my account:choose language:title'),
+            headerLeft: (
+                <TouchableOpacity
+                    onPress={() => navigation.goBack()}
+                >
+                    <Icon
+                        name="chevron-left"
+                        color="white"
+                        size={35}
+                    />
+                </TouchableOpacity>
+            ),
+            headerTitleStyle: {
+                /* this only styles the title/text (font, color etc.)  */
+                color: 'white'
+            },
+            headerStyle: {
+                /* this will style the header, but does NOT change the text */
+                backgroundColor: '#496FC2'
+            }
         }
     };
 
