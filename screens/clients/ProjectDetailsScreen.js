@@ -40,7 +40,7 @@ export default class ProjectsListScreen extends Component {
                     paddingTop: 30
                 }}>
                     <View style={{marginLeft: 20, marginRight: 20}}>
-                        <Text style={{textAlign: 'center'}}>Project's details will be her</Text>
+                        <Text style={{textAlign: 'center'}}>Project's details will be here</Text>
                     </View>
                 </ScrollView>
             </View>
