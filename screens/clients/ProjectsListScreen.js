@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Alert, Text, StatusBar, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, StatusBar, TouchableOpacity} from 'react-native';
 import {Icon, ListItem} from 'react-native-elements';
 
 import SearchList from '@unpourtous/react-native-search-list/library';
@@ -12,13 +12,6 @@ const rowHeight = 50;
 export default class ProjectsListScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
         return {
-            title: screenProps.t('drawer menu:clients'),
-            drawerIcon: ({tintColor}) => {
-                return <Icon
-                    name="group"
-                    color={tintColor}
-                />
-            },
             header: null // hiding the default StackNavigator header since we have our own
         }
     };
@@ -36,13 +29,7 @@ export default class ProjectsListScreen extends Component {
         }
 
         return (
-            <Touchable onPress={() => {
-                Alert.alert('Clicked!', `sectionID: ${sectionID}; item: ${item.searchStr}`,
-                    [
-                        {text: 'OK', onPress: () => console.log('OK Pressed')},
-                    ],
-                    {cancelable: true})
-            }}>
+            <Touchable>
                 <ListItem
                     key={rowID}
                     title={item.searchStr}

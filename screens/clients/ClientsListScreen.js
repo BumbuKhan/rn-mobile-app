@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Alert, Text, StatusBar} from 'react-native';
+import {View, StyleSheet, Text, StatusBar} from 'react-native';
 import {Icon, ListItem} from 'react-native-elements';
 
 import SearchList from '@unpourtous/react-native-search-list/library';
@@ -37,13 +37,7 @@ export default class ChooseClientListScreen extends Component {
         }
 
         return (
-            <Touchable onPress={() => {
-                Alert.alert('Clicked!', `sectionID: ${sectionID}; item: ${item.searchStr}`,
-                    [
-                        {text: 'OK', onPress: () => console.log('OK Pressed')},
-                    ],
-                    {cancelable: true})
-            }}>
+            <Touchable>
                 <ListItem
                     key={rowID}
                     title={item.searchStr}
