@@ -258,7 +258,11 @@ class ActiveProjectScreen extends Component {
                                 {
                                     text: t('common:ok'),
                                     onPress: () => {
-                                        this.props.removeProject()
+                                        // clearing out timers first
+                                        this._removeUpdateTimer();
+                                        this._removeBlinkTimer();
+
+                                        this.props.removeProject();
                                     }
                                 },
                             ],
