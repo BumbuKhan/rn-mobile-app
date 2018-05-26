@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, ScrollView, StyleSheet, Alert} from 'react-native';
+import {View, ScrollView, StyleSheet, Alert, StatusBar} from 'react-native';
 import {Header, Icon, ListItem} from 'react-native-elements';
 import {connect} from 'react-redux';
 
@@ -66,6 +66,10 @@ class MyAccountScreen extends Component {
 
         return (
             <View style={{flex: 1}}>
+                <StatusBar
+                    barStyle='light-content'
+                />
+
                 <Header
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{text: t('drawer menu:my account'), style: {color: '#fff', fontSize: 20}}}

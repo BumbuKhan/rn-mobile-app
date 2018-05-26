@@ -55,7 +55,7 @@ class EditProfileScreen extends Component {
             curPasswordModalVisible: visible
         });
 
-        const barStyle = (visible)? 'dark-content': 'light-content';
+        const barStyle = (visible) ? 'dark-content' : 'light-content';
         this.setState({barStyle});
     }
 
@@ -64,7 +64,7 @@ class EditProfileScreen extends Component {
             newPasswordModalVisible: visible
         });
 
-        const barStyle = (visible)? 'dark-content': 'light-content';
+        const barStyle = (visible) ? 'dark-content' : 'light-content';
         this.setState({barStyle});
     }
 
@@ -310,7 +310,7 @@ class EditProfileScreen extends Component {
                                 }}
                             />
 
-                            {(this.state.curEditingField.error.length)?
+                            {(this.state.curEditingField.error.length) ?
                                 <View style={styles.modalFieldContainer}>
                                     <Text style={styles.modalFieldError}>{this.state.curEditingField.error || ''}</Text>
                                 </View>
