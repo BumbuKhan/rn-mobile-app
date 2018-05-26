@@ -96,7 +96,7 @@ export default class ProjectsListScreen extends Component {
                     renderEmpty={this._renderEmpty}
                     rowHeight={rowHeight}
                     toolbarBackgroundColor={'#496FC2'}
-                    title='Projects      '
+                    title={`${this.props.navigation.state.params.headerTitle}'s Projects      `}
                     cancelTitle='Cancel'
                     onClickBack={() => {
                     }}
