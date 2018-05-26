@@ -139,8 +139,28 @@ export default class ClientsListScreen extends Component {
                         }}
                     />
                 </View>
+
+                {this._renderHelperText()}
             </View>
         </Modal>);
+    };
+
+    _renderHelperText = () => {
+        let diff = 0;
+
+        if (this.state.dateFrom && this.state.dateTo) {
+            diff = moment(this.state.dateTo).diff(this.state.dateFrom, 'days');
+        }
+
+        if (!diff) {
+            return;
+        }
+
+        return (
+            <View style={{marginLeft: 15, marginRight: 15, marginTop: 15}}>
+                <Text style={{color: 'gray'}}>You are going to request a vacation for {diff} day(s)</Text>
+            </View>
+        );
     };
 
     render() {
