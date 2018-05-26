@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert} from 'react-native';
+import {Text, View, StyleSheet, ScrollView, Modal, TouchableOpacity, Alert, StatusBar} from 'react-native';
 import {ListItem, Icon, FormInput, Button} from 'react-native-elements';
 import {connect} from 'react-redux';
 
@@ -9,7 +9,26 @@ import {logIn} from '../../actions';
 class EditProfileScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
         return {
-            title: screenProps.t('screens:my account:edit profile:title')
+            title: screenProps.t('screens:my account:edit profile:title'),
+            headerLeft: (
+                <TouchableOpacity
+                    onPress={() => navigation.goBack()}
+                >
+                    <Icon
+                        name="chevron-left"
+                        color="white"
+                        size={35}
+                    />
+                </TouchableOpacity>
+            ),
+            headerTitleStyle: {
+                /* this only styles the title/text (font, color etc.)  */
+                color: 'white'
+            },
+            headerStyle: {
+                /* this will style the header, but does NOT change the text */
+                backgroundColor: '#496FC2'
+            }
         }
     };
 
@@ -243,6 +262,10 @@ class EditProfileScreen extends Component {
 
         return (
             <View style={styles.container}>
+                <StatusBar
+                    barStyle="light-content"
+                />
+
                 {<Modal
                     animationType="slide"
                     transparent={false}
