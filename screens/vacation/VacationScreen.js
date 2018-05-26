@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView, Modal, StatusBar, TouchableOpacity} from 'react-native';
-import {Header, Icon, ListItem, Button} from 'react-native-elements';
+import {View, StyleSheet, ScrollView, Modal, StatusBar, TouchableOpacity} from 'react-native';
+import {Header, Icon, ListItem, Button, Text} from 'react-native-elements';
+import DatePicker from 'react-native-datepicker';
+import moment from 'moment';
 
 import {Menu, ListItemDescription, ListItemTitle} from '../../components/common';
 
@@ -19,7 +21,9 @@ export default class ClientsListScreen extends Component {
 
     state = {
         barStyle: 'light-content',
-        isRequestVacationModalVisible: false
+        isRequestVacationModalVisible: false,
+        dateFrom: null,
+        dateTo: null
     };
 
     _setRequestVacationModalVisible(visible) {
@@ -52,8 +56,70 @@ export default class ClientsListScreen extends Component {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{marginTop: 40}}>
+                <View style={{marginTop: 40, paddingLeft: 15, paddingRight: 15}}>
+                    <Text h4>Requesting a vacation</Text>
+                </View>
 
+                <View style={{
+                    flexDirection: 'row',
+                    marginLeft: 15,
+                    marginRight: 15,
+                    marginTop: 20,
+                    justifyContent: 'space-between'
+                }}>
+                    <View style={{
+                        width: '48%'
+                    }}>
+                        <Text style={styles.datePickerTitle}>From</Text>
+                        <DatePicker
+                            showIcon={false}
+                            style={{width: '100%'}}
+                            date={this.state.dateFrom}
+                            mode="date"
+                            placeholder="Select start date"
+                            format="YYYY-MM-DD"
+                            minDate={moment().format("YYYY-MM-DD")}
+                            maxDate={moment().add(1, 'year').format("YYYY-MM-DD")}
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                                dateInput: {
+                                    borderColor: '#e0e0e0',
+                                    borderRadius: 3
+                                }
+                            }}
+                            onDateChange={(dateFrom) => {
+                                this.setState({dateFrom})
+                            }}
+                        />
+                    </View>
+
+                    <View style={{
+                        width: '48%'
+                    }}>
+                        <Text style={styles.datePickerTitle}>To</Text>
+                        <DatePicker
+                            showIcon={false}
+                            style={{width: '100%'}}
+                            date={this.state.dateTo}
+                            mode="date"
+                            placeholder="Select end date"
+                            format="YYYY-MM-DD"
+                            minDate={moment().format("YYYY-MM-DD")}
+                            maxDate={moment().add(1, 'year').format("YYYY-MM-DD")}
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                                dateInput: {
+                                    borderColor: '#e0e0e0',
+                                    borderRadius: 3
+                                }
+                            }}
+                            onDateChange={(dateTo) => {
+                                this.setState({dateTo})
+                            }}
+                        />
+                    </View>
                 </View>
 
                 <View style={{
@@ -178,6 +244,11 @@ export default class ClientsListScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    datePickerTitle: {
+        fontSize: 16,
+        color: 'gray',
+        paddingBottom: 4
+    },
     requestBtnWrapper: {
         paddingLeft: 20,
         paddingRight: 20
