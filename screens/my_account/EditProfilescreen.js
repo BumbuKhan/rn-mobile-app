@@ -46,19 +46,26 @@ class EditProfileScreen extends Component {
 
         },
 
-        newPasswordModalVisible: false
+        newPasswordModalVisible: false,
+        barStyle: 'light-content'
     };
 
     _setCurPasswordModalVisible(visible) {
         this.setState({
             curPasswordModalVisible: visible
         });
+
+        const barStyle = (visible)? 'dark-content': 'light-content';
+        this.setState({barStyle});
     }
 
     _setNewPasswordModalVisible(visible) {
         this.setState({
             newPasswordModalVisible: visible
         });
+
+        const barStyle = (visible)? 'dark-content': 'light-content';
+        this.setState({barStyle});
     }
 
     _checkPassword = () => {
@@ -263,7 +270,7 @@ class EditProfileScreen extends Component {
         return (
             <View style={styles.container}>
                 <StatusBar
-                    barStyle="light-content"
+                    barStyle={this.state.barStyle}
                 />
 
                 {<Modal
