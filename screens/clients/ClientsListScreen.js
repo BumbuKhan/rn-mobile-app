@@ -54,6 +54,7 @@ export default class ChooseClientListScreen extends Component {
                     }}
                     containerStyle={containerStyle}
                     onPress={() => {
+                        this.props.navigation.navigate('ProjectsList');
                     }}
                 />
             </Touchable>

@@ -18,7 +18,7 @@ import ClientsListScreen from "./screens/clients/ClientsListScreen";
 import MyHoursScreen from "./screens/my_hours/MyHoursScreen";
 import VacationScreen from "./screens/vacation/VacationScreen";
 import HistoryScreen from "./screens/history/HistoryScreen";
-import ProjectsListScreen from "./screens/clients/ProjectsListScreen";
+import _ProjectsListScreen from "./screens/clients/ProjectsListScreen";
 import ProjectDetailsScreen from "./screens/clients/ProjectDetailsScreen";
 import ChooseClientsScreen from "./screens/active_project/ChooseClientsScreen";
 import ChooseProjectScreen from "./screens/active_project/ChooseProjectScreen";
@@ -51,7 +51,7 @@ const AppStack = DrawerNavigator({
             screen: ClientsListScreen
         },
         ProjectsList: {
-            screen: ProjectsListScreen
+            screen: _ProjectsListScreen
         },
         ProjectDetails: {
             screen: ProjectDetailsScreen
