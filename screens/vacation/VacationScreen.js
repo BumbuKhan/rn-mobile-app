@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView, Alert} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Alert, StatusBar} from 'react-native';
 import {Header, Icon, ListItem, Button} from 'react-native-elements';
 
 import {Menu, ListItemDescription, ListItemTitle} from '../../components/common';
@@ -22,6 +22,10 @@ export default class ClientsListScreen extends Component {
 
         return (
             <View style={{flex: 1}}>
+                <StatusBar
+                    barStyle="light-content"
+                />
+
                 <Header
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{text: t('drawer menu:vacation'), style: {color: '#fff', fontSize: 20}}}
