@@ -1,8 +1,9 @@
+import moment from 'moment';
 import React, {Component} from 'react';
 import {View, StyleSheet, ScrollView, Modal, StatusBar, TouchableOpacity} from 'react-native';
 import {Header, Icon, ListItem, Button, Text} from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
-import moment from 'moment';
+import ActionSheet from 'react-native-actionsheet';
 
 import {Menu, ListItemDescription, ListItemTitle} from '../../components/common';
 
@@ -163,6 +164,10 @@ export default class ClientsListScreen extends Component {
         );
     };
 
+    showActionSheet = () => {
+        this.ActionSheet.show()
+    };
+
     render() {
         const {t} = this.props.screenProps;
 
@@ -240,8 +245,7 @@ export default class ClientsListScreen extends Component {
                             textStyle={{
                                 fontSize: 18
                             }}
-                            onPress={() => {
-                            }}
+                            onPress={this.showActionSheet}
                         />
                     </View>
 
@@ -258,6 +262,16 @@ export default class ClientsListScreen extends Component {
                 </ScrollView>
 
                 {this._renderRequestVacationModal()}
+
+                <ActionSheet
+                    title="Please, specify the type of the walkaway"
+                    ref={o => this.ActionSheet = o}
+                    options={['Paid walkaway', 'Not paid walkaway', 'Cancel']}
+                    cancelButtonIndex={2}
+                    onPress={(index) => {
+                        console.log('index', index);
+                    }}
+                />
             </View>
         );
     };
