@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView, Alert, StatusBar} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Modal, StatusBar, TouchableOpacity} from 'react-native';
 import {Header, Icon, ListItem, Button} from 'react-native-elements';
 
 import {Menu, ListItemDescription, ListItemTitle} from '../../components/common';
@@ -17,13 +17,73 @@ export default class ClientsListScreen extends Component {
         }
     };
 
+    state = {
+        barStyle: 'light-content',
+        isRequestVacationModalVisible: false
+    };
+
+    _setRequestVacationModalVisible(visible) {
+        this.setState({
+            isRequestVacationModalVisible: visible
+        });
+
+        const barStyle = (visible) ? 'dark-content' : 'light-content';
+        this.setState({barStyle});
+    }
+
+    _renderRequestVacationModal = () => {
+        return (<Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.isRequestVacationModalVisible}>
+
+            <View style={styles.modalContainer}>
+                <View style={{
+                    alignSelf: 'flex-start',
+                    paddingLeft: 15
+                }}>
+                    <TouchableOpacity onPress={() => {
+                        this._setRequestVacationModalVisible(false)
+                    }}>
+                        <Icon
+                            name='close'
+                            color='black'
+                        />
+                    </TouchableOpacity>
+                </View>
+
+                <View style={{marginTop: 40}}>
+
+                </View>
+
+                <View style={{
+                    marginTop: 20
+                }}>
+                    <Button
+                        title="Send Request"
+                        buttonStyle={{
+                            backgroundColor: '#0ec86c',
+                        }}
+                        borderRadius={3}
+                        textStyle={{
+                            fontSize: 18
+                        }}
+                        onPress={() => {
+
+                        }}
+                    />
+                </View>
+            </View>
+        </Modal>);
+    };
+
     render() {
         const {t} = this.props.screenProps;
 
         return (
             <View style={{flex: 1}}>
                 <StatusBar
-                    barStyle="light-content"
+                    barStyle={this.state.barStyle}
                 />
 
                 <Header
@@ -78,6 +138,7 @@ export default class ClientsListScreen extends Component {
                                 fontSize: 18
                             }}
                             onPress={() => {
+                                this._setRequestVacationModalVisible(true);
                             }}
                         />
                     </View>
@@ -109,6 +170,8 @@ export default class ClientsListScreen extends Component {
                         </View>
                     </View>
                 </ScrollView>
+
+                {this._renderRequestVacationModal()}
             </View>
         );
     };
