@@ -97,6 +97,17 @@ export default class ClientsListScreen extends Component {
                             }}
                         />
                     </View>
+
+                    <ListItemTitle
+                        title="REQUESTS"
+                    />
+                    <View style={styles.requestsWrapper}>
+                        <View style={{
+                            padding: 20
+                        }}>
+                            <Text style={{color: 'gray'}}>Your requests will appear here</Text>
+                        </View>
+                    </View>
                 </ScrollView>
             </View>
         );
@@ -107,6 +118,11 @@ const styles = StyleSheet.create({
     requestBtnWrapper: {
         paddingLeft: 20,
         paddingRight: 20
+    },
+    requestsWrapper: {
+        backgroundColor: 'white',
+        marginLeft: 20,
+        marginRight: 20
     },
     modalContainer: {
         marginTop: 35
