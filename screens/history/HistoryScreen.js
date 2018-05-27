@@ -23,6 +23,9 @@ export default class ClientsListScreen extends Component {
         return (
             <View>
                 <Header
+                    statusBarProps={{
+                        barStyle: 'light-content'
+                    }}
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{text: t('drawer menu:history'), style: {color: '#fff', fontSize: 20}}}
                 />
