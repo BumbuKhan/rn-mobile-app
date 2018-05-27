@@ -23,6 +23,7 @@ export default class ClientsListScreen extends Component {
         return (
             <View>
                 <Header
+
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{text: t('drawer menu:my hours'), style: {color: '#fff', fontSize: 20}}}
                 />
