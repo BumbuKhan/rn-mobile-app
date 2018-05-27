@@ -4,8 +4,44 @@ import {View, StyleSheet, ScrollView, Modal, StatusBar, TouchableOpacity} from '
 import {Header, Icon, ListItem, Button, Text} from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
 import ActionSheet from 'react-native-actionsheet';
+import Accordion from 'react-native-collapsible/Accordion';
 
 import {Menu, ListItemDescription, ListItemTitle} from '../../components/common';
+
+const REQUESTS = [
+    {
+        title: 'For not-paid walkaway',
+        content: 'You have requested a walkaway from 2018-05-28 14:30 to 2018-05-28 17:00',
+        response: {
+            status: 'pending',
+            reason: null
+        }
+    },
+    {
+        title: 'For vacation - 5 day(s)',
+        content: 'You have requested a vacation from 2018-06-30 to 2018-07-05',
+        response: {
+            status: 'declined',
+            reason: 'You are taking vacation too often!'
+        }
+    },
+    {
+        title: 'For vacation - 10 day(s)',
+        content: 'You have requested a vacation from 2018-05-31 to 2018-06-10',
+        response: {
+            status: 'approved',
+            reason: null
+        }
+    },
+    {
+        title: 'For paid walkaway',
+        content: 'You have requested a walkaway from 2018-05-31 14:30 to 2018-05-31 17:00',
+        response: {
+            status: 'need-to-be-discussed',
+            reason: null
+        }
+    }
+];
 
 export default class ClientsListScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -41,6 +77,10 @@ export default class ClientsListScreen extends Component {
         const barStyle = (visible) ? 'dark-content' : 'light-content';
         this.setState({barStyle});
     }
+
+    showActionSheet = () => {
+        this.ActionSheet.show()
+    };
 
     _setRequestWalkawayModalVisible(visible) {
         this.setState({
@@ -308,8 +348,134 @@ export default class ClientsListScreen extends Component {
         );
     };
 
-    showActionSheet = () => {
-        this.ActionSheet.show()
+    _renderRequests = () => {
+        return (
+            <View style={{
+                marginBottom: 30
+            }}>
+                <ListItemTitle
+                    title="REQUESTS"
+                />
+                <View style={styles.requestsWrapper}>
+
+                    <Accordion
+                        sections={REQUESTS}
+                        renderHeader={this._renderHeader}
+                        renderContent={this._renderContent}
+                        underlayColor="white"
+                        onChange={(activeAccordeonIndex) => {
+                            this.setState({
+                                activeAccordeonIndex
+                            });
+                        }}
+                    />
+
+                </View>
+            </View>
+        );
+    };
+
+    _renderHeader = (section, index, isActive) => {
+        let icon;
+
+        if (section.response.status === 'pending') {
+            // pending...
+            icon = <Icon
+                name="hourglass-empty"
+                size={18}
+                color="#496FC2"
+            />;
+        } else if (section.response.status === 'approved') {
+            // approved
+            icon = <Icon
+                name="check"
+                size={18}
+                color="#0ec86c"
+            />;
+        } else if (section.response.status === 'declined') {
+            // declined
+            icon = <Icon
+                name="check"
+                size={18}
+                color="red"
+            />;
+        } else {
+            // need to be discussed
+            icon = <Icon
+                name="warning"
+                size={18}
+                color="#FDB657"
+            />;
+        }
+
+        return (
+            <View style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                padding: 8
+            }}>
+                <View style={{
+                    flex: 1
+                }}>{icon}</View>
+
+                <View style={{
+                    flex: 10,
+                    padding: 5
+                }}>
+                    <Text style={{
+                        fontSize: 18
+                    }}>{section.title}</Text>
+                </View>
+                <View style={{
+                    flex: 1
+                }}>
+                    <Icon
+                        name={(isActive)? 'keyboard-arrow-up': 'keyboard-arrow-down'}
+                        size={20}
+                        color="gray"
+                    />
+                </View>
+            </View>
+        );
+    };
+
+    _renderContent = (section) => {
+        let status;
+
+        if (section.response.status === 'pending') {
+            // pending...
+            status = <Text style={{
+                color: '#496FC2'
+            }}>Pending...</Text>;
+        } else if (section.response.status === 'approved') {
+            // approved
+            status = <Text style={{
+                color: '#0ec86c'
+            }}>Approved!</Text>;
+        } else if (section.response.status === 'declined') {
+            // declined
+            status = <Text style={{
+                color: 'red'
+            }}>Declined!</Text>;
+        } else {
+            status = <Text style={{
+                color: '#FDB657'
+            }}>Need to be discussed!</Text>;
+        }
+
+        return (
+            <View style={{
+                paddingLeft: 35,
+                paddingRight: 35,
+                paddingBottom: 10
+            }}>
+                <Text style={{
+                    color: 'gray',
+                    marginBottom: 10
+                }}>{section.content}</Text>
+                {status}
+            </View>
+        );
     };
 
     render() {
@@ -393,16 +559,7 @@ export default class ClientsListScreen extends Component {
                         />
                     </View>
 
-                    <ListItemTitle
-                        title="REQUESTS"
-                    />
-                    <View style={styles.requestsWrapper}>
-                        <View style={{
-                            padding: 20
-                        }}>
-                            <Text style={{color: 'gray'}}>Your requests will appear here</Text>
-                        </View>
-                    </View>
+                    {this._renderRequests()}
                 </ScrollView>
 
                 {this._renderRequestVacationModal()}
@@ -442,8 +599,13 @@ const styles = StyleSheet.create({
     },
     requestsWrapper: {
         backgroundColor: 'white',
+        paddingTop: 5,
+        paddingBottom: 5,
         marginLeft: 20,
-        marginRight: 20
+        marginRight: 20,
+        borderWidth: 1,
+        borderColor: '#eeeeee',
+        borderRadius: 3
     },
     modalContainer: {
         marginTop: 35
