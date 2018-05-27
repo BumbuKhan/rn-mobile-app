@@ -590,7 +590,6 @@ export default class ClientsListScreen extends Component {
 const styles = StyleSheet.create({
     datePickerTitle: {
         fontSize: 16,
-        color: 'gray',
         paddingBottom: 4
     },
     requestBtnWrapper: {
