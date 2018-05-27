@@ -571,15 +571,16 @@ export default class ClientsListScreen extends Component {
                     options={['Paid walkaway', 'Not paid walkaway', 'Cancel']}
                     cancelButtonIndex={2}
                     onPress={(index) => {
-                        const walkawayType = (index === 0) ? 'paid' : 'not-paid';
+                        if (index === 0 || index === 1) {
+                            const walkawayType = (index === 0) ? 'paid' : 'not-paid';
 
-                        this.setState({
-                            walkawayType
-                        });
+                            this.setState({
+                                walkawayType
+                            });
 
-                        // rising walkaway modal...
-                        this._setRequestWalkawayModalVisible(true);
-
+                            // rising walkaway modal...
+                            this._setRequestWalkawayModalVisible(true);
+                        }
                     }}
                 />
             </View>
