@@ -45,12 +45,12 @@ class MyAccountScreen extends Component {
                             this.props.logOut();
 
                             // and finally calling appropriate API endpoint
-                            const authStr = `Bearer ${this.props.user.token.access_token}`;
+                            /*const authStr = `Bearer ${this.props.user.token.access_token}`;
 
                             axios.post('/logout', {}, {headers: {Authorization: authStr}})
                                 .then((response) => {
                                     //console.log(response);
-                                })
+                                })*/
                         }
                     },
                 ],
