@@ -22,14 +22,29 @@ export default class ClientsListScreen extends Component {
 
     state = {
         barStyle: 'light-content',
+
         isRequestVacationModalVisible: false,
-        dateFrom: null,
-        dateTo: null
+        vacationDateFrom: null,
+        vacationDateTo: null,
+
+        isRequestWalkawayModalVisible: false,
+        walkawayDateFrom: null,
+        walkawayDateTo: null,
+        walkawayType: null, // ['paid', 'not-paid']
     };
 
     _setRequestVacationModalVisible(visible) {
         this.setState({
             isRequestVacationModalVisible: visible
+        });
+
+        const barStyle = (visible) ? 'dark-content' : 'light-content';
+        this.setState({barStyle});
+    }
+
+    _setRequestWalkawayModalVisible(visible) {
+        this.setState({
+            isRequestWalkawayModalVisible: visible
         });
 
         const barStyle = (visible) ? 'dark-content' : 'light-content';
@@ -75,7 +90,7 @@ export default class ClientsListScreen extends Component {
                         <DatePicker
                             showIcon={false}
                             style={{width: '100%'}}
-                            date={this.state.dateFrom}
+                            date={this.state.vacationDateFrom}
                             mode="date"
                             placeholder="Select start date"
                             format="YYYY-MM-DD"
@@ -89,8 +104,8 @@ export default class ClientsListScreen extends Component {
                                     borderRadius: 3
                                 }
                             }}
-                            onDateChange={(dateFrom) => {
-                                this.setState({dateFrom})
+                            onDateChange={(vacationDateFrom) => {
+                                this.setState({vacationDateFrom})
                             }}
                         />
                     </View>
@@ -102,7 +117,7 @@ export default class ClientsListScreen extends Component {
                         <DatePicker
                             showIcon={false}
                             style={{width: '100%'}}
-                            date={this.state.dateTo}
+                            date={this.state.vacationDateTo}
                             mode="date"
                             placeholder="Select end date"
                             format="YYYY-MM-DD"
@@ -116,8 +131,8 @@ export default class ClientsListScreen extends Component {
                                     borderRadius: 3
                                 }
                             }}
-                            onDateChange={(dateTo) => {
-                                this.setState({dateTo})
+                            onDateChange={(vacationDateTo) => {
+                                this.setState({vacationDateTo})
                             }}
                         />
                     </View>
@@ -141,16 +156,145 @@ export default class ClientsListScreen extends Component {
                     />
                 </View>
 
-                {this._renderHelperText()}
+                {this._renderVacationHelperText()}
             </View>
         </Modal>);
     };
 
-    _renderHelperText = () => {
+    _renderRequestWalkawayModal = () => {
+        return (<Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.isRequestWalkawayModalVisible}>
+
+            <View style={styles.modalContainer}>
+                <View style={{
+                    alignSelf: 'flex-start',
+                    paddingLeft: 15
+                }}>
+                    <TouchableOpacity onPress={() => {
+                        this._setRequestWalkawayModalVisible(false);
+                    }}>
+                        <Icon
+                            name='close'
+                            color='black'
+                        />
+                    </TouchableOpacity>
+                </View>
+
+                <View style={{marginTop: 40, paddingLeft: 15, paddingRight: 15}}>
+                    <Text h4>{`Requesting a ${this.state.walkawayType} walkaway`}</Text>
+                </View>
+
+                <View style={{
+                    flexDirection: 'row',
+                    marginLeft: 15,
+                    marginRight: 15,
+                    marginTop: 20,
+                    justifyContent: 'space-between'
+                }}>
+                    <View style={{
+                        width: '48%'
+                    }}>
+                        <Text style={styles.datePickerTitle}>From</Text>
+                        <DatePicker
+                            showIcon={false}
+                            style={{width: '100%'}}
+                            date={this.state.walkawayDateFrom}
+                            mode="date"
+                            placeholder="Select start date"
+                            format="YYYY-MM-DD"
+                            minDate={moment().format("YYYY-MM-DD")}
+                            maxDate={moment().add(1, 'year').format("YYYY-MM-DD")}
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                                dateInput: {
+                                    borderColor: '#e0e0e0',
+                                    borderRadius: 3
+                                }
+                            }}
+                            onDateChange={(walkawayDateFrom) => {
+                                this.setState({walkawayDateFrom})
+                            }}
+                        />
+                    </View>
+
+                    <View style={{
+                        width: '48%'
+                    }}>
+                        <Text style={styles.datePickerTitle}>To</Text>
+                        <DatePicker
+                            showIcon={false}
+                            style={{width: '100%'}}
+                            date={this.state.walkawayDateTo}
+                            mode="date"
+                            placeholder="Select end date"
+                            format="YYYY-MM-DD"
+                            minDate={moment().format("YYYY-MM-DD")}
+                            maxDate={moment().add(1, 'year').format("YYYY-MM-DD")}
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                                dateInput: {
+                                    borderColor: '#e0e0e0',
+                                    borderRadius: 3
+                                }
+                            }}
+                            onDateChange={(walkawayDateTo) => {
+                                this.setState({walkawayDateTo});
+                            }}
+                        />
+                    </View>
+                </View>
+
+                <View style={{
+                    marginTop: 20
+                }}>
+                    <Button
+                        title="Send Request"
+                        buttonStyle={{
+                            backgroundColor: '#0ec86c',
+                        }}
+                        borderRadius={3}
+                        textStyle={{
+                            fontSize: 18
+                        }}
+                        onPress={() => {
+
+                        }}
+                    />
+                </View>
+
+                {this._renderWalkawayHelperText()}
+            </View>
+        </Modal>);
+    };
+
+    _renderWalkawayHelperText = () => {
         let diff = 0;
 
-        if (this.state.dateFrom && this.state.dateTo) {
-            diff = moment(this.state.dateTo).diff(this.state.dateFrom, 'days');
+        if (this.state.walkawayDateTo && this.state.walkawayDateFrom) {
+            diff = moment(this.state.walkawayDateTo).diff(this.state.walkawayDateFrom, 'days');
+        }
+
+        if (!diff) {
+            return;
+        }
+
+        return (
+            <View style={{marginLeft: 15, marginRight: 15, marginTop: 15}}>
+                <Text
+                    style={{color: 'gray'}}>{`You are going to request a ${this.state.walkawayType} walkaway for ${diff} day(s)`}</Text>
+            </View>
+        );
+    };
+
+    _renderVacationHelperText = () => {
+        let diff = 0;
+
+        if (this.state.vacationDateFrom && this.state.vacationDateTo) {
+            diff = moment(this.state.vacationDateTo).diff(this.state.vacationDateFrom, 'days');
         }
 
         if (!diff) {
@@ -262,6 +406,7 @@ export default class ClientsListScreen extends Component {
                 </ScrollView>
 
                 {this._renderRequestVacationModal()}
+                {this._renderRequestWalkawayModal()}
 
                 <ActionSheet
                     title="Please, specify the type of the walkaway"
@@ -269,7 +414,15 @@ export default class ClientsListScreen extends Component {
                     options={['Paid walkaway', 'Not paid walkaway', 'Cancel']}
                     cancelButtonIndex={2}
                     onPress={(index) => {
-                        console.log('index', index);
+                        const walkawayType = (index === 0) ? 'paid' : 'not-paid';
+
+                        this.setState({
+                            walkawayType
+                        });
+
+                        // rising walkaway modal...
+                        this._setRequestWalkawayModalVisible(true);
+
                     }}
                 />
             </View>
