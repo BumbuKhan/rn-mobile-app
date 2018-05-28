@@ -437,6 +437,33 @@ class EditProfileScreen extends Component {
 
                     <ListItem
                         containerStyle={[styles.listItem, styles.listItemBorder]}
+                        title={t('screens:my account:edit profile:address')}
+                        titleStyle={styles.listItemTitleStyle}
+                        subtitle={this.props.user.address || 'Berlin, main str. 34/2'}
+                        subtitleStyle={styles.listItemSubtitleStyle}
+                        hideChevron={true}
+                    />
+
+                    <ListItem
+                        containerStyle={[styles.listItem, styles.listItemBorder]}
+                        title={t('screens:my account:edit profile:phone')}
+                        titleStyle={styles.listItemTitleStyle}
+                        subtitle={this.props.user.phone || '+123 456 789 10'}
+                        subtitleStyle={styles.listItemSubtitleStyle}
+                        hideChevron={true}
+                    />
+
+                    <ListItem
+                        containerStyle={[styles.listItem, styles.listItemBorder]}
+                        title={t('screens:my account:edit profile:birth date')}
+                        titleStyle={styles.listItemTitleStyle}
+                        subtitle={this.props.user.birth_date || '24 June 1993'}
+                        subtitleStyle={styles.listItemSubtitleStyle}
+                        hideChevron={true}
+                    />
+
+                    <ListItem
+                        containerStyle={[styles.listItem, styles.listItemBorder]}
                         title={t('screens:my account:edit profile:email')}
                         titleStyle={styles.listItemTitleStyle}
                         subtitle={this.props.user.email}

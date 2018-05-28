@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps({user, settings}) {
+    console.log('user', user);
     return {user, settings};
 }
 

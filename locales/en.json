@@ -77,7 +77,10 @@
         "phone number": "Phone Number",
         "password": "Password",
         "current password": "Current Password",
-        "your password has been successfully changed": "Your password has been successfully changed"
+        "your password has been successfully changed": "Your password has been successfully changed",
+        "address": "Address",
+        "phone": "Phone",
+        "birth date": "Birth Date"
       },
 
       "choose language": {
