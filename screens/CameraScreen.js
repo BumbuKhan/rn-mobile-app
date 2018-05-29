@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera, Permissions } from 'expo';
+import { Icon } from 'react-native-elements';
 
 export default class CameraScreen extends React.Component {
     static navigationOptions = {
@@ -30,41 +31,74 @@ export default class CameraScreen extends React.Component {
                         ref={ref => this.camera = ref}
                         style={{ flex: 1 }}
                         type={this.state.type}>
-                        <View
-                            style={{
-                                flex: 1,
-                                backgroundColor: 'transparent',
-                                flexDirection: 'row',
+
+                        <View style={{
+                            flex: 1,
+                            marginTop: 25,
+                            paddingLeft: 20,
+                            paddingRight: 20,
+                            flexDirection: 'row'
+                        }}>
+                            <View style={{
+                                alignSelf: 'flex-start'
                             }}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        this.props.navigation.goBack();
+                                    }}
+                                >
+                                    <Icon
+                                        name="close"
+                                        color="white"
+                                        size={30}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
 
-                            <TouchableOpacity
-                                style={{
-                                    flex: 1,
-                                    alignSelf: 'flex-end',
-                                    alignItems: 'center',
-                                }}
-                                onPress={async () => {
-                                    if (this.camera) {
-                                        let photo = await this.camera.takePictureAsync({
-                                            base64: true
-                                        });
+                        <View style={{
+                            flex: 1,
+                            marginTop: 25,
+                            paddingLeft: 20,
+                            paddingRight: 20,
+                            flexDirection: 'row',
+                            marginBottom: 10
+                        }}>
+                            <View style={{
+                                flex: 0.33
+                            }}></View>
 
-                                        // will return an object with such structure:
-                                        /*
-                                        {
-                                            "base64": "qwew876q6e7q87e6q...qweqweqwe"
-                                            "height": 200,
-                                            "width": 200,                                            
-                                            "uri": "file:///Users/macbook/Library/Developer/Co...B2-407B-B279-538218BE21AC.jpg"
+                            <View style={{
+                                flex: 0.33,
+                                alignSelf: 'flex-end',
+                                alignItems: 'center'
+                            }}>
+                                <TouchableOpacity
+                                    onPress={async () => {
+                                        if (this.camera) {
+                                            let photo = await this.camera.takePictureAsync({
+                                                base64: true
+                                            });
+    
+                                            // will return an object with such structure:
+                                            /*
+                                            {
+                                                "base64": "qwew876q6e7q87e6q...qweqweqwe"
+                                                "height": 200,
+                                                "width": 200,                                            
+                                                "uri": "file:///Users/macbook/Library/Developer/Co...B2-407B-B279-538218BE21AC.jpg"
+                                            }
+                                            */
                                         }
-                                        */
-                                    }
-                                }}>
-                                <Text
-                                    style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                                    {' '}Shoot{' '}
-                                </Text>
-                            </TouchableOpacity>
+                                    }}
+                                >
+                                    <Icon
+                                        name="camera-alt"
+                                        color="white"
+                                        size={50}
+                                    />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </Camera>
                 </View>
