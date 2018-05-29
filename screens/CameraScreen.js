@@ -80,6 +80,9 @@ class CameraScreen extends React.Component {
             }}
             onPress={() => {
                 this.props.addPhotos(this.state.takenPhotos);
+                
+                // taking user back to the active project screen once the 'Apply' button is clicked
+                this.props.navigation.goBack();
             }}
         >
             <Text style={{
