@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity, StatusBar, Image } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import { Icon } from 'react-native-elements';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import * as actions from '../actions';
 
@@ -80,7 +80,7 @@ class CameraScreen extends React.Component {
             }}
             onPress={() => {
                 this.props.addPhotos(this.state.takenPhotos);
-                
+
                 // taking user back to the active project screen once the 'Apply' button is clicked
                 this.props.navigation.goBack();
             }}

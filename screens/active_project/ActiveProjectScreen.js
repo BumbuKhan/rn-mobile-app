@@ -20,24 +20,6 @@ import ActionSheet from 'react-native-actionsheet';
 import { Menu, Plus, ListItemDescription, ListItemTitle } from '../../components/common';
 import * as actions from '../../actions';
 
-// const images = [
-//     {
-//         url: 'http://jandjcleaningservices.com.au/wp-content/uploads/2015/03/Factory-Cleaning-Services-Melbourne.jpg'
-//     },
-//     {
-//         url: 'http://mckinseychina.com/wp-content/uploads/2014/04/robots669x400.jpg'
-//     },
-//     {
-//         url: 'https://si.wsj.net/public/resources/images/BN-UX263_3bywu_OR_20170831081022.jpg?width=1260&height=840'
-//     },
-//     {
-//         url: 'https://cdn.static-economist.com/sites/default/files/images/print-edition/20150314_BBP001_0.jpg'
-//     },
-//     {
-//         url: 'https://ediewater.s3.amazonaws.com/features/images/r_890-factory-thinking-is-it-time-for-offsite-build-in-the-water-industry-.jpg'
-//     }
-// ];
-
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({ navigation, screenProps }) => {
         return {
@@ -718,7 +700,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                    molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                        molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
