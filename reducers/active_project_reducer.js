@@ -5,7 +5,8 @@ import {
     CREATE_ACTIVE_PROJECT,
     REMOVE_ACTIVE_PROJECT,
     ACTIVE_PROJECT_TOGGLE_TIMER,
-    ACTIVE_PROJECT_UPDATE_TIMER
+    ACTIVE_PROJECT_UPDATE_TIMER,
+    ACTIVE_PROJECT_ADD_PHOTOS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -23,7 +24,20 @@ const INITIAL_STATE = {
         ]
     */
     timers: [],
-    vastedTime: 0, // in seconds, counter for time
+    vastedTime: 0, // in seconds, counter for time,
+    /*
+    'photos' is an array with such structure:
+        [
+            {
+                "base64": "qwew876q6e7q87e6q...qweqweqwe"
+                "height": 200,
+                "width": 200,                                            
+                "uri": "file:///Users/macbook/Library/Developer/Co...38218BE21AC.jpg"
+            },
+            ...
+        ]
+    */
+    photos: []
 };
 
 export default activeProjectReducer = (state = INITIAL_STATE, action) => {
@@ -78,6 +92,15 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
 
             return {...state, vastedTime: _vastedTime};
 
+        case ACTIVE_PROJECT_ADD_PHOTOS:
+            // getting already existing photos...
+            const existingPhotos = [...state.photos];
+
+            // adding new portion to the existing...
+            const newPhotos = [...existingPhotos, ...action.payload];
+
+            // returning new state after merge
+            return {...state, photos: newPhotos};
         default:
             return state;
     }

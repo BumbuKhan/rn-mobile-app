@@ -3,7 +3,8 @@ import {
     CREATE_ACTIVE_PROJECT,
     REMOVE_ACTIVE_PROJECT,
     ACTIVE_PROJECT_TOGGLE_TIMER,
-    ACTIVE_PROJECT_UPDATE_TIMER
+    ACTIVE_PROJECT_UPDATE_TIMER,
+    ACTIVE_PROJECT_ADD_PHOTOS
 } from './types';
 
 export const toggleType = (type) => {
@@ -39,3 +40,23 @@ export const updateTimer = (state) => {
         type: ACTIVE_PROJECT_UPDATE_TIMER
     }
 };
+
+// will add taken photos to active project
+/*
+'photos' is an array with such structure:
+    [
+        {
+            "base64": "qwew876q6e7q87e6q...qweqweqwe"
+            "height": 200,
+            "width": 200,                                            
+            "uri": "file:///Users/macbook/Library/Developer/Co...38218BE21AC.jpg"
+        },
+        ...
+    ]
+*/
+export const addPhotos = (photos) => {
+    return {
+        type: ACTIVE_PROJECT_ADD_PHOTOS,
+        payload: photos
+    }
+}

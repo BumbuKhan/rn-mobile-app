@@ -718,7 +718,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                            molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
@@ -744,23 +744,27 @@ class ActiveProjectScreen extends Component {
                     >
                         <View style={{ flexDirection: 'row', paddingLeft: 20, paddingRight: 20 }}>
 
-                            {images.map((image, i) => {
-                                return (
-                                    <TouchableOpacity
-                                        key={i}
-                                        onPress={() => {
-                                            this.setState({
-                                                isImageViewerVisible: true,
-                                                imageViewerCurIndex: i
-                                            });
-                                        }}>
-                                        <Image
-                                            style={{ width: 100, height: 80, marginRight: 5 }}
-                                            source={{ uri: image.url }}
-                                        />
-                                    </TouchableOpacity>
-                                )
-                            })}
+                            {(!this.props.activeProject.photos.length) ? (
+                                <Text>No photo</Text>
+                            ) : (
+                                    this.props.activeProject.photos.map((image, i) => {
+                                        return (
+                                            <TouchableOpacity
+                                                key={i}
+                                                onPress={() => {
+                                                    this.setState({
+                                                        isImageViewerVisible: true,
+                                                        imageViewerCurIndex: i
+                                                    });
+                                                }}>
+                                                <Image
+                                                    style={{ width: 100, height: 80, marginRight: 5 }}
+                                                    source={{ uri: `data:image/jpg;base64,${image.base64}` }}
+                                                />
+                                            </TouchableOpacity>
+                                        )
+                                    })
+                                )}
                         </View>
                     </ScrollView>
                 </View>
@@ -809,7 +813,7 @@ class ActiveProjectScreen extends Component {
                                     size: 24
                                 }}
                                 onPress={() => {
-                                    
+
                                 }}
                             />
                         </View>

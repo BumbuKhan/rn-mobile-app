@@ -2,8 +2,11 @@ import React from 'react';
 import { Text, View, TouchableOpacity, StatusBar, Image } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import { Icon } from 'react-native-elements';
+import {connect} from 'react-redux';
 
-export default class CameraScreen extends React.Component {
+import * as actions from '../actions';
+
+class CameraScreen extends React.Component {
     static navigationOptions = {
         header: null
     };
@@ -76,7 +79,7 @@ export default class CameraScreen extends React.Component {
                 marginBottom: 20
             }}
             onPress={() => {
-
+                this.props.addPhotos(this.state.takenPhotos);
             }}
         >
             <Text style={{
@@ -84,7 +87,42 @@ export default class CameraScreen extends React.Component {
                 fontSize: 20
             }}>Apply</Text>
         </TouchableOpacity>);
-    }
+    };
+
+    _renderCameraButton = () => {
+        return (
+            <TouchableOpacity
+                onPress={async () => {
+                    if (this.camera) {
+                        let photo = await this.camera.takePictureAsync({
+                            base64: true
+                        });
+
+                        // will return an object with such structure:
+                        /*
+                        {
+                            "base64": "qwew876q6e7q87e6q...qweqweqwe"
+                            "height": 200,
+                            "width": 200,                                            
+                            "uri": "file:///Users/macbook/Library/Developer/Co...B2-407B-B279-538218BE21AC.jpg"
+                        }
+                        */
+
+                        // adding taken photo to this.state.takenPhotos
+                        this.setState({
+                            takenPhotos: [...this.state.takenPhotos, photo]
+                        });
+                    }
+                }}
+            >
+                <Icon
+                    name="camera"
+                    color="white"
+                    size={65}
+                />
+            </TouchableOpacity>
+        );
+    };
 
     render() {
         const { hasCameraPermission } = this.state;
@@ -157,36 +195,7 @@ export default class CameraScreen extends React.Component {
                                 alignSelf: 'flex-end',
                                 alignItems: 'center'
                             }}>
-                                <TouchableOpacity
-                                    onPress={async () => {
-                                        if (this.camera) {
-                                            let photo = await this.camera.takePictureAsync({
-                                                base64: true
-                                            });
-
-                                            // will return an object with such structure:
-                                            /*
-                                            {
-                                                "base64": "qwew876q6e7q87e6q...qweqweqwe"
-                                                "height": 200,
-                                                "width": 200,                                            
-                                                "uri": "file:///Users/macbook/Library/Developer/Co...B2-407B-B279-538218BE21AC.jpg"
-                                            }
-                                            */
-
-                                            // adding taken photo to this.state.takenPhotos
-                                            this.setState({
-                                                takenPhotos: [...this.state.takenPhotos, photo]
-                                            });
-                                        }
-                                    }}
-                                >
-                                    <Icon
-                                        name="camera"
-                                        color="white"
-                                        size={65}
-                                    />
-                                </TouchableOpacity>
+                                {this._renderCameraButton()}
                             </View>
 
                             <View style={{
@@ -203,3 +212,5 @@ export default class CameraScreen extends React.Component {
         }
     }
 }
+
+export default connect(null, actions)(CameraScreen);
