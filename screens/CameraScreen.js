@@ -36,15 +36,13 @@ export default class CameraScreen extends React.Component {
                         type={this.state.type}>
 
                         <View style={{
-                            flex: 1,
                             marginTop: 25,
                             paddingLeft: 20,
                             paddingRight: 20,
-                            flexDirection: 'row'
+                            flexDirection: 'row',
+                            justifyContent: 'space-between'
                         }}>
-                            <View style={{
-                                alignSelf: 'flex-start'
-                            }}>
+                            <View>
                                 <TouchableOpacity
                                     onPress={() => {
                                         this.props.navigation.goBack();
@@ -52,6 +50,18 @@ export default class CameraScreen extends React.Component {
                                 >
                                     <Icon
                                         name="close"
+                                        color="white"
+                                        size={30}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+
+                            <View>
+                                <TouchableOpacity
+                                    onPress={() => {}}
+                                >
+                                    <Icon
+                                        name="flash-off"
                                         color="white"
                                         size={30}
                                     />
@@ -96,9 +106,9 @@ export default class CameraScreen extends React.Component {
                                     }}
                                 >
                                     <Icon
-                                        name="camera-alt"
+                                        name="camera"
                                         color="white"
-                                        size={50}
+                                        size={65}
                                     />
                                 </TouchableOpacity>
                             </View>
