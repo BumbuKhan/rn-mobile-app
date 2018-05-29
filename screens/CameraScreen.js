@@ -66,6 +66,26 @@ export default class CameraScreen extends React.Component {
         );
     };
 
+    _renderApplyButton = () => {
+        if (!this.state.takenPhotos.length) {
+            return;
+        }
+
+        return (<TouchableOpacity
+            style={{
+                marginBottom: 20
+            }}
+            onPress={() => {
+
+            }}
+        >
+            <Text style={{
+                color: 'white',
+                fontSize: 20
+            }}>Apply</Text>
+        </TouchableOpacity>);
+    }
+
     render() {
         const { hasCameraPermission } = this.state;
         if (hasCameraPermission === null) {
@@ -167,6 +187,14 @@ export default class CameraScreen extends React.Component {
                                         size={65}
                                     />
                                 </TouchableOpacity>
+                            </View>
+
+                            <View style={{
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
+                                flex: 0.33
+                            }}>
+                                {this._renderApplyButton()}
                             </View>
                         </View>
                     </Camera>
