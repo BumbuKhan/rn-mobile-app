@@ -786,6 +786,7 @@ class ActiveProjectScreen extends Component {
                                 size: 24
                             }}
                             onPress={() => {
+                                this.props.navigation.navigate('Camera');
                             }}
                         />
                     </View>
