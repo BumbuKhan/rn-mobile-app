@@ -1,5 +1,5 @@
-import {Font} from 'expo';
-import React, {Component} from 'react';
+import { Font } from 'expo';
+import React, { Component } from 'react';
 import {
     View,
     Modal,
@@ -12,12 +12,12 @@ import {
     Dimensions,
     TextInput
 } from 'react-native';
-import {Header, Icon, Button, CheckBox, Text, ListItem} from 'react-native-elements';
-import {connect} from 'react-redux';
+import { Header, Icon, Button, CheckBox, Text, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import ActionSheet from 'react-native-actionsheet';
 
-import {Menu, Plus, ListItemDescription, ListItemTitle} from '../../components/common';
+import { Menu, Plus, ListItemDescription, ListItemTitle } from '../../components/common';
 import * as actions from '../../actions';
 
 const images = [
@@ -39,10 +39,10 @@ const images = [
 ];
 
 class ActiveProjectScreen extends Component {
-    static navigationOptions = ({navigation, screenProps}) => {
+    static navigationOptions = ({ navigation, screenProps }) => {
         return {
             title: screenProps.t('drawer menu:active project'),
-            drawerIcon: ({tintColor}) => {
+            drawerIcon: ({ tintColor }) => {
                 return <Icon
                     name="timer"
                     color={tintColor}
@@ -70,7 +70,7 @@ class ActiveProjectScreen extends Component {
             'digital-7-italic': require('../../assets/fonts/digital-7-italic.ttf')
         });
 
-        this.setState({fontLoaded: true});
+        this.setState({ fontLoaded: true });
     }
 
     componentWillMount = () => {
@@ -174,7 +174,7 @@ class ActiveProjectScreen extends Component {
 
         return (
             <View style={[styles.mt30]}>
-                <View style={[styles.timerWrapper, {borderColor: '#e0e0e0', borderTopWidth: 1, borderBottomWidth: 1}]}>
+                <View style={[styles.timerWrapper, { borderColor: '#e0e0e0', borderTopWidth: 1, borderBottomWidth: 1 }]}>
                     <View>
                         {
                             this.state.fontLoaded ? (
@@ -227,10 +227,10 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         return (
-            <View style={{marginBottom: 20, marginTop: 20}}>
+            <View style={{ marginBottom: 20, marginTop: 20 }}>
                 <Button
                     title={t('screens:active project:remove project button text')}
                     buttonStyle={{
@@ -266,7 +266,7 @@ class ActiveProjectScreen extends Component {
                                     }
                                 },
                             ],
-                            {cancelable: false}
+                            { cancelable: false }
                         )
                     }}
                 />
@@ -278,7 +278,7 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         let title = (!this.state.isProjectCompleted) ?
             t('screens:active project:stop project for today button text') :
@@ -315,7 +315,7 @@ class ActiveProjectScreen extends Component {
                                     }
                                 },
                             ],
-                            {cancelable: false}
+                            { cancelable: false }
                         )
                     }}
                 />
@@ -327,7 +327,7 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         return (
             <View>
@@ -346,7 +346,7 @@ class ActiveProjectScreen extends Component {
     };
 
     _renderProjectTypeModal = () => {
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         return (<Modal
             animationType="slide"
@@ -373,7 +373,7 @@ class ActiveProjectScreen extends Component {
                         <Text h3>{t("screens:active project:project type modal title")}</Text>
                     </View>
 
-                    <View style={[styles.modalCheckboxWrapper, {borderTopWidth: 1, borderTopColor: '#e0e0e0'}]}>
+                    <View style={[styles.modalCheckboxWrapper, { borderTopWidth: 1, borderTopColor: '#e0e0e0' }]}>
                         <CheckBox
                             title='STN'
                             checked={this.props.activeProject.type === 'STN'}
@@ -462,7 +462,7 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         return (
             <View>
@@ -518,7 +518,7 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         return (
             <View>
@@ -565,7 +565,7 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         return (
             <View style={styles.mt30}>
@@ -612,7 +612,7 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         return (
             <View style={styles.mt30}>
@@ -659,7 +659,7 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         return (
             <View>
@@ -699,7 +699,7 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         return (
             <View style={[styles.mt30, {
@@ -718,7 +718,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                    molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                            molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
@@ -729,7 +729,7 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         return (
             <View>
@@ -737,12 +737,12 @@ class ActiveProjectScreen extends Component {
                     title="PHOTOS"
                 />
 
-                <View style={[styles.photoScrollView, {borderColor: '#e0e0e0', borderTopWidth: 1,}]}>
+                <View style={[styles.photoScrollView, { borderColor: '#e0e0e0', borderTopWidth: 1, }]}>
                     <ScrollView
                         horizontal
                         showsHorizontalScrollIndicator={false}
                     >
-                        <View style={{flexDirection: 'row', paddingLeft: 20, paddingRight: 20}}>
+                        <View style={{ flexDirection: 'row', paddingLeft: 20, paddingRight: 20 }}>
 
                             {images.map((image, i) => {
                                 return (
@@ -755,8 +755,8 @@ class ActiveProjectScreen extends Component {
                                             });
                                         }}>
                                         <Image
-                                            style={{width: 100, height: 80, marginRight: 5}}
-                                            source={{uri: image.url}}
+                                            style={{ width: 100, height: 80, marginRight: 5 }}
+                                            source={{ uri: image.url }}
                                         />
                                     </TouchableOpacity>
                                 )
@@ -765,36 +765,60 @@ class ActiveProjectScreen extends Component {
                     </ScrollView>
                 </View>
 
-                <View style={[styles.photoChooseBtnWrapper, {borderColor: '#e0e0e0', borderBottomWidth: 1}]}>
+                <View style={[styles.photoChooseBtnWrapper, { borderColor: '#e0e0e0', borderBottomWidth: 1 }]}>
                     <View style={{
                         borderTopColor: '#e0e0e0',
                         borderTopWidth: 1,
-                        flex: 1
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'space-around'
                     }}>
-                        <Button
-                            title="Add Photo"
-                            buttonStyle={{
-                                backgroundColor: 'transparent'
-                            }}
-                            textStyle={{
-                                fontSize: 18,
-                                color: '#496FC2'
-                            }}
-                            icon={{
-                                name: 'camera-alt',
-                                color: '#496FC2',
-                                size: 24
-                            }}
-                            onPress={() => {
-                                this.props.navigation.navigate('Camera');
-                            }}
-                        />
+                        <View>
+                            <Button
+                                title="Take Photo"
+                                buttonStyle={{
+                                    backgroundColor: 'transparent'
+                                }}
+                                textStyle={{
+                                    fontSize: 18,
+                                    color: '#496FC2'
+                                }}
+                                icon={{
+                                    name: 'camera-alt',
+                                    color: '#496FC2',
+                                    size: 24
+                                }}
+                                onPress={() => {
+                                    this.props.navigation.navigate('Camera');
+                                }}
+                            />
+                        </View>
+                        <View>
+                            <Button
+                                title="Browse"
+                                buttonStyle={{
+                                    backgroundColor: 'transparent'
+                                }}
+                                textStyle={{
+                                    fontSize: 18,
+                                    color: '#496FC2'
+                                }}
+                                icon={{
+                                    name: 'insert-photo',
+                                    color: '#496FC2',
+                                    size: 24
+                                }}
+                                onPress={() => {
+                                    
+                                }}
+                            />
+                        </View>
                     </View>
                 </View>
 
                 <Modal visible={this.state.isImageViewerVisible} transparent={true}>
                     <ImageViewer
-                        style={{flex: 1}}
+                        style={{ flex: 1 }}
                         imageUrls={images}
                         index={this.state.imageViewerCurIndex}
                         onSwipeDown={() => {
@@ -803,7 +827,7 @@ class ActiveProjectScreen extends Component {
                             });
                         }}
                         loadingRender={() => {
-                            const {height} = Dimensions.get('window');
+                            const { height } = Dimensions.get('window');
 
                             return (
                                 <View style={{
@@ -812,7 +836,7 @@ class ActiveProjectScreen extends Component {
                                     justifyContent: 'center',
                                     paddingTop: height / 2
                                 }}>
-                                    <ActivityIndicator/>
+                                    <ActivityIndicator />
                                 </View>
                             );
                         }}
@@ -846,7 +870,7 @@ class ActiveProjectScreen extends Component {
                                     )}
                                     centerComponent={{
                                         text: `${this.state.imageViewerCurIndex + 1}/${images.length}`,
-                                        style: {color: '#fff'}
+                                        style: { color: '#fff' }
                                     }}
                                 />
                             )
@@ -883,7 +907,7 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         return (
             <View>
@@ -911,10 +935,10 @@ class ActiveProjectScreen extends Component {
     };
 
     render() {
-        const {t} = this.props.screenProps;
+        const { t } = this.props.screenProps;
 
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 {this._renderProjectTypeModal()}
 
                 <Header
@@ -922,10 +946,10 @@ class ActiveProjectScreen extends Component {
                         barStyle: 'light-content'
                     }}
                     leftComponent={<Menu {...this.props} />}
-                    centerComponent={{text: t('drawer menu:active project'), style: {color: '#fff', fontSize: 20}}}
+                    centerComponent={{ text: t('drawer menu:active project'), style: { color: '#fff', fontSize: 20 } }}
                     rightComponent={(!this.props.activeProject.isCreated) ? <Plus onPress={() => {
                         this._setProjectTypeModalVisible(true);
-                    }}/> : null}
+                    }} /> : null}
                 />
                 <ScrollView style={{
                     backgroundColor: '#f7f7f7'
@@ -1043,8 +1067,8 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps({activeProject}) {
-    return {activeProject}
+function mapStateToProps({ activeProject }) {
+    return { activeProject }
 }
 
 export default connect(mapStateToProps, actions)(ActiveProjectScreen);
