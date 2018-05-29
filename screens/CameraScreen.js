@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, StatusBar} from 'react-native';
 import { Camera, Permissions } from 'expo';
 import { Icon } from 'react-native-elements';
 
@@ -27,6 +27,9 @@ export default class CameraScreen extends React.Component {
         } else {
             return (
                 <View style={{ flex: 1 }}>
+                    <StatusBar 
+                        hidden
+                    />
                     <Camera
                         ref={ref => this.camera = ref}
                         style={{ flex: 1 }}
@@ -98,6 +101,15 @@ export default class CameraScreen extends React.Component {
                                         size={50}
                                     />
                                 </TouchableOpacity>
+                            </View>
+
+                            <View style={{
+                                flex: 0.33,
+                                alignSelf: 'flex-end',
+                                alignItems: 'center',
+                                backgroundColor: 'yellow'
+                            }}>
+                                <Text>x</Text>
                             </View>
                         </View>
                     </Camera>
