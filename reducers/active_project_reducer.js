@@ -6,7 +6,8 @@ import {
     REMOVE_ACTIVE_PROJECT,
     ACTIVE_PROJECT_TOGGLE_TIMER,
     ACTIVE_PROJECT_UPDATE_TIMER,
-    ACTIVE_PROJECT_ADD_PHOTOS
+    ACTIVE_PROJECT_ADD_PHOTOS,
+    ACTIVE_PROJECT_REMOVE_PHOTO
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -93,7 +94,7 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
             return {...state, vastedTime: _vastedTime};
 
         case ACTIVE_PROJECT_ADD_PHOTOS:
-            // getting already existing photos...
+            // getting existing photos...
             const existingPhotos = [...state.photos];
 
             // adding new portion to the existing...
@@ -101,6 +102,15 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
 
             // returning new state after merge
             return {...state, photos: newPhotos};
+            
+        case ACTIVE_PROJECT_REMOVE_PHOTO:
+            // getting existing photos...
+            const photos = [...state.photos];
+
+            // removing the specified photo
+            const afterRemove = photos.filter((photo, i) => i !== action.payload);
+
+            return {...state, photos: afterRemove};
         default:
             return state;
     }

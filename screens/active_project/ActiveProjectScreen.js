@@ -852,7 +852,7 @@ class ActiveProjectScreen extends Component {
                                             onPress={() => {
                                                 this.setState({
                                                     isImageViewerVisible: false
-                                                })
+                                                });
                                             }}
                                         >
                                             <Icon
@@ -895,6 +895,18 @@ class ActiveProjectScreen extends Component {
                     destructiveButtonIndex={0}
                     onPress={(index) => {
                         console.log('index', index);
+
+                        if (index === 0) {
+                            // checking if the removed image was the last one, then closing the imageViewer
+                            if (this.props.activeProject.photos.length === 1) {
+                                this.setState({
+                                    isImageViewerVisible: false
+                                });
+                            }
+
+                            // deleting the image...
+                            this.props.removePhoto(this.state.imageViewerCurIndex);
+                        }
                     }}
                 />
             </View>

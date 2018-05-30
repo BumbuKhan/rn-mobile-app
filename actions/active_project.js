@@ -4,7 +4,8 @@ import {
     REMOVE_ACTIVE_PROJECT,
     ACTIVE_PROJECT_TOGGLE_TIMER,
     ACTIVE_PROJECT_UPDATE_TIMER,
-    ACTIVE_PROJECT_ADD_PHOTOS
+    ACTIVE_PROJECT_ADD_PHOTOS,
+    ACTIVE_PROJECT_REMOVE_PHOTO
 } from './types';
 
 export const toggleType = (type) => {
@@ -58,5 +59,12 @@ export const addPhotos = (photos) => {
     return {
         type: ACTIVE_PROJECT_ADD_PHOTOS,
         payload: photos
+    }
+}
+
+export const removePhoto = (index) => {
+    return {
+        type: ACTIVE_PROJECT_REMOVE_PHOTO,
+        payload: index
     }
 }
