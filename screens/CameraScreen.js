@@ -14,7 +14,8 @@ class CameraScreen extends React.Component {
     state = {
         hasCameraPermission: null,
         type: Camera.Constants.Type.back,
-        takenPhotos: []
+        takenPhotos: [],
+        flash: false // whether camera flashlight is turned no or not
     };
 
     async componentWillMount() {
@@ -142,7 +143,9 @@ class CameraScreen extends React.Component {
                     <Camera
                         ref={ref => this.camera = ref}
                         style={{ flex: 1 }}
-                        type={this.state.type}>
+                        type={this.state.type}
+                        flashMode={(this.state.flash? 'on': 'off')}
+                    >
 
                         <View style={{
                             marginTop: 25,
@@ -167,11 +170,15 @@ class CameraScreen extends React.Component {
 
                             <View>
                                 <TouchableOpacity
-                                    onPress={() => { }}
+                                    onPress={() => {
+                                        this.setState({
+                                            flash: !this.state.flash
+                                        });
+                                    }}
                                 >
                                     <Icon
-                                        name="flash-off"
-                                        color="white"
+                                        name={(this.state.flash ? 'flash-on' : 'flash-off')}
+                                        color={(this.state.flash? 'yellow': 'white')}
                                         size={30}
                                     />
                                 </TouchableOpacity>
