@@ -4,7 +4,7 @@ import { Camera, Permissions } from 'expo';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import * as actions from '../actions';
+import * as actions from '../../actions';
 
 class CameraScreen extends React.Component {
     static navigationOptions = {

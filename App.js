@@ -24,7 +24,7 @@ import ChooseClientsScreen from "./screens/active_project/ChooseClientsScreen";
 import ChooseProjectScreen from "./screens/active_project/ChooseProjectScreen";
 import ChooseTaskScreen from "./screens/active_project/ChooseTaskScreen";
 import ChooseActivityScreen from "./screens/active_project/ChooseActivityScreen";
-import CameraScreen from "./screens/CameraScreen";
+import CameraScreen from "./screens/active_project/CameraScreen";
 
 // we'll describe all screens that are shown to authenticated user here
 const AppStack = DrawerNavigator({
