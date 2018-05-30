@@ -1,6 +1,7 @@
-import { Font } from 'expo';
+import { Font, ImagePicker, Permissions } from 'expo';
 import React, { Component } from 'react';
 import {
+    Platform,
     View,
     Modal,
     StyleSheet,
@@ -19,6 +20,11 @@ import ActionSheet from 'react-native-actionsheet';
 
 import { Menu, Plus, ListItemDescription, ListItemTitle } from '../../components/common';
 import * as actions from '../../actions';
+
+const ImagePickerOptions = {
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    base64: true
+};
 
 class ActiveProjectScreen extends Component {
     static navigationOptions = ({ navigation, screenProps }) => {
@@ -44,7 +50,8 @@ class ActiveProjectScreen extends Component {
         isProjectCompleted: false, // will be replaced to the props from redux
         expensesNeeded: false,
         noticesNeeded: false,
-        moreStuffNeeded: false
+        moreStuffNeeded: false,
+        hasCameraRollPermission: null
     };
 
     async componentDidMount() {
@@ -55,7 +62,7 @@ class ActiveProjectScreen extends Component {
         this.setState({ fontLoaded: true });
     }
 
-    componentWillMount = () => {
+    componentWillMount = async () => {
         if (this.props.activeProject.isTimerActive) {
             this._initBlinkTimer();
         }
@@ -700,7 +707,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                        molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                                    molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
@@ -811,8 +818,23 @@ class ActiveProjectScreen extends Component {
                                     color: '#496FC2',
                                     size: 24
                                 }}
-                                onPress={() => {
+                                onPress={async () => {
+                                    // according to the https://docs.expo.io/versions/v27.0.0/sdk/imagepicker#expoimagepickerlaunchimagelibraryasyncoptions
+                                    // we should grant camera roll permission to pick up a photo from the user's gallery (only on IOS)
+                                    if (Platform.OS === 'ios') {
+                                        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+                                        this.setState({ hasCameraRollPermission: status === 'granted' });
+                                    }
 
+                                    const image = await ImagePicker.launchImageLibraryAsync(ImagePickerOptions);
+
+                                    if (!images.cancelled) {
+                                        const pickedImage = [{
+                                            base64: image.base64
+                                        }];
+
+                                        this.props.addPhotos(pickedImage);
+                                    }
                                 }}
                             />
                         </View>
