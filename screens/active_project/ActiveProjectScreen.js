@@ -51,7 +51,8 @@ class ActiveProjectScreen extends Component {
         expensesNeeded: false,
         noticesNeeded: false,
         moreStuffNeeded: false,
-        hasCameraRollPermission: null
+        hasCameraRollPermission: null,
+        barStyle: 'light-content'
     };
 
     async componentDidMount() {
@@ -819,6 +820,10 @@ class ActiveProjectScreen extends Component {
                                     size: 24
                                 }}
                                 onPress={async () => {
+                                    this.setState({
+                                        barStyle: 'dark-content'
+                                    });
+
                                     // according to the https://docs.expo.io/versions/v27.0.0/sdk/imagepicker#expoimagepickerlaunchimagelibraryasyncoptions
                                     // we should grant camera roll permission to pick up a photo from the user's gallery (only on IOS)
                                     if (Platform.OS === 'ios') {
@@ -827,6 +832,10 @@ class ActiveProjectScreen extends Component {
                                     }
 
                                     const image = await ImagePicker.launchImageLibraryAsync(ImagePickerOptions);
+
+                                    this.setState({
+                                        barStyle: 'light-content'
+                                    });
 
                                     if (!image.cancelled) {
                                         const pickedImage = [{
@@ -980,7 +989,7 @@ class ActiveProjectScreen extends Component {
 
                 <Header
                     statusBarProps={{
-                        barStyle: 'light-content'
+                        barStyle: this.state.barStyle
                     }}
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{ text: t('drawer menu:active project'), style: { color: '#fff', fontSize: 20 } }}
