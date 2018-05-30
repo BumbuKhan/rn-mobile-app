@@ -828,7 +828,7 @@ class ActiveProjectScreen extends Component {
 
                                     const image = await ImagePicker.launchImageLibraryAsync(ImagePickerOptions);
 
-                                    if (!images.cancelled) {
+                                    if (!image.cancelled) {
                                         const pickedImage = [{
                                             base64: image.base64
                                         }];
