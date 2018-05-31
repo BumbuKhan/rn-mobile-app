@@ -439,7 +439,7 @@ class EditProfileScreen extends Component {
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title={t('screens:my account:edit profile:address')}
                         titleStyle={styles.listItemTitleStyle}
-                        subtitle={this.props.user.address || 'Berlin, main str. 34/2'}
+                        subtitle={this.props.user.address || 'Not provided'}
                         subtitleStyle={styles.listItemSubtitleStyle}
                         hideChevron={true}
                     />
@@ -448,7 +448,7 @@ class EditProfileScreen extends Component {
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title={t('screens:my account:edit profile:phone')}
                         titleStyle={styles.listItemTitleStyle}
-                        subtitle={this.props.user.phone || '+123 456 789 10'}
+                        subtitle={this.props.user.tel || 'Not provided'}
                         subtitleStyle={styles.listItemSubtitleStyle}
                         hideChevron={true}
                     />
@@ -457,7 +457,7 @@ class EditProfileScreen extends Component {
                         containerStyle={[styles.listItem, styles.listItemBorder]}
                         title={t('screens:my account:edit profile:birth date')}
                         titleStyle={styles.listItemTitleStyle}
-                        subtitle={this.props.user.birth_date || '24 June 1993'}
+                        subtitle={this.props.user.birthday || 'Not provided'}
                         subtitleStyle={styles.listItemSubtitleStyle}
                         hideChevron={true}
                     />
