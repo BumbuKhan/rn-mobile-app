@@ -942,7 +942,7 @@ class ActiveProjectScreen extends Component {
                             // ImageViewer shows nothing (black background to be precise) when removing an image with index > 1
                             // In order to solve this issue we should kinda swipe image to left by force...
                             // we can achive that by decrementing this.state.imageViewerCurIndex
-                            if (this.state.imageViewerCurIndex > 1) {
+                            if (this.state.imageViewerCurIndex >= 1) {
                                 console.log('we should swipe image to left by force...');
                                 this.setState({
                                     imageViewerCurIndex: this.state.imageViewerCurIndex - 1
