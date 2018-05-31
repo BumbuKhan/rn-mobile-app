@@ -929,6 +929,7 @@ class ActiveProjectScreen extends Component {
 
                         if (index === 0) {
                             // checking if the removed image was the last one, then closing the imageViewer
+                            // since there is no image to look through
                             if (this.props.activeProject.photos.length === 1) {
                                 this.setState({
                                     isImageViewerVisible: false
@@ -937,6 +938,16 @@ class ActiveProjectScreen extends Component {
 
                             // deleting the image...
                             this.props.removePhoto(this.state.imageViewerCurIndex);
+
+                            // ImageViewer shows nothing (black background to be precise) when removing an image with index > 1
+                            // In order to solve this issue we should kinda swipe image to left by force...
+                            // we can achive that by decrementing this.state.imageViewerCurIndex
+                            if (this.state.imageViewerCurIndex > 1) {
+                                console.log('we should swipe image to left by force...');
+                                this.setState({
+                                    imageViewerCurIndex: this.state.imageViewerCurIndex - 1
+                                });
+                            }
                         }
                     }}
                 />
