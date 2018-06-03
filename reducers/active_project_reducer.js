@@ -115,7 +115,7 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
 
         case ACTIVE_PROJECT_CLEAN:
             // cleaning out the activeProject key in redux store
-            return {};
+            return INITIAL_STATE;
         default:
             return state;
     }
