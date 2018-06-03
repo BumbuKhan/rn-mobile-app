@@ -271,7 +271,7 @@ class ActiveProjectScreen extends Component {
         const { t } = this.props.screenProps;
 
         let title = (!this.state.isProjectCompleted) ?
-            t('screens:active project:stop project for today button text') :
+            t('screens:active project:stop project temporarily button text') :
             t('screens:active project:stop project button text');
 
         let backgroundColor = (!this.state.isProjectCompleted) ? '#0ec86c' : 'red';
