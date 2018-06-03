@@ -12,6 +12,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
+    id: null,
     type: 'STN',
     isCreated: false,
     isTimerActive: false,
@@ -48,8 +49,9 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
             return {...state, type: action.payload};
 
         case CREATE_ACTIVE_PROJECT:
-            return {...state, isCreated: true};
+            return {...state, id: getUniqueId(), isCreated: true};
 
+        // this case will be removed, most likely
         case REMOVE_ACTIVE_PROJECT:
             return INITIAL_STATE;
 
@@ -119,4 +121,10 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
         default:
             return state;
     }
+}
+
+function getUniqueId() {
+    const id = moment().unix();
+
+    return id;
 }
