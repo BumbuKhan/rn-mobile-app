@@ -7,7 +7,8 @@ import {
     ACTIVE_PROJECT_TOGGLE_TIMER,
     ACTIVE_PROJECT_UPDATE_TIMER,
     ACTIVE_PROJECT_ADD_PHOTOS,
-    ACTIVE_PROJECT_REMOVE_PHOTO
+    ACTIVE_PROJECT_REMOVE_PHOTO,
+    ACTIVE_PROJECT_CLEAN
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -111,6 +112,10 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
             const afterRemove = photos.filter((photo, i) => i !== action.payload);
 
             return {...state, photos: afterRemove};
+
+        case ACTIVE_PROJECT_CLEAN:
+            // cleaning out the activeProject key in redux store
+            return {};
         default:
             return state;
     }

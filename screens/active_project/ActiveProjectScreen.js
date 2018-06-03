@@ -301,7 +301,7 @@ class ActiveProjectScreen extends Component {
                                 {
                                     text: t('common:ok'),
                                     onPress: () => {
-                                        //this.props.saveProject()
+                                        this._stopProjectTemporirly();
                                     }
                                 },
                             ],
@@ -310,6 +310,11 @@ class ActiveProjectScreen extends Component {
                     }}
                 />
             </View>)
+    };
+
+    _stopProjectTemporirly = () => {
+        // cleaning out the activeProject...
+        this.props.cleanProject();
     };
 
     _renderNoActiveProjectText = () => {
