@@ -724,7 +724,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                                                                        molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                                                                                        molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
@@ -1014,6 +1014,9 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
+        // taking only 5 last projects...
+        const _projects = this.props.projects.slice(0, 5);
+
         return <View style={{
             marginTop: 50
         }}>
@@ -1021,59 +1024,45 @@ class ActiveProjectScreen extends Component {
                 title="RECENTLY ACTIVE PROJECTS"
             />
 
-            <ListItem
-                containerStyle={[styles.listItem, styles.listItemBorder]}
-                title="Project 1"
-                subtitle="Activity 1 - Task 1"
-                titleStyle={styles.listItemTitleStyle}
-                rightTitle="5 min ago"
-            />
-            <ListItem
-                containerStyle={[styles.listItem]}
-                title="Project 2"
-                subtitle="Activity 2 - Task 2"
-                titleStyle={styles.listItemTitleStyle}
-                rightTitle="15 min ago"
-            />
-            <ListItem
-                containerStyle={[styles.listItem]}
-                title="Project 3"
-                subtitle="Activity 3 - Task 3"
-                titleStyle={styles.listItemTitleStyle}
-                rightTitle="Yesterday"
-            />
-            <ListItem
-                containerStyle={[styles.listItem]}
-                title="Project 4"
-                subtitle="Activity 4 - Task 4"
-                titleStyle={styles.listItemTitleStyle}
-                rightTitle="Yesterday"
-            />
-            <ListItem
-                containerStyle={[styles.listItem]}
-                title="Project 4"
-                subtitle="Activity 4 - Task 4"
-                titleStyle={styles.listItemTitleStyle}
-                rightTitle="2 day(s) ago"
-            />
+            {_projects.map((project, i) => {
+                const _styles = [styles.listItem];
 
-            <View style={{
-                marginTop: 20,
-                marginLeft: 5,
-                marginRight: 5
-            }}>
-                <Button
-                    title="View All Projects"
-                    textStyle={{
-                        fontSize: 18
-                    }}
-                    buttonStyle={{
-                        backgroundColor: "#496FC2",
-                        borderWidth: 0,
-                        borderRadius: 3
-                    }}
-                />
-            </View>
+                if (i == 0) {
+                    _styles.push(styles.listItemBorder);
+                }
+
+                return (
+                    <ListItem
+                        key={i}
+                        containerStyle={_styles}
+                        title="Project 1"
+                        subtitle="Activity 1 - Task 1"
+                        titleStyle={styles.listItemTitleStyle}
+                        rightTitle="5 min ago"
+                    />
+                );
+            })}
+
+            {(this.props.projects.length > 5) && (
+                <View style={{
+                    marginTop: 20,
+                    marginBottom: 20,
+                    marginLeft: 5,
+                    marginRight: 5
+                }}>
+                    <Button
+                        title={`View All Projects (${this.props.projects.length})`}
+                        textStyle={{
+                            fontSize: 18
+                        }}
+                        buttonStyle={{
+                            backgroundColor: "#496FC2",
+                            borderWidth: 0,
+                            borderRadius: 3
+                        }}
+                    />
+                </View>
+            )}
         </View>
     };
 
