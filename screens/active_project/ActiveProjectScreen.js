@@ -724,7 +724,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                                                                molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                                                                        molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
@@ -1009,7 +1009,7 @@ class ActiveProjectScreen extends Component {
 
     _renderRecentlyActiveProjects = () => {
         const { projects, activeProject } = this.props;
-        
+
         if (activeProject.isCreated || !projects.length) {
             return;
         }
@@ -1056,6 +1056,24 @@ class ActiveProjectScreen extends Component {
                 titleStyle={styles.listItemTitleStyle}
                 rightTitle="2 day(s) ago"
             />
+
+            <View style={{
+                marginTop: 20,
+                marginLeft: 5,
+                marginRight: 5
+            }}>
+                <Button
+                    title="View All Projects"
+                    textStyle={{
+                        fontSize: 18
+                    }}
+                    buttonStyle={{
+                        backgroundColor: "#496FC2",
+                        borderWidth: 0,
+                        borderRadius: 3
+                    }}
+                />
+            </View>
         </View>
     };
 
