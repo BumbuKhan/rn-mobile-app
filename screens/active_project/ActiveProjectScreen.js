@@ -313,6 +313,11 @@ class ActiveProjectScreen extends Component {
     };
 
     _stopProjectTemporarily = () => {
+        // first we should stop timer if it's running...
+        if (this.props.activeProject.isTimerActive) {
+            this.props.toggleTimer(false);
+        }
+
         // cleaning out the activeProject...
         this.props.cleanProject();
     };
