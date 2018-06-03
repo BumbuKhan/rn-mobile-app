@@ -11,3 +11,6 @@ export const ACTIVE_PROJECT_UPDATE_TIMER = 'active_project_UPDATE_timer';
 export const ACTIVE_PROJECT_ADD_PHOTOS = 'active_project_add_photos';
 export const ACTIVE_PROJECT_REMOVE_PHOTO = 'active_project_remove_photos';
 export const ACTIVE_PROJECT_CLEAN = 'active_project_clean';
+
+// adding project to 'projects' array in the redux store 
+export const ADD_PROJECT = 'add_project';

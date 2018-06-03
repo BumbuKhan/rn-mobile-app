@@ -447,7 +447,13 @@ class ActiveProjectScreen extends Component {
                             fontSize: 18
                         }}
                         onPress={() => {
+                            // creating the project
                             this.props.createProject();
+
+                            // adding created project to 'projects' array
+                            this.props.addProject(this.props.activeProject);
+
+                            // closing modal window
                             this._setProjectTypeModalVisible(false);
                         }}
                     />
@@ -718,7 +724,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                                    molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                                                                molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
@@ -1001,6 +1007,58 @@ class ActiveProjectScreen extends Component {
         );
     };
 
+    _renderRecentlyActiveProjects = () => {
+        const { projects, activeProject } = this.props;
+        
+        if (activeProject.isCreated || !projects.length) {
+            return;
+        }
+
+        return <View style={{
+            marginTop: 50
+        }}>
+            <ListItemTitle
+                title="RECENTLY ACTIVE PROJECTS"
+            />
+
+            <ListItem
+                containerStyle={[styles.listItem, styles.listItemBorder]}
+                title="Project 1"
+                subtitle="Activity 1 - Task 1"
+                titleStyle={styles.listItemTitleStyle}
+                rightTitle="5 min ago"
+            />
+            <ListItem
+                containerStyle={[styles.listItem]}
+                title="Project 2"
+                subtitle="Activity 2 - Task 2"
+                titleStyle={styles.listItemTitleStyle}
+                rightTitle="15 min ago"
+            />
+            <ListItem
+                containerStyle={[styles.listItem]}
+                title="Project 3"
+                subtitle="Activity 3 - Task 3"
+                titleStyle={styles.listItemTitleStyle}
+                rightTitle="Yesterday"
+            />
+            <ListItem
+                containerStyle={[styles.listItem]}
+                title="Project 4"
+                subtitle="Activity 4 - Task 4"
+                titleStyle={styles.listItemTitleStyle}
+                rightTitle="Yesterday"
+            />
+            <ListItem
+                containerStyle={[styles.listItem]}
+                title="Project 4"
+                subtitle="Activity 4 - Task 4"
+                titleStyle={styles.listItemTitleStyle}
+                rightTitle="2 day(s) ago"
+            />
+        </View>
+    };
+
     render() {
         const { t } = this.props.screenProps;
 
@@ -1022,6 +1080,7 @@ class ActiveProjectScreen extends Component {
                     backgroundColor: '#f7f7f7'
                 }}>
                     {this._renderNoActiveProjectText()}
+                    {this._renderRecentlyActiveProjects()}
 
                     {this._renderTimer()}
                     {this._renderProjectType()}
@@ -1134,8 +1193,8 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps({ activeProject }) {
-    return { activeProject }
+function mapStateToProps({ activeProject, projects }) {
+    return { activeProject, projects }
 }
 
 export default connect(mapStateToProps, actions)(ActiveProjectScreen);
