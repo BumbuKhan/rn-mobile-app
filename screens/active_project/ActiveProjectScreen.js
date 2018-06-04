@@ -254,7 +254,11 @@ class ActiveProjectScreen extends Component {
                                         this._removeUpdateTimer();
                                         this._removeBlinkTimer();
 
-                                        this.props.removeProject();
+                                        // removing this project from 'projects' key
+                                        this.props.deleteProject(this.props.activeProject.id);
+
+                                        // removing active project from 'activeProject' key
+                                        this.props.removeActiveProject();
                                     }
                                 },
                             ],

@@ -23,7 +23,7 @@ export const createProject = () => {
     }
 };
 
-export const removeProject = () => {
+export const removeActiveProject = () => {
     return {
         type: REMOVE_ACTIVE_PROJECT
     }
