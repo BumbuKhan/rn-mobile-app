@@ -454,14 +454,12 @@ class ActiveProjectScreen extends Component {
                             fontSize: 18
                         }}
                         onPress={() => {
-                            console.log('creating the project...');
                             // creating the project
                             this.props.createProject();
 
                             // TODO: I should come up with a better solution!
                             // waiting for a sec, while project is creating...
                             setTimeout(() => {
-                                console.log('this.props.activeProject', this.props.activeProject);
                                 // adding created project to 'projects' array
                                 this.props.addProject(this.props.activeProject);
                             }, 1000);
@@ -737,7 +735,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                                                                                                molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                                                                                                        molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
@@ -1045,14 +1043,20 @@ class ActiveProjectScreen extends Component {
                 }
 
                 return (
-                    <ListItem
+                    <TouchableOpacity
                         key={i}
-                        containerStyle={_styles}
-                        title="Project 1"
-                        subtitle="Activity 1 - Task 1"
-                        titleStyle={styles.listItemTitleStyle}
-                        rightTitle="5 min ago"
-                    />
+                        onPress={() => {
+                            this.props.rehydrateProject(project);
+                        }}
+                    >
+                        <ListItem
+                            containerStyle={_styles}
+                            title="Project 1"
+                            subtitle="Activity 1 - Task 1"
+                            titleStyle={styles.listItemTitleStyle}
+                            rightTitle="5 min ago"
+                        />
+                    </TouchableOpacity>
                 );
             })}
 

@@ -6,7 +6,8 @@ import {
     ACTIVE_PROJECT_UPDATE_TIMER,
     ACTIVE_PROJECT_ADD_PHOTOS,
     ACTIVE_PROJECT_REMOVE_PHOTO,
-    ACTIVE_PROJECT_CLEAN
+    ACTIVE_PROJECT_CLEAN,
+    REHYDRATE_PROJECT
 } from './types';
 
 export const toggleType = (type) => {
@@ -73,5 +74,12 @@ export const removePhoto = (index) => {
 export const cleanProject = () => {
     return {
         type: ACTIVE_PROJECT_CLEAN
+    }
+}
+
+export const rehydrateProject = (project) => {
+    return {
+        type: REHYDRATE_PROJECT,
+        payload: project
     }
 }

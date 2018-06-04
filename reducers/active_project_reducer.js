@@ -8,7 +8,8 @@ import {
     ACTIVE_PROJECT_UPDATE_TIMER,
     ACTIVE_PROJECT_ADD_PHOTOS,
     ACTIVE_PROJECT_REMOVE_PHOTO,
-    ACTIVE_PROJECT_CLEAN
+    ACTIVE_PROJECT_CLEAN,
+    REHYDRATE_PROJECT
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -124,6 +125,9 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
         case ACTIVE_PROJECT_CLEAN:
             // cleaning out the activeProject key in redux store
             return INITIAL_STATE;
+
+        case REHYDRATE_PROJECT:
+            return action.payload;
         default:
             return state;
     }

@@ -1,4 +1,7 @@
-import {ADD_PROJECT, REMOVE_PROJECT} from '../actions/types';
+import {
+    ADD_PROJECT,
+    REMOVE_PROJECT
+} from '../actions/types';
 
 const INITIAL_STATE = [];
 
