@@ -1,3 +1,5 @@
+import _ from 'lodash';
+import moment from 'moment';
 import { Font, ImagePicker, Permissions } from 'expo';
 import React, { Component } from 'react';
 import {
@@ -1025,8 +1027,13 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
+        let _projects = [...this.props.projects];
+
+        // sorting by modifiedAt key...
+        _projects = _.orderBy(_projects, ['modifiedAt'], ['desc']);
+
         // taking only 5 last projects...
-        const _projects = this.props.projects.slice(0, 5);
+         _projects = _projects.slice(0, 5);
 
         return <View style={{
             marginTop: 50
@@ -1054,7 +1061,7 @@ class ActiveProjectScreen extends Component {
                             title="Project 1"
                             subtitle="Activity 1 - Task 1"
                             titleStyle={styles.listItemTitleStyle}
-                            rightTitle="5 min ago"
+                            rightTitle={`${project.createdAt}`}
                         />
                     </TouchableOpacity>
                 );
