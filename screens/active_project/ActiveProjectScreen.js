@@ -54,7 +54,8 @@ class ActiveProjectScreen extends Component {
         noticesNeeded: false,
         moreStuffNeeded: false,
         hasCameraRollPermission: null,
-        barStyle: 'light-content'
+        barStyle: 'light-content',
+        recentlyActiveProjectLimit: 5 // by default we're displaying only 5 items
     };
 
     async componentDidMount() {
@@ -741,7 +742,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                                                                                                        molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                                                                                                            molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
@@ -1036,11 +1037,14 @@ class ActiveProjectScreen extends Component {
         // sorting by modifiedAt key...
         _projects = _.orderBy(_projects, ['modifiedAt'], ['desc']);
 
-        // taking only 5 last projects...
-         _projects = _projects.slice(0, 5);
+        if (this.state.recentlyActiveProjectLimit) {
+            // taking only 5 last projects...
+            _projects = _projects.slice(0, 5);
+        }
 
         return <View style={{
-            marginTop: 50
+            marginTop: 50,
+            marginBottom: 50
         }}>
             <ListItemTitle
                 title="RECENTLY ACTIVE PROJECTS"
@@ -1071,7 +1075,7 @@ class ActiveProjectScreen extends Component {
                 );
             })}
 
-            {(this.props.projects.length > 5) && (
+            {(this.props.projects.length > 5 && this.state.recentlyActiveProjectLimit) && (
                 <View style={{
                     marginTop: 20,
                     marginBottom: 20,
@@ -1087,6 +1091,11 @@ class ActiveProjectScreen extends Component {
                             backgroundColor: "#496FC2",
                             borderWidth: 0,
                             borderRadius: 3
+                        }}
+                        onPress={() => {
+                            this.setState({
+                                recentlyActiveProjectLimit: null
+                            })
                         }}
                     />
                 </View>
