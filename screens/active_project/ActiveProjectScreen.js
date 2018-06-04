@@ -55,7 +55,7 @@ class ActiveProjectScreen extends Component {
         moreStuffNeeded: false,
         hasCameraRollPermission: null,
         barStyle: 'light-content',
-        recentlyActiveProjectLimit: 5 // by default we're displaying only 5 items
+        recentlyActiveProjectShowAll: false // by default we're not displaying all list
     };
 
     async componentDidMount() {
@@ -1037,7 +1037,7 @@ class ActiveProjectScreen extends Component {
         // sorting by modifiedAt key...
         _projects = _.orderBy(_projects, ['modifiedAt'], ['desc']);
 
-        if (this.state.recentlyActiveProjectLimit) {
+        if (!this.state.recentlyActiveProjectShowAll) {
             // taking only 5 last projects...
             _projects = _projects.slice(0, 5);
         }
@@ -1075,7 +1075,7 @@ class ActiveProjectScreen extends Component {
                 );
             })}
 
-            {(this.props.projects.length > 5 && this.state.recentlyActiveProjectLimit) && (
+            {(this.props.projects.length > 5 && !this.state.recentlyActiveProjectShowAll) && (
                 <View style={{
                     marginTop: 20,
                     marginBottom: 20,
@@ -1083,7 +1083,7 @@ class ActiveProjectScreen extends Component {
                     marginRight: 5
                 }}>
                     <Button
-                        title={`View All Projects (${this.props.projects.length})`}
+                        title="View All Projects"
                         textStyle={{
                             fontSize: 18
                         }}
@@ -1094,7 +1094,7 @@ class ActiveProjectScreen extends Component {
                         }}
                         onPress={() => {
                             this.setState({
-                                recentlyActiveProjectLimit: null
+                                recentlyActiveProjectShowAll: true
                             })
                         }}
                     />
