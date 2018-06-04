@@ -41,7 +41,9 @@ const INITIAL_STATE = {
             ...
         ]
     */
-    photos: []
+    photos: [],
+    createdAt: null,
+    modifiedAt: null
 };
 
 export default activeProjectReducer = (state = INITIAL_STATE, action) => {
@@ -50,10 +52,14 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
             return { ...state, type: action.payload };
 
         case CREATE_ACTIVE_PROJECT:
+            const now = moment().unix();
+
             const newProject = {
                 ...state,
                 id: getUniqueId(),
-                isCreated: true
+                isCreated: true,
+                createdAt: now,
+                modifiedAt: now
             };
 
             return newProject;
