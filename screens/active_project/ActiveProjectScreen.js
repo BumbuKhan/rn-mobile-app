@@ -254,10 +254,10 @@ class ActiveProjectScreen extends Component {
                                         this._removeUpdateTimer();
                                         this._removeBlinkTimer();
 
-                                        // removing this project from 'projects' key
+                                        // removing this project from redux 'projects' key
                                         this.props.deleteProject(this.props.activeProject.id);
 
-                                        // removing active project from 'activeProject' key
+                                        // removing active project from redux 'activeProject' key
                                         this.props.removeActiveProject();
                                     }
                                 },
