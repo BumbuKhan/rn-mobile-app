@@ -318,6 +318,11 @@ class ActiveProjectScreen extends Component {
             this.props.toggleTimer(false);
         }
 
+        // we should find the project (that is about to be stopped) in 'projects' key
+        // and remove it, then we should add again, since the information (timer data, photos and e.t.c)
+        // might be updated...
+        this.props.deleteProject(this.props.activeProject.id);
+
         // cleaning out the activeProject...
         this.props.cleanProject();
     };
@@ -724,7 +729,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                                                                                        molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                                                                                            molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
