@@ -30,7 +30,9 @@ REDUX_STORE = {
             ...
         ],
         vastedTime: <Number [in seconds]>,
-        photos: []
+        photos: [],
+        createdAt: <UNIX timestamp>,
+        modifiedAt: <UNIX timestamp>
     },
     projects: []
 }

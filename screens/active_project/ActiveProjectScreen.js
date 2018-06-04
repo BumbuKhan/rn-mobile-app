@@ -1061,7 +1061,7 @@ class ActiveProjectScreen extends Component {
                             title="Project 1"
                             subtitle="Activity 1 - Task 1"
                             titleStyle={styles.listItemTitleStyle}
-                            rightTitle={`${project.createdAt}`}
+                            rightTitle={moment.unix(project.modifiedAt).fromNow()}
                         />
                     </TouchableOpacity>
                 );
