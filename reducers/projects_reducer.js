@@ -9,9 +9,9 @@ export default projectsReducer = (state = INITIAL_STATE, action) => {
 
         case REMOVE_PROJECT:
             const _projects = [...state];
-            
+
             return _projects.filter((project) => {
-                return project.id !== action.payload;
+                return project.id != action.payload;
             });
 
         default:

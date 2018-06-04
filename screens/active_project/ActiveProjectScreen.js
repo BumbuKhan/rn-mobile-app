@@ -322,6 +322,8 @@ class ActiveProjectScreen extends Component {
         // and remove it, then we should add again, since the information (timer data, photos and e.t.c)
         // might be updated...
         this.props.deleteProject(this.props.activeProject.id);
+        // adding again...
+        this.props.addProject(this.props.activeProject);
 
         // cleaning out the activeProject...
         this.props.cleanProject();
@@ -452,11 +454,17 @@ class ActiveProjectScreen extends Component {
                             fontSize: 18
                         }}
                         onPress={() => {
+                            console.log('creating the project...');
                             // creating the project
                             this.props.createProject();
 
-                            // adding created project to 'projects' array
-                            this.props.addProject(this.props.activeProject);
+                            // TODO: I should come up with a better solution!
+                            // waiting for a sec, while project is creating...
+                            setTimeout(() => {
+                                console.log('this.props.activeProject', this.props.activeProject);
+                                // adding created project to 'projects' array
+                                this.props.addProject(this.props.activeProject);
+                            }, 1000);
 
                             // closing modal window
                             this._setProjectTypeModalVisible(false);
@@ -729,7 +737,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                                                                                            molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                                                                                                molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );

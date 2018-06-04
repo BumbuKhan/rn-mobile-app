@@ -46,10 +46,16 @@ const INITIAL_STATE = {
 export default activeProjectReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case TOGGLE_ACTIVE_PROJECT_TYPE:
-            return {...state, type: action.payload};
+            return { ...state, type: action.payload };
 
         case CREATE_ACTIVE_PROJECT:
-            return {...state, id: getUniqueId(), isCreated: true};
+            const newProject = {
+                ...state,
+                id: getUniqueId(),
+                isCreated: true
+            };
+
+            return newProject;
 
         // this case will be removed, most likely
         case REMOVE_ACTIVE_PROJECT:
@@ -81,20 +87,20 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
                 newState.timers = curTimers;
             }
 
-            return {...state, ...newState};
+            return { ...state, ...newState };
 
         case ACTIVE_PROJECT_UPDATE_TIMER:
             let _vastedTime = 0;
 
             // looping through all state.timers and calculating deltas between stoppedAt - startedAt
             state.timers.map((timer) => {
-                let stoppedAt = (timer.stoppedAt)? timer.stoppedAt: moment().unix();
+                let stoppedAt = (timer.stoppedAt) ? timer.stoppedAt : moment().unix();
 
                 let deltaSeconds = stoppedAt - timer.startedAt;
                 _vastedTime += deltaSeconds;
             });
 
-            return {...state, vastedTime: _vastedTime};
+            return { ...state, vastedTime: _vastedTime };
 
         case ACTIVE_PROJECT_ADD_PHOTOS:
             // getting existing photos...
@@ -104,8 +110,8 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
             const newPhotos = [...existingPhotos, ...action.payload];
 
             // returning new state after merge
-            return {...state, photos: newPhotos};
-            
+            return { ...state, photos: newPhotos };
+
         case ACTIVE_PROJECT_REMOVE_PHOTO:
             // getting existing photos...
             const photos = [...state.photos];
@@ -113,7 +119,7 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
             // removing the specified photo
             const afterRemove = photos.filter((photo, i) => i !== action.payload);
 
-            return {...state, photos: afterRemove};
+            return { ...state, photos: afterRemove };
 
         case ACTIVE_PROJECT_CLEAN:
             // cleaning out the activeProject key in redux store
