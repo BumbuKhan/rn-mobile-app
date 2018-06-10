@@ -6,6 +6,7 @@ import {FormInput, Text, Button} from 'react-native-elements';
 import {logIn} from '../../actions';
 import axios from '../../helpers/axios';
 import {setCurLang} from '../../actions';
+import {LOGIN} from '../../helpers/api_endpoints';
 
 class SignInScreen extends Component {
     state = {
@@ -23,7 +24,7 @@ class SignInScreen extends Component {
         });
 
         axios
-            .post('/login', {
+            .post(LOGIN, {
                 email: this.state.email, // qurban.qurbanov93@gmail.com
                 password: this.state.password // 12345678
             })

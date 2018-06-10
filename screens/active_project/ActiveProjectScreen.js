@@ -58,14 +58,6 @@ class ActiveProjectScreen extends Component {
         recentlyActiveProjectShowAll: false // by default we're not displaying all list
     };
 
-    async componentDidMount() {
-        await Font.loadAsync({
-            'digital-7-italic': require('../../assets/fonts/digital-7-italic.ttf')
-        });
-
-        this.setState({ fontLoaded: true });
-    }
-
     componentWillMount = async () => {
         if (this.props.activeProject.isTimerActive) {
             this._initBlinkTimer();
@@ -75,6 +67,14 @@ class ActiveProjectScreen extends Component {
             this._initUpdateTimer();
         }
     };
+
+    async componentDidMount() {
+        await Font.loadAsync({
+            'digital-7-italic': require('../../assets/fonts/digital-7-italic.ttf')
+        });
+
+        this.setState({ fontLoaded: true });
+    }
 
     componentWillReceiveProps = (props) => {
         if (props.activeProject.isTimerActive) {
