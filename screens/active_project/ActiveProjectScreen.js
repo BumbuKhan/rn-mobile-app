@@ -22,6 +22,8 @@ import ActionSheet from 'react-native-actionsheet';
 
 import { Menu, Plus, ListItemDescription, ListItemTitle } from '../../components/common';
 import * as actions from '../../actions';
+import { PROJECT_CATEGORIES } from '../../helpers/api_endpoints';
+import axios from '../../helpers/axios';
 
 const ImagePickerOptions = {
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -58,7 +60,7 @@ class ActiveProjectScreen extends Component {
         recentlyActiveProjectShowAll: false // by default we're not displaying all list
     };
 
-    componentWillMount = async () => {
+    componentWillMount = () => {
         if (this.props.activeProject.isTimerActive) {
             this._initBlinkTimer();
         }
@@ -66,6 +68,45 @@ class ActiveProjectScreen extends Component {
         if (this.props.activeProject.isTimerActive) {
             this._initUpdateTimer();
         }
+
+        // fetching project categories '/api/categories'
+        const authStr = `Bearer ${this.props.user.token.access_token}`;
+        axios
+            .get(PROJECT_CATEGORIES, { headers: { Authorization: authStr } })
+            .then((_response) => {
+                const response = _response.data;
+                const { data } = response;
+
+                if (!response.success) {
+                    throw new Error('Something went wrong, please try later');
+                }
+
+                console.log('updating cat data...');
+                console.log('data', data);
+                this.props.updateCategories(data);
+            })
+            .catch((error) => {
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                } else if (error.request) {
+                    // No internet connection...
+                    Alert.alert(
+                        t("common:no internet connection"),
+                        t("common:please make sure that you have got an internet connection"),
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                }
+                            },
+                        ],
+                        { cancelable: false }
+                    );
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error);
+                }
+            });
     };
 
     async componentDidMount() {
@@ -132,7 +173,7 @@ class ActiveProjectScreen extends Component {
         }
     };
 
-    _setProjectTypeModalVisible(visible) {
+    _setProjectCategoriesModalVisible(visible) {
         this.setState({
             projectTypeModalVisible: visible
         });
@@ -359,7 +400,7 @@ class ActiveProjectScreen extends Component {
         );
     };
 
-    _renderProjectTypeModal = () => {
+    _renderProjectCategoriesModal = () => {
         const { t } = this.props.screenProps;
 
         return (<Modal
@@ -373,7 +414,7 @@ class ActiveProjectScreen extends Component {
                     paddingLeft: 15
                 }}>
                     <TouchableOpacity onPress={() => {
-                        this._setProjectTypeModalVisible(false)
+                        this._setProjectCategoriesModalVisible(false)
                     }}>
                         <Icon
                             name='close'
@@ -387,7 +428,36 @@ class ActiveProjectScreen extends Component {
                         <Text h3>{t("screens:active project:project type modal title")}</Text>
                     </View>
 
-                    <View style={[styles.modalCheckboxWrapper, { borderTopWidth: 1, borderTopColor: '#e0e0e0' }]}>
+                    {this.props.projectCategories.map((category, index) => {
+                        const _style = [styles.modalCheckboxWrapper];
+
+                        if (index === 0) {
+                            _style.push({ borderTopWidth: 1, borderTopColor: '#e0e0e0' });
+                        }
+
+                        return (
+                            <View key={index} style={_style}>
+                                <CheckBox
+                                    title={category.name}
+                                    checked={this.props.activeProject.type === category.name}
+                                    iconType='material'
+                                    checkedIcon="radio-button-checked"
+                                    uncheckedIcon="radio-button-unchecked"
+                                    checkedColor="#496FC2"
+                                    containerStyle={styles.modalCheckboxContainer}
+                                    onPress={() => {
+                                        this.props.toggleType(category.name);
+                                    }}
+                                />
+                                <View style={styles.modalCheckboxSubtitleContainer}>
+                                    <Text
+                                        style={styles.modalCheckboxSubtitle}>{category.description}</Text>
+                                </View>
+                            </View>
+                        );
+                    })}
+
+                    {/* <View style={[styles.modalCheckboxWrapper, { borderTopWidth: 1, borderTopColor: '#e0e0e0' }]}>
                         <CheckBox
                             title='STN'
                             checked={this.props.activeProject.type === 'STN'}
@@ -442,7 +512,7 @@ class ActiveProjectScreen extends Component {
                             <Text
                                 style={styles.modalCheckboxSubtitle}>{t("common:atn job type description")}</Text>
                         </View>
-                    </View>
+                    </View> */}
 
                 </View>
 
@@ -472,7 +542,7 @@ class ActiveProjectScreen extends Component {
                             }, 1000);
 
                             // closing modal window
-                            this._setProjectTypeModalVisible(false);
+                            this._setProjectCategoriesModalVisible(false);
                         }}
                     />
                 </View>
@@ -742,7 +812,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                                                                                                            molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                                                                                                                                                    molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
@@ -1108,7 +1178,7 @@ class ActiveProjectScreen extends Component {
 
         return (
             <View style={{ flex: 1 }}>
-                {this._renderProjectTypeModal()}
+                {this._renderProjectCategoriesModal()}
 
                 <Header
                     statusBarProps={{
@@ -1117,7 +1187,7 @@ class ActiveProjectScreen extends Component {
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{ text: t('drawer menu:active project'), style: { color: '#fff', fontSize: 20 } }}
                     rightComponent={(!this.props.activeProject.isCreated) ? <Plus onPress={() => {
-                        this._setProjectTypeModalVisible(true);
+                        this._setProjectCategoriesModalVisible(true);
                     }} /> : null}
                 />
                 <ScrollView style={{
@@ -1237,8 +1307,8 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps({ activeProject, projects }) {
-    return { activeProject, projects }
+function mapStateToProps({ activeProject, projects, user, projectCategories }) {
+    return { activeProject, projects, user, projectCategories }
 }
 
 export default connect(mapStateToProps, actions)(ActiveProjectScreen);

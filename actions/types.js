@@ -16,3 +16,5 @@ export const ACTIVE_PROJECT_CLEAN = 'active_project_clean';
 export const ADD_PROJECT = 'add_project';
 export const REMOVE_PROJECT = 'remove_project';
 export const REHYDRATE_PROJECT = 'rehydrate_project';
+
+export const UPDATE_CATEGORIES = 'update_categories';
