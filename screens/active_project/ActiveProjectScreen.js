@@ -456,64 +456,6 @@ class ActiveProjectScreen extends Component {
                             </View>
                         );
                     })}
-
-                    {/* <View style={[styles.modalCheckboxWrapper, { borderTopWidth: 1, borderTopColor: '#e0e0e0' }]}>
-                        <CheckBox
-                            title='STN'
-                            checked={this.props.activeProject.type === 'STN'}
-                            iconType='material'
-                            checkedIcon="radio-button-checked"
-                            uncheckedIcon="radio-button-unchecked"
-                            checkedColor="#496FC2"
-                            containerStyle={styles.modalCheckboxContainer}
-                            onPress={() => {
-                                this.props.toggleType('STN');
-                            }}
-                        />
-                        <View style={styles.modalCheckboxSubtitleContainer}>
-                            <Text
-                                style={styles.modalCheckboxSubtitle}>{t("common:stn job type description")}</Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.modalCheckboxWrapper}>
-                        <CheckBox
-                            title='BTN'
-                            checked={this.props.activeProject.type === 'BTN'}
-                            iconType='material'
-                            checkedIcon="radio-button-checked"
-                            uncheckedIcon="radio-button-unchecked"
-                            checkedColor="#496FC2"
-                            containerStyle={styles.modalCheckboxContainer}
-                            onPress={() => {
-                                this.props.toggleType('BTN');
-                            }}
-                        />
-                        <View style={styles.modalCheckboxSubtitleContainer}>
-                            <Text
-                                style={styles.modalCheckboxSubtitle}>{t("common:btn job type description")}</Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.modalCheckboxWrapper}>
-                        <CheckBox
-                            title='ATN'
-                            checked={this.props.activeProject.type === 'ATN'}
-                            iconType='material'
-                            checkedIcon="radio-button-checked"
-                            uncheckedIcon="radio-button-unchecked"
-                            checkedColor="#496FC2"
-                            containerStyle={styles.modalCheckboxContainer}
-                            onPress={() => {
-                                this.props.toggleType('ATN');
-                            }}
-                        />
-                        <View style={styles.modalCheckboxSubtitleContainer}>
-                            <Text
-                                style={styles.modalCheckboxSubtitle}>{t("common:atn job type description")}</Text>
-                        </View>
-                    </View> */}
-
                 </View>
 
                 <View style={{
@@ -812,7 +754,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                                                                                                                                                    molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                                                                                                                                                        molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
