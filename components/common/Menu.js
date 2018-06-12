@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {TouchableOpacity} from 'react-native';
-import {Icon} from 'react-native-elements';
+import React, { Component } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 class Menu extends Component {
     render() {
@@ -19,4 +19,4 @@ class Menu extends Component {
     }
 }
 
-export {Menu};
+export { Menu };

@@ -58,6 +58,7 @@ class ActiveProjectScreen extends Component {
         moreStuffNeeded: false,
         hasCameraRollPermission: null,
         barStyle: 'light-content',
+        isBarHidden: false,
         recentlyActiveProjectShowAll: false // by default we're not displaying all list
     };
 
@@ -497,6 +498,8 @@ class ActiveProjectScreen extends Component {
 
                             // closing modal window
                             this._setProjectCategoriesModalVisible(false);
+
+                            this._setStatusBar('light');
                         }}
                     />
                 </View>
@@ -766,7 +769,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                                                                                                                                                            molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                                                                                                                                                                molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
@@ -1133,6 +1136,7 @@ class ActiveProjectScreen extends Component {
 
                 <StatusBar
                     barStyle={this.state.barStyle}
+                    hidden={this.state.isBarHidden}
                 />
 
                 <Header
