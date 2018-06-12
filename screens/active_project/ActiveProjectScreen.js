@@ -13,7 +13,8 @@ import {
     Image,
     ActivityIndicator,
     Dimensions,
-    TextInput
+    TextInput,
+    StatusBar
 } from 'react-native';
 import { Header, Icon, Button, CheckBox, Text, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -130,6 +131,14 @@ class ActiveProjectScreen extends Component {
         this._removeBlinkTimer();
         this._removeUpdateTimer();
     };
+
+    /**
+     * 'theme' either 'light' or 'dark'
+     */
+    _setStatusBar = (theme) => {
+        const barStyle = (theme === 'dark') ? 'dark-content' : 'light-content';
+        this.setState({ barStyle });
+    }
 
     _initBlinkTimer = () => {
         // user has started time tracking
@@ -415,7 +424,8 @@ class ActiveProjectScreen extends Component {
                     paddingLeft: 15
                 }}>
                     <TouchableOpacity onPress={() => {
-                        this._setProjectCategoriesModalVisible(false)
+                        this._setProjectCategoriesModalVisible(false);
+                        this._setStatusBar('light');
                     }}>
                         <Icon
                             name='close'
@@ -756,7 +766,7 @@ class ActiveProjectScreen extends Component {
                 <Text style={{
                     fontSize: 15
                 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique ligula sodales nisi
-                                                                                                                                                                        molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
+                                                                                                                                                                            molestie tempus. Etiam id laoreet sem. In at tempor lacus, sed mattis orci. Donec eros nisi, aliquam
                     vitae quam eget, placerat posuere dolor.</Text>
             </View>
         );
@@ -1121,14 +1131,16 @@ class ActiveProjectScreen extends Component {
             <View style={{ flex: 1 }}>
                 {this._renderProjectCategoriesModal()}
 
+                <StatusBar
+                    barStyle={this.state.barStyle}
+                />
+
                 <Header
-                    statusBarProps={{
-                        barStyle: this.state.barStyle
-                    }}
                     leftComponent={<Menu {...this.props} />}
                     centerComponent={{ text: t('drawer menu:active project'), style: { color: '#fff', fontSize: 20 } }}
                     rightComponent={(!this.props.activeProject.isCreated) ? <Plus onPress={() => {
                         this._setProjectCategoriesModalVisible(true);
+                        this._setStatusBar('dark');
                     }} /> : null}
                 />
                 <ScrollView style={{
