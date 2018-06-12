@@ -81,8 +81,6 @@ class ActiveProjectScreen extends Component {
                     throw new Error('Something went wrong, please try later');
                 }
 
-                console.log('updating cat data...');
-                console.log('data', data);
                 this.props.updateCategories(data);
             })
             .catch((error) => {
@@ -243,11 +241,18 @@ class ActiveProjectScreen extends Component {
             return;
         }
 
+        const projectCat = this.props.projectCategories.filter((category) => category.id == this.props.activeProject.type)
+
+        console.log('projectCat', projectCat);
+        console.log('this.props.activeProject.type', this.props.activeProject.type);
+
+        const rightTitle = projectCat[0].name;
+
         return (
             <View style={[styles.mt30]}>
                 <ListItem
                     hideChevron={true}
-                    rightTitle={this.props.activeProject.type}
+                    rightTitle={rightTitle}
                     title="Project's type"
                     titleStyle={[styles.listItemTitleStyle]}
                     containerStyle={[styles.listItem, styles.listItemBorder]}
@@ -439,14 +444,14 @@ class ActiveProjectScreen extends Component {
                             <View key={index} style={_style}>
                                 <CheckBox
                                     title={category.name}
-                                    checked={this.props.activeProject.type === category.name}
+                                    checked={this.props.activeProject.type === category.id}
                                     iconType='material'
                                     checkedIcon="radio-button-checked"
                                     uncheckedIcon="radio-button-unchecked"
                                     checkedColor="#496FC2"
                                     containerStyle={styles.modalCheckboxContainer}
                                     onPress={() => {
-                                        this.props.toggleType(category.name);
+                                        this.props.toggleType(category.id);
                                     }}
                                 />
                                 <View style={styles.modalCheckboxSubtitleContainer}>
@@ -971,8 +976,6 @@ class ActiveProjectScreen extends Component {
                     cancelButtonIndex={1}
                     destructiveButtonIndex={0}
                     onPress={(index) => {
-                        console.log('index', index);
-
                         if (index === 0) {
                             // checking if the removed image was the last one, then closing the imageViewer
                             // since there is no image to look through
@@ -989,7 +992,6 @@ class ActiveProjectScreen extends Component {
                             // In order to solve this issue we should kinda swipe image to left by force...
                             // we can achive that by decrementing this.state.imageViewerCurIndex
                             if (this.state.imageViewerCurIndex >= 1) {
-                                console.log('we should swipe image to left by force...');
                                 this.setState({
                                     imageViewerCurIndex: this.state.imageViewerCurIndex - 1
                                 });

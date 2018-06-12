@@ -14,7 +14,7 @@ import {
 
 const INITIAL_STATE = {
     id: null,
-    type: 'STN',
+    type: null,
     isCreated: false,
     isTimerActive: false,
     // 'timers' key will have such structure:

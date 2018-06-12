@@ -10,10 +10,10 @@ import {
     REHYDRATE_PROJECT
 } from './types';
 
-export const toggleType = (type) => {
+export const toggleType = (id) => {
     return {
         type: TOGGLE_ACTIVE_PROJECT_TYPE,
-        payload: type
+        payload: id
     }
 };
 
