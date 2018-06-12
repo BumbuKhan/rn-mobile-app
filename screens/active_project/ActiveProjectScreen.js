@@ -242,10 +242,6 @@ class ActiveProjectScreen extends Component {
         }
 
         const projectCat = this.props.projectCategories.filter((category) => category.id == this.props.activeProject.type)
-
-        console.log('projectCat', projectCat);
-        console.log('this.props.activeProject.type', this.props.activeProject.type);
-
         const rightTitle = projectCat[0].name;
 
         return (
@@ -477,6 +473,7 @@ class ActiveProjectScreen extends Component {
                         textStyle={{
                             fontSize: 18
                         }}
+                        disabled={!this.props.activeProject.type}
                         onPress={() => {
                             // creating the project
                             this.props.createProject();
