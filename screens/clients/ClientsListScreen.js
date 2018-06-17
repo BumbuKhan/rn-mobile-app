@@ -1,20 +1,22 @@
-import React, {Component} from 'react';
-import {View, StyleSheet, Text, StatusBar} from 'react-native';
-import {Icon, ListItem} from 'react-native-elements';
+import React, { Component } from 'react';
+import { View, StyleSheet, Text, StatusBar, ActivityIndicator } from 'react-native';
+import { Icon, ListItem } from 'react-native-elements';
 
 import SearchList from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
 
-import {Menu} from '../../components/common';
+import axios from '../../helpers/axios';
+import { Menu } from '../../components/common';
 import demoList from '../active_project/data_clients';
+import { CLIENTS } from '../../helpers/api_endpoints';
 
 const rowHeight = 50;
 
 export default class ChooseClientListScreen extends Component {
-    static navigationOptions = ({navigation, screenProps}) => {
+    static navigationOptions = ({ navigation, screenProps }) => {
         return {
             title: screenProps.t('drawer menu:clients'),
-            drawerIcon: ({tintColor}) => {
+            drawerIcon: ({ tintColor }) => {
                 return <Icon
                     name="group"
                     color={tintColor}
@@ -25,8 +27,89 @@ export default class ChooseClientListScreen extends Component {
     };
 
     state = {
-        dataSource: demoList
+        dataSource: [],
+        loading: false
     };
+
+    componentDidMount = () => {
+        this.setState({
+            loading: true
+        });
+
+        // making an HTTP request to GET:/api/clients endpoint
+        axios
+            .get(CLIENTS)
+            .then((_response) => {
+                this.setState({
+                    loading: false
+                });
+
+                const response = _response.data;
+                const { data } = response;
+
+                /*
+                data looks like this:
+                {
+                    "address": "2864 Mario Mountains Suite 603 Caspermouth, MN 10576",
+                    "company_name": "Altenwerth, Koelpin and Torphy",
+                    "created_at": "2018-06-14 19:24:04",
+                    "email": null,
+                    "fax": null,
+                    "first_name": "Vance",
+                    "id": 999,
+                    "info": "Alice thought ...ced that they.",
+                    "last_name": "Fisher",
+                    "tel": null,
+                    "updated_at": "2018-06-14 19:24:04",
+                    "website": null,
+                }
+                */
+
+                if (!response.success) {
+                    throw new Error('Something went wrong, please try later');
+                }
+
+                const clients = data.map((client) => {
+                    return {
+                        id: client.id,
+                        searchKey: client.id,
+                        searchStr: client.company_name,
+                        address: client.address
+                    }
+                });
+
+                this.setState({
+                    dataSource: clients
+                });
+            })
+            .catch((error) => {
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                } else if (error.request) {
+                    // No internet connection...
+                    Alert.alert(
+                        t("common:no internet connection"),
+                        t("common:please make sure that you have got an internet connection"),
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                }
+                            },
+                        ],
+                        { cancelable: false }
+                    );
+
+                    // turning off loading spinner
+                    this.setState({
+                        loading: false
+                    });
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error);
+                }
+            })
+    }
 
     // custom render row
     _renderRow = (item, sectionID, rowID, highlightRowFunc, isSearching) => {
@@ -36,10 +119,12 @@ export default class ChooseClientListScreen extends Component {
             containerStyle.push(styles.listItemNoBorderBottom);
         }
 
+        console.log(sectionID + rowID);
+
         return (
             <Touchable>
                 <ListItem
-                    key={rowID}
+                    key={item.searchKey}
                     title={item.searchStr}
                     titleStyle={styles.listItemTitleStyle}
                     subtitle={item.address}
@@ -61,7 +146,15 @@ export default class ChooseClientListScreen extends Component {
     _renderEmpty = () => {
         return (
             <View style={styles.emptyDataSource}>
-                <Text style={{color: '#979797', fontSize: 18, paddingTop: 20}}> No Content </Text>
+                {(this.state.loading) ?
+                    <View style={{
+                        marginTop: 20
+                    }}>
+                        <ActivityIndicator
+                            size="small"
+                        />
+                    </View> :
+                    <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>}
             </View>
         )
     };
@@ -70,8 +163,8 @@ export default class ChooseClientListScreen extends Component {
     _renderEmptyResult = (searchStr) => {
         return (
             <View style={styles.emptySearchResult}>
-                <Text style={{color: '#979797', fontSize: 18, paddingTop: 20}}> No Result For <Text
-                    style={{color: '#171a23', fontSize: 18}}>{searchStr}</Text></Text>
+                <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Result For <Text
+                    style={{ color: '#171a23', fontSize: 18 }}>{searchStr}</Text></Text>
             </View>
         )
     };
@@ -88,12 +181,13 @@ export default class ChooseClientListScreen extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <StatusBar
                     barStyle='light-content'
                 />
                 <SearchList
                     data={this.state.dataSource}
+                    hideSectionList={true}
                     renderRow={this._renderRow}
                     renderEmptyResult={this._renderEmptyResult}
                     renderBackButton={this._renderBackButton}
