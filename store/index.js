@@ -1,6 +1,6 @@
-import {createStore, applyMiddleware, compose} from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import {persistStore, persistReducer} from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import reducers from '../reducers';
@@ -21,4 +21,4 @@ let store = createStore(persistedReducer, {},
 let persistor = persistStore(store);
 // persistor.purge();
 
-export {store, persistor};
+export { store, persistor };

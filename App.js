@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import {StackNavigator, SwitchNavigator, TabNavigator, DrawerNavigator} from 'react-navigation';
-import {Provider} from 'react-redux';
-import {Text} from 'react-navigation';
-import {I18nextProvider, translate} from 'react-i18next';
-import {PersistGate} from 'redux-persist/integration/react';
+import React, { Component } from 'react';
+import { StackNavigator, SwitchNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
+import { Text } from 'react-navigation';
+import { I18nextProvider, translate } from 'react-i18next';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import i18n from './locales/i18n';
-import {store, persistor} from './store';
+import { store, persistor } from './store';
 
 import AuthLoadingScreen from "./screens/auth/AuthLoadingScreen";
 import ActiveProjectScreen from './screens/active_project/ActiveProjectScreen';
@@ -18,7 +18,7 @@ import ClientsListScreen from "./screens/clients/ClientsListScreen";
 import MyHoursScreen from "./screens/my_hours/MyHoursScreen";
 import VacationScreen from "./screens/vacation/VacationScreen";
 import HistoryScreen from "./screens/history/HistoryScreen";
-import _ProjectsListScreen from "./screens/clients/ProjectsListScreen";
+import ProjectsListScreen from "./screens/clients/ProjectsListScreen";
 import ProjectDetailsScreen from "./screens/clients/ProjectDetailsScreen";
 import ChooseClientsScreen from "./screens/active_project/ChooseClientsScreen";
 import ChooseProjectScreen from "./screens/active_project/ChooseProjectScreen";
@@ -48,21 +48,21 @@ const AppStack = DrawerNavigator({
             screen: CameraScreen
         }
     }, {
-        initialRouteName: 'ActiveProjectScreen'
-    }),
+            initialRouteName: 'ActiveProjectScreen'
+        }),
     Clients: StackNavigator({
         ClientsList: {
             screen: ClientsListScreen
         },
         ProjectsList: {
-            screen: _ProjectsListScreen
+            screen: ProjectsListScreen
         },
         ProjectDetails: {
             screen: ProjectDetailsScreen
         }
     }, {
-        initialRouteName: 'ClientsList'
-    }),
+            initialRouteName: 'ClientsList'
+        }),
     MyHours: {
         screen: MyHoursScreen
     },
@@ -83,11 +83,11 @@ const AppStack = DrawerNavigator({
             screen: EditProfileScreen
         }
     }, {
-        initialRouteName: 'SettingsMain'
-    })
+            initialRouteName: 'SettingsMain'
+        })
 }, {
-    initialRouteName: 'Clients'
-});
+        initialRouteName: 'ActiveProject'
+    });
 
 const RootStack = SwitchNavigator({
     AuthLoading: AuthLoadingScreen,
@@ -95,24 +95,24 @@ const RootStack = SwitchNavigator({
     Auth: TabNavigator({
         SignIn: SignInScreen,
     }, {
-        initialRouteName: 'SignIn',
-        navigationOptions: {
-            tabBarVisible: false
-        },
-        animationEnabled: true
-    })
+            initialRouteName: 'SignIn',
+            navigationOptions: {
+                tabBarVisible: false
+            },
+            animationEnabled: true
+        })
 }, {
-    // this screen runs always the first once the app is launched and decides
-    // whether to show the signin screen according to the 'userToken' key in AsyncStorage
-    // if the user is already authenticated it will take him right to the application (HomeScreen in this case)
-    initialRouteName: 'AuthLoading'
-});
+        // this screen runs always the first once the app is launched and decides
+        // whether to show the signin screen according to the 'userToken' key in AsyncStorage
+        // if the user is already authenticated it will take him right to the application (HomeScreen in this case)
+        initialRouteName: 'AuthLoading'
+    });
 
 
 // Wrapping a stack with translation hoc asserts we trigger new render on language change
 // the hoc is set to only trigger rerender on languageChanged
 const WrappedStack = () => {
-    return <RootStack screenProps={{t: i18n.getFixedT()}}/>;
+    return <RootStack screenProps={{ t: i18n.getFixedT() }} />;
 };
 
 const ReloadAppOnLanguageChange = translate('translation', {
@@ -126,7 +126,7 @@ export default class App extends Component {
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
                     <I18nextProvider i18n={i18n}>
-                        <ReloadAppOnLanguageChange/>
+                        <ReloadAppOnLanguageChange />
                     </I18nextProvider>
                 </PersistGate>
             </Provider>
