@@ -63,6 +63,8 @@ class ActiveProjectScreen extends Component {
     };
 
     componentWillMount = () => {
+        const { t } = this.props.screenProps;
+
         if (this.props.activeProject.isTimerActive) {
             this._initBlinkTimer();
         }

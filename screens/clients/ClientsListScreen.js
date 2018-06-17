@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, StatusBar, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Text, StatusBar, ActivityIndicator, Alert } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 import SearchList from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
@@ -11,7 +13,7 @@ import { CLIENTS } from '../../helpers/api_endpoints';
 
 const rowHeight = 50;
 
-export default class ChooseClientListScreen extends Component {
+class ChooseClientListScreen extends Component {
     static navigationOptions = ({ navigation, screenProps }) => {
         return {
             title: screenProps.t('drawer menu:clients'),
@@ -31,6 +33,8 @@ export default class ChooseClientListScreen extends Component {
     };
 
     componentDidMount = () => {
+        const { t } = this.props.screenProps;
+
         this.setState({
             loading: true
         });
@@ -47,7 +51,7 @@ export default class ChooseClientListScreen extends Component {
                 const { data } = response;
 
                 /*
-                data looks like this:
+                'data' looks like this:
                 {
                     "address": "2864 Mario Mountains Suite 603 Caspermouth, MN 10576",
                     "company_name": "Altenwerth, Koelpin and Torphy",
@@ -68,6 +72,7 @@ export default class ChooseClientListScreen extends Component {
                     throw new Error('Something went wrong, please try later');
                 }
 
+                // formatting data
                 const clients = data.map((client) => {
                     return {
                         id: client.id,
@@ -77,9 +82,8 @@ export default class ChooseClientListScreen extends Component {
                     }
                 });
 
-                this.setState({
-                    dataSource: clients
-                });
+                // pushing fetched data to redux store
+                this.props.updateClients(clients);
             })
             .catch((error) => {
                 if (error.response) {
@@ -117,8 +121,6 @@ export default class ChooseClientListScreen extends Component {
         if (item !== this.state.dataSource.length - 1) {
             containerStyle.push(styles.listItemNoBorderBottom);
         }
-
-        console.log(sectionID + rowID);
 
         return (
             <Touchable>
@@ -185,7 +187,7 @@ export default class ChooseClientListScreen extends Component {
                     barStyle='light-content'
                 />
                 <SearchList
-                    data={this.state.dataSource}
+                    data={this.props.clients}
                     hideSectionList={true}
                     renderRow={this._renderRow}
                     renderEmptyResult={this._renderEmptyResult}
@@ -229,3 +231,11 @@ const styles = StyleSheet.create({
         marginTop: 30
     }
 });
+
+function mapStateToProps({ clients }) {
+    return {
+        clients
+    }
+}
+
+export default connect(mapStateToProps, actions)(ChooseClientListScreen);
