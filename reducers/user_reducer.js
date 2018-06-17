@@ -1,4 +1,4 @@
-import {LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT, TOGGLE_CUR_LANG} from '../actions/types';
+import { LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT, TOGGLE_CUR_LANG } from '../actions/types';
 
 const INITIAL_STATE = null;
 
@@ -14,7 +14,7 @@ export default userReducer = (state = INITIAL_STATE, action) => {
             return INITIAL_STATE;
 
         case TOGGLE_CUR_LANG:
-            return {...state, language: action.payload};
+            return { ...state, language: action.payload };
 
         default:
             return state;

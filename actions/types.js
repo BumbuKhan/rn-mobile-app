@@ -18,3 +18,5 @@ export const REMOVE_PROJECT = 'remove_project';
 export const REHYDRATE_PROJECT = 'rehydrate_project';
 
 export const UPDATE_CATEGORIES = 'update_categories';
+
+export const UPDATE_CLIENTS = 'update_clients';
