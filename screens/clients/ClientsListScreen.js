@@ -7,7 +7,6 @@ import Touchable from '@unpourtous/react-native-search-list/library/utils/Toucha
 
 import axios from '../../helpers/axios';
 import { Menu } from '../../components/common';
-import demoList from '../active_project/data_clients';
 import { CLIENTS } from '../../helpers/api_endpoints';
 
 const rowHeight = 50;
