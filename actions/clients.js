@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import axios from '../helpers/axios';
 import { CLIENTS } from '../helpers/api_endpoints';
 
@@ -54,8 +55,40 @@ export const fetchClients = () => {
 
             dispatch(fetchClientsResolved(data));
         }
-        catch (err) {
-            dispatch(fetchClientsRejected(err));
+        catch (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                Alert.alert(
+                    'Authentication failed',
+                    'Incorrect email or password',
+                    [
+                        {
+                            text: 'OK', onPress: () => {
+                            }
+                        },
+                    ],
+                    { cancelable: false }
+                );
+            } else if (error.request) {
+                // No internet connection...
+                Alert.alert(
+                    'No Internet Connection',
+                    'Please male sure that you have got an Internet connection',
+                    [
+                        {
+                            text: 'OK', onPress: () => {
+                            }
+                        },
+                    ],
+                    { cancelable: false }
+                );
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+
+            dispatch(fetchClientsRejected(error));
         }
     }
 }

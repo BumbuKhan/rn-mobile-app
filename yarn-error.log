@@ -1,20 +1,20 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.7.0/libexec/bin/yarn.js remove react-native-torch
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.7.0/libexec/bin/yarn.js
 
 PATH: 
-  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/macbook/Library/Android/sdk/tools:/Users/macbook/Library/Android/sdk/platform-tools:/Users/macbook/Library/Android/sdk/tools:/Users/macbook/Library/Android/sdk/platform-tools
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/macbook/Library/Android/sdk/tools:/Users/macbook/Library/Android/sdk/platform-tools
 
 Yarn version: 
   1.7.0
 
 Node version: 
-  9.11.1
+  8.11.3
 
 Platform: 
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/Users/macbook/projects/stn-mobile-app/node_modules/.bin/babylon'
+  Error: EACCES: permission denied, unlink '/Users/macbook/projects/stn-mobile-app/node_modules/.bin/atob'
 
 npm manifest: 
   {
