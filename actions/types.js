@@ -19,4 +19,7 @@ export const REHYDRATE_PROJECT = 'rehydrate_project';
 
 export const UPDATE_CATEGORIES = 'update_categories';
 
-export const UPDATE_CLIENTS = 'update_clients';
+// clients screen
+export const FETCH_CLIENTS_PENDING = 'fetch_client_pending';
+export const FETCH_CLIENTS_RESOLVED = 'fetch_client_resolved';
+export const FETCH_CLIENTS_REJECTED = 'fetch_client_rejected';

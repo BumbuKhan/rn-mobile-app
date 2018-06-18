@@ -27,98 +27,17 @@ class ChooseClientListScreen extends Component {
         }
     };
 
-    state = {
-        dataSource: [],
-        loading: false
-    };
-
     componentDidMount = () => {
-        const { t } = this.props.screenProps;
-
-        this.setState({
-            loading: true
-        });
-
-        // making an HTTP request to GET:/api/clients endpoint
-        axios
-            .get(CLIENTS)
-            .then((_response) => {
-                this.setState({
-                    loading: false
-                });
-
-                const response = _response.data;
-                const { data } = response;
-
-                /*
-                'data' looks like this:
-                {
-                    "address": "2864 Mario Mountains Suite 603 Caspermouth, MN 10576",
-                    "company_name": "Altenwerth, Koelpin and Torphy",
-                    "created_at": "2018-06-14 19:24:04",
-                    "email": null,
-                    "fax": null,
-                    "first_name": "Vance",
-                    "id": 999,
-                    "info": "Alice thought ...ced that they.",
-                    "last_name": "Fisher",
-                    "tel": null,
-                    "updated_at": "2018-06-14 19:24:04",
-                    "website": null,
-                }
-                */
-
-                if (!response.success) {
-                    throw new Error('Something went wrong, please try later');
-                }
-
-                // formatting data
-                const clients = data.map((client) => {
-                    return {
-                        id: client.id,
-                        searchKey: client.id,
-                        searchStr: client.company_name,
-                        address: client.address
-                    }
-                });
-
-                // pushing fetched data to redux store
-                this.props.updateClients(clients);
-            })
-            .catch((error) => {
-                if (error.response) {
-                    // The request was made and the server responded with a status code
-                    // that falls out of the range of 2xx
-                } else if (error.request) {
-                    // No internet connection...
-                    Alert.alert(
-                        t("common:no internet connection"),
-                        t("common:please make sure that you have got an internet connection"),
-                        [
-                            {
-                                text: 'OK', onPress: () => {
-                                }
-                            },
-                        ],
-                        { cancelable: false }
-                    );
-
-                    // turning off loading spinner
-                    this.setState({
-                        loading: false
-                    });
-                } else {
-                    // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error);
-                }
-            })
+        if (!this.props.fetched) {
+            this.props.fetchClients();
+        }
     }
 
     // custom render row
     _renderRow = (item, sectionID, rowID, highlightRowFunc, isSearching) => {
         let containerStyle = [styles.listItem, styles.listItemBorder];
 
-        if (item !== this.state.dataSource.length - 1) {
+        if (item !== this.props.clients.items.length - 1) {
             containerStyle.push(styles.listItemNoBorderBottom);
         }
 
@@ -147,7 +66,7 @@ class ChooseClientListScreen extends Component {
     _renderEmpty = () => {
         return (
             <View style={styles.emptyDataSource}>
-                {(this.state.loading) ?
+                {(this.props.clients.pending) ?
                     <View style={{
                         marginTop: 20
                     }}>
@@ -187,7 +106,7 @@ class ChooseClientListScreen extends Component {
                     barStyle='light-content'
                 />
                 <SearchList
-                    data={this.props.clients}
+                    data={this.props.clients.items}
                     hideSectionList={true}
                     renderRow={this._renderRow}
                     renderEmptyResult={this._renderEmptyResult}

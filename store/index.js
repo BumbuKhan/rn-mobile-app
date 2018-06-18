@@ -8,7 +8,13 @@ import reducers from '../reducers';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['user', 'activeProject', 'projects', 'projectCategories']
+    whitelist: [
+        'user',
+        'activeProject',
+        'projects',
+        'projectCategories',
+        'clients'
+    ]
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -19,6 +25,6 @@ let store = createStore(persistedReducer, {},
     ));
 
 let persistor = persistStore(store);
-// persistor.purge();
+persistor.purge();
 
 export { store, persistor };
