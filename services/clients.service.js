@@ -1,7 +1,11 @@
 import { getAuthHeaders } from '../helpers';
-import { BASE_URL, CLIENTS } from '../helpers/api_endpoints';
+import { CLIENTS } from '../helpers/api_endpoints';
 
-export const getClients = async () => {
+export const clientsService = {
+    getClients
+};
+
+async function getClients() {
     const headers = await getAuthHeaders();
 
     const requestOptions = {
@@ -9,7 +13,7 @@ export const getClients = async () => {
         headers
     };
 
-    return fetch(BASE_URL + CLIENTS, requestOptions).then(handleResponse);
+    return fetch(CLIENTS, requestOptions).then(handleResponse);
 
 }
 
@@ -20,7 +24,7 @@ function handleResponse(response) {
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
-                console.log('unauthorised');
+                console.log('unauthorised...');
             }
 
             const error = (data && data.error) || response.statusText;

@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-import { getClients } from '../services';
+import { clientsService } from '../services';
 import { authHeader } from '../helpers';
 
 import {
@@ -41,7 +41,7 @@ export const fetchClients = () => {
 
         // fetching data from the API
         try {
-            const response = await getClients();
+            const response = await clientsService.getClients();
 
             let { data } = response;
 
