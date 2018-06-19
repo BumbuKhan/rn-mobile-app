@@ -1,4 +1,14 @@
-function handleResponse(response) {
+import axios from '../helpers/axios';
+import { authHeader } from '../helpers';
+import { CLIENTS } from '../helpers/api_endpoints';
+
+export const getClients = async () => {
+    const header = await authHeader();
+
+    return axios.get(CLIENTS, header);
+}
+
+const handleResponse = (response) => {
     return response.json().then(data => {
         if (!response.success) {
             if (response.status === 401) {

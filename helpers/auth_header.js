@@ -4,10 +4,12 @@ export async function authHeader() {
     let persistedData = await AsyncStorage.getItem('persist:root');
 
     persistedData = JSON.parse(persistedData);
-    const user = JSON.parse(authData.user);
+    const user = JSON.parse(persistedData.user);
 
     if (user && user.token.access_token) {
-        return { 'Authorization': 'Bearer ' + user.token.access_token };
+        return {
+            headers: { 'Authorization': 'Bearer ' + user.token.access_token }
+        };
     } else {
         return {};
     }

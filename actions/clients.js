@@ -1,6 +1,8 @@
 import { Alert } from 'react-native';
 import axios from '../helpers/axios';
 import { CLIENTS } from '../helpers/api_endpoints';
+import { getClients } from '../services';
+import { authHeader } from '../helpers';
 
 import {
     FETCH_CLIENTS_PENDING,
@@ -34,13 +36,15 @@ const fetchClientsResolved = (clients) => {
 // making an HTTP request...
 export const fetchClients = () => {
     console.log('fetching clients...');
+
     return async (dispatch) => {
         // turning on loading spinner
         dispatch(fetchClientsPending());
 
         // fetching data from the API
         try {
-            const response = await axios.get(CLIENTS);
+            const response = await getClients();
+
             let { data } = response.data;
 
             // formatting received data
@@ -56,6 +60,8 @@ export const fetchClients = () => {
             dispatch(fetchClientsResolved(data));
         }
         catch (error) {
+            console.log('error while fetching clients...', error);
+
             if (error.response) {
                 // The request was made and the server responded with a status code
                 // that falls out of the range of 2xx
