@@ -1,6 +1,4 @@
 import { Alert } from 'react-native';
-import axios from '../helpers/axios';
-import { CLIENTS } from '../helpers/api_endpoints';
 import { getClients } from '../services';
 import { authHeader } from '../helpers';
 
