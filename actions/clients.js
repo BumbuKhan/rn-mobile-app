@@ -43,7 +43,7 @@ export const fetchClients = () => {
         try {
             const response = await getClients();
 
-            let { data } = response.data;
+            let { data } = response;
 
             // formatting received data
             data = data.map((client) => {
@@ -95,7 +95,7 @@ export const fetchClients = () => {
                 );
             } else {
                 // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
+                //console.log('Error', error.message);
             }
 
             dispatch(fetchClientsRejected(error));

@@ -1,21 +1,26 @@
-import axios from '../helpers/axios';
-import { authHeader } from '../helpers';
-import { CLIENTS } from '../helpers/api_endpoints';
+import { getAuthHeaders } from '../helpers';
+import { BASE_URL, CLIENTS } from '../helpers/api_endpoints';
 
 export const getClients = async () => {
-    const header = await authHeader();
+    const headers = await getAuthHeaders();
 
-    return axios.get(CLIENTS, header);
+    const requestOptions = {
+        method: 'GET',
+        headers
+    };
+
+    return fetch(BASE_URL + CLIENTS, requestOptions).then(handleResponse);
+
 }
 
-const handleResponse = (response) => {
+function handleResponse(response) {
+    console.log(response);
+
     return response.json().then(data => {
-        if (!response.success) {
+        if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
-                // logout();
-                // location.reload(true);
-                console.log('Unauthenticated');
+                console.log('unauthorised');
             }
 
             const error = (data && data.error) || response.statusText;
