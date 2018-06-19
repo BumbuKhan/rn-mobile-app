@@ -6,7 +6,6 @@ import {
 
 const INITIAL_STATE = {
     pending: false,
-    fetched: false,
     items: [],
     error: null
 };
@@ -17,7 +16,6 @@ export default clientsReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 pending: true,
-                fetched: false,
                 items: []
             }
 
@@ -25,7 +23,6 @@ export default clientsReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 pending: false,
-                fetched: true,                
                 items: action.payload
             }
 

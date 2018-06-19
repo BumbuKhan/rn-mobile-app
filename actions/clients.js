@@ -59,17 +59,23 @@ export const fetchClients = () => {
             if (error.response) {
                 // The request was made and the server responded with a status code
                 // that falls out of the range of 2xx
-                Alert.alert(
-                    'Authentication failed',
-                    'Incorrect email or password',
-                    [
-                        {
-                            text: 'OK', onPress: () => {
-                            }
-                        },
-                    ],
-                    { cancelable: false }
-                );
+                if (error.response.status == 401) {
+                    // unauthorized
+                    // TODO: need to be implemented
+                } else {
+                    // server error...
+                    Alert.alert(
+                        'Something went wrong',
+                        'Please try later',
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                }
+                            },
+                        ],
+                        { cancelable: false }
+                    );
+                }
             } else if (error.request) {
                 // No internet connection...
                 Alert.alert(
