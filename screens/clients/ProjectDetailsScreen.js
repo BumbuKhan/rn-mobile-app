@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
-import {Icon} from 'react-native-elements';
+import React, { Component } from 'react';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 export default class ProjectsListScreen extends Component {
-    static navigationOptions = ({navigation, screenProps}) => {
-        const {params} = navigation.state;
+    static navigationOptions = ({ navigation, screenProps }) => {
+        const { params } = navigation.state;
 
         return {
             title: `${params.headerTitle}'s Details`,
@@ -39,8 +39,8 @@ export default class ProjectsListScreen extends Component {
                     backgroundColor: '#f7f7f7',
                     paddingTop: 30
                 }}>
-                    <View style={{marginLeft: 20, marginRight: 20}}>
-                        <Text style={{textAlign: 'center'}}>Project's details will be here</Text>
+                    <View style={{ marginLeft: 20, marginRight: 20 }}>
+                        <Text style={{ textAlign: 'center' }}>Project's details will be here</Text>
                     </View>
                 </ScrollView>
             </View>
