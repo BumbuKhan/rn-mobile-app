@@ -54,7 +54,8 @@ class ChooseClientListScreen extends Component {
                     containerStyle={containerStyle}
                     onPress={() => {
                         this.props.navigation.navigate('ProjectsList', {
-                            headerTitle: item.searchStr
+                            headerTitle: item.searchStr,
+                            clientId: item.id
                         });
                     }}
                 />
