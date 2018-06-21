@@ -28,9 +28,7 @@ class ChooseClientListScreen extends Component {
     };
 
     componentDidMount = () => {
-        if (!this.props.fetched) {
-            this.props.fetchClients();
-        }
+        this.props.fetchClients();
     }
 
     // custom render row
