@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 import * as actions from '../../actions';
 
 import SearchList from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
-
-// import demoList from '../active_project/data_projects';
 
 const rowHeight = 50;
 
@@ -18,12 +16,8 @@ class ProjectsListScreen extends Component {
         }
     };
 
-    // state = {
-    //     dataSource: demoList
-    // };
-
     componentDidMount = () => {
-        this.props.fetchClientsProjects(this.props.navigation.state.params.clientId);
+        this.props.fetchClientsProjects();
     }
 
     // custom render row
@@ -40,7 +34,7 @@ class ProjectsListScreen extends Component {
                     key={rowID}
                     title={item.searchStr}
                     titleStyle={styles.listItemTitleStyle}
-                    subtitle={item.details}
+                    subtitle={item.admin_notes}
                     subtitleStyle={{
                         fontSize: 16
                     }}
@@ -59,7 +53,15 @@ class ProjectsListScreen extends Component {
     _renderEmpty = () => {
         return (
             <View style={styles.emptyDataSource}>
-                <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>
+                {(this.props.clientsProjects.pending) ?
+                    <View style={{
+                        marginTop: 20
+                    }}>
+                        <ActivityIndicator
+                            size="small"
+                        />
+                    </View> :
+                    <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>}
             </View>
         )
     };
@@ -96,6 +98,7 @@ class ProjectsListScreen extends Component {
                 />
                 <SearchList
                     data={this.props.clientsProjects.items}
+                    hideSectionList={true}
                     renderRow={this._renderRow}
                     renderEmptyResult={this._renderEmptyResult}
                     renderBackButton={this._renderBackButton}

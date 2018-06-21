@@ -47,5 +47,5 @@ export const fetchClients = () => {
     function fetchClientsRejected(err) { return { type: FETCH_CLIENTS_REJECTED, payload: err } }
 
     // will be dispatched when success
-    function fetchClientsResolved(clients) { return { type: FETCH_CLIENTS_RESOLVED, payload: clients } }
+    function fetchClientsResolved(data) { return { type: FETCH_CLIENTS_RESOLVED, payload: data } }
 }
