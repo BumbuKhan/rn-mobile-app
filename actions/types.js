@@ -23,3 +23,8 @@ export const UPDATE_CATEGORIES = 'update_categories';
 export const FETCH_CLIENTS_PENDING = 'fetch_client_pending';
 export const FETCH_CLIENTS_RESOLVED = 'fetch_client_resolved';
 export const FETCH_CLIENTS_REJECTED = 'fetch_client_rejected';
+
+// clients project
+export const FETCH_CLIENTS_PROJECTS_PENDING = 'fetch_clients_projects_pending';
+export const FETCH_CLIENTS_PROJECTS_RESOLVED = 'fetch_clients_projects_resolved';
+export const FETCH_CLIENTS_PROJECTS_REJECTED = 'fetch_clients_projects_rejected';

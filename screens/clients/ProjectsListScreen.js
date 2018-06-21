@@ -1,30 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
+import * as actions from '../../actions';
 
 import SearchList from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
 
-import demoList from '../active_project/data_projects';
+// import demoList from '../active_project/data_projects';
 
 const rowHeight = 50;
 
-export default class ProjectsListScreen extends Component {
+class ProjectsListScreen extends Component {
     static navigationOptions = ({ navigation, screenProps }) => {
         return {
             header: null // hiding the default StackNavigator header since we have our own
         }
     };
 
-    state = {
-        dataSource: demoList
-    };
+    // state = {
+    //     dataSource: demoList
+    // };
+
+    componentDidMount = () => {
+        this.props.fetchClientsProjects(this.props.navigation.state.params.clientId);
+    }
 
     // custom render row
     _renderRow = (item, sectionID, rowID, highlightRowFunc, isSearching) => {
         let containerStyle = [styles.listItem, styles.listItemBorder];
 
-        if (item !== this.state.dataSource.length - 1) {
+        if (item !== this.props.clientsProjects.items.length - 1) {
             containerStyle.push(styles.listItemNoBorderBottom);
         }
 
@@ -89,7 +95,7 @@ export default class ProjectsListScreen extends Component {
                     barStyle='light-content'
                 />
                 <SearchList
-                    data={this.state.dataSource}
+                    data={this.props.clientsProjects.items}
                     renderRow={this._renderRow}
                     renderEmptyResult={this._renderEmptyResult}
                     renderBackButton={this._renderBackButton}
@@ -132,3 +138,11 @@ const styles = StyleSheet.create({
         marginTop: 30
     }
 });
+
+function mapStateToProps({ clientsProjects }) {
+    return {
+        clientsProjects
+    };
+}
+
+export default connect(mapStateToProps, actions)(ProjectsListScreen);

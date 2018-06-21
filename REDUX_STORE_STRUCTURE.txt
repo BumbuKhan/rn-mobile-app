@@ -34,7 +34,7 @@ REDUX_STORE = {
         createdAt: <UNIX timestamp>,
         modifiedAt: <UNIX timestamp>
     },
-    projects: [],
+    projects: [], // TODO: rename it to 'userProjects'
     projectCategories: [
         {
             id: <Number>,,
@@ -44,5 +44,6 @@ REDUX_STORE = {
             updated_at: "2018-06-05 13:28:22"
         },
         ...
-    ]
+    ],
+    clientsProjects: [], // all projects of all clients
 }
