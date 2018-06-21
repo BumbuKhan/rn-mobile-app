@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {View, StyleSheet, Text, StatusBar, TouchableOpacity} from 'react-native';
-import {Icon, ListItem} from 'react-native-elements';
+import React, { Component } from 'react';
+import { View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { Icon, ListItem } from 'react-native-elements';
 
 import SearchList from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
@@ -10,7 +10,7 @@ import demoList from '../active_project/data_projects';
 const rowHeight = 50;
 
 export default class ProjectsListScreen extends Component {
-    static navigationOptions = ({navigation, screenProps}) => {
+    static navigationOptions = ({ navigation, screenProps }) => {
         return {
             header: null // hiding the default StackNavigator header since we have our own
         }
@@ -53,7 +53,7 @@ export default class ProjectsListScreen extends Component {
     _renderEmpty = () => {
         return (
             <View style={styles.emptyDataSource}>
-                <Text style={{color: '#979797', fontSize: 18, paddingTop: 20}}> No Content </Text>
+                <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>
             </View>
         )
     };
@@ -62,8 +62,8 @@ export default class ProjectsListScreen extends Component {
     _renderEmptyResult = (searchStr) => {
         return (
             <View style={styles.emptySearchResult}>
-                <Text style={{color: '#979797', fontSize: 18, paddingTop: 20}}> No Result For <Text
-                    style={{color: '#171a23', fontSize: 18}}>{searchStr}</Text></Text>
+                <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Result For <Text
+                    style={{ color: '#171a23', fontSize: 18 }}>{searchStr}</Text></Text>
             </View>
         )
     };
@@ -84,7 +84,7 @@ export default class ProjectsListScreen extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <StatusBar
                     barStyle='light-content'
                 />
