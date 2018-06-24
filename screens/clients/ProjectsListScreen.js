@@ -71,7 +71,7 @@ class ProjectsListScreen extends Component {
                             size="small"
                         />
                     </View> :
-                    <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>}
+                    <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Projects</Text>}
             </View>
         )
     };
