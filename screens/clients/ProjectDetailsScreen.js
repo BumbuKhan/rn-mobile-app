@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { Icon, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
 
-export default class ProjectsListScreen extends Component {
+class ProjectsListScreen extends Component {
     static navigationOptions = ({ navigation, screenProps }) => {
         const { params } = navigation.state;
 
@@ -30,7 +31,28 @@ export default class ProjectsListScreen extends Component {
         }
     };
 
+    _renderProjectType = () => {
+        const { projectData } = this.props.navigation.state.params;
+        console.log('projectData', projectData);
+
+        const projectCat = this.props.projectCategories.filter((category) => category.id == projectData.category_id)
+        const rightTitle = (projectCat[0] && projectCat[0].name) || 'Not set';
+
+        return (
+            <View style={[styles.mt30]}>
+                <ListItem
+                    hideChevron={true}
+                    rightTitle={rightTitle}
+                    title="Project's type"
+                    titleStyle={[styles.listItemTitleStyle]}
+                    containerStyle={[styles.listItem, styles.listItemBorder]}
+                />
+            </View>
+        );
+    };
+
     render() {
+        console.log('this.props.projectCategories', this.props.projectCategories);
         return (
             <View style={{
                 flex: 1
@@ -39,11 +61,103 @@ export default class ProjectsListScreen extends Component {
                     backgroundColor: '#f7f7f7',
                     paddingTop: 30
                 }}>
-                    <View style={{ marginLeft: 20, marginRight: 20 }}>
-                        <Text style={{ textAlign: 'center' }}>Project's details will be here</Text>
-                    </View>
+                    {this._renderProjectType()}
                 </ScrollView>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    modalContainer: {
+        marginTop: 35
+    },
+    modalHeader: {
+        marginTop: 30,
+        marginBottom: 25,
+        marginLeft: 20,
+        marginRight: 20
+    },
+    modalCheckboxContainer: {
+        borderWidth: 0,
+        backgroundColor: "white",
+        marginBottom: 0,
+        paddingBottom: 0
+    },
+    modalCheckboxSubtitleContainer: {
+        marginLeft: 55
+    },
+    modalCheckboxSubtitle: {
+        color: 'gray'
+    },
+    modalCheckboxWrapper: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#e0e0e0',
+        paddingBottom: 10
+    },
+
+    listItem: {
+        backgroundColor: 'white',
+        borderTopColor: '#eaeaea',
+        borderBottomColor: '#eaeaea',
+    },
+    listItemBorder: {
+        borderTopWidth: 1
+    },
+    listItemTitleStyle: {
+        fontSize: 18
+    },
+    mt30: {
+        marginTop: 30
+    },
+
+    timerWrapper: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        paddingTop: 20,
+        paddingBottom: 20,
+        paddingLeft: 15,
+        paddingRight: 15
+    },
+    timerText: {
+        fontFamily: 'digital-7-italic',
+        fontSize: 60,
+        fontWeight: 'bold'
+    },
+    colorWhite: {
+        color: 'white'
+    },
+    colorBlack: {
+        color: 'black'
+    },
+
+    photoScrollView: {
+        backgroundColor: 'white',
+        paddingTop: 15,
+        paddingBottom: 15,
+    },
+    photoChooseBtnWrapper: {
+        backgroundColor: 'white',
+        paddingLeft: 20,
+        paddingRight: 20
+    },
+
+    textInputWrapper: {
+        backgroundColor: 'white',
+        paddingTop: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingBottom: 15
+    }
+});
+
+function mapStateToProps({ projectCategories }) {
+    return {
+        projectCategories
+    }
+}
+
+export default connect(mapStateToProps)(ProjectsListScreen);
