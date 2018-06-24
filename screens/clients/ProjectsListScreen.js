@@ -7,8 +7,6 @@ import * as actions from '../../actions';
 import SearchList from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
 
-import demoList from '../active_project/data_projects';
-
 const rowHeight = 50;
 
 class ProjectsListScreen extends Component {
@@ -19,18 +17,28 @@ class ProjectsListScreen extends Component {
     };
 
     state = {
-        dataSource: demoList
+        projects: []
     };
 
     componentDidMount = () => {
         this.props.fetchClientsProjects();
     }
 
+    componentWillReceiveProps = (props) => {
+        const projects = props.projects.items.filter((project) => {
+            return project.client_id == this.props.navigation.state.params.clientId;
+        });
+
+        this.setState({
+            projects
+        });
+    }
+
     // custom render row
     _renderRow = (item, sectionID, rowID, highlightRowFunc, isSearching) => {
         let containerStyle = [styles.listItem, styles.listItemBorder];
 
-        if (item !== this.state.dataSource.length - 1) {
+        if (item !== this.state.projects.length - 1) {
             containerStyle.push(styles.listItemNoBorderBottom);
         }
 
@@ -99,7 +107,7 @@ class ProjectsListScreen extends Component {
                     barStyle='light-content'
                 />
                 <SearchList
-                    data={this.props.projects.items}
+                    data={this.state.projects}
                     renderRow={this._renderRow}
                     hideSectionList={true}
                     renderEmptyResult={this._renderEmptyResult}

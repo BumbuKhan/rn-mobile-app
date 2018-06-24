@@ -24,6 +24,7 @@ export const fetchClientsProjects = () => {
                     data = data.map((project) => {
                         return {
                             id: project.id,
+                            client_id: project.client_id,
                             searchKey: project.id,
                             searchStr: project.name
                         }
