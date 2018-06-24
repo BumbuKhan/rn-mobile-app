@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { ActivityIndicator, View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
 import SearchList from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
+
+import demoList from '../active_project/data_projects';
 
 const rowHeight = 50;
 
@@ -16,15 +18,15 @@ class ProjectsListScreen extends Component {
         }
     };
 
-    componentDidMount = () => {
-        this.props.fetchClientsProjects();
-    }
+    state = {
+        dataSource: demoList
+    };
 
     // custom render row
     _renderRow = (item, sectionID, rowID, highlightRowFunc, isSearching) => {
         let containerStyle = [styles.listItem, styles.listItemBorder];
 
-        if (item !== this.props.clientsProjects.items.length - 1) {
+        if (item !== this.state.dataSource.length - 1) {
             containerStyle.push(styles.listItemNoBorderBottom);
         }
 
@@ -34,7 +36,7 @@ class ProjectsListScreen extends Component {
                     key={rowID}
                     title={item.searchStr}
                     titleStyle={styles.listItemTitleStyle}
-                    subtitle={item.admin_notes}
+                    subtitle={item.details}
                     subtitleStyle={{
                         fontSize: 16
                     }}
@@ -53,15 +55,7 @@ class ProjectsListScreen extends Component {
     _renderEmpty = () => {
         return (
             <View style={styles.emptyDataSource}>
-                {(this.props.clientsProjects.pending) ?
-                    <View style={{
-                        marginTop: 20
-                    }}>
-                        <ActivityIndicator
-                            size="small"
-                        />
-                    </View> :
-                    <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>}
+                <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>
             </View>
         )
     };
@@ -97,8 +91,7 @@ class ProjectsListScreen extends Component {
                     barStyle='light-content'
                 />
                 <SearchList
-                    data={this.props.clientsProjects.items}
-                    hideSectionList={true}
+                    data={this.state.dataSource}
                     renderRow={this._renderRow}
                     renderEmptyResult={this._renderEmptyResult}
                     renderBackButton={this._renderBackButton}
@@ -144,8 +137,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps({ clientsProjects }) {
     return {
-        clientsProjects
-    };
+        projects: clientsProjects
+    }
 }
 
-export default connect(mapStateToProps, actions)(ProjectsListScreen);
+export default connect(mapStateToProps)(ProjectsListScreen);
