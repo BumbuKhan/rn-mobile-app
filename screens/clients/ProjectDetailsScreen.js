@@ -33,7 +33,7 @@ class ProjectsListScreen extends Component {
 
     _renderProjectType = () => {
         const { projectData } = this.props.navigation.state.params;
-        console.log('projectData', projectData);
+        // console.log('projectData', projectData);
 
         const projectCat = this.props.projectCategories.filter((category) => category.id == projectData.category_id)
         const rightTitle = (projectCat[0] && projectCat[0].name) || 'Not set';
@@ -51,8 +51,27 @@ class ProjectsListScreen extends Component {
         );
     };
 
+    _renderClient = () => {
+        const { projectData } = this.props.navigation.state.params;
+
+        const clients = this.props.clients.items.filter((client) => client.id == projectData.client_id)
+        const rightTitle = (clients[0] && clients[0].searchStr) || 'Not set';
+
+        return (
+            <View>
+                <ListItem
+                    hideChevron={true}
+                    rightTitle={rightTitle}
+                    title="Client"
+                    titleStyle={[styles.listItemTitleStyle]}
+                    containerStyle={[styles.listItem]}
+                />
+            </View>
+        );
+    };
+
     render() {
-        console.log('this.props.projectCategories', this.props.projectCategories);
+        
         return (
             <View style={{
                 flex: 1
@@ -62,6 +81,7 @@ class ProjectsListScreen extends Component {
                     paddingTop: 30
                 }}>
                     {this._renderProjectType()}
+                    {this._renderClient()}
                 </ScrollView>
             </View>
         );
@@ -154,9 +174,10 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps({ projectCategories }) {
+function mapStateToProps({ projectCategories, clients }) {
     return {
-        projectCategories
+        projectCategories,
+        clients
     }
 }
 
