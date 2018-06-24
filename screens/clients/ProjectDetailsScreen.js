@@ -70,8 +70,26 @@ class ProjectsListScreen extends Component {
         );
     };
 
+    _renderProject = () => {
+        const { projectData } = this.props.navigation.state.params;
+
+        return (
+            <View>
+                <ListItem
+                    hideChevron={true}
+                    rightTitle={projectData.searchStr}
+                    title="Project"
+                    titleStyle={[styles.listItemTitleStyle]}
+                    containerStyle={[styles.listItem]}
+                />
+            </View>
+        );
+    };
+
     render() {
-        
+        const { projectData } = this.props.navigation.state.params;
+
+        console.log(projectData);
         return (
             <View style={{
                 flex: 1
@@ -82,6 +100,7 @@ class ProjectsListScreen extends Component {
                 }}>
                     {this._renderProjectType()}
                     {this._renderClient()}
+                    {this._renderProject()}
                 </ScrollView>
             </View>
         );
@@ -174,10 +193,11 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps({ projectCategories, clients }) {
+function mapStateToProps({ projectCategories, clients, projects }) {
     return {
         projectCategories,
-        clients
+        clients,
+        projects
     }
 }
 

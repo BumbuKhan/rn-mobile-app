@@ -26,7 +26,6 @@ export const fetchClientsProjects = () => {
                         return {
                             admin_notes: project.admin_notes,
                             category_id: project.category_id,
-                            client_id: project.client_id,
                             created_at: project.created_at,
                             deadline_at: project.deadline_at,
                             taxonomy_id: project.taxonomy_id,
