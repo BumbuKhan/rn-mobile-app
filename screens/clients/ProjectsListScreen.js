@@ -93,8 +93,6 @@ class ProjectsListScreen extends Component {
     };
 
     render() {
-        console.log('this.props.projects', this.props.projects);
-
         return (
             <View style={{ flex: 1 }}>
                 <StatusBar
