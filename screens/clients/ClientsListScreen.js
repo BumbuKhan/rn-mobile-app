@@ -98,6 +98,8 @@ class ChooseClientListScreen extends Component {
     };
 
     render() {
+        console.log('this.props.clients', this.props.clients);
+
         return (
             <View style={{ flex: 1 }}>
                 <StatusBar

@@ -20,6 +20,15 @@ export const fetchClientsProjects = () => {
                 clientsProjects => {
                     let { data } = clientsProjects;
 
+                    // formatting received data
+                    data = data.map((project) => {
+                        return {
+                            id: project.id,
+                            searchKey: project.id,
+                            searchStr: project.name
+                        }
+                    });
+
                     // sending fetched data to redux store
                     dispatch(fetchClientsProjectsResolved(data));
                 },

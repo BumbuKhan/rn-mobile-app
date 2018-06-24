@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -22,6 +22,10 @@ class ProjectsListScreen extends Component {
         dataSource: demoList
     };
 
+    componentDidMount = () => {
+        this.props.fetchClientsProjects();
+    }
+
     // custom render row
     _renderRow = (item, sectionID, rowID, highlightRowFunc, isSearching) => {
         let containerStyle = [styles.listItem, styles.listItemBorder];
@@ -33,13 +37,9 @@ class ProjectsListScreen extends Component {
         return (
             <Touchable>
                 <ListItem
-                    key={rowID}
+                    key={item.id}
                     title={item.searchStr}
                     titleStyle={styles.listItemTitleStyle}
-                    subtitle={item.details}
-                    subtitleStyle={{
-                        fontSize: 16
-                    }}
                     containerStyle={containerStyle}
                     onPress={() => {
                         this.props.navigation.navigate('ProjectDetails', {
@@ -55,7 +55,15 @@ class ProjectsListScreen extends Component {
     _renderEmpty = () => {
         return (
             <View style={styles.emptyDataSource}>
-                <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>
+                {(this.props.projects.pending) ?
+                    <View style={{
+                        marginTop: 20
+                    }}>
+                        <ActivityIndicator
+                            size="small"
+                        />
+                    </View> :
+                    <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>}
             </View>
         )
     };
@@ -85,14 +93,17 @@ class ProjectsListScreen extends Component {
     };
 
     render() {
+        console.log('this.props.projects', this.props.projects);
+
         return (
             <View style={{ flex: 1 }}>
                 <StatusBar
                     barStyle='light-content'
                 />
                 <SearchList
-                    data={this.state.dataSource}
+                    data={this.props.projects.items}
                     renderRow={this._renderRow}
+                    hideSectionList={true}
                     renderEmptyResult={this._renderEmptyResult}
                     renderBackButton={this._renderBackButton}
                     renderEmpty={this._renderEmpty}
@@ -141,4 +152,4 @@ function mapStateToProps({ clientsProjects }) {
     }
 }
 
-export default connect(mapStateToProps)(ProjectsListScreen);
+export default connect(mapStateToProps, actions)(ProjectsListScreen);
