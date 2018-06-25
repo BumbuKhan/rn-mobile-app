@@ -1153,7 +1153,7 @@ class ActiveProjectScreen extends Component {
                     backgroundColor: '#f7f7f7'
                 }}>
                     {this._renderNoActiveProjectText()}
-                    {this._renderRecentlyActiveProjects()}
+                    {/* {this._renderRecentlyActiveProjects()} */}
 
                     {this._renderTimer()}
                     {this._renderProjectType()}
