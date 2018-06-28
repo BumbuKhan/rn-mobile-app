@@ -42,6 +42,7 @@ class ChooseClientListScreen extends Component {
                     subtitleStyle={{
                         fontSize: 16
                     }}
+                    hideChevron={true}
                     containerStyle={containerStyle}
                     onPress={() => {
                         this.props.navigation.navigate('ActiveProject');
