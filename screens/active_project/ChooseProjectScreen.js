@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
-import {View, StyleSheet, Alert, Text, TouchableOpacity} from 'react-native';
-import {Icon, Divider} from 'react-native-elements';
+import React, { Component } from 'react';
+import { ActivityIndicator, View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { Icon, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
-import SearchList, {HighlightableText} from '@unpourtous/react-native-search-list/library';
+import SearchList from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
-
-import demoList from './data_projects';
 
 const rowHeight = 50;
 
-export default class ChooseProjectScreen extends Component {
+class ChooseProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
         return {
             //title: screenProps.t('screens:active project:choose client:title')
@@ -19,29 +19,46 @@ export default class ChooseProjectScreen extends Component {
     };
 
     state = {
-        dataSource: demoList
+        projects: []
     };
+
+    componentDidMount = () => {
+        this.props.fetchClientsProjects();
+    }
+
+    componentWillReceiveProps = (props) => {
+        const projects = props.projects.items.filter((project) => {
+            // return project.client_id == this.props.navigation.state.params.clientId;
+            return project.client_id == 761;
+        });
+
+        this.setState({
+            projects
+        });
+    }
 
     // custom render row
     _renderRow = (item, sectionID, rowID, highlightRowFunc, isSearching) => {
+        let containerStyle = [styles.listItem, styles.listItemBorder];
+
+        if (item !== this.state.projects.length - 1) {
+            containerStyle.push(styles.listItemNoBorderBottom);
+        }
+
         return (
-            <Touchable onPress={() => {
-                Alert.alert('Clicked!', `sectionID: ${sectionID}; item: ${item.searchStr}`,
-                    [
-                        {text: 'OK', onPress: () => console.log('OK Pressed')},
-                    ],
-                    {cancelable: true})
-            }}>
-                <View key={rowID} style={{flex: 1, marginLeft: 20, height: rowHeight, justifyContent: 'center'}}>
-                    {/*use `HighlightableText` to highlight the search result*/}
-                    <HighlightableText
-                        matcher={item.matcher}
-                        text={item.searchStr}
-                        textColor={'#000'}
-                        hightlightTextColor={'#0069c0'}
-                    />
-                    <Text style={{color: 'gray'}}>{item.details}</Text>
-                </View>
+            <Touchable>
+                <ListItem
+                    key={item.id}
+                    title={item.searchStr}
+                    titleStyle={styles.listItemTitleStyle}
+                    containerStyle={containerStyle}
+                    onPress={() => {
+                        this.props.navigation.navigate('ProjectDetails', {
+                            headerTitle: item.searchStr,
+                            projectData: item
+                        });
+                    }}
+                />
             </Touchable>
         )
     };
@@ -50,7 +67,15 @@ export default class ChooseProjectScreen extends Component {
     _renderEmpty = () => {
         return (
             <View style={styles.emptyDataSource}>
-                <Text style={{color: '#979797', fontSize: 18, paddingTop: 20}}> No Content </Text>
+                {(this.props.projects.pending) ?
+                    <View style={{
+                        marginTop: 20
+                    }}>
+                        <ActivityIndicator
+                            size="small"
+                        />
+                    </View> :
+                    <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Projects</Text>}
             </View>
         )
     };
@@ -59,31 +84,8 @@ export default class ChooseProjectScreen extends Component {
     _renderEmptyResult = (searchStr) => {
         return (
             <View style={styles.emptySearchResult}>
-                <Text style={{color: '#979797', fontSize: 18, paddingTop: 20}}> No Result For <Text
-                    style={{color: '#171a23', fontSize: 18}}>{searchStr}</Text></Text>
-
-                <Divider style={{
-                    marginTop: 10
-                }}/>
-
-                <View style={{
-                    alignSelf: 'center',
-                    marginTop: 10
-                }}>
-                    <TouchableOpacity>
-
-                        <Text style={{
-                            color: '#0069c0',
-                            fontSize: 18
-                        }}><Icon
-                            name="add"
-                            color="#0069c0"
-                            size={16}
-                        /> Add it as a new project</Text>
-                    </TouchableOpacity>
-                </View>
-                {/*<Text style={{color: '#979797', fontSize: 18, alignItems: 'center', paddingTop: 10}}>Please search
-                    again</Text>*/}
+                <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Result For <Text
+                    style={{ color: '#171a23', fontSize: 18 }}>{searchStr}</Text></Text>
             </View>
         )
     };
@@ -104,16 +106,20 @@ export default class ChooseProjectScreen extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
+                <StatusBar
+                    barStyle='light-content'
+                />
                 <SearchList
-                    data={this.state.dataSource}
+                    data={this.state.projects}
                     renderRow={this._renderRow}
+                    hideSectionList={true}
                     renderEmptyResult={this._renderEmptyResult}
                     renderBackButton={this._renderBackButton}
                     renderEmpty={this._renderEmpty}
                     rowHeight={rowHeight}
                     toolbarBackgroundColor={'#496FC2'}
-                    title='Pick a Project     '
+                    title={`Projects      `}
                     cancelTitle='Cancel'
                     onClickBack={() => {
                     }}
@@ -131,49 +137,7 @@ export default class ChooseProjectScreen extends Component {
             </View>
         )
     }
-
-    /*render() {
-        const {t} = this.props.screenProps;
-
-        return (
-            <View style={{
-                flex: 1
-            }}>
-                <ScrollView>
-
-                    <ListItem
-                        containerStyle={[styles.listItem, styles.listItemBorder, styles.mt30]}
-                        title="Client 1"
-                        titleStyle={styles.listItemTitleStyle}
-                        hideChevron={false}
-                        onPress={() => {}}
-                        rightIcon={<Icon name='check'/>}
-                    />
-
-                    <ListItem
-                        containerStyle={[styles.listItem]}
-                        title="Client 2"
-                        titleStyle={styles.listItemTitleStyle}
-                        hideChevron={true}
-                        onPress={() => {}}
-                        rightIcon={<Icon name='check'/>}
-                    />
-
-                    <ListItem
-                        containerStyle={[styles.listItem]}
-                        title="Client 1"
-                        titleStyle={styles.listItemTitleStyle}
-                        hideChevron={true}
-                        onPress={() => {}}
-                        rightIcon={<Icon name='check'/>}
-                    />
-
-                </ScrollView>
-            </View>
-        );
-    }*/
 }
-
 
 const styles = StyleSheet.create({
     listItem: {
@@ -182,7 +146,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#eaeaea',
     },
     listItemBorder: {
-        borderTopWidth: 1
+        borderBottomWidth: 1
     },
     listItemTitleStyle: {
         fontSize: 18
@@ -191,3 +155,11 @@ const styles = StyleSheet.create({
         marginTop: 30
     }
 });
+
+function mapStateToProps({ clientsProjects }) {
+    return {
+        projects: clientsProjects
+    }
+}
+
+export default connect(mapStateToProps, actions)(ChooseProjectScreen);
