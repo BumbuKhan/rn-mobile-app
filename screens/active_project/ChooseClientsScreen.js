@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, StatusBar, ActivityIndicator, Alert, TouchableOpacity } from 'react-native';
+import {
+    View,
+    StyleSheet,
+    Text,
+    StatusBar,
+    ActivityIndicator,
+    Alert,
+    TouchableOpacity
+} from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -42,7 +50,8 @@ class ChooseClientListScreen extends Component {
                     subtitleStyle={{
                         fontSize: 16
                     }}
-                    hideChevron={true}
+                    hideChevron={rowID !== 180} /* TODO: will be compared with the redux store  */
+                    rightIcon={<Icon name='check' />}
                     containerStyle={containerStyle}
                     onPress={() => {
                         this.props.navigation.navigate('ActiveProject');
