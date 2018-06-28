@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
-import {View, StyleSheet, Alert, Text, TouchableOpacity} from 'react-native';
-import {Icon, Divider} from 'react-native-elements';
+import React, { Component } from 'react';
+import { View, StyleSheet, Alert, Text, TouchableOpacity } from 'react-native';
+import { Icon, Divider } from 'react-native-elements';
+import * as actions from '../../actions';
 
-import SearchList, {HighlightableText} from '@unpourtous/react-native-search-list/library';
+import SearchList, { HighlightableText } from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
 
 import demoList from './data_clients';
@@ -10,7 +11,7 @@ import demoList from './data_clients';
 const rowHeight = 50;
 
 export default class ChooseClientListScreen extends Component {
-    static navigationOptions = ({navigation, screenProps}) => {
+    static navigationOptions = ({ navigation, screenProps }) => {
         return {
             //title: screenProps.t('screens:active project:choose client:title')
             title: 'Choose Client',
@@ -28,11 +29,11 @@ export default class ChooseClientListScreen extends Component {
             <Touchable onPress={() => {
                 Alert.alert('Clicked!', `sectionID: ${sectionID}; item: ${item.searchStr}`,
                     [
-                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                        { text: 'OK', onPress: () => console.log('OK Pressed') },
                     ],
-                    {cancelable: true})
+                    { cancelable: true })
             }}>
-                <View key={rowID} style={{flex: 1, marginLeft: 20, height: rowHeight, justifyContent: 'center'}}>
+                <View key={rowID} style={{ flex: 1, marginLeft: 20, height: rowHeight, justifyContent: 'center' }}>
                     {/*use `HighlightableText` to highlight the search result*/}
                     <HighlightableText
                         matcher={item.matcher}
@@ -40,7 +41,7 @@ export default class ChooseClientListScreen extends Component {
                         textColor={'#000'}
                         hightlightTextColor={'#0069c0'}
                     />
-                    <Text style={{color: 'gray'}}>{item.address}</Text>
+                    <Text style={{ color: 'gray' }}>{item.address}</Text>
                 </View>
             </Touchable>
         )
@@ -50,7 +51,7 @@ export default class ChooseClientListScreen extends Component {
     _renderEmpty = () => {
         return (
             <View style={styles.emptyDataSource}>
-                <Text style={{color: '#979797', fontSize: 18, paddingTop: 20}}> No Content </Text>
+                <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>
             </View>
         )
     };
@@ -59,12 +60,12 @@ export default class ChooseClientListScreen extends Component {
     _renderEmptyResult = (searchStr) => {
         return (
             <View style={styles.emptySearchResult}>
-                <Text style={{color: '#979797', fontSize: 18, paddingTop: 20}}> No Result For <Text
-                    style={{color: '#171a23', fontSize: 18}}>{searchStr}</Text></Text>
+                <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Result For <Text
+                    style={{ color: '#171a23', fontSize: 18 }}>{searchStr}</Text></Text>
 
                 <Divider style={{
                     marginTop: 10
-                }}/>
+                }} />
 
                 <View style={{
                     alignSelf: 'center',
@@ -76,10 +77,10 @@ export default class ChooseClientListScreen extends Component {
                             color: '#0069c0',
                             fontSize: 18
                         }}><Icon
-                            name="add"
-                            color="#0069c0"
-                            size={16}
-                        /> Add it as a new client</Text>
+                                name="add"
+                                color="#0069c0"
+                                size={16}
+                            /> Add it as a new client</Text>
                     </TouchableOpacity>
                 </View>
                 {/*<Text style={{color: '#979797', fontSize: 18, alignItems: 'center', paddingTop: 10}}>Please search
@@ -104,7 +105,7 @@ export default class ChooseClientListScreen extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <SearchList
                     data={this.state.dataSource}
                     renderRow={this._renderRow}
