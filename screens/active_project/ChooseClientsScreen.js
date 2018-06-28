@@ -54,7 +54,8 @@ class ChooseClientListScreen extends Component {
                     rightIcon={<Icon name='check' />}
                     containerStyle={containerStyle}
                     onPress={() => {
-                        this.props.navigation.navigate('ActiveProject');
+                        // TODO: invoking appropriate action
+                        this.props.navigation.goBack();
                     }}
                 />
             </Touchable>
