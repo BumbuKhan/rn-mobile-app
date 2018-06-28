@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Alert, Text, TouchableOpacity } from 'react-native';
-import { Icon, Divider } from 'react-native-elements';
+import { View, StyleSheet, Text, StatusBar, ActivityIndicator, Alert } from 'react-native';
+import { Icon, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
-import SearchList, { HighlightableText } from '@unpourtous/react-native-search-list/library';
+import SearchList from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
 
-import demoList from './data_clients';
+import { Menu } from '../../components/common';
 
 const rowHeight = 50;
 
-export default class ChooseClientListScreen extends Component {
+class ChooseClientListScreen extends Component {
     static navigationOptions = ({ navigation, screenProps }) => {
         return {
             //title: screenProps.t('screens:active project:choose client:title')
@@ -19,30 +20,36 @@ export default class ChooseClientListScreen extends Component {
         }
     };
 
-    state = {
-        dataSource: demoList
-    };
+    componentDidMount = () => {
+        this.props.fetchClients();
+    }
 
     // custom render row
     _renderRow = (item, sectionID, rowID, highlightRowFunc, isSearching) => {
+        let containerStyle = [styles.listItem, styles.listItemBorder];
+
+        if (item !== this.props.clients.items.length - 1) {
+            containerStyle.push(styles.listItemNoBorderBottom);
+        }
+
         return (
-            <Touchable onPress={() => {
-                Alert.alert('Clicked!', `sectionID: ${sectionID}; item: ${item.searchStr}`,
-                    [
-                        { text: 'OK', onPress: () => console.log('OK Pressed') },
-                    ],
-                    { cancelable: true })
-            }}>
-                <View key={rowID} style={{ flex: 1, marginLeft: 20, height: rowHeight, justifyContent: 'center' }}>
-                    {/*use `HighlightableText` to highlight the search result*/}
-                    <HighlightableText
-                        matcher={item.matcher}
-                        text={item.searchStr}
-                        textColor={'#000'}
-                        hightlightTextColor={'#0069c0'}
-                    />
-                    <Text style={{ color: 'gray' }}>{item.address}</Text>
-                </View>
+            <Touchable>
+                <ListItem
+                    key={item.searchKey}
+                    title={item.searchStr}
+                    titleStyle={styles.listItemTitleStyle}
+                    subtitle={item.address}
+                    subtitleStyle={{
+                        fontSize: 16
+                    }}
+                    containerStyle={containerStyle}
+                    onPress={() => {
+                        this.props.navigation.navigate('ProjectsList', {
+                            headerTitle: item.searchStr,
+                            clientId: item.id
+                        });
+                    }}
+                />
             </Touchable>
         )
     };
@@ -51,7 +58,15 @@ export default class ChooseClientListScreen extends Component {
     _renderEmpty = () => {
         return (
             <View style={styles.emptyDataSource}>
-                <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>
+                {(this.props.clients.pending) ?
+                    <View style={{
+                        marginTop: 20
+                    }}>
+                        <ActivityIndicator
+                            size="small"
+                        />
+                    </View> :
+                    <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>}
             </View>
         )
     };
@@ -62,59 +77,36 @@ export default class ChooseClientListScreen extends Component {
             <View style={styles.emptySearchResult}>
                 <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Result For <Text
                     style={{ color: '#171a23', fontSize: 18 }}>{searchStr}</Text></Text>
-
-                <Divider style={{
-                    marginTop: 10
-                }} />
-
-                <View style={{
-                    alignSelf: 'center',
-                    marginTop: 10
-                }}>
-                    <TouchableOpacity>
-
-                        <Text style={{
-                            color: '#0069c0',
-                            fontSize: 18
-                        }}><Icon
-                                name="add"
-                                color="#0069c0"
-                                size={16}
-                            /> Add it as a new client</Text>
-                    </TouchableOpacity>
-                </View>
-                {/*<Text style={{color: '#979797', fontSize: 18, alignItems: 'center', paddingTop: 10}}>Please search
-                    again</Text>*/}
             </View>
         )
     };
 
     _renderBackButton = () => {
         return (
-            <TouchableOpacity onPress={() => {
-                this.props.navigation.goBack();
+            <View style={{
+                paddingLeft: 15
             }}>
-                <Icon
-                    name="chevron-left"
-                    color="white"
-                    size={35}
-                />
-            </TouchableOpacity>
+                <Menu {...this.props} />
+            </View>
         )
     };
 
     render() {
         return (
             <View style={{ flex: 1 }}>
+                <StatusBar
+                    barStyle='light-content'
+                />
                 <SearchList
-                    data={this.state.dataSource}
+                    data={this.props.clients.items}
+                    hideSectionList={true}
                     renderRow={this._renderRow}
                     renderEmptyResult={this._renderEmptyResult}
                     renderBackButton={this._renderBackButton}
                     renderEmpty={this._renderEmpty}
                     rowHeight={rowHeight}
                     toolbarBackgroundColor={'#496FC2'}
-                    title='Pick a client     '
+                    title='Clients      '
                     cancelTitle='Cancel'
                     onClickBack={() => {
                     }}
@@ -132,49 +124,7 @@ export default class ChooseClientListScreen extends Component {
             </View>
         )
     }
-
-    /*render() {
-        const {t} = this.props.screenProps;
-
-        return (
-            <View style={{
-                flex: 1
-            }}>
-                <ScrollView>
-
-                    <ListItem
-                        containerStyle={[styles.listItem, styles.listItemBorder, styles.mt30]}
-                        title="Client 1"
-                        titleStyle={styles.listItemTitleStyle}
-                        hideChevron={false}
-                        onPress={() => {}}
-                        rightIcon={<Icon name='check'/>}
-                    />
-
-                    <ListItem
-                        containerStyle={[styles.listItem]}
-                        title="Client 2"
-                        titleStyle={styles.listItemTitleStyle}
-                        hideChevron={true}
-                        onPress={() => {}}
-                        rightIcon={<Icon name='check'/>}
-                    />
-
-                    <ListItem
-                        containerStyle={[styles.listItem]}
-                        title="Client 1"
-                        titleStyle={styles.listItemTitleStyle}
-                        hideChevron={true}
-                        onPress={() => {}}
-                        rightIcon={<Icon name='check'/>}
-                    />
-
-                </ScrollView>
-            </View>
-        );
-    }*/
 }
-
 
 const styles = StyleSheet.create({
     listItem: {
@@ -183,7 +133,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#eaeaea',
     },
     listItemBorder: {
-        borderTopWidth: 1
+        borderBottomWidth: 1
     },
     listItemTitleStyle: {
         fontSize: 18
@@ -192,3 +142,11 @@ const styles = StyleSheet.create({
         marginTop: 30
     }
 });
+
+function mapStateToProps({ clients }) {
+    return {
+        clients
+    }
+}
+
+export default connect(mapStateToProps, actions)(ChooseClientListScreen);

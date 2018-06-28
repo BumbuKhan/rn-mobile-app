@@ -7,7 +7,6 @@ import * as actions from '../../actions';
 import SearchList from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
 
-import axios from '../../helpers/axios';
 import { Menu } from '../../components/common';
 
 const rowHeight = 50;
@@ -22,7 +21,7 @@ class ChooseClientListScreen extends Component {
                     color={tintColor}
                 />
             },
-            header: null // hiding the default StackNavigator header since we have our own
+            header: false // hiding the default StackNavigator header since we have our own
         }
     };
 
