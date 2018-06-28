@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, StatusBar, ActivityIndicator, Alert } from 'react-native';
+import { View, StyleSheet, Text, StatusBar, ActivityIndicator, Alert, TouchableOpacity } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -83,11 +83,15 @@ class ChooseClientListScreen extends Component {
 
     _renderBackButton = () => {
         return (
-            <View style={{
-                paddingLeft: 15
+            <TouchableOpacity onPress={() => {
+                this.props.navigation.goBack();
             }}>
-                <Menu {...this.props} />
-            </View>
+                <Icon
+                    name="chevron-left"
+                    color="white"
+                    size={35}
+                />
+            </TouchableOpacity>
         )
     };
 
