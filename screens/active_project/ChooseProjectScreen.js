@@ -52,11 +52,10 @@ class ChooseProjectScreen extends Component {
                     title={item.searchStr}
                     titleStyle={styles.listItemTitleStyle}
                     containerStyle={containerStyle}
+                    hideChevron={rowID !== 180} /* TODO: will be compared with the redux store  */
+                    rightIcon={<Icon name='check' />}
                     onPress={() => {
-                        this.props.navigation.navigate('ProjectDetails', {
-                            headerTitle: item.searchStr,
-                            projectData: item
-                        });
+                        this.props.navigation.goBack()
                     }}
                 />
             </Touchable>
