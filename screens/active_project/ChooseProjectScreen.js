@@ -12,7 +12,6 @@ const rowHeight = 50;
 class ChooseProjectScreen extends Component {
     static navigationOptions = ({navigation, screenProps}) => {
         return {
-            //title: screenProps.t('screens:active project:choose client:title')
             title: 'Choose Project',
             header: false
         }
