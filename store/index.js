@@ -11,9 +11,9 @@ const persistConfig = {
     whitelist: [
         'user',
         'activeProject',
+        'clients',
         'projects',
         'projectCategories',
-        'clients'
     ]
 };
 

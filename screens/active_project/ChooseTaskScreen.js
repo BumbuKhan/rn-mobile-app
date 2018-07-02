@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, View, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
-import { Icon, ListItem } from 'react-native-elements';
+import { View, StyleSheet, Alert, Text, TouchableOpacity } from 'react-native';
+import { Icon, Divider } from 'react-native-elements';
+
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-
-import SearchList from '@unpourtous/react-native-search-list/library';
+import SearchList, { HighlightableText } from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
+
+import demoList from './data_tasks';
 
 const rowHeight = 50;
 
 class ChooseTaskScreen extends Component {
-    static navigationOptions = ({navigation, screenProps}) => {
+    static navigationOptions = ({ navigation, screenProps }) => {
         return {
             //title: screenProps.t('screens:active project:choose client:title')
             title: 'Choose Task',
@@ -19,45 +21,29 @@ class ChooseTaskScreen extends Component {
     };
 
     state = {
-        projects: []
+        dataSource: demoList
     };
-
-    componentDidMount = () => {
-        this.props.fetchProjectTasks();
-    }
-
-    componentWillReceiveProps = (props) => {
-        const projects = props.projects.items.filter((project) => {
-            // return project.client_id == this.props.navigation.state.params.clientId;
-            return project.client_id == 761;
-        });
-
-        this.setState({
-            projects
-        });
-    }
 
     // custom render row
     _renderRow = (item, sectionID, rowID, highlightRowFunc, isSearching) => {
-        let containerStyle = [styles.listItem, styles.listItemBorder];
-
-        if (item !== this.state.projects.length - 1) {
-            containerStyle.push(styles.listItemNoBorderBottom);
-        }
-
         return (
-            <Touchable>
-                <ListItem
-                    key={item.id}
-                    title={item.searchStr}
-                    titleStyle={styles.listItemTitleStyle}
-                    containerStyle={containerStyle}
-                    hideChevron={rowID !== 180} /* TODO: will be compared with the redux store  */
-                    rightIcon={<Icon name='check' />}
-                    onPress={() => {
-                        this.props.navigation.goBack()
-                    }}
-                />
+            <Touchable onPress={() => {
+                Alert.alert('Clicked!', `sectionID: ${sectionID}; item: ${item.searchStr}`,
+                    [
+                        { text: 'OK', onPress: () => console.log('OK Pressed') },
+                    ],
+                    { cancelable: true })
+            }}>
+                <View key={rowID} style={{ flex: 1, marginLeft: 20, height: rowHeight, justifyContent: 'center' }}>
+                    {/*use `HighlightableText` to highlight the search result*/}
+                    <HighlightableText
+                        matcher={item.matcher}
+                        text={item.searchStr}
+                        textColor={'#000'}
+                        hightlightTextColor={'#0069c0'}
+                    />
+                    <Text style={{ color: 'gray' }}>{item.details}</Text>
+                </View>
             </Touchable>
         )
     };
@@ -66,15 +52,7 @@ class ChooseTaskScreen extends Component {
     _renderEmpty = () => {
         return (
             <View style={styles.emptyDataSource}>
-                {(this.props.projects.pending) ?
-                    <View style={{
-                        marginTop: 20
-                    }}>
-                        <ActivityIndicator
-                            size="small"
-                        />
-                    </View> :
-                    <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Projects</Text>}
+                <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Content </Text>
             </View>
         )
     };
@@ -85,6 +63,29 @@ class ChooseTaskScreen extends Component {
             <View style={styles.emptySearchResult}>
                 <Text style={{ color: '#979797', fontSize: 18, paddingTop: 20 }}> No Result For <Text
                     style={{ color: '#171a23', fontSize: 18 }}>{searchStr}</Text></Text>
+
+                <Divider style={{
+                    marginTop: 10
+                }} />
+
+                <View style={{
+                    alignSelf: 'center',
+                    marginTop: 10
+                }}>
+                    <TouchableOpacity>
+
+                        <Text style={{
+                            color: '#0069c0',
+                            fontSize: 18
+                        }}><Icon
+                                name="add"
+                                color="#0069c0"
+                                size={16}
+                            /> Add it as a new task</Text>
+                    </TouchableOpacity>
+                </View>
+                {/*<Text style={{color: '#979797', fontSize: 18, alignItems: 'center', paddingTop: 10}}>Please search
+                    again</Text>*/}
             </View>
         )
     };
@@ -106,19 +107,15 @@ class ChooseTaskScreen extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <StatusBar
-                    barStyle='light-content'
-                />
                 <SearchList
-                    data={this.state.projects}
+                    data={this.state.dataSource}
                     renderRow={this._renderRow}
-                    hideSectionList={true}
                     renderEmptyResult={this._renderEmptyResult}
                     renderBackButton={this._renderBackButton}
                     renderEmpty={this._renderEmpty}
                     rowHeight={rowHeight}
                     toolbarBackgroundColor={'#496FC2'}
-                    title={`Tasks      `}
+                    title='Pick a Task     '
                     cancelTitle='Cancel'
                     onClickBack={() => {
                     }}
@@ -138,6 +135,7 @@ class ChooseTaskScreen extends Component {
     }
 }
 
+
 const styles = StyleSheet.create({
     listItem: {
         backgroundColor: 'white',
@@ -145,7 +143,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#eaeaea',
     },
     listItemBorder: {
-        borderBottomWidth: 1
+        borderTopWidth: 1
     },
     listItemTitleStyle: {
         fontSize: 18
@@ -155,10 +153,10 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps({ clientsProjects }) {
+function mapStatetToProps({ tasks }) {
     return {
-        projects: clientsProjects
+        tasks
     }
 }
 
-export default connect(mapStateToProps, actions)(ChooseTaskScreen);
+export default connect(mapStatetToProps, null)(ChooseTaskScreen);
