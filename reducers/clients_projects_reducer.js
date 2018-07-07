@@ -1,7 +1,7 @@
 import {
-    FETCH_CLIENTS_PROJECTS_PENDING,
-    FETCH_CLIENTS_PROJECTS_RESOLVED,
-    FETCH_CLIENTS_PROJECTS_REJECTED
+    FETCH_CLIENT_PROJECTS_PENDING,
+    FETCH_CLIENT_PROJECTS_RESOLVED,
+    FETCH_CLIENT_PROJECTS_REJECTED
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -12,21 +12,21 @@ const INITIAL_STATE = {
 
 export default clientsProjectsReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case FETCH_CLIENTS_PROJECTS_PENDING:
+        case FETCH_CLIENT_PROJECTS_PENDING:
             return {
                 ...state,
                 pending: true,
                 items: []
             }
 
-        case FETCH_CLIENTS_PROJECTS_RESOLVED:
+        case FETCH_CLIENT_PROJECTS_RESOLVED:
             return {
                 ...state,
                 pending: false,
                 items: action.payload
             }
 
-        case FETCH_CLIENTS_PROJECTS_REJECTED:
+        case FETCH_CLIENT_PROJECTS_REJECTED:
             return {
                 ...state,
                 error: action.payload

@@ -3,9 +3,9 @@ import { clientsService } from '../services';
 import { authHeader } from '../helpers';
 
 import {
-    FETCH_CLIENTS_PROJECTS_PENDING,
-    FETCH_CLIENTS_PROJECTS_RESOLVED,
-    FETCH_CLIENTS_PROJECTS_REJECTED
+    FETCH_CLIENT_PROJECTS_PENDING,
+    FETCH_CLIENT_PROJECTS_RESOLVED,
+    FETCH_CLIENT_PROJECTS_REJECTED
 } from './types';
 
 export const fetchClientsProjects = () => {
@@ -48,11 +48,11 @@ export const fetchClientsProjects = () => {
     }
 
     // for displaying a loading spinner
-    function fetchClientsProjectsPending() { return { type: FETCH_CLIENTS_PROJECTS_PENDING } }
+    function fetchClientsProjectsPending() { return { type: FETCH_CLIENT_PROJECTS_PENDING } }
 
     // will be dispatched when error
-    function fetchClientsProjectsRejected(err) { return { type: FETCH_CLIENTS_PROJECTS_REJECTED, payload: err } }
+    function fetchClientsProjectsRejected(err) { return { type: FETCH_CLIENT_PROJECTS_REJECTED, payload: err } }
 
     // will be dispatched when success
-    function fetchClientsProjectsResolved(data) { return { type: FETCH_CLIENTS_PROJECTS_RESOLVED, payload: data } }
+    function fetchClientsProjectsResolved(data) { return { type: FETCH_CLIENT_PROJECTS_RESOLVED, payload: data } }
 }
