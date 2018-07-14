@@ -18,19 +18,56 @@ REDUX_STORE = {
         }
     },
     activeProject: {
-        id: <Integer [defaulted by null]>
-        type: <String ['STN', 'ATN', 'BTN']>,
+        id: <RANDOM UNIQUE Integer [defaulted by null]>
+        type: <ID ['STN', 'ATN', 'BTN']>,
         isCreated: <Boolean>,
         isTimerActive: <Boolean>,
-        timers: [
-            {
-                startedAt: <UNIX timestamp>,
-                stoppedAt: <UNIX timestamp>
-            },
-            ...
-        ],
+        clientID: <ID>,
+        projectData: {
+            id: '',
+            deadline: '',
+            time_for_the_project: ''
+        },
+
+        activeTask: {
+            id: '',
+            title: '',
+            'description': ''
+        },
+        activeActivity: {
+            id: '',
+            'title': '',
+            description: '',
+        },
+
+        days: {
+            '01.02.2018': {
+                tasks: {
+                    '23': {
+                        activities: {
+                            '34': {
+                                'expenses': '...',
+                                'photos': [{}, {}, ...],
+                                'notes': '...',
+                                ...
+                                'status': 'completed | not_completed',
+                                'more_stuff_neede': '...',
+                                timers: [
+                                    {
+                                        startedAt: <UNIX timestamp>,
+                                        stoppedAt: <UNIX timestamp>
+                                    },
+                                    ...
+                                ],
+                            }
+                        }
+                    }
+                }
+            }
+        }
         vastedTime: <Number [in seconds]>,
-        photos: [],
+        'description': '...',
+
         createdAt: <UNIX timestamp>,
         modifiedAt: <UNIX timestamp>
     },
