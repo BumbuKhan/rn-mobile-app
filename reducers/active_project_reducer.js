@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { getUniqueId, getTimestamp } from './utils';
 
 import {
     TOGGLE_ACTIVE_PROJECT_TYPE,
@@ -60,7 +60,7 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
             return { ...state, type: action.payload };
 
         case CREATE_ACTIVE_PROJECT:
-            const now = moment().unix();
+            const now = getTimestamp();
 
             const newProject = {
                 ...state,
@@ -86,7 +86,7 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
                 let curTimers = [...state.timers];
 
                 const newTimer = {
-                    startedAt: moment().unix(),
+                    startedAt: getTimestamp(),
                     stoppedAt: null // hasn't been stopped yet
                 };
 
@@ -97,7 +97,7 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
                 let curTimers = [...state.timers];
 
                 const lastTimer = curTimers[curTimers.length - 1];
-                lastTimer.stoppedAt = moment().unix();
+                lastTimer.stoppedAt = getTimestamp();
 
                 newState.timers = curTimers;
             }
@@ -109,7 +109,7 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
 
             // looping through all state.timers and calculating deltas between stoppedAt - startedAt
             state.timers.map((timer) => {
-                let stoppedAt = (timer.stoppedAt) ? timer.stoppedAt : moment().unix();
+                let stoppedAt = (timer.stoppedAt) ? timer.stoppedAt : getTimestamp();
 
                 let deltaSeconds = stoppedAt - timer.startedAt;
                 _vastedTime += deltaSeconds;
@@ -145,10 +145,4 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
         default:
             return state;
     }
-}
-
-function getUniqueId() {
-    const id = moment().unix();
-
-    return id;
 }
