@@ -542,10 +542,11 @@ class ActiveProjectScreen extends Component {
                 />
 
                 <ListItem
+                    disabled={!this.props.activeProject.currentProject.id}
                     containerStyle={[styles.listItem]}
                     title="Task"
                     titleStyle={styles.listItemTitleStyle}
-                    rightTitle="Fix all screwdrivers"
+                    rightTitle={this.props.activeProject.currentTask.searchStr || 'Select task'}
                     onPress={() => {
                         this.props.navigation.navigate('ChooseTask');
                     }}
