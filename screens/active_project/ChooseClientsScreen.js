@@ -50,7 +50,7 @@ class ChooseClientListScreen extends Component {
                     subtitleStyle={{
                         fontSize: 16
                     }}
-                    hideChevron={rowID !== 180} /* TODO: will be compared with the redux store  */
+                    hideChevron={rowID !== this.props.currentClient.id} /* TODO: will be compared with the redux store  */
                     rightIcon={<Icon name='check' />}
                     containerStyle={containerStyle}
                     onPress={() => {
@@ -104,6 +104,7 @@ class ChooseClientListScreen extends Component {
     };
 
     render() {
+        console.log('this.props.currentClient', this.props.currentClient);
         return (
             <View style={{ flex: 1 }}>
                 <StatusBar
@@ -155,9 +156,10 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps({ clients }) {
+function mapStateToProps({ clients, activeProject }) {
     return {
-        clients
+        clients,
+        currentClient: activeProject.currentClient
     }
 }
 
