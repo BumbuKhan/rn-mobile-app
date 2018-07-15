@@ -23,7 +23,10 @@ REDUX_STORE = {
         isCreated: <Boolean>,
         isTimerActive: <Boolean>,
         
-        currentClient: {},
+        currentClient: {
+            id: '',
+            ...
+        },
         
         currentProject: {
             id: '',

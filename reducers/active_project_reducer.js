@@ -10,7 +10,8 @@ import {
     ACTIVE_PROJECT_REMOVE_PHOTO,
     ACTIVE_PROJECT_CLEAN,
     REHYDRATE_PROJECT,
-    SELECT_CLIENT
+    SELECT_CLIENT,
+    SELECT_CLIENT_PROJECT
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -138,6 +139,10 @@ export default activeProjectReducer = (state = INITIAL_STATE, action) => {
 
         case SELECT_CLIENT:
             return { ...state, currentClient: action.payload };
+            return { ...state, photos: afterRemove };
+
+        case SELECT_CLIENT_PROJECT:
+            return { ...state, currentProject: action.payload };
 
         case ACTIVE_PROJECT_CLEAN:
             // cleaning out the activeProject key in redux store

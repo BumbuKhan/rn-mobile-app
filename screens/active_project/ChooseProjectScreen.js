@@ -51,9 +51,10 @@ class ChooseProjectScreen extends Component {
                     title={item.searchStr}
                     titleStyle={styles.listItemTitleStyle}
                     containerStyle={containerStyle}
-                    hideChevron={rowID !== 180} /* TODO: will be compared with the redux store  */
+                    hideChevron={rowID !== this.props.currentProject.id}
                     rightIcon={<Icon name='check' />}
                     onPress={() => {
+                        this.props.selectProject(item);
                         this.props.navigation.goBack()
                     }}
                 />
@@ -154,9 +155,10 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps({ clientsProjects }) {
+function mapStateToProps({ clientsProjects, activeProject }) {
     return {
-        projects: clientsProjects
+        projects: clientsProjects,
+        currentProject: activeProject.currentProject
     }
 }
 

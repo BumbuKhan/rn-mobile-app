@@ -5,7 +5,8 @@ import { authHeader } from '../helpers';
 import {
     FETCH_CLIENTS_PENDING,
     FETCH_CLIENTS_RESOLVED,
-    FETCH_CLIENTS_REJECTED
+    FETCH_CLIENTS_REJECTED,
+    SELECT_CLIENT
 } from './types';
 
 export const fetchClients = () => {
@@ -48,4 +49,11 @@ export const fetchClients = () => {
 
     // will be dispatched when success
     function fetchClientsResolved(data) { return { type: FETCH_CLIENTS_RESOLVED, payload: data } }
+}
+
+export const selectClient = (client) => {
+    return {
+        type: SELECT_CLIENT,
+        payload: client
+    }
 }

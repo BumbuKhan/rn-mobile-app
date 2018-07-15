@@ -29,3 +29,4 @@ export const SELECT_CLIENT = 'select_client';
 export const FETCH_CLIENT_PROJECTS_PENDING = 'fetch_client_projects_pending';
 export const FETCH_CLIENT_PROJECTS_RESOLVED = 'fetch_client_projects_resolved';
 export const FETCH_CLIENT_PROJECTS_REJECTED = 'fetch_client_projects_rejected';
+export const SELECT_CLIENT_PROJECT = 'select_client_project';

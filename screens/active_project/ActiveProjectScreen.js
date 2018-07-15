@@ -531,10 +531,11 @@ class ActiveProjectScreen extends Component {
                 />
 
                 <ListItem
+                    disabled={!this.props.activeProject.currentClient.id}
                     containerStyle={[styles.listItem]}
                     title="Project"
                     titleStyle={styles.listItemTitleStyle}
-                    rightTitle="Tools fixes"
+                    rightTitle={this.props.activeProject.currentProject.searchStr || 'Select project'}
                     onPress={() => {
                         this.props.navigation.navigate('ChooseProject');
                     }}
