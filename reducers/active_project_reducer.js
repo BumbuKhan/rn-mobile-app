@@ -17,6 +17,13 @@ const INITIAL_STATE = {
     type: null,
     isCreated: false,
     isTimerActive: false,
+
+    currentClient: {},
+    currentProject: {},
+    currentTask: {},
+    currentActivity: {},
+
+    days: {},
     // 'timers' key will have such structure:
     /*
         timers: [
@@ -27,7 +34,7 @@ const INITIAL_STATE = {
             ...
         ]
     */
-    timers: [],
+    timers: [], // TODO: will be shifted to 'days'
     vastedTime: 0, // in seconds, counter for time,
     /*
     'photos' is an array with such structure:
@@ -41,7 +48,8 @@ const INITIAL_STATE = {
             ...
         ]
     */
-    photos: [],
+    photos: [], // TODO: will be shifted to 'days'
+
     createdAt: null,
     modifiedAt: null
 };

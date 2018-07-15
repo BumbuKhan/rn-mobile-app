@@ -23,18 +23,19 @@ REDUX_STORE = {
         isCreated: <Boolean>,
         isTimerActive: <Boolean>,
         clientID: <ID>,
-        projectData: {
+        currentProject: {
             id: '',
             deadline: '',
-            time_for_the_project: ''
+            time_for_the_project: '',
+            description: '',
         },
 
-        activeTask: {
+        currentTask: {
             id: '',
             title: '',
             'description': ''
         },
-        activeActivity: {
+        currentActivity: {
             id: '',
             'title': '',
             description: '',
@@ -66,7 +67,6 @@ REDUX_STORE = {
             }
         }
         vastedTime: <Number [in seconds]>,
-        'description': '...',
 
         createdAt: <UNIX timestamp>,
         modifiedAt: <UNIX timestamp>
