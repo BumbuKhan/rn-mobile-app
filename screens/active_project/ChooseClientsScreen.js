@@ -54,7 +54,7 @@ class ChooseClientListScreen extends Component {
                     rightIcon={<Icon name='check' />}
                     containerStyle={containerStyle}
                     onPress={() => {
-                        // TODO: invoking appropriate action
+                        this.props.selectClient(item);
                         this.props.navigation.goBack();
                     }}
                 />

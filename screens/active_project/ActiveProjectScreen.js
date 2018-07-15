@@ -524,7 +524,7 @@ class ActiveProjectScreen extends Component {
                     containerStyle={[styles.listItem, styles.listItemBorder]}
                     title="Client"
                     titleStyle={styles.listItemTitleStyle}
-                    rightTitle="Factory masters"
+                    rightTitle={this.props.activeProject.currentClient.searchStr || 'Select client'}
                     onPress={() => {
                         this.props.navigation.navigate('ChooseClient');
                     }}

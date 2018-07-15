@@ -22,7 +22,9 @@ REDUX_STORE = {
         type: <ID ['STN', 'ATN', 'BTN']>,
         isCreated: <Boolean>,
         isTimerActive: <Boolean>,
-        clientID: <ID>,
+        
+        currentClient: {},
+        
         currentProject: {
             id: '',
             deadline: '',

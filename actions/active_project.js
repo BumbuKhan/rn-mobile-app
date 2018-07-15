@@ -7,7 +7,8 @@ import {
     ACTIVE_PROJECT_ADD_PHOTOS,
     ACTIVE_PROJECT_REMOVE_PHOTO,
     ACTIVE_PROJECT_CLEAN,
-    REHYDRATE_PROJECT
+    REHYDRATE_PROJECT,
+    SELECT_CLIENT
 } from './types';
 
 export const toggleType = (id) => {
@@ -81,5 +82,12 @@ export const rehydrateProject = (project) => {
     return {
         type: REHYDRATE_PROJECT,
         payload: project
+    }
+}
+
+export const selectClient = (client) => {
+    return {
+        type: SELECT_CLIENT,
+        payload: client
     }
 }
