@@ -4,3 +4,4 @@ export * from './projects';
 export * from './project_categories';
 export * from './clients';
 export * from './clients_projects';
+export * from './project_tasks';

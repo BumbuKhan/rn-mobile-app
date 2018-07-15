@@ -7,8 +7,6 @@ import * as actions from '../../actions';
 import SearchList, { HighlightableText } from '@unpourtous/react-native-search-list/library';
 import Touchable from '@unpourtous/react-native-search-list/library/utils/Touchable'
 
-import demoList from './data_tasks';
-
 const rowHeight = 50;
 
 class ChooseTaskScreen extends Component {
@@ -20,9 +18,9 @@ class ChooseTaskScreen extends Component {
         }
     };
 
-    state = {
-        dataSource: demoList
-    };
+    componentDidMount = () => {
+        this.props.fetchProjectTasks(this.props.currentProject.id);
+    }
 
     // custom render row
     _renderRow = (item, sectionID, rowID, highlightRowFunc, isSearching) => {
@@ -108,7 +106,7 @@ class ChooseTaskScreen extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <SearchList
-                    data={this.state.dataSource}
+                    data={this.props.tasks.items}
                     renderRow={this._renderRow}
                     renderEmptyResult={this._renderEmptyResult}
                     renderBackButton={this._renderBackButton}
@@ -153,10 +151,11 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStatetToProps({ tasks }) {
+function mapStatetToProps({ tasks, activeProject: { currentProject }}) {
     return {
-        tasks
+        tasks,
+        currentProject
     }
 }
 
-export default connect(mapStatetToProps, null)(ChooseTaskScreen);
+export default connect(mapStatetToProps, actions)(ChooseTaskScreen);

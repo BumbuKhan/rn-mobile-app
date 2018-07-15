@@ -30,3 +30,8 @@ export const FETCH_CLIENT_PROJECTS_PENDING = 'fetch_client_projects_pending';
 export const FETCH_CLIENT_PROJECTS_RESOLVED = 'fetch_client_projects_resolved';
 export const FETCH_CLIENT_PROJECTS_REJECTED = 'fetch_client_projects_rejected';
 export const SELECT_CLIENT_PROJECT = 'select_client_project';
+
+// tasks
+export const FETCH_PROJECT_TASKS_PENDING = 'fetch_project_tasks_pending';
+export const FETCH_PROJECT_TASKS_RESOLVED = 'fetch_project_tasks_resolved';
+export const FETCH_PROJECT_TASKS_REJECTED = 'fetch_project_tasks_rejected';

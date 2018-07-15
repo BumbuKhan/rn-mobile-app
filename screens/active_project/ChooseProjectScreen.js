@@ -17,30 +17,15 @@ class ChooseProjectScreen extends Component {
         }
     };
 
-    state = {
-        projects: []
-    };
-
     componentDidMount = () => {
         this.props.fetchClientsProjects(this.props.currentClient.id);
-    }
-
-    componentWillReceiveProps = (props) => {
-        const projects = props.projects.items.filter((project) => {
-            // return project.client_id == this.props.navigation.state.params.clientId;
-            return project.client_id == 761;
-        });
-
-        this.setState({
-            projects
-        });
     }
 
     // custom render row
     _renderRow = (item, sectionID, rowID, highlightRowFunc, isSearching) => {
         let containerStyle = [styles.listItem, styles.listItemBorder];
 
-        if (item !== this.state.projects.length - 1) {
+        if (item !== this.props.projects.items.length - 1) {
             containerStyle.push(styles.listItemNoBorderBottom);
         }
 
@@ -110,7 +95,7 @@ class ChooseProjectScreen extends Component {
                     barStyle='light-content'
                 />
                 <SearchList
-                    data={this.state.projects}
+                    data={this.props.projects.items}
                     renderRow={this._renderRow}
                     hideSectionList={true}
                     renderEmptyResult={this._renderEmptyResult}

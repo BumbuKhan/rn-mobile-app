@@ -20,10 +20,16 @@ export default projectTasksReducer = (state = INITIAL_STATE, action) => {
             }
 
         case FETCH_CLIENT_PROJECTS_RESOLVED:
+            const items = action.payload.map((task) => ({
+                id: task.id,
+                searchStr: task.name,
+                details: task.name,
+            }));
+
             return {
                 ...state,
                 pending: false,
-                items: action.payload
+                items
             }
 
         case FETCH_CLIENT_PROJECTS_REJECTED:
