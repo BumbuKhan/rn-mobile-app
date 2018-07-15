@@ -67,10 +67,7 @@ class ActiveProjectScreen extends Component {
 
         if (this.props.activeProject.isTimerActive) {
             this._initBlinkTimer();
-        }
-
-        if (this.props.activeProject.isTimerActive) {
-            this._initUpdateTimer();
+            this._initUpdateTimer();   
         }
 
         // fetching project categories '/api/categories'
