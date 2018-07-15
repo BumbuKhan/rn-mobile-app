@@ -22,7 +22,7 @@ class ChooseProjectScreen extends Component {
     };
 
     componentDidMount = () => {
-        this.props.fetchClientsProjects();
+        this.props.fetchClientsProjects(this.props.currentClient.id);
     }
 
     componentWillReceiveProps = (props) => {
@@ -158,7 +158,8 @@ const styles = StyleSheet.create({
 function mapStateToProps({ clientsProjects, activeProject }) {
     return {
         projects: clientsProjects,
-        currentProject: activeProject.currentProject
+        currentProject: activeProject.currentProject,
+        currentClient: activeProject.currentClient
     }
 }
 

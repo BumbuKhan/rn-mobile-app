@@ -9,21 +9,20 @@ import {
     SELECT_CLIENT_PROJECT
 } from './types';
 
-export const fetchClientsProjects = () => {
+export const fetchClientsProjects = (clientId) => {
     console.log('fetching clients projects...');
 
     return (dispatch) => {
         // turning on loading spinner
         dispatch(fetchClientsProjectsPending());
 
-        clientsService.getClientsProjects()
+        clientsService.getClientsProjects(clientId)
             .then(
                 clientsProjects => {
                     let { data } = clientsProjects;
 
                     // formatting received data
                     data = data.map((project) => {
-                        console.log(project);
                         return {
                             admin_notes: project.admin_notes,
                             category_id: project.category_id,

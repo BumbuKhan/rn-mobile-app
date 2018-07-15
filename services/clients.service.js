@@ -1,5 +1,5 @@
 import { getAuthHeaders } from '../helpers';
-import { CLIENTS, CLIENTS_PROJECTS } from '../helpers/api_endpoints';
+import { CLIENTS } from '../helpers/api_endpoints';
 
 export const clientsService = {
     getClients,
@@ -26,7 +26,7 @@ async function getClientsProjects(clientId) {
         headers
     };
 
-    return fetch(`${CLIENTS_PROJECTS}`, requestOptions).then(handleResponse);
+    return fetch(`${CLIENTS}/${clientId}/projects`, requestOptions).then(handleResponse);
 
 }
 
